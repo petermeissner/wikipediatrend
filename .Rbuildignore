@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 devel/.*$
 data-raw/.*$
+wikipediaTrend__*

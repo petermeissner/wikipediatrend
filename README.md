@@ -23,11 +23,11 @@ The data can be returned for whole months expressed as strings with four digit y
 
 
 ```r
-require(wikipediainfo)
+require(wikipediatrend)
 ```
 
 ```
-## Loading required package: wikipediainfo
+## Loading required package: wikipediatrend
 ```
 
 
@@ -41,12 +41,13 @@ res1 <- wp_trend("")
 ## Results written to:
 ## D:/Peter/Dropbox/RPackages/wikipediatrend/wikipediaTrend__Peter_Principle.csv
 ```
+The function informs us about which pages where accessed to retrieve the information. Furthermore, the dowloaded data is written on disk. That is done to prevent downloading the same information over and over again. Instead the function first looks for a relevant CSV file in the current working directory to match requested data with already downloaded data before asking the server for data. 
 
 ```r
 plot(res1[res1$count < quantile(res1$count, na.rm=T, 0.99),])
 ```
 
-![plot of chunk unnamed-chunk-2](./Readme_files/figure-html/unnamed-chunk-2.png) 
+![plot of chunk unnamed-chunk-3](./Readme_files/figure-html/unnamed-chunk-3.png) 
 
 ```r
 dim(res1)
@@ -71,7 +72,7 @@ res2 <- wp_trend("", pageName="Ebola")
 plot(res2[res2$count < quantile(res2$count, na.rm=T, 0.99),])
 ```
 
-![plot of chunk unnamed-chunk-3](./Readme_files/figure-html/unnamed-chunk-3.png) 
+![plot of chunk unnamed-chunk-4](./Readme_files/figure-html/unnamed-chunk-4.png) 
 
 ```r
 dim(res2)
@@ -96,7 +97,7 @@ res3 <- wp_trend("", pageName="Barack_Obama")
 plot(res3[res3$count < quantile(res3$count, na.rm=T, 0.99),])
 ```
 
-![plot of chunk unnamed-chunk-4](./Readme_files/figure-html/unnamed-chunk-4.png) 
+![plot of chunk unnamed-chunk-5](./Readme_files/figure-html/unnamed-chunk-5.png) 
 
 ```r
 dim(res3)
@@ -131,7 +132,7 @@ dim(res4)
 plot(res4[res4$count < quantile(res4$count, na.rm=T, 0.99),])
 ```
 
-![plot of chunk unnamed-chunk-5](./Readme_files/figure-html/unnamed-chunk-5.png) 
+![plot of chunk unnamed-chunk-6](./Readme_files/figure-html/unnamed-chunk-6.png) 
 
 
 

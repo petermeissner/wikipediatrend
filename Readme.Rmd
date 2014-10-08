@@ -27,11 +27,14 @@ http://stats.grok.se/json/en/201409/Peter_Principle
 The data can be returned for whole months expressed as strings with four digit years followed by two digit months. Furthermore, one can express the language for which to return the access counts and last but not least we have to specify the title of the Wikipedia article. 
 
 ```{r}
-require(wikipediainfo)
+require(wikipediatrend)
 ```
 
 ```{r}
 res1 <- wp_trend("")
+```
+The function informs us about which pages where accessed to retrieve the information. Furthermore, the dowloaded data is written on disk. That is done to prevent downloading the same information over and over again. Instead the function first looks for a relevant CSV file in the current working directory to match requested data with already downloaded data before asking the server for data. 
+```{r}
 plot(res1[res1$count < quantile(res1$count, na.rm=T, 0.99),])
 dim(res1)
 ```

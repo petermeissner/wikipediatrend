@@ -1,7 +1,7 @@
-Package: wikipediainfo
+Package: wikipediatrend
 Title: Getting infos from Wikipedia
 Date: 2014-10-07
-Version: 0.0.9001
+Version: 0.1
 Author: Peter Meissner (retep.meissner@gmail.com)
 Meintainer: Peter Meissner (retep.meissner@gmail.com)
 Authors@R: person("Peter", "Meissner", email = "retep.meissner@gmail.com",

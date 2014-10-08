@@ -41,4 +41,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-.Rproj
+# rstudio / rpackage specific
+*.Rproj
+.Rproj.user
+

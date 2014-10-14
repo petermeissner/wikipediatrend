@@ -1,12 +1,12 @@
 Package: wikipediatrend
-Title: Getting infos from Wikipedia
+Title: Getting  page access statistics for Wikipedia articles
 Date: 2014-10-07
 Version: 0.1
 Author: Peter Meissner (retep.meissner@gmail.com)
 Meintainer: Peter Meissner (retep.meissner@gmail.com)
 Authors@R: person("Peter", "Meissner", email = "retep.meissner@gmail.com",
     role = c("aut", "cre"))
-Description: A package for getting information from and about Wikipedia articles
+Description: Getting page access statistics for Wikipedia articles.
 Depends:
     R (>= 3.0.0)
 License: MIT + file LICENSE

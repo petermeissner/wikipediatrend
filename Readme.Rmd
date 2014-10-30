@@ -1,7 +1,7 @@
 ---
 title: "Wikipedia Article Access Statistics"
 author: "Peter Meißner"
-date: "Monday, September 29, 2014"
+date: "Thursday, October 30, 2014"
 output:
   html_document:
     keep_md: yes

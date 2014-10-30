@@ -12,58 +12,60 @@
 #'   
 #' @param toDate blsa
 #'   
-#' @param friendly blsa
+#' @param friendly Either \code{TRUE}, \code{FALSE}, \code{1} or \code{2} 
+#' This option causes twofold. First, the results of the request are saved in the current working directory in a CSV file with name scheme: \code{wp__[page name]_[country code].csv}. 
+#' Second, the function will look if perhaps a previously saved result is available to be used to only download those information that are still missing instead of the whole timespan. 
+#' 
+#' For storage on disk write.csv() and write.csv2() are used
 #'   
 
-wp_trend <- function( requestFrom = "retep.meissner@gmail.com",
-                      pageName    = "Peter_Principle", 
+wp_trend <- function( requestFrom = "anonymous",
+                      pageName    = "Peter_principle", 
                       countryCode = "en", 
                       fromDate    = Sys.Date()-30, 
                       toDate      = Sys.Date(),
-                      friendly    = T
+                      friendly    = F
 ){
+  # encourage being freindly
+  if ( !friendly ) {
+    message("
+    With option 'friendly' set to FALSE subsequent requests 
+    of the same wikipedia-page cause the server -- which is kindly 
+    providing information for you -- to work hard to get the same 
+    stuff over and over and over and over again. Do not bore 
+    the server - be friendly. 
+    
+    More information is found via '?wp_trend'.
+    ")
+  }
+  
+  
   # http header
   standardHeader <- list( from         = requestFrom,
-                          'user-agent' = paste( "wikipediaTrend running on: ", 
+                          'user-agent' = paste( "wikipediatrend running on: ", 
                                                 R.version$platform,
                                                 R.version$version.string,
                                                 sep=", "))
   
-  # expand dates 
-  if ( as.Date(fromDate) < as.Date("2007-12-01")  ) { 
-    fromDate <- as.Date("2007-12-01")
-  } 
-  dates    <- seq(as.Date(fromDate), as.Date(toDate), "month")
-  dates    <- paste0(substring(dates, 1, 4), substring(dates, 6, 7))
+  # file name for beeing friendly
+  resname <- paste0("wp", "__", pageName, "__", countryCode, ".csv")
+  
+  # check dates
+  tmp  <- wp_check_date_inputs(fromDate, toDate)
+  from <- tmp$from
+  to   <- tmp$to
+  
+  # beeing friendly
+  friendly_data <- wp_friendly_load(resname, friendly)
+  
+  # checking for months with missing data
+  dates_day <- wp_expand_ts(from, to, "day")
+  not_in_fd <- !(dates_day %in% friendly_data$date)
+  dates_url <- unique(wp_yearmonth(dates_day[ not_in_fd ]))
   
   # prepare urls
   urls  <- paste( "http://stats.grok.se/json",
-                  countryCode, dates, pageName, sep="/")
-  
-  # beeing friendly: using already downloaded data (except for current month)
-  resname <- paste0("wikipediaTrend", "__", pageName, ".csv")
-  if ( (friendly==1 | friendly==2) & file.exists(resname) ) {
-    if ( friendly==1 ) {
-      restmp <- read.csv(resname)[,c("date", "count")]
-      restmp$date <- as.Date(restmp$date)
-    }
-    if ( friendly==2 ) {
-      restmp <- read.csv2(resname)[,c("date", "count")]
-      restmp$date <- as.Date(restmp$date)
-    }
-    restmp_dates <- substring(
-        stringr::str_replace(as.character(restmp$date), "-", ""),
-        1,6)
-    iffer <- !(dates %in% restmp_dates)
-    if ( toDate==Sys.Date() ) { 
-      iffer2 <- dates == substring(
-        stringr::str_replace(as.character(Sys.Date()), "-", ""), 
-        1, 6)
-      iffer  <- iffer | iffer2 
-    } 
-    dates <- dates[iffer]
-    urls  <- urls[iffer]
-  }
+                  countryCode, dates_url, pageName, sep="/")
   
   # chunking urls
   urlchunks <- chunk(urls, 5)
@@ -71,33 +73,27 @@ wp_trend <- function( requestFrom = "retep.meissner@gmail.com",
   # make http requests
   jsons <- list()
   for(i in seq_along(urlchunks)){
-    jsons   <- c(jsons, RCurl::getURL(url = urlchunks[[i]], httpheader = standardHeader))
+    jsons <- c(
+      jsons, 
+      RCurl::getURL(url = urlchunks[[i]], httpheader = standardHeader)
+     )
     message(paste(urlchunks[[i]], collapse="\n"))
     Sys.sleep(1)
   }
   
-  # produce data set
+  # extract data
   res <- extract_access_counts(jsons)
   
-  # beeing friendly: saving results to file for possible later use
-  if ( friendly==1 | friendly==2 ) {
-    resname <- paste0("wikipediaTrend", "__", pageName, ".csv")
-    if( exists("restmp") ){
-      res <-  rbind(
-        restmp, 
-        res[!(as.character(res$date) %in% as.character(restmp$date)),]
-      )
-    }
-    if ( friendly==1 ) write.csv(res, resname)
-    if ( friendly==2 ) write.csv2(res, resname)
-    message(paste0("\nResults written to:\n", getwd(), "/", resname ,"\n"))
-  }
-  if ( friendly==0 ) {
-    message("\nPlease think about beeing server friendly by turning on the friendly option.")
-  }
-  # return
-  res <- res[ res$date <= toDate & res$date >= fromDate ,]
+  # combine new data and old data
+  not_in_res <- !(friendly_data$date %in% res$date)
+  res <- rbind(res, friendly[not_in_res])
   res <- res[order(res$date), ]
+  
+  # beeing friendly: saving results to file for possible later use
+  wp_friendly_save(res, friendly, resname)
+
+  # return
+  res <- res[ res$date <= to & res$date >= from ,]
   return(res)
 }
 

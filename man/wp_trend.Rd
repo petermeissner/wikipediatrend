@@ -3,9 +3,9 @@
 \alias{wp_trend}
 \title{Function for getting access statistics for wikipedia pages}
 \usage{
-wp_trend(requestFrom = "retep.meissner@gmail.com",
-  pageName = "Peter_Principle", countryCode = "en", fromDate = Sys.Date()
-  - 30, toDate = Sys.Date(), friendly = T)
+wp_trend(requestFrom = "anonymous", pageName = "Peter_principle",
+  countryCode = "en", fromDate = Sys.Date() - 30, toDate = Sys.Date(),
+  friendly = F)
 }
 \arguments{
 \item{requestFrom}{This parameter sends an identifier (i.e. your email
@@ -20,7 +20,11 @@ wp_trend(requestFrom = "retep.meissner@gmail.com",
 
 \item{toDate}{blsa}
 
-\item{friendly}{blsa}
+\item{friendly}{Either \code{TRUE}, \code{FALSE}, \code{1} or \code{2}
+This option causes twofold. First, the results of the request are saved in the current working directory in a CSV file with name scheme: \code{wp__[page name]_[country code].csv}.
+Second, the function will look if perhaps a previously saved result is available to be used to only download those information that are still missing instead of the whole timespan.
+
+For storage on disk write.csv() and write.csv2() are used}
 }
 \description{
 Function for getting access statistics for wikipedia pages

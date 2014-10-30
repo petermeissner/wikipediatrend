@@ -1,7 +1,7 @@
 Package: wikipediatrend
 Title: Getting  page access statistics for Wikipedia articles
 Date: 2014-10-07
-Version: 0.1
+Version: 0.1.0.90001
 Author: Peter Meissner (retep.meissner@gmail.com)
 Meintainer: Peter Meissner (retep.meissner@gmail.com)
 Authors@R: person("Peter", "Meissner", email = "retep.meissner@gmail.com",

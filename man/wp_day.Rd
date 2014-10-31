@@ -5,11 +5,11 @@
 \alias{wp_day.default}
 \title{Function to extract the day}
 \usage{
-wp_day(timeStamp)
+wp_day(timestamp)
 
-\method{wp_day}{POSIXlt}(timeStamp)
+\method{wp_day}{POSIXlt}(timestamp)
 
-\method{wp_day}{default}(timeStamp)
+\method{wp_day}{default}(timestamp)
 }
 \arguments{
 \item{timestamp}{a timestamp}

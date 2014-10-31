@@ -5,11 +5,11 @@
 \alias{wp_year.default}
 \title{Function to extract the year}
 \usage{
-wp_year(timeStamp)
+wp_year(timestamp)
 
-\method{wp_year}{POSIXlt}(timeStamp)
+\method{wp_year}{POSIXlt}(timestamp)
 
-\method{wp_year}{default}(timeStamp)
+\method{wp_year}{default}(timestamp)
 }
 \arguments{
 \item{timestamp}{a timestamp}

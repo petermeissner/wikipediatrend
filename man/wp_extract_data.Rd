@@ -6,7 +6,7 @@
 wp_extract_data(wp_json)
 }
 \arguments{
-\item{wikipediaTrendJson}{The results from server request in JSON format}
+\item{wp_json}{The results from server request in JSON format}
 }
 \description{
 The function does accepts a list of JSON snippets and transforms the information into a data frame

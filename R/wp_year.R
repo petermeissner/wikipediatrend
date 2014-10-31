@@ -5,14 +5,14 @@
 #' @param timestamp a timestamp
 #' 
 
-wp_year          <- function(timeStamp) UseMethod("wp_year")
+wp_year          <- function(timestamp) UseMethod("wp_year")
 
 #' @describeIn wp_year extract
-wp_year.POSIXlt  <- function(timeStamp) {
-  timeStamp$year+1900
+wp_year.POSIXlt  <- function(timestamp) {
+  timestamp$year+1900
 }
 
 #' @describeIn wp_year extract
-wp_year.default  <- function(timeStamp) {
-  as.POSIXlt(timeStamp)$year+1900
+wp_year.default  <- function(timestamp) {
+  as.POSIXlt(timestamp)$year+1900
 }

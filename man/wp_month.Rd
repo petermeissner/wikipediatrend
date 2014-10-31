@@ -5,11 +5,11 @@
 \alias{wp_month.default}
 \title{Function to extract the month}
 \usage{
-wp_month(timeStamp)
+wp_month(timestamp)
 
-\method{wp_month}{POSIXlt}(timeStamp)
+\method{wp_month}{POSIXlt}(timestamp)
 
-\method{wp_month}{default}(timeStamp)
+\method{wp_month}{default}(timestamp)
 }
 \arguments{
 \item{timestamp}{a timestamp}

@@ -5,14 +5,14 @@
 #' @param timestamp a timestamp
 #' 
 
-wp_month          <- function(timeStamp) UseMethod("wp_month")
+wp_month          <- function(timestamp) UseMethod("wp_month")
 
 #' @describeIn wp_month extract
-wp_month.POSIXlt  <- function(timeStamp) {
-  timeStamp$mon+1
+wp_month.POSIXlt  <- function(timestamp) {
+  timestamp$mon+1
 }
 
 #' @describeIn wp_month extract
-wp_month.default  <- function(timeStamp) {
-  as.POSIXlt(timeStamp)$mon+1
+wp_month.default  <- function(timestamp) {
+  as.POSIXlt(timestamp)$mon+1
 }

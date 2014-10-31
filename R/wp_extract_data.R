@@ -2,7 +2,7 @@
 #' 
 #' The function does accepts a list of JSON snippets and transforms the information into a data frame
 #' 
-#' @param wikipediaTrendJson The results from server request in JSON format
+#' @param wp_json The results from server request in JSON format
 
 wp_extract_data <- function(wp_json){
   worker <- function(wp_json){

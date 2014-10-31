@@ -1,4 +1,7 @@
 #' Helper function for wp_trend that loads previous saved wp_trend results
+#' 
+#' @param resname  name of the file from which previous \code{wp_trend()} results should be loaded (option is passed down from \code{wp_trend()})
+#' @param friendly should previous results be ignored or loaded (option is passed down from \code{wp_trend()})
 
 wp_friendly_load <- function(resname, friendly){
   

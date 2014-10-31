@@ -4,13 +4,13 @@
 #'   address to contact you if necessary) to stats.grok.se (the server that
 #'   kindly provides the information you request).
 #'   
-#' @param pageName The name of the Wikipedia page as to be found in the URL to the wikipedia article. If e.g. the URL is: \code{https://en.wikipedia.org/wiki/Peter_Fox_(musician)}, than the page name equals to \code{Peter_Fox_(musician)}.
+#' @param page The name of the Wikipedia page as to be found in the URL to the wikipedia article. If e.g. the URL is: \code{https://en.wikipedia.org/wiki/Peter_Fox_(musician)}, than the page name equals to \code{Peter_Fox_(musician)}.
 #'   
-#' @param countryCode The country code of
+#' @param lang The language shorthand identifying which Wikipedia access statistics are to be used: e.g. \code{"en"} for the English version found at http://en.wikipedia.org, \code{"de"} for the German version found at http://en.wikipedia.org or perhaps \code{"als"} for the Alemannic dialect found under http://als.wikipedia.org/.
 #'
-#' @param fromDate blsa
+#' @param from The starting date of the timespan for which access statistics should be retrieved - note that there is no data prior to 2007-12-01. Supply 
 #'   
-#' @param toDate blsa
+#' @param to The last date for which access statistics should be retrieved.
 #'   
 #' @param friendly Either \code{TRUE}, \code{FALSE}, \code{1} or \code{2} 
 #' This option causes twofold. First, the results of the request are saved in the current working directory in a CSV file with name scheme: \code{wp__[page name]_[country code].csv}. 
@@ -19,12 +19,12 @@
 #' For storage on disk write.csv() and write.csv2() are used
 #'   
 
-wp_trend <- function( requestFrom = "anonymous",
-                      pageName    = "Peter_principle", 
-                      countryCode = "en", 
-                      fromDate    = Sys.Date()-30, 
-                      toDate      = Sys.Date(),
-                      friendly    = F
+wp_trend <- function( page        = "Peter_principle", 
+                      from        = Sys.Date()-30, 
+                      to          = Sys.Date(),
+                      lang        = "en", 
+                      friendly    = F,
+                      requestFrom = "anonymous"
 ){
   # encourage being freindly
   if ( !friendly ) {
@@ -48,10 +48,10 @@ wp_trend <- function( requestFrom = "anonymous",
                                                 sep=", "))
   
   # file name for beeing friendly
-  resname <- paste0("wp", "__", pageName, "__", countryCode, ".csv")
+  resname <- paste0("wp", "__", page, "__", lang, ".csv")
   
   # check dates
-  tmp  <- wp_check_date_inputs(fromDate, toDate)
+  tmp  <- wp_check_date_inputs(from, to)
   from <- tmp$from
   to   <- tmp$to
   
@@ -65,7 +65,8 @@ wp_trend <- function( requestFrom = "anonymous",
   
   # prepare urls
   urls  <- paste( "http://stats.grok.se/json",
-                  countryCode, dates_url, pageName, sep="/")
+                  lang, dates_url, page, sep="/")
+  if(all(dates_url=="")) urls  <- NULL
   
   # chunking urls
   urlchunks <- chunk(urls, 5)
@@ -82,11 +83,11 @@ wp_trend <- function( requestFrom = "anonymous",
   }
   
   # extract data
-  res <- extract_access_counts(jsons)
+  res <- wp_extract_data(jsons)
   
   # combine new data and old data
   not_in_res <- !(friendly_data$date %in% res$date)
-  res <- rbind(res, friendly[not_in_res])
+  res <- rbind(res, friendly_data[not_in_res,])
   res <- res[order(res$date), ]
   
   # beeing friendly: saving results to file for possible later use

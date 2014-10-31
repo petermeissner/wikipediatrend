@@ -45,4 +45,5 @@ Temporary Items
 *.Rproj
 .Rproj.user
 devel/
+/wp*.csv
 

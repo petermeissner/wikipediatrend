@@ -2,7 +2,9 @@
 #' 
 #' Function to extract the year from a timestamp of e.g. class POSIXlt, POSIXct, Date, or character. If the option is of type character it should be in the form of yyyy-mm-dd.
 #' 
-#' @param timestamp a timestamp
+#' @param timestamp Some sort of timestamp e.g. of class POSIXlt, POSIXct, Date,
+#'   or character. If the option is of type character it should be in the form
+#'   of yyyy-mm-dd.
 #' 
 
 wp_year          <- function(timestamp) UseMethod("wp_year")

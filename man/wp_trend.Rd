@@ -9,17 +9,17 @@ wp_trend(page = "Peter_principle", from = Sys.Date() - 30,
 \arguments{
 \item{page}{The name of the Wikipedia page as to be found in the URL to the wikipedia article. If e.g. the URL is: \code{https://en.wikipedia.org/wiki/Peter_Fox_(musician)}, than the page name equals to \code{Peter_Fox_(musician)}.}
 
-\item{from}{The starting date of the timespan for which access statistics should be retrieved - note that there is no data prior to 2007-12-01. Supply}
+\item{from}{The starting date of the timespan for which access statistics should be retrieved - note that there is no data prior to 2007-12-01. Supply some sort of timestamp e.g. of class POSIXlt, POSIXct, Date, or character. If the option is of type character it should be in the form of yyyy-mm-dd.}
 
-\item{to}{The last date for which access statistics should be retrieved.}
+\item{to}{The last date for which access statistics should be retrieved. Supply some sort of timestamp e.g. of class POSIXlt, POSIXct, Date, or character. If the option is of type character it should be in the form of yyyy-mm-dd.}
 
-\item{lang}{The language shorthand identifying which Wikipedia access statistics are to be used: e.g. \code{"en"} for the English version found at http://en.wikipedia.org, \code{"de"} for the German version found at http://en.wikipedia.org or perhaps \code{"als"} for the Alemannic dialect found under http://als.wikipedia.org/.}
+\item{lang}{The language shorthand identifying which Wikipedia access statistics are to be used: e.g. \code{"en"} for the English version found at http://en.wikipedia.org, \code{"de"} for the German version found at http://de.wikipedia.org or perhaps \code{"als"} for the Alemannic dialect found under http://als.wikipedia.org/.}
 
 \item{friendly}{Either \code{TRUE}, \code{FALSE}, \code{1} or \code{2}
-This option causes twofold. First, the results of the request are saved in the current working directory in a CSV file with name scheme: \code{wp__[page name]_[country code].csv}.
+This option causes twofold. First, if the value is set to TRUE, 1, or 2 the results of the request are saved in the current working directory in a CSV file with name scheme: \code{wp__[page name]_[country code].csv}.
 Second, the function will look if perhaps a previously saved result is available to be used to only download those information that are still missing instead of the whole timespan.
 
-For storage on disk write.csv() and write.csv2() are used}
+For storage on disk \code{write.csv()} (friendly=TRUE or friendly=1) and \code{write.csv2()} (friendly=2) are used.}
 
 \item{requestFrom}{This parameter sends an identifier (i.e. your email
   address to contact you if necessary) to stats.grok.se (the server that

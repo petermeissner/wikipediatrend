@@ -1,6 +1,7 @@
 #' Helper function for wp_trend
 #' 
-#' The function does accepts a list of JSON snippets and transforms the information into a data frame
+#' The function does accepts a list of JSON snippets and transforms the
+#' information into a data frame
 #' 
 #' @param wp_json The results from server request in JSON format
 

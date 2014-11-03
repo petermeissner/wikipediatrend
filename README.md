@@ -171,7 +171,7 @@ lines(cats)
 
 ![](./Readme_files/figure-html/unnamed-chunk-5-1.png) 
 
-... and can triumphantly can conclude that cats are sooooo early 2010's.
+... and triumphantly can conclude that <span style="color:red">cats are sooooo early 2010's</span>.
 
 ### Ebola
 

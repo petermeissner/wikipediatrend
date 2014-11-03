@@ -1,7 +1,7 @@
 Package: wikipediatrend
 Title: Getting Wikipedia article traffic statistics from Stats.Grok.SE API.
 Date: 2014-10-07
-Version: 0.1.0.90005
+Version: 0.1.0.90006
 Author: Peter Meissner (retep.meissner@gmail.com)
 Meintainer: Peter Meissner (retep.meissner@gmail.com)
 Authors@R: person("Peter", "Meissner", email = "retep.meissner@gmail.com",

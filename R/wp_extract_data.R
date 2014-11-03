@@ -8,18 +8,20 @@
 wp_extract_data <- function(wp_json){
   worker <- function(wp_json){
     tmp         <- jsonlite::fromJSON(wp_json)$daily_views
-    tmp_data <- data.frame( date = as.Date( names(tmp)[right_dates] ), 
-                            count= unlist(tmp)[right_dates]           )
+    tmp_data <- data.frame( date = wp_date( names(tmp) ), 
+                            count= unlist(tmp)           )
     return(tmp_data)
   }
   if( length(wp_json)==0 ) return(data.frame(date=NULL, count=NULL))
   if(length(wp_json)==1 & is.character(wp_json[[1]])){
-    return(worker(wp_json[[1]]))
+    res <- worker(wp_json[[1]])
+    res <- res[!is.na(res$date),]
+    return(res)
   }
   if(length(wp_json)> 1 & is.character(wp_json[[1]])){
     date  <- unlist(lapply(lapply(wp_json, worker), '[[', "date"))
     count <- unlist(lapply(lapply(wp_json, worker), '[[', "count"))
-    res   <- data.frame( date=as.Date(date, origin="1970-01-01"), 
+    res   <- data.frame( date=wp_date(date, origin="1970-01-01"), 
                          count, row.names = NULL)
     res <- res[!is.na(res$date),]
     return(res)

@@ -23,8 +23,8 @@ form of yyyy-mm-dd.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{POSIXlt}: extract
+\item \code{POSIXlt}: extract day from timestamp
 
-\item \code{default}: extract
+\item \code{default}: extract day from timestamp
 }}
 

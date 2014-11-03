@@ -93,12 +93,14 @@ The option can be set to different values:
 
 
 
-## Viral Marketing Section 
+## So what? 
 
 ### Cats
 
-```{r, cache=TRUE}
-cats <- wp_trend("Cat", from="2010-01-01")
+First of all we are now able to study cats:
+
+```{r, cache=FALSE}
+cats <- wp_trend("Cat", from="2010-01-01", friendly=T)
   # throw out extreme values
   no_outlier <- 
   cats$count < 
@@ -114,20 +116,26 @@ plot( cats,
 lines(cats)
 ```
 
+... and can triumphantly can conclude that cats are sooooo early 2010's.
+
 ### Ebola
 
-```{r, cache=TRUE}
-ebola <- wp_trend("Ebola", from="2008-01-01")
-plot( cats, 
-      col=ifelse( wp_wday(ebolas$date) > 5 , "red", "black") ,
-      ylim=c(0, max(ebola$count)),
+```{r, cache=FALSE}
+ebola_en1 <- wp_trend("Ebola", from="2008-01-01", friendly=T)
+plot( ebola_en1, 
+      ylim=c(0, max(ebola_en1$count)),
       main="Ebola's Wikipedia Attention",
-      ylab="views per day", xlab="time")
-lines(ebola)
+      ylab="views per day", xlab="time",
+      type="l")
+lines(ebola_en1)
 ```
 
 
-
+```{r, cache=TRUE}
+ebola_en2 <- wp_trend("Ebola_virus_disease", from="2008-01-01", friendly=T)
+ebola_de1 <- wp_trend("Ebola", lang="de", from="2008-01-01", friendly=T)
+ebola_de2 <- wp_trend("Ebolafieber", lang="de", from="2008-01-01", friendly=T)
+```
 
 
 

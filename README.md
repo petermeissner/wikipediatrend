@@ -109,7 +109,9 @@ head(peter_principle)
 ```r
 plot( peter_principle, 
       col=ifelse( wp_wday(peter_principle$date) > 5 , "red", "black") ,
-      ylim=c(0, max(peter_principle$count)))
+      ylim=c(0, max(peter_principle$count)),
+      main="Peter Principle's Wikipedia Attention",
+      ylab="views per day", xlab="time")
 lines(peter_principle)
 ```
 
@@ -118,7 +120,7 @@ lines(peter_principle)
 Looking at the graph we can conclude that the *Peter Principle* as a work related phenomenon obviously is something that is most pressing on workdays.
 
 
-## Being freindly
+## Being friendly
 
 One of the most important features of the package is its `friendly` option. On the one hand it saves us time when making subsequent requests of the same page because less pages have to be loeaded. On the other hand it serves to minimize workload on behalf of the `stats.grok.se`-server that kindly provides the information we are using. 
 
@@ -129,14 +131,115 @@ The option can be set to different values:
 - **1** is the same as **TRUE**
 - **2**, is the same as **TRUE** but storage takes place via `write.csv2()`
 
-sd
 
 
 
 
+## So what? 
+
+### Cats
+
+First of all we are now able to study cats:
+
+
+```r
+cats <- wp_trend("Cat", from="2010-01-01", friendly=T)
+```
+
+```
+## http://stats.grok.se/json/en/201411/Cat
+## 
+## Results written to:
+## D:/Peter/Dropbox/RPackages/wikipediatrend/wp__Cat__en.csv
+```
+
+```r
+  # throw out extreme values
+  no_outlier <- 
+  cats$count < 
+    quantile(cats$count, na.rm=T, 0.99) & 
+  cats$count > 
+    quantile(cats$count, na.rm=T, 0.01)  
+cats <- cats[no_outlier,]
+plot( cats, 
+      col=ifelse( wp_wday(cats$date) > 5 , "red", "black") ,
+      ylim=c(0, max(cats$count)),
+      main="Cats' Wikipedia Attention",
+      ylab="views per day", xlab="time")
+lines(cats)
+```
+
+![](./Readme_files/figure-html/unnamed-chunk-5-1.png) 
+
+... and can triumphantly can conclude that cats are sooooo early 2010's.
+
+### Ebola
+
+
+```r
+ebola_en1 <- wp_trend("Ebola", from="2008-01-01", friendly=T)
+```
+
+```
+## http://stats.grok.se/json/en/200801/Ebola
+## http://stats.grok.se/json/en/200807/Ebola
+## http://stats.grok.se/json/en/201411/Ebola
+## 
+## Results written to:
+## D:/Peter/Dropbox/RPackages/wikipediatrend/wp__Ebola__en.csv
+```
+
+```r
+plot( ebola_en1, 
+      ylim=c(0, max(ebola_en1$count)),
+      main="Ebola's Wikipedia Attention",
+      ylab="views per day", xlab="time",
+      type="l")
+lines(ebola_en1)
+```
+
+![](./Readme_files/figure-html/unnamed-chunk-6-1.png) 
 
 
 
+```r
+ebola_en2 <- wp_trend("Ebola_virus_disease", from="2008-01-01", friendly=T)
+```
+
+```
+## http://stats.grok.se/json/en/200801/Ebola_virus_disease
+## http://stats.grok.se/json/en/200807/Ebola_virus_disease
+## http://stats.grok.se/json/en/201411/Ebola_virus_disease
+## 
+## Results written to:
+## D:/Peter/Dropbox/RPackages/wikipediatrend/wp__Ebola_virus_disease__en.csv
+```
+
+```r
+ebola_de1 <- wp_trend("Ebola", lang="de", from="2008-01-01", friendly=T)
+```
+
+```
+## http://stats.grok.se/json/de/200801/Ebola
+## http://stats.grok.se/json/de/200807/Ebola
+## http://stats.grok.se/json/de/201411/Ebola
+## 
+## Results written to:
+## D:/Peter/Dropbox/RPackages/wikipediatrend/wp__Ebola__de.csv
+```
+
+```r
+ebola_de2 <- wp_trend("Ebolafieber", lang="de", from="2008-01-01", friendly=T)
+```
+
+```
+## http://stats.grok.se/json/de/200801/Ebolafieber
+## http://stats.grok.se/json/de/200807/Ebolafieber
+## http://stats.grok.se/json/de/201411/Ebolafieber
+## 
+## Results written to:
+## D:/Peter/Dropbox/RPackages/wikipediatrend/wp__Ebolafieber__de.csv
+```
 
 
 

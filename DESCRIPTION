@@ -1,5 +1,5 @@
 Package: wikipediatrend
-Title: Getting  page access statistics for Wikipedia articles
+Title: Getting Wikipedia article traffic statistics from Stats.Grok.SE API.
 Date: 2014-10-07
 Version: 0.1.0.90005
 Author: Peter Meissner (retep.meissner@gmail.com)

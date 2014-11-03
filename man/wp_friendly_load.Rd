@@ -6,9 +6,11 @@
 wp_friendly_load(resname, friendly)
 }
 \arguments{
-\item{resname}{name of the file from which previous \code{wp_trend()} results should be loaded (option is passed down from \code{wp_trend()})}
+\item{resname}{name of the file from which previous \code{wp_trend()}
+results should be loaded (option is passed down from \code{wp_trend()})}
 
-\item{friendly}{should previous results be ignored or loaded (option is passed down from \code{wp_trend()})}
+\item{friendly}{should previous results be ignored or loaded (option is
+passed down from \code{wp_trend()})}
 }
 \description{
 Helper function for wp_trend that loads previous saved wp_trend results

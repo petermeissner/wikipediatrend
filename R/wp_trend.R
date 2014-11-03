@@ -114,6 +114,7 @@ wp_trend <- function( page        = "Peter_principle",
 
   # return
   res <- res[ res$date <= to & res$date >= from ,]
+  rownames(res) <- NULL
   return(res)
 }
 

@@ -1,20 +1,19 @@
 ---
 title: "Wikipedia Article Access Statistics"
 author: "Peter Meißner"
-date: "Thursday, October 30, 2014"
+date: "Friday, October 31, 2014"
 output:
   html_document:
     keep_md: yes
 ---
 
-# Behind the scenes of Wikipedia
+## Introduction
 
-On Wikipedia there are a lot of information to be explored behind the scenes. One type of information are page access statistics -- e.g. http://stats.grok.se/en/201409/Peter_Principle. Another type are the info pages -- e.g. https://en.wikipedia.org/w/index.php?title=Peter_Principle&action=info.
+On Wikipedia there are a lot of information to be explored behind the scenes. One type of information are page access statistics -- e.g. http://stats.grok.se/en/201409/Peter_Principle. Another type are the info pages -- e.g. https://en.wikipedia.org/w/index.php?title=Peter_Principle&action=info. While the latter falls into the jurisdiction of the [MediaWiki](http://cran.r-project.org/web/packages/WikipediR/index.html)-package for the former no ready made package exists. 
 
+## Stats.grok.se API and the wikipediatrend package
 
-# Access statistics
-
-Let's have a look at how `http://stats.grok.se` works. Playing around a little with the various part of the URL reveals that we can have either a nice graphic drawn for us or we might get access counts on a dayly basis as JSON format: 
+`http://stats.grok.se` provides an Web API to retreive Wikipedia page access statistics on a daily basis. The information is either presented in HTML or provided as JSON data. 
 
 ```
 http://stats.grok.se/en/201409/Peter_Principle
@@ -24,37 +23,110 @@ versus
 http://stats.grok.se/json/en/201409/Peter_Principle
 ```
 
-The data can be returned for whole months expressed as strings with four digit years followed by two digit months. Furthermore, one can express the language for which to return the access counts and last but not least we have to specify the title of the Wikipedia article. 
+A single request results in data for a certain page, from one of Wikipedia's different language subdomains, and for all days of a given month. The `wikipediatrend` package draws on this Web API and provides a consistent and convenient way to use those data within R. Fruthermore the package not only takes care of the communication between the Web API on `stats.grok.se` and your local R session but also allows for minimizing traffic and workload on behalf of the `stats.grok.se`-server by having a build in storage and reuse system of already used data -- data is (if user decides so) saved locally in CSV format and reused for subsequent requests. 
+
+
+
+## A First Tutorial
 
 ```{r}
 require(wikipediatrend)
 ```
 
-```{r}
-res1 <- wp_trend("")
+The workhorse of the package is the `wp_trend()` function with several arguments:
+
+- **page**        [ `"Peter_principle"` ]: <br>
+... here goes the name of the page
+- **from**        [ `Sys.Date()-30` ]: <br>
+... starting date of the timespan to be considered
+- **to**          [ `Sys.Date()` ]: <br>
+... end date of the timespan to be considered
+- **lang**        [ `"en"` ]: <br>
+... language of the page
+- **friendly**    [ `F` ]: <br>
+... should `wp_trend()` try minimize workload on behalf of `stats.grok.se`
+- **requestFrom** [ `"anonymous"` ]: <br>
+... do you care to identify yourself towards `stats.grok.se`
+
+
+Let's have a first run using the defaults:
+```{r, cache=TRUE}
+peter_principle <- wp_trend()
 ```
-The function informs us about which pages where accessed to retrieve the information. Furthermore, the dowloaded data is written on disk. That is done to prevent downloading the same information over and over again. Instead the function first looks for a relevant CSV file in the current working directory to match requested data with already downloaded data before asking the server for data. 
-```{r}
-plot(res1[res1$count < quantile(res1$count, na.rm=T, 0.99),])
-dim(res1)
+
+The function informs us that using the friendly option might be a good idea and shows us which URLs it used to retreive the inforamtion we were asking for. 
+
+The function's return is a data frame with two variables *date* and *count*:
+
+```{r, cache=TRUE}
+dim(peter_principle)
+class(peter_principle)
+head(peter_principle)
 ```
-```{r}
-res2 <- wp_trend("", pageName="Ebola")
-plot(res2[res2$count < quantile(res2$count, na.rm=T, 0.99),])
-dim(res2)
+
+... that e.g. can be used directly for visualization. Using `wp_wday()` we can furthermore descriminate weekdays <span style="color:black">(black)</span> from weekends <span style="color:red">(red)</span>. 
+
+```{r, cache=TRUE}
+plot( peter_principle, 
+      col=ifelse( wp_wday(peter_principle$date) > 5 , "red", "black") ,
+      ylim=c(0, max(peter_principle$count)),
+      main="Peter Principle's Wikipedia Attention",
+      ylab="views per day", xlab="time")
+lines(peter_principle)
 ```
-```{r}
-res3 <- wp_trend("", pageName="Barack_Obama")
-plot(res3[res3$count < quantile(res3$count, na.rm=T, 0.99),])
-dim(res3)
+
+Looking at the graph we can conclude that the *Peter Principle* as a work related phenomenon obviously is something that is most pressing on workdays.
+
+
+## Being friendly
+
+One of the most important features of the package is its `friendly` option. On the one hand it saves us time when making subsequent requests of the same page because less pages have to be loeaded. On the other hand it serves to minimize workload on behalf of the `stats.grok.se`-server that kindly provides the information we are using. 
+
+The option can be set to different values: 
+
+- **FALSE**, the default, deactivates `wp_trend()`'s friendly behaviour alltogether
+- **TRUE**, activates `wp_trend()`'s friendly behaviour and retreieved access statistics are stored on disk in CSV format via `write.csv()`
+- **1** is the same as **TRUE**
+- **2**, is the same as **TRUE** but storage takes place via `write.csv2()`
+
+
+
+
+
+## Viral Marketing Section 
+
+### Cats
+
+```{r, cache=TRUE}
+cats <- wp_trend("Cat", from="2010-01-01")
+  # throw out extreme values
+  no_outlier <- 
+  cats$count < 
+    quantile(cats$count, na.rm=T, 0.99) & 
+  cats$count > 
+    quantile(cats$count, na.rm=T, 0.01)  
+cats <- cats[no_outlier,]
+plot( cats, 
+      col=ifelse( wp_wday(cats$date) > 5 , "red", "black") ,
+      ylim=c(0, max(cats$count)),
+      main="Cats' Wikipedia Attention",
+      ylab="views per day", xlab="time")
+lines(cats)
 ```
-```{r}
-res4 <- wp_trend("", 
-                       pageName="Angela_Merkel",
-                       countryCode="de")
-dim(res4)
-plot(res4[res4$count < quantile(res4$count, na.rm=T, 0.99),])
+
+### Ebola
+
+```{r, cache=TRUE}
+ebola <- wp_trend("Ebola", from="2008-01-01")
+plot( cats, 
+      col=ifelse( wp_wday(ebolas$date) > 5 , "red", "black") ,
+      ylim=c(0, max(ebola$count)),
+      main="Ebola's Wikipedia Attention",
+      ylab="views per day", xlab="time")
+lines(ebola)
 ```
+
+
 
 
 

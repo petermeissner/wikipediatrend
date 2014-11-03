@@ -7,8 +7,10 @@
 
 wp_extract_data <- function(wp_json){
   worker <- function(wp_json){
-    tmp <- jsonlite::fromJSON(wp_json)$daily_views
-    data.frame(date=as.Date(names(tmp)), count=unlist(tmp))
+    tmp         <- jsonlite::fromJSON(wp_json)$daily_views
+    tmp_data <- data.frame( date = as.Date( names(tmp)[right_dates] ), 
+                            count= unlist(tmp)[right_dates]           )
+    return(tmp_data)
   }
   if( length(wp_json)==0 ) return(data.frame(date=NULL, count=NULL))
   if(length(wp_json)==1 & is.character(wp_json[[1]])){

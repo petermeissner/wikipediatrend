@@ -6,7 +6,9 @@
 wp_yearmonth(timestamp)
 }
 \arguments{
-\item{timestamp}{Some sort of timestamp e.g. of class POSIXlt, POSIXct, Date, or character. If the option is of type character it should be in the form of yyyy-mm-dd.}
+\item{timestamp}{Some sort of timestamp e.g. of class POSIXlt, POSIXct, Date,
+or character. If the option is of type character it should be in the form
+of yyyy-mm-dd.}
 }
 \description{
 function for getting year and month of a timestamp

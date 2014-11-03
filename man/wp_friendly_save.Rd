@@ -8,11 +8,14 @@ wp_friendly_save(res, friendly, resname)
 \arguments{
 \item{res}{internal data retreived by \code{wp_trend()}}
 
-\item{friendly}{should retrieved data be saved for later use (option is passed down from \code{wp_trend()})}
+\item{friendly}{should retrieved data be saved for later use (option is
+passed down from \code{wp_trend()})}
 
-\item{resname}{the name serving to save the data (option is passed down from \code{wp_trend()})}
+\item{resname}{the name serving to save the data (option is passed down from
+\code{wp_trend()})}
 }
 \description{
-Function writes wp_trend data to a CSV file that can be used for subsequent requests
+Function writes wp_trend data to a CSV file that can be used for subsequent
+requests
 }
 

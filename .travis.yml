@@ -8,6 +8,9 @@ before_install:
   - ./travis-tool.sh bootstrap
 
 install:
+  - ./travis-tool.sh r_binary_install RCurl
+  - ./travis-tool.sh r_binary_install stringr
+  - ./travis-tool.sh r_binary_install jsonlite
   - ./travis-tool.sh install_github petermeissner/wikipediatrend
   - ./travis-tool.sh install_deps
 

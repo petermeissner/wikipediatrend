@@ -4,3 +4,4 @@ devel/.*$
 data-raw/.*$
 wp__*.csv
 Readme.*
+^\.travis\.yml$

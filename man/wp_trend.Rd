@@ -48,6 +48,11 @@ wp_trend(page = "Peter_principle", from = Sys.Date() - 30,
 Function for getting access statistics for wikipedia pages
 }
 \examples{
-wp_trend("Main_Page", from="2014-11-01", to="2014-11-30", lang="en", friendly=FALSE, requestFrom="R package wikipedia trend test request")
+wp_trend(page="Main_Page",
+         from="2014-11-01",
+         to="2014-11-30",
+         lang="en",
+         friendly=FALSE,
+         requestFrom="R package wikipedia trend test request")
 }
 

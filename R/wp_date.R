@@ -12,6 +12,12 @@
 #' with the special purpose to make \code{wp_trend()} also with dirty,
 #' unreasonable data (e.g. "" or "2012-13-01" or "2012-02-32") and are not
 #' recommended for any other than wikipediatrend internal use.
+#' 
+#' @param x See \code{?as.Date}
+#' @param format See \code{?as.Date}
+#' @param origin See \code{?as.Date}
+#' @param tz See \code{?as.Date}
+#' @param ... See \code{?as.Date}
 
 wp_date <- function (x, ...)
 {
@@ -27,7 +33,7 @@ wp_date.character <- function (x, format = "", ...)
   if ( format=="" ) {
     res <- strptime(x, format="%Y-%m-%d")
   }else{
-    res <- strptime(x, foirmat=format)
+    res <- strptime(x, format=format)
   }
   wp_date(res)
 }
@@ -103,10 +109,10 @@ wp_date.POSIXct    <- function (x, tz = "UTC", ...)
 }
 
 
-#' @describeIn wp_date  same as \code{as.Date()}
+#' @describeIn wp_date  using \code{as.Date()}
 wp_date.POSIXlt <- function (x, ...) 
 {
-  .Internal(POSIXlt2Date(x))
+  as.Date(x)
 }
 
 

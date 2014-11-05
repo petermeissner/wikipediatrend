@@ -13,13 +13,13 @@ wp_friendly_load <- function(resname, friendly){
     
     if ( friendly & test ) {
       dat <- read.csv(resname)[,c("date", "count")]
-      dat$date <- as.Date(dat$date)
+      dat$date <- wp_date(dat$date)
       return(dat)
     }
     
     if ( friendly & !test ) {
       dat <- read.csv2(resname)[,c("date", "count")]
-      dat$date <- as.Date(dat$date)
+      dat$date <- wp_date(dat$date)
       return(dat)
     }
   

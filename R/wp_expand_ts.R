@@ -7,6 +7,6 @@
 #'   \code{"month"}, \code{"year"}
 
 wp_expand_ts <- function(from, to, by){
-  dates <- seq(as.Date(from), as.Date(to), by)
+  dates <- seq(wp_date(from), wp_date(to), by)
   return(dates)
 }

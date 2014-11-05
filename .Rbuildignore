@@ -2,5 +2,5 @@
 ^\.Rproj\.user$
 devel/.*$
 data-raw/.*$
-wikipediaTrend__*
+wp__*.csv
 Readme.*

@@ -29,6 +29,17 @@ wp_date(x, ...)
 
 \method{wp_date}{POSIXlt}(x, ...)
 }
+\arguments{
+\item{x}{See \code{?as.Date}}
+
+\item{...}{See \code{?as.Date}}
+
+\item{format}{See \code{?as.Date}}
+
+\item{origin}{See \code{?as.Date}}
+
+\item{tz}{See \code{?as.Date}}
+}
 \description{
 \code{wp_date()} provides a generic function and several methods to transform
 something into a date, just like \code{as.Date()}. While most methods were
@@ -64,6 +75,6 @@ instead of killing itself with an error.
 
 \item \code{POSIXct}: same as \code{as.Date()}
 
-\item \code{POSIXlt}: same as \code{as.Date()}
+\item \code{POSIXlt}: using \code{as.Date()}
 }}
 

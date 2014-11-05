@@ -1,5 +1,5 @@
 ---
-title: "Introducing wikipediatrend -- Easy Analyses of Puplic Attention, Anxiety and Information Seeking"
+title: "Introducing Wikipediatrend -- Easy Analyses of Puplic Attention, Anxiety and Information Seeking"
 author: "Peter Meißner"
 output:
   html_document:

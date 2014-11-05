@@ -3,7 +3,8 @@ Peter Meißner
 
 
 
-2014-11-05
+2014-11-05 <br>
+
 [![Build Status](https://travis-ci.org/petermeissner/wikipediatrend.svg?branch=master)](https://travis-ci.org/petermeissner/wikipediatrend)
 
 

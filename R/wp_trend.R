@@ -1,69 +1,98 @@
 #' Function for getting access statistics for wikipedia pages
 #' 
-#' @param requestFrom This parameter sends an identifier (i.e. your email
-#'   address to contact you if necessary) to stats.grok.se (the server that
+#' @param requestFrom This parameter sends an identifier (i.e. your email 
+#'   address to contact you if necessary) to stats.grok.se (the server that 
 #'   kindly provides the information you request).
 #'   
-#' @param pageName The name of the Wikipedia page as to be found in the URL to the wikipedia article. If e.g. the URL is: \code{https://en.wikipedia.org/wiki/Peter_Fox_(musician)}, than the page name equals to \code{Peter_Fox_(musician)}.
+#' @param page The name of the Wikipedia page as to be found in the URL to the 
+#'   wikipedia article. If e.g. the URL is: 
+#'   \code{https://en.wikipedia.org/wiki/Peter_Fox_(musician)}, than the page 
+#'   name equals to \code{Peter_Fox_(musician)}.
 #'   
-#' @param countryCode The country code of
-#'
-#' @param fromDate blsa
+#' @param lang The language shorthand identifying which Wikipedia access 
+#'   statistics are to be used: e.g. \code{"en"} for the English version found 
+#'   at http://en.wikipedia.org, \code{"de"} for the German version found at 
+#'   http://de.wikipedia.org or perhaps \code{"als"} for the Alemannic dialect 
+#'   found under http://als.wikipedia.org/.
 #'   
-#' @param toDate blsa
+#' @param from The starting date of the timespan for which access statistics 
+#'   should be retrieved - note that there is no data prior to 2007-12-01. 
+#'   Supply some sort of timestamp e.g. of class POSIXlt, POSIXct, Date, or 
+#'   character. If the option is of type character it should be in the form of 
+#'   yyyy-mm-dd.
 #'   
-#' @param friendly blsa
+#' @param to The last date for which access statistics should be retrieved. 
+#'   Supply some sort of timestamp e.g. of class POSIXlt, POSIXct, Date, or 
+#'   character. If the option is of type character it should be in the form of 
+#'   yyyy-mm-dd.
 #'   
+#' @param friendly Either \code{TRUE}, \code{FALSE}, \code{1} or \code{2} This 
+#'   option causes twofold. First, if the value is set to TRUE, 1, or 2 the 
+#'   results of the request are saved in the current working directory in a CSV 
+#'   file with name scheme: \code{wp__[page name]_[country code].csv}. Second, 
+#'   the function will look if perhaps a previously saved result is available to
+#'   be used to only download those information that are still missing instead 
+#'   of the whole timespan.
+#'   
+#'   For storage on disk \code{write.csv()} (friendly=TRUE or friendly=1) and 
+#'   \code{write.csv2()} (friendly=2) are used.
+#'   
+#' @examples 
+#' wp_trend(page="Main_Page", 
+#'          from="2014-11-01", 
+#'          to="2014-11-30", 
+#'          lang="en", 
+#'          friendly=FALSE, 
+#'          requestFrom="R package wikipedia trend test request")
 
-wp_trend <- function( requestFrom = "retep.meissner@gmail.com",
-                      pageName    = "Peter_Principle", 
-                      countryCode = "en", 
-                      fromDate    = Sys.Date()-30, 
-                      toDate      = Sys.Date(),
-                      friendly    = T
+wp_trend <- function( page        = "Peter_principle", 
+                      from        = Sys.Date()-30, 
+                      to          = Sys.Date(),
+                      lang        = "en", 
+                      friendly    = F,
+                      requestFrom = "anonymous"
 ){
+  # encourage being freindly
+  if ( !friendly ) {
+    message("
+    With option 'friendly' set to FALSE subsequent requests 
+    of the same wikipedia-page cause the server -- which is kindly 
+    providing information for you -- to work hard to get the same 
+    stuff over and over and over and over again. Do not bore 
+    the server - be friendly. 
+    
+    More information is found via '?wp_trend'.
+    ")
+  }
+  
+
   # http header
   standardHeader <- list( from         = requestFrom,
-                          'user-agent' = paste( "wikipediaTrend running on: ", 
+                          'user-agent' = paste( "wikipediatrend running on: ", 
                                                 R.version$platform,
                                                 R.version$version.string,
                                                 sep=", "))
   
-  # expand dates 
-  if ( as.Date(fromDate) < as.Date("2007-12-01")  ) { 
-    fromDate <- as.Date("2007-12-01")
-  } 
-  dates    <- seq(as.Date(fromDate), as.Date(toDate), "month")
-  dates    <- paste0(substring(dates, 1, 4), substring(dates, 6, 7))
+  # file name for beeing friendly
+  resname <- paste0("wp", "__", page, "__", lang, ".csv")
+  
+  # check dates
+  tmp  <- wp_check_date_inputs(from, to)
+  from <- tmp$from
+  to   <- tmp$to
+  
+  # beeing friendly
+  friendly_data <- wp_friendly_load(resname, friendly)
+  
+  # checking for months with missing data
+  dates_day <- wp_expand_ts(from, to, "day")
+  not_in_fd <- !(dates_day %in% friendly_data$date)
+  dates_url <- unique(wp_yearmonth(dates_day[ not_in_fd ]))
   
   # prepare urls
   urls  <- paste( "http://stats.grok.se/json",
-                  countryCode, dates, pageName, sep="/")
-  
-  # beeing friendly: using already downloaded data (except for current month)
-  resname <- paste0("wikipediaTrend", "__", pageName, ".csv")
-  if ( (friendly==1 | friendly==2) & file.exists(resname) ) {
-    if ( friendly==1 ) {
-      restmp <- read.csv(resname)[,c("date", "count")]
-      restmp$date <- as.Date(restmp$date)
-    }
-    if ( friendly==2 ) {
-      restmp <- read.csv2(resname)[,c("date", "count")]
-      restmp$date <- as.Date(restmp$date)
-    }
-    restmp_dates <- substring(
-        stringr::str_replace(as.character(restmp$date), "-", ""),
-        1,6)
-    iffer <- !(dates %in% restmp_dates)
-    if ( toDate==Sys.Date() ) { 
-      iffer2 <- dates == substring(
-        stringr::str_replace(as.character(Sys.Date()), "-", ""), 
-        1, 6)
-      iffer  <- iffer | iffer2 
-    } 
-    dates <- dates[iffer]
-    urls  <- urls[iffer]
-  }
+                  lang, dates_url, page, sep="/")
+  if(all(dates_url=="")) urls  <- NULL
   
   # chunking urls
   urlchunks <- chunk(urls, 5)
@@ -71,33 +100,28 @@ wp_trend <- function( requestFrom = "retep.meissner@gmail.com",
   # make http requests
   jsons <- list()
   for(i in seq_along(urlchunks)){
-    jsons   <- c(jsons, RCurl::getURL(url = urlchunks[[i]], httpheader = standardHeader))
+    jsons <- c(
+      jsons, 
+      RCurl::getURL(url = urlchunks[[i]], httpheader = standardHeader)
+     )
     message(paste(urlchunks[[i]], collapse="\n"))
     Sys.sleep(1)
   }
   
-  # produce data set
-  res <- extract_access_counts(jsons)
+  # extract data
+  res <- wp_extract_data(jsons)
+  
+  # combine new data and old data
+  not_in_res <- !(friendly_data$date %in% res$date)
+  res <- rbind(res, friendly_data[not_in_res,])
+  res <- res[order(res$date), ]
   
   # beeing friendly: saving results to file for possible later use
-  if ( friendly==1 | friendly==2 ) {
-    resname <- paste0("wikipediaTrend", "__", pageName, ".csv")
-    if( exists("restmp") ){
-      res <-  rbind(
-        restmp, 
-        res[!(as.character(res$date) %in% as.character(restmp$date)),]
-      )
-    }
-    if ( friendly==1 ) write.csv(res, resname)
-    if ( friendly==2 ) write.csv2(res, resname)
-    message(paste0("\nResults written to:\n", getwd(), "/", resname ,"\n"))
-  }
-  if ( friendly==0 ) {
-    message("\nPlease think about beeing server friendly by turning on the friendly option.")
-  }
+  wp_friendly_save(res, friendly, resname)
+
   # return
-  res <- res[ res$date <= toDate & res$date >= fromDate ,]
-  res <- res[order(res$date), ]
+  res <- res[ res$date <= to & res$date >= from ,]
+  rownames(res) <- NULL
   return(res)
 }
 

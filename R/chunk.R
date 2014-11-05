@@ -7,4 +7,7 @@
 #' @param x The vector to be chunked.
 #' @param n The prefered size of those chunks.
 
-chunk <- function(x,n) split(x, ceiling(seq_along(x)/n))
+chunk <- function(x,n){
+  if(is.null(x)) return(NULL)
+  split(x, ceiling(seq_along(x)/n))
+}

@@ -5,3 +5,4 @@ data-raw/.*$
 wp__*.csv
 Readme.*
 ^\.travis\.yml$
+cran-comments.md

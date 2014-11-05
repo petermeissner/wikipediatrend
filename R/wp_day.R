@@ -10,7 +10,6 @@
 #'   
 #'   
 
-
 wp_day          <- function(timestamp) UseMethod("wp_day")
 
 #' @describeIn wp_day extract day from timestamp

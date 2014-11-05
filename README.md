@@ -4,7 +4,7 @@ Peter Meißner
 
 
 2014-11-05
-<img src="travischeck.png" alt="Build Status">
+[![Build Status](https://travis-ci.org/petermeissner/wikipediatrend.svg?branch=master)](https://travis-ci.org/petermeissner/wikipediatrend)
 
 
 

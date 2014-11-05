@@ -36,4 +36,4 @@ Temporary Items
 devel/
 /wp*.csv
 inst/doc
-Readme_cache/
+Readme_cache/html/*

@@ -6,9 +6,17 @@ output:
     keep_md: yes
 ---
 
-[![Build Status](https://travis-ci.org/petermeissner/diffr.svg)](https://travis-ci.org/petermeissner/diffr)
+```{r, echo=FALSE}
+setInternet2(use = TRUE)
+download.file("https://travis-ci.org/petermeissner/wikipediatrend.svg?branch=master", "travischeck.png")
+```
 
 `r Sys.Date()`
+<img src="travischeck.png" alt="Build Status">
+
+
+
+
 
 ## Introduction
 

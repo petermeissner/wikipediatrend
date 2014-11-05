@@ -1,9 +1,14 @@
 # Introducing wikipediatrend -- Easy Analyses of Puplic Attention, Anxiety and Information Seeking
 Peter Meißner  
 
-[![Build Status](https://travis-ci.org/petermeissner/diffr.svg](https://travis-ci.org/petermeissner/diffr.svg)
+
 
 2014-11-05
+<img src="https://travis-ci.org/petermeissner/wikipediatrend.svg?branch=master" alt="Build Status">
+
+
+
+
 
 ## Introduction
 
@@ -69,6 +74,7 @@ peter_principle <- wp_trend()
 ##     More information is found via '?wp_trend'.
 ##     
 ## http://stats.grok.se/json/en/201410/Peter_principle
+## http://stats.grok.se/json/en/201411/Peter_principle
 ```
 
 The function informs us that using the friendly option might be a good idea and shows us which URLs it used to retreive the inforamtion we were asking for. 
@@ -97,13 +103,13 @@ head(peter_principle)
 ```
 
 ```
-##                  date count
-## 2014-10-01 2014-10-01  1892
-## 2014-10-02 2014-10-02  1974
-## 2014-10-03 2014-10-03  1638
-## 2014-10-04 2014-10-04   800
-## 2014-10-05 2014-10-05   826
-## 2014-10-06 2014-10-06  1272
+##         date count
+## 1 2014-10-06  1272
+## 2 2014-10-07  1473
+## 3 2014-10-08  1312
+## 4 2014-10-09  1486
+## 5 2014-10-10  1107
+## 6 2014-10-11   652
 ```
 
 ... that e.g. can be used directly for visualization. Using `wp_wday()` we can furthermore descriminate weekdays <span style="color:black">(black)</span> from weekends <span style="color:red">(red)</span>. 
@@ -118,7 +124,7 @@ plot( peter_principle,
 lines(peter_principle)
 ```
 
-![](./Readme_files/figure-html/unnamed-chunk-4-1.png) 
+![](./Readme_files/figure-html/unnamed-chunk-5-1.png) 
 
 Looking at the graph we can conclude that the *Peter Principle* as a work related phenomenon obviously is something that is most pressing on workdays.
 
@@ -213,7 +219,7 @@ plot( isis,
       type="l")
 ```
 
-![](./Readme_files/figure-html/unnamed-chunk-8-1.png) 
+![](./Readme_files/figure-html/unnamed-chunk-9-1.png) 
 
 ... revealing what most might have already suspected: ISIS is quite a new penomenon. 
 
@@ -255,7 +261,7 @@ plot( cats,
 lines(cats)
 ```
 
-![](./Readme_files/figure-html/unnamed-chunk-9-1.png) 
+![](./Readme_files/figure-html/unnamed-chunk-10-1.png) 
 
 ... and triumphantly can conclude: 
 
@@ -368,7 +374,7 @@ plot( ebola_en,
 lines(ebola_en)
 ```
 
-![](./Readme_files/figure-html/unnamed-chunk-10-1.png) 
+![](./Readme_files/figure-html/unnamed-chunk-11-1.png) 
 
 Which unsurprisingly peaks in 2014 with the Ebola outbreak in Western Africa. 
 
@@ -382,7 +388,87 @@ ebola_de <- wp_trend("Ebola", lang="de", from="2008-01-01", friendly=T)
 
 ```
 ## http://stats.grok.se/json/de/200801/Ebola
+## http://stats.grok.se/json/de/200802/Ebola
+## http://stats.grok.se/json/de/200803/Ebola
+## http://stats.grok.se/json/de/200804/Ebola
+## http://stats.grok.se/json/de/200805/Ebola
+## http://stats.grok.se/json/de/200806/Ebola
 ## http://stats.grok.se/json/de/200807/Ebola
+## http://stats.grok.se/json/de/200808/Ebola
+## http://stats.grok.se/json/de/200809/Ebola
+## http://stats.grok.se/json/de/200810/Ebola
+## http://stats.grok.se/json/de/200811/Ebola
+## http://stats.grok.se/json/de/200812/Ebola
+## http://stats.grok.se/json/de/200901/Ebola
+## http://stats.grok.se/json/de/200902/Ebola
+## http://stats.grok.se/json/de/200903/Ebola
+## http://stats.grok.se/json/de/200904/Ebola
+## http://stats.grok.se/json/de/200905/Ebola
+## http://stats.grok.se/json/de/200906/Ebola
+## http://stats.grok.se/json/de/200907/Ebola
+## http://stats.grok.se/json/de/200908/Ebola
+## http://stats.grok.se/json/de/200909/Ebola
+## http://stats.grok.se/json/de/200910/Ebola
+## http://stats.grok.se/json/de/200911/Ebola
+## http://stats.grok.se/json/de/200912/Ebola
+## http://stats.grok.se/json/de/201001/Ebola
+## http://stats.grok.se/json/de/201002/Ebola
+## http://stats.grok.se/json/de/201003/Ebola
+## http://stats.grok.se/json/de/201004/Ebola
+## http://stats.grok.se/json/de/201005/Ebola
+## http://stats.grok.se/json/de/201006/Ebola
+## http://stats.grok.se/json/de/201007/Ebola
+## http://stats.grok.se/json/de/201008/Ebola
+## http://stats.grok.se/json/de/201009/Ebola
+## http://stats.grok.se/json/de/201010/Ebola
+## http://stats.grok.se/json/de/201011/Ebola
+## http://stats.grok.se/json/de/201012/Ebola
+## http://stats.grok.se/json/de/201101/Ebola
+## http://stats.grok.se/json/de/201102/Ebola
+## http://stats.grok.se/json/de/201103/Ebola
+## http://stats.grok.se/json/de/201104/Ebola
+## http://stats.grok.se/json/de/201105/Ebola
+## http://stats.grok.se/json/de/201106/Ebola
+## http://stats.grok.se/json/de/201107/Ebola
+## http://stats.grok.se/json/de/201108/Ebola
+## http://stats.grok.se/json/de/201109/Ebola
+## http://stats.grok.se/json/de/201110/Ebola
+## http://stats.grok.se/json/de/201111/Ebola
+## http://stats.grok.se/json/de/201112/Ebola
+## http://stats.grok.se/json/de/201201/Ebola
+## http://stats.grok.se/json/de/201202/Ebola
+## http://stats.grok.se/json/de/201203/Ebola
+## http://stats.grok.se/json/de/201204/Ebola
+## http://stats.grok.se/json/de/201205/Ebola
+## http://stats.grok.se/json/de/201206/Ebola
+## http://stats.grok.se/json/de/201207/Ebola
+## http://stats.grok.se/json/de/201208/Ebola
+## http://stats.grok.se/json/de/201209/Ebola
+## http://stats.grok.se/json/de/201210/Ebola
+## http://stats.grok.se/json/de/201211/Ebola
+## http://stats.grok.se/json/de/201212/Ebola
+## http://stats.grok.se/json/de/201301/Ebola
+## http://stats.grok.se/json/de/201302/Ebola
+## http://stats.grok.se/json/de/201303/Ebola
+## http://stats.grok.se/json/de/201304/Ebola
+## http://stats.grok.se/json/de/201305/Ebola
+## http://stats.grok.se/json/de/201306/Ebola
+## http://stats.grok.se/json/de/201307/Ebola
+## http://stats.grok.se/json/de/201308/Ebola
+## http://stats.grok.se/json/de/201309/Ebola
+## http://stats.grok.se/json/de/201310/Ebola
+## http://stats.grok.se/json/de/201311/Ebola
+## http://stats.grok.se/json/de/201312/Ebola
+## http://stats.grok.se/json/de/201401/Ebola
+## http://stats.grok.se/json/de/201402/Ebola
+## http://stats.grok.se/json/de/201403/Ebola
+## http://stats.grok.se/json/de/201404/Ebola
+## http://stats.grok.se/json/de/201405/Ebola
+## http://stats.grok.se/json/de/201406/Ebola
+## http://stats.grok.se/json/de/201407/Ebola
+## http://stats.grok.se/json/de/201408/Ebola
+## http://stats.grok.se/json/de/201409/Ebola
+## http://stats.grok.se/json/de/201410/Ebola
 ## http://stats.grok.se/json/de/201411/Ebola
 ## 
 ## Results written to:
@@ -405,7 +491,7 @@ legend("topleft",
        )
 ```
 
-![](./Readme_files/figure-html/unnamed-chunk-12-1.png) 
+![](./Readme_files/figure-html/unnamed-chunk-13-1.png) 
 
 The similarities are striking. 
 

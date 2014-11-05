@@ -1,12 +1,12 @@
 Package: wikipediatrend
 Title: Public subject attention via Wikipedia page access statistics.
 Date: 2014-10-07
-Version: 0.1.0.90007
+Version: 0.2.0
 Maintainer: Peter Meissner <retep.meissner@gmail.com>
 Author: Peter Meissner <retep.meissner@gmail.com>
 Description: Public attention besides media attention or some specialized
     expert attention of specific phenomenons is an interesting field of study.
-    The internet not only allows to access informtion in no time on virtually
+    The internet not only allows to access information in no time on virtually
     any subject but via page access statistics gathered by website authors the
     subject of attention as well as its temporal structure can be studied as
     well. For the omnipresent Wikipedia those access statistics are made

@@ -1,6 +1,6 @@
-# Introducing wikipediatrend -- Easing Analyzing Puplic Attention, Anxiety and Information Seeking
+# Introducing wikipediatrend -- Easy Analyses of Puplic Attention, Anxiety and Information Seeking
 Peter Meißner  
-`r Sys.Date()`  
+2014-11-05  
 
 ## Introduction
 
@@ -212,7 +212,7 @@ plot( isis,
 
 ![](./Readme_files/figure-html/unnamed-chunk-8-1.png) 
 
-... revealing what most might have already suspected: ISIS is a quite new penomenon. 
+... revealing what most might have already suspected: ISIS is quite a new penomenon. 
 
 
 ## So what? 

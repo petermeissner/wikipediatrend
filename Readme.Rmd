@@ -1,7 +1,7 @@
 ---
-title: "Introducing wikipediatrend -- Easing Analyzing Puplic Attention, Anxiety and Information Seeking"
+title: "Introducing wikipediatrend -- Easy Analyses of Puplic Attention, Anxiety and Information Seeking"
 author: "Peter Meißner"
-date: "`r Sys.Date()`"
+date: 2014-11-05
 output:
   html_document:
     keep_md: yes

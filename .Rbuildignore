@@ -2,7 +2,7 @@
 ^\.Rproj\.user$
 devel/.*$
 data-raw/.*$
-wp__*.csv
 Readme.*
 ^\.travis\.yml$
 cran-comments.md
+wp__*

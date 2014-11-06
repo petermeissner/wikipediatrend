@@ -148,13 +148,6 @@ Let's try it out by making two subsequent requests to get access statistics for 
 file.remove("wp__Islamic_State_of_Iraq_and_the_Levant__en.csv")
 ```
 
-```
-## Warning in
-## file.remove("wp__Islamic_State_of_Iraq_and_the_Levant__en.csv"): cannot
-## remove file 'wp__Islamic_State_of_Iraq_and_the_Levant__en.csv', reason 'No
-## such file or directory'
-```
-
 While for the first request the server has to provide information many times, the second request only asks for those months for which we do not have complete data already. Furthermore, `wp_trend()` informs us that the data has been stored in a CSV-file.
 
 
@@ -279,87 +272,7 @@ ebola_en <- wp_trend("Ebola", from="2008-01-01", friendly=T)
 
 ```
 ## http://stats.grok.se/json/en/200801/Ebola
-## http://stats.grok.se/json/en/200802/Ebola
-## http://stats.grok.se/json/en/200803/Ebola
-## http://stats.grok.se/json/en/200804/Ebola
-## http://stats.grok.se/json/en/200805/Ebola
-## http://stats.grok.se/json/en/200806/Ebola
 ## http://stats.grok.se/json/en/200807/Ebola
-## http://stats.grok.se/json/en/200808/Ebola
-## http://stats.grok.se/json/en/200809/Ebola
-## http://stats.grok.se/json/en/200810/Ebola
-## http://stats.grok.se/json/en/200811/Ebola
-## http://stats.grok.se/json/en/200812/Ebola
-## http://stats.grok.se/json/en/200901/Ebola
-## http://stats.grok.se/json/en/200902/Ebola
-## http://stats.grok.se/json/en/200903/Ebola
-## http://stats.grok.se/json/en/200904/Ebola
-## http://stats.grok.se/json/en/200905/Ebola
-## http://stats.grok.se/json/en/200906/Ebola
-## http://stats.grok.se/json/en/200907/Ebola
-## http://stats.grok.se/json/en/200908/Ebola
-## http://stats.grok.se/json/en/200909/Ebola
-## http://stats.grok.se/json/en/200910/Ebola
-## http://stats.grok.se/json/en/200911/Ebola
-## http://stats.grok.se/json/en/200912/Ebola
-## http://stats.grok.se/json/en/201001/Ebola
-## http://stats.grok.se/json/en/201002/Ebola
-## http://stats.grok.se/json/en/201003/Ebola
-## http://stats.grok.se/json/en/201004/Ebola
-## http://stats.grok.se/json/en/201005/Ebola
-## http://stats.grok.se/json/en/201006/Ebola
-## http://stats.grok.se/json/en/201007/Ebola
-## http://stats.grok.se/json/en/201008/Ebola
-## http://stats.grok.se/json/en/201009/Ebola
-## http://stats.grok.se/json/en/201010/Ebola
-## http://stats.grok.se/json/en/201011/Ebola
-## http://stats.grok.se/json/en/201012/Ebola
-## http://stats.grok.se/json/en/201101/Ebola
-## http://stats.grok.se/json/en/201102/Ebola
-## http://stats.grok.se/json/en/201103/Ebola
-## http://stats.grok.se/json/en/201104/Ebola
-## http://stats.grok.se/json/en/201105/Ebola
-## http://stats.grok.se/json/en/201106/Ebola
-## http://stats.grok.se/json/en/201107/Ebola
-## http://stats.grok.se/json/en/201108/Ebola
-## http://stats.grok.se/json/en/201109/Ebola
-## http://stats.grok.se/json/en/201110/Ebola
-## http://stats.grok.se/json/en/201111/Ebola
-## http://stats.grok.se/json/en/201112/Ebola
-## http://stats.grok.se/json/en/201201/Ebola
-## http://stats.grok.se/json/en/201202/Ebola
-## http://stats.grok.se/json/en/201203/Ebola
-## http://stats.grok.se/json/en/201204/Ebola
-## http://stats.grok.se/json/en/201205/Ebola
-## http://stats.grok.se/json/en/201206/Ebola
-## http://stats.grok.se/json/en/201207/Ebola
-## http://stats.grok.se/json/en/201208/Ebola
-## http://stats.grok.se/json/en/201209/Ebola
-## http://stats.grok.se/json/en/201210/Ebola
-## http://stats.grok.se/json/en/201211/Ebola
-## http://stats.grok.se/json/en/201212/Ebola
-## http://stats.grok.se/json/en/201301/Ebola
-## http://stats.grok.se/json/en/201302/Ebola
-## http://stats.grok.se/json/en/201303/Ebola
-## http://stats.grok.se/json/en/201304/Ebola
-## http://stats.grok.se/json/en/201305/Ebola
-## http://stats.grok.se/json/en/201306/Ebola
-## http://stats.grok.se/json/en/201307/Ebola
-## http://stats.grok.se/json/en/201308/Ebola
-## http://stats.grok.se/json/en/201309/Ebola
-## http://stats.grok.se/json/en/201310/Ebola
-## http://stats.grok.se/json/en/201311/Ebola
-## http://stats.grok.se/json/en/201312/Ebola
-## http://stats.grok.se/json/en/201401/Ebola
-## http://stats.grok.se/json/en/201402/Ebola
-## http://stats.grok.se/json/en/201403/Ebola
-## http://stats.grok.se/json/en/201404/Ebola
-## http://stats.grok.se/json/en/201405/Ebola
-## http://stats.grok.se/json/en/201406/Ebola
-## http://stats.grok.se/json/en/201407/Ebola
-## http://stats.grok.se/json/en/201408/Ebola
-## http://stats.grok.se/json/en/201409/Ebola
-## http://stats.grok.se/json/en/201410/Ebola
 ## http://stats.grok.se/json/en/201411/Ebola
 ## 
 ## Results written to:
@@ -389,87 +302,7 @@ ebola_de <- wp_trend("Ebola", lang="de", from="2008-01-01", friendly=T)
 
 ```
 ## http://stats.grok.se/json/de/200801/Ebola
-## http://stats.grok.se/json/de/200802/Ebola
-## http://stats.grok.se/json/de/200803/Ebola
-## http://stats.grok.se/json/de/200804/Ebola
-## http://stats.grok.se/json/de/200805/Ebola
-## http://stats.grok.se/json/de/200806/Ebola
 ## http://stats.grok.se/json/de/200807/Ebola
-## http://stats.grok.se/json/de/200808/Ebola
-## http://stats.grok.se/json/de/200809/Ebola
-## http://stats.grok.se/json/de/200810/Ebola
-## http://stats.grok.se/json/de/200811/Ebola
-## http://stats.grok.se/json/de/200812/Ebola
-## http://stats.grok.se/json/de/200901/Ebola
-## http://stats.grok.se/json/de/200902/Ebola
-## http://stats.grok.se/json/de/200903/Ebola
-## http://stats.grok.se/json/de/200904/Ebola
-## http://stats.grok.se/json/de/200905/Ebola
-## http://stats.grok.se/json/de/200906/Ebola
-## http://stats.grok.se/json/de/200907/Ebola
-## http://stats.grok.se/json/de/200908/Ebola
-## http://stats.grok.se/json/de/200909/Ebola
-## http://stats.grok.se/json/de/200910/Ebola
-## http://stats.grok.se/json/de/200911/Ebola
-## http://stats.grok.se/json/de/200912/Ebola
-## http://stats.grok.se/json/de/201001/Ebola
-## http://stats.grok.se/json/de/201002/Ebola
-## http://stats.grok.se/json/de/201003/Ebola
-## http://stats.grok.se/json/de/201004/Ebola
-## http://stats.grok.se/json/de/201005/Ebola
-## http://stats.grok.se/json/de/201006/Ebola
-## http://stats.grok.se/json/de/201007/Ebola
-## http://stats.grok.se/json/de/201008/Ebola
-## http://stats.grok.se/json/de/201009/Ebola
-## http://stats.grok.se/json/de/201010/Ebola
-## http://stats.grok.se/json/de/201011/Ebola
-## http://stats.grok.se/json/de/201012/Ebola
-## http://stats.grok.se/json/de/201101/Ebola
-## http://stats.grok.se/json/de/201102/Ebola
-## http://stats.grok.se/json/de/201103/Ebola
-## http://stats.grok.se/json/de/201104/Ebola
-## http://stats.grok.se/json/de/201105/Ebola
-## http://stats.grok.se/json/de/201106/Ebola
-## http://stats.grok.se/json/de/201107/Ebola
-## http://stats.grok.se/json/de/201108/Ebola
-## http://stats.grok.se/json/de/201109/Ebola
-## http://stats.grok.se/json/de/201110/Ebola
-## http://stats.grok.se/json/de/201111/Ebola
-## http://stats.grok.se/json/de/201112/Ebola
-## http://stats.grok.se/json/de/201201/Ebola
-## http://stats.grok.se/json/de/201202/Ebola
-## http://stats.grok.se/json/de/201203/Ebola
-## http://stats.grok.se/json/de/201204/Ebola
-## http://stats.grok.se/json/de/201205/Ebola
-## http://stats.grok.se/json/de/201206/Ebola
-## http://stats.grok.se/json/de/201207/Ebola
-## http://stats.grok.se/json/de/201208/Ebola
-## http://stats.grok.se/json/de/201209/Ebola
-## http://stats.grok.se/json/de/201210/Ebola
-## http://stats.grok.se/json/de/201211/Ebola
-## http://stats.grok.se/json/de/201212/Ebola
-## http://stats.grok.se/json/de/201301/Ebola
-## http://stats.grok.se/json/de/201302/Ebola
-## http://stats.grok.se/json/de/201303/Ebola
-## http://stats.grok.se/json/de/201304/Ebola
-## http://stats.grok.se/json/de/201305/Ebola
-## http://stats.grok.se/json/de/201306/Ebola
-## http://stats.grok.se/json/de/201307/Ebola
-## http://stats.grok.se/json/de/201308/Ebola
-## http://stats.grok.se/json/de/201309/Ebola
-## http://stats.grok.se/json/de/201310/Ebola
-## http://stats.grok.se/json/de/201311/Ebola
-## http://stats.grok.se/json/de/201312/Ebola
-## http://stats.grok.se/json/de/201401/Ebola
-## http://stats.grok.se/json/de/201402/Ebola
-## http://stats.grok.se/json/de/201403/Ebola
-## http://stats.grok.se/json/de/201404/Ebola
-## http://stats.grok.se/json/de/201405/Ebola
-## http://stats.grok.se/json/de/201406/Ebola
-## http://stats.grok.se/json/de/201407/Ebola
-## http://stats.grok.se/json/de/201408/Ebola
-## http://stats.grok.se/json/de/201409/Ebola
-## http://stats.grok.se/json/de/201410/Ebola
 ## http://stats.grok.se/json/de/201411/Ebola
 ## 
 ## Results written to:

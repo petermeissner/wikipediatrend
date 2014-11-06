@@ -5,7 +5,7 @@ Peter Meißner
 
 2014-11-06
 
-<img src="travischeck.svg" alt="">
+<img src="travischeck.png" alt="">
 
 
 

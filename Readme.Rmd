@@ -8,12 +8,12 @@ output:
 
 ```{r, echo=FALSE}
 setInternet2(use = TRUE)
-download.file("https://travis-ci.org/petermeissner/wikipediatrend.svg?branch=master", "travischeck.svg")
+download.file("https://travis-ci.org/petermeissner/wikipediatrend.svg?branch=master", "travischeck.png")
 ```
 
 `r Sys.Date()`
 
-<img src="travischeck.svg" alt="">
+<img src="travischeck.png" alt="">
 
 
 

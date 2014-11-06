@@ -499,7 +499,7 @@ The similarities are striking.
 
 # Credits
 
-- Parts of the package's code have been shamelessly copied and modified from R base package written by R core team. 
+- Parts of the package's code have been shamelessly copied and modified from R base package written by R core team. This concerns the `wp_date()` generic and its methods and is detailed in the help files. 
 
 
 

@@ -1,6 +1,7 @@
 Since last submission to CRAN:
 
-- I changed the last sentence of the package description as requested
+- I changed the last sentence of the package description in DESCRIPTION as requested
+
 
 Furthermore
 
@@ -14,5 +15,5 @@ wp_date() (the derived generic and its methods)
 - I extinguished some spelling/grammar errors in the readme
 
 - Travis was used to check package on Ubuntu - ok
-
-- devtools::check() complaint about imports that are not used although I checked and there are instances of stringr::str_pad(...), jsonlite::fromJSON(...) and RCurl::getURL(...) that justify the imports described in DESCRIPTION
+- devtools::check() was used to check the package locally on windows machine - ok
+- devtools::build() was used to check the package on remote windows machines - ok 

@@ -6,12 +6,12 @@ Maintainer: Peter Meissner <retep.meissner@gmail.com>
 Author: Peter Meissner <retep.meissner@gmail.com>
 Authors@R: as.person(c(
     "Peter Meissner <retep.meissner@gmail.com> [aut, cre]",
-    "R Core team [ctb] (wp_date() derived from base package as.Date())"
+    "R Core team [ctb] (wp_date derived from base package as.Date)"
     ))
 Description: Public attention is an interesting field of study.
     The internet not only allows to access information in no time on virtually
     any subject but via page access statistics gathered by website authors the
-    subject of attention as wellcan be studied. For the omnipresent Wikipedia
+    subject of attention as well can be studied. For the omnipresent Wikipedia
     those access statistics are made available via stats.grok.se a server
     providing the information as file dumps as well as as web API.
     This package provides an easy to  use, consistent and traffic

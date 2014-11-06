@@ -4,7 +4,8 @@ Peter Meißner
 
 
 2014-11-06
-<img src="travischeck.png" alt="Build Status">
+
+<iframe height=20 src="travischeck.svg"></iframe>
 
 
 

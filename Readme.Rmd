@@ -13,7 +13,7 @@ download.file("https://travis-ci.org/petermeissner/wikipediatrend.svg?branch=mas
 
 `r Sys.Date()`
 
-<iframe height=20 src="travischeck.svg"></iframe>
+<img src="travischeck.svg" alt="">
 
 
 

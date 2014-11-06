@@ -1,23 +1,21 @@
 ---
-title: "Introducing Wikipediatrend -- Easy Analyses of Public Attention, Anxiety and Information Seeking"
+title: Introducing Wikipediatrend -- Easy Analyses of Public Attention, Anxiety and
+  Information Seeking
 author: "Peter Meißner"
 output:
   html_document:
     keep_md: yes
+    self_contained: no
 ---
 
 ```{r, echo=FALSE}
 setInternet2(use = TRUE)
-download.file("https://travis-ci.org/petermeissner/wikipediatrend.svg?branch=master", "travischeck.png")
+download.file("https://travis-ci.org/petermeissner/wikipediatrend.svg?branch=master", "travischeck.svg")
 ```
 
 `r Sys.Date()`
 
-<img src="travischeck.png" alt="">
-
-
-
-
+<img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master"></img>
 
 ## Introduction
 

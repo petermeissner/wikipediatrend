@@ -5,11 +5,7 @@ Peter Meißner
 
 2014-11-06
 
-<img src="travischeck.png" alt="">
-
-
-
-
+<img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master"></img>
 
 ## Introduction
 

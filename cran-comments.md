@@ -1,29 +1,14 @@
-YOUR REQUESTS AND MY ACTIONS TAKEN 
--- sorry for the inconveniences, I hope everything works now -- 
+Since last submission to CRAN:
 
-* checking top-level files ... NOTE
-Non-standard file/directory found at top level:
-  ‘cran-comments.md’
-  
-  --> file is now excluded from built
+- I changed the last sentence of the package description as requested
 
-* Also, pls use the MIT license as explained on the R license page.
+Furthermore
 
-  --> reduced LICENSE file to two lines:
-    YEAR: 2014
-    COPYRIGHT HOLDER: Peter Meissner
-  --> License in DESCRIPTION: 
-    License: MIT + file LICENSE
+- I added R-Core team as contributers because part of the code was derived from R base package
+- I changed license to GPL-2 because part of the code was derived from R base package 
+- What I derived is mentioned in DESCRIPTION as well as within the help files of
+wp_date() (the derived generic and its methods)
 
-* Finally, pls use title case and no final period for the title.
+- I changed default behaviour of the main function to not send any user-agent information along its HTTP requests to comply with cran repository policy
 
-  --> title in DESCRIPTION changed to:
-  Public Subject Attention via Wikipedia Page Access Statistics
-
-
-BEFORE SUBMISSION TO CRAN
-
-* package was checked via 
-    - R CMD check on Win7 64 system -- OK
-    - Travis Ubuntu build //  https://travis-ci.org/petermeissner/wikipediatrend -- OK
-    - devtools::build_win() -- OK 
+- I extinguished some spelling/grammar errors in the readme

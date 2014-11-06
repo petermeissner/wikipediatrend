@@ -42,17 +42,17 @@ wp_date(x, ...)
 }
 \description{
 \code{wp_date()} provides a generic function and several methods to transform
-something into a date, just like \code{as.Date()}. While most methods were
-copied 1:1 from as.Date() some changes were made that alter  the usual
-behavior: (1) Whenever wp_date() is applied to an empty string \code{""} or
-any other not-standard-unambiguous format the function will return \code{NA}
-and throw out a warning instead of simply kill itself with an error. (2)
-Whenever, as.Date usually is in the need of an origin supplied and does not
-get one \code{wp_date()} will assume the origin to be "1970-01-01" and throw
-an error instead of kill itself with an error. All these changes are made
-with the special purpose to make \code{wp_trend()} also with dirty,
-unreasonable data (e.g. "" or "2012-13-01" or "2012-02-32") and are not
-recommended for any other than wikipediatrend internal use.
+something into a date, just like \code{as.Date()} from the base package.
+While most methods were copied 1:1 from as.Date() some changes were made that
+alter  the usual behavior: (1) Whenever wp_date() is applied to an empty
+string \code{""} or any other not-standard-unambiguous format the function
+will return \code{NA} and throw out a warning instead of simply kill itself
+with an error. (2) Whenever, as.Date usually is in the need of an origin
+supplied and does not get one \code{wp_date()} will assume the origin to be
+"1970-01-01" and throw an error instead of kill itself with an error. All
+these changes are made with the special purpose to make \code{wp_trend()}
+also with dirty, unreasonable data (e.g. "" or "2012-13-01" or "2012-02-32")
+and are not recommended for any other than wikipediatrend internal use.
 }
 \section{Methods (by class)}{
 \itemize{

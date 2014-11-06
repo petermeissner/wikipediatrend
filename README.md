@@ -1,9 +1,9 @@
-# Introducing Wikipediatrend -- Easy Analyses of Puplic Attention, Anxiety and Information Seeking
+# Introducing Wikipediatrend -- Easy Analyses of Public Attention, Anxiety and Information Seeking
 Peter Meißner  
 
 
 
-2014-11-05
+2014-11-06
 <img src="travischeck.png" alt="Build Status">
 
 
@@ -12,11 +12,13 @@ Peter Meißner
 
 ## Introduction
 
-On Wikipedia there are a lot of information to be explored behind the scenes. One type of information are page access statistics -- e.g. http://stats.grok.se/en/201409/Peter_Principle. Another type are the info pages -- e.g. https://en.wikipedia.org/w/index.php?title=Peter_Principle&action=info. While the latter falls into the jurisdiction of the [MediaWiki](http://cran.r-project.org/web/packages/WikipediR/index.html)-package for the former no ready made package exists. 
+Wikipedia provides a lot of valuable meta data. 
+One type of information are page access statistics -- e.g. http://stats.grok.se/en/201409/Peter_Principle. Another type are the info pages -- e.g. https://en.wikipedia.org/w/index.php?title=Peter_Principle&action=info. While the latter falls into the jurisdiction of the [MediaWiki](http://cran.r-project.org/web/packages/WikipediR/index.html)-package , this package allows loading page view statistics into R. 
 
 ## Stats.grok.se API and the wikipediatrend package
 
-`http://stats.grok.se` provides an Web API to retreive Wikipedia page access statistics on a daily basis. The information is either presented in HTML or provided as JSON data. 
+`http://stats.grok.se` retrieves Wikipedia page access statistics on a daily 
+basis. The information is either presented in HTML or provided as JSON data.
 
 ```
 http://stats.grok.se/en/201409/Peter_Principle
@@ -26,11 +28,11 @@ versus
 http://stats.grok.se/json/en/201409/Peter_Principle
 ```
 
-A single request results in data for a certain page, from one of Wikipedia's different language subdomains, and for all days of a given month. The `wikipediatrend` package draws on this Web API and provides a consistent and convenient way to use those data within R. Fruthermore the package not only takes care of the communication between the Web API on `stats.grok.se` and your local R session but also allows for minimizing traffic and workload on behalf of the `stats.grok.se`-server by having a build in storage and reuse system of already used data -- data is (if user decides so) saved locally in CSV format and reused for subsequent requests. 
+A single request results in data for a specific entry, from one of Wikipedia's different language subdomains and for all days of a given month. The `wikipediatrend` package draws on this Web API and provides a consistent and convenient way to use those data within R. Furthermore the package not only takes care of the communication between the Web API at `stats.grok.se` and your local R session but also provides means to minimize traffic and workload for `stats.grok.se`-server  -- data is (if user decides so) stored locally in CSV format and reused for subsequent requests. 
 
 
 
-## A First Tutorial
+## A first tutorial
 
 
 ```r
@@ -55,6 +57,8 @@ The workhorse of the package is the `wp_trend()` function with several arguments
 ... should `wp_trend()` try minimize workload on behalf of `stats.grok.se`
 - **requestFrom** [ `"anonymous"` ]: <br>
 ... do you care to identify yourself towards `stats.grok.se`
+- **userAgent** [ `FALSE` ] <br>
+... do you care to send information on your plattform, R version and the package used to make server requests
 
 
 Let's have a first run using the defaults:
@@ -77,7 +81,7 @@ peter_principle <- wp_trend()
 ## http://stats.grok.se/json/en/201411/Peter_principle
 ```
 
-The function informs us that using the friendly option might be a good idea and shows us which URLs it used to retreive the inforamtion we were asking for. 
+The function informs us that using the friendly option might be a good idea and shows us which URLs it used to retrieve the information we were asking for. 
 
 The function's return is a data frame with two variables *date* and *count*:
 
@@ -112,7 +116,7 @@ head(peter_principle)
 ## 6 2014-10-11   652
 ```
 
-... that e.g. can be used directly for visualization. Using `wp_wday()` we can furthermore descriminate weekdays <span style="color:black">(black)</span> from weekends <span style="color:red">(red)</span>. 
+We can use this information to visualize the page view trend. Using `wp_wday()` we can furthermore discriminate weekdays <span style="color:black">(black)</span> from weekends <span style="color:red">(red)</span>. 
 
 
 ```r
@@ -126,7 +130,7 @@ lines(peter_principle)
 
 ![](./Readme_files/figure-html/unnamed-chunk-5-1.png) 
 
-Looking at the graph we can conclude that the *Peter Principle* as a work related phenomenon obviously is something that is most pressing on workdays.
+Looking at the graph we can conclude that the *Peter Principle* as a work related phenomenon obviously is something that is most pressing on workdays -- or maybe people in general just tend to use their computers less on weekends.
 
 
 ## Being friendly
@@ -135,8 +139,8 @@ One of the most important features of the package is its `friendly` option. On t
 
 The option can be set to different values: 
 
-- **FALSE**, the default, deactivates `wp_trend()`'s friendly behaviour alltogether
-- **TRUE**, activates `wp_trend()`'s friendly behaviour and retreieved access statistics are stored on disk in CSV format via `write.csv()`
+- **FALSE**, the default, deactivates `wp_trend()`'s friendly behavior altogether
+- **TRUE**, activates `wp_trend()`'s friendly behavior and retreieved access statistics are stored on disk in CSV format via `write.csv()`
 - **1** is the same as **TRUE**
 - **2**, is the same as **TRUE** but storage takes place via `write.csv2()`
 
@@ -192,7 +196,7 @@ isis <- wp_trend("Islamic_State_of_Iraq_and_the_Levant", from="2013-01-01", frie
 ## D:/Peter/Dropbox/RPackages/wikipediatrend/wp__Islamic_State_of_Iraq_and_the_Levant__en.csv
 ```
 
-The second request uses these previous saved information to minimize traffic and function execution time. If it downloads new data, it updates the data already stored on disk.
+The second request uses this previous saved information to minimize traffic and function execution time. If it downloads new data, it updates the data already stored on disk.
 
 
 
@@ -221,7 +225,7 @@ plot( isis,
 
 ![](./Readme_files/figure-html/unnamed-chunk-9-1.png) 
 
-... revealing what most might have already suspected: ISIS is quite a new penomenon. 
+... revealing what most might have already suspected: ISIS is quite a new phenomenon. 
 
 
 ## So what? 
@@ -574,6 +578,12 @@ legend("topleft",
 ![](./Readme_files/figure-html/unnamed-chunk-13-1.png) 
 
 The similarities are striking. 
+
+
+# Credits
+
+- Parts of the package's code have been shamelessly copied and modified from R base package written by R core team. 
+
 
 
 <!-- http://www.tandfonline.com/doi/pdf/10.1080/10410236.2011.571759 -->

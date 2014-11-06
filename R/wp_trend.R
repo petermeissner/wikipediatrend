@@ -37,41 +37,48 @@
 #'   For storage on disk \code{write.csv()} (friendly=TRUE or friendly=1) and 
 #'   \code{write.csv2()} (friendly=2) are used.
 #'   
+#' @param userAgent Whether or not to send the following information along your
+#'   requests: \code{paste( "wikipediatrend running on: ", R.version$platform,
+#'   R.version$version.string, sep=", ")}
+#'   
 #' @examples 
-#' wp_trend(page="Main_Page", 
-#'          from="2014-11-01", 
-#'          to="2014-11-30", 
-#'          lang="en", 
-#'          friendly=FALSE, 
-#'          requestFrom="R package wikipedia trend test request")
+#' wp_trend(page        = "Main_Page", 
+#'          from        = "2014-11-01", 
+#'          to          = "2014-11-30", 
+#'          lang        = "en", 
+#'          friendly    = FALSE, 
+#'          requestFrom = "wp.trend.tester at wptt.wptt",
+#'          userAgent   =   TRUE)
 
 wp_trend <- function( page        = "Peter_principle", 
                       from        = Sys.Date()-30, 
                       to          = Sys.Date(),
                       lang        = "en", 
                       friendly    = F,
-                      requestFrom = "anonymous"
+                      requestFrom = "anonymous",
+                      userAgent   = F
 ){
   # encourage being freindly
   if ( !friendly ) {
     message("
     With option 'friendly' set to FALSE subsequent requests 
-    of the same wikipedia-page cause the server -- which is kindly 
+    of the same wikipedia-entry cause the server -- which is kindly 
     providing information for you -- to work hard to get the same 
     stuff over and over and over and over again. Do not bore 
     the server - be friendly. 
     
-    More information is found via '?wp_trend'.
+    See: '?wp_trend'
     ")
   }
-  
-
-  # http header
-  standardHeader <- list( from         = requestFrom,
-                          'user-agent' = paste( "wikipediatrend running on: ", 
-                                                R.version$platform,
-                                                R.version$version.string,
-                                                sep=", "))
+  if ( !userAgent ) {
+    standardHeader <- list( from         = requestFrom)
+  }else{
+    standardHeader <- list( from         = requestFrom,
+                            'user-agent' = paste( "wikipediatrend running on: ", 
+                                                  R.version$platform,
+                                                  R.version$version.string,
+                                                  sep=", "))
+  }
   
   # file name for beeing friendly
   resname <- paste0("wp", "__", page, "__", lang, ".csv")

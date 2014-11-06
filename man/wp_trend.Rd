@@ -4,7 +4,8 @@
 \title{Function for getting access statistics for wikipedia pages}
 \usage{
 wp_trend(page = "Peter_principle", from = Sys.Date() - 30,
-  to = Sys.Date(), lang = "en", friendly = F, requestFrom = "anonymous")
+  to = Sys.Date(), lang = "en", friendly = F, requestFrom = "anonymous",
+  userAgent = F)
 }
 \arguments{
 \item{page}{The name of the Wikipedia page as to be found in the URL to the
@@ -43,16 +44,21 @@ wp_trend(page = "Peter_principle", from = Sys.Date() - 30,
 \item{requestFrom}{This parameter sends an identifier (i.e. your email
   address to contact you if necessary) to stats.grok.se (the server that
   kindly provides the information you request).}
+
+\item{userAgent}{Whether or not to send the following information along your
+  requests: \code{paste( "wikipediatrend running on: ", R.version$platform,
+  R.version$version.string, sep=", ")}}
 }
 \description{
 Function for getting access statistics for wikipedia pages
 }
 \examples{
-wp_trend(page="Main_Page",
-         from="2014-11-01",
-         to="2014-11-30",
-         lang="en",
-         friendly=FALSE,
-         requestFrom="R package wikipedia trend test request")
+wp_trend(page        = "Main_Page",
+         from        = "2014-11-01",
+         to          = "2014-11-30",
+         lang        = "en",
+         friendly    = FALSE,
+         requestFrom = "wp.trend.tester at wptt.wptt",
+         userAgent   =   TRUE)
 }
 

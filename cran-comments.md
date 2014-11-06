@@ -12,3 +12,7 @@ wp_date() (the derived generic and its methods)
 - I changed default behaviour of the main function to not send any user-agent information along its HTTP requests to comply with cran repository policy
 
 - I extinguished some spelling/grammar errors in the readme
+
+- Travis was used to check package on Ubuntu - ok
+
+- devtools::check() complaint about imports that are not used although I checked and there are instances of stringr::str_pad(...), jsonlite::fromJSON(...) and RCurl::getURL(...) that justify the imports described in DESCRIPTION

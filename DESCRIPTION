@@ -3,7 +3,6 @@ Title: Public Subject Attention via Wikipedia Page Access Statistics
 Date: 2014-11-06
 Version: 0.2.0
 Maintainer: Peter Meissner <retep.meissner@gmail.com>
-Author: Peter Meissner <retep.meissner@gmail.com>
 Authors@R: as.person(c(
     "Peter Meissner <retep.meissner@gmail.com> [aut, cre]",
     "R Core team [ctb] (wp_date derived from base package as.Date)"

@@ -6,7 +6,7 @@
 
 wp_yearmonth <- function(timestamp){
   paste0(
-    wp_year(timestamp), 
-    stringr::str_pad(wp_month(timestamp), 2, "left", 0)
+    wp_year(wp_date(timestamp)), 
+    stringr::str_pad(wp_month(wp_date(timestamp)), 2, "left", 0)
   )
 }

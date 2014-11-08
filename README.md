@@ -1,29 +1,31 @@
 # Introducing Wikipediatrend -- Easy Analyses of Public Attention, Anxiety and Information Seeking
 Peter Meißner  
 
+2014-11-08
 
-
-2014-11-06
-
+## Current version auto-build status
 <img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master"></img>
+
 
 ## Introduction
 
 Wikipedia provides a lot of valuable meta data. 
 One type of information are page access statistics -- e.g. http://stats.grok.se/en/201409/Peter_Principle. Another type are the info pages -- e.g. https://en.wikipedia.org/w/index.php?title=Peter_Principle&action=info. While the latter falls into the jurisdiction of the [MediaWiki](http://cran.r-project.org/web/packages/WikipediR/index.html)-package , this package allows loading page view statistics into R. 
 
+
 ## Stats.grok.se API and the wikipediatrend package
 
 `http://stats.grok.se` retrieves Wikipedia page access statistics on a daily 
 basis. The information is either presented in HTML or provided as JSON data.
 
-```
+
 http://stats.grok.se/en/201409/Peter_Principle
-```
+
 versus
-```
+
 http://stats.grok.se/json/en/201409/Peter_Principle
-```
+
+
 
 A single request results in data for a specific entry, from one of Wikipedia's different language subdomains and for all days of a given month. The `wikipediatrend` package draws on this Web API and provides a consistent and convenient way to use those data within R. Furthermore the package not only takes care of the communication between the Web API at `stats.grok.se` and your local R session but also provides means to minimize traffic and workload for `stats.grok.se`-server  -- data is (if user decides so) stored locally in CSV format and reused for subsequent requests. 
 
@@ -75,7 +77,6 @@ peter_principle <- wp_trend()
 ##     More information is found via '?wp_trend'.
 ##     
 ## http://stats.grok.se/json/en/201410/Peter_principle
-## http://stats.grok.se/json/en/201411/Peter_principle
 ```
 
 The function informs us that using the friendly option might be a good idea and shows us which URLs it used to retrieve the information we were asking for. 
@@ -104,13 +105,13 @@ head(peter_principle)
 ```
 
 ```
-##         date count
-## 1 2014-10-06  1272
-## 2 2014-10-07  1473
-## 3 2014-10-08  1312
-## 4 2014-10-09  1486
-## 5 2014-10-10  1107
-## 6 2014-10-11   652
+##                  date count
+## 2014-10-01 2014-10-01  1892
+## 2014-10-02 2014-10-02  1974
+## 2014-10-03 2014-10-03  1638
+## 2014-10-04 2014-10-04   800
+## 2014-10-05 2014-10-05   826
+## 2014-10-06 2014-10-06  1272
 ```
 
 We can use this information to visualize the page view trend. Using `wp_wday()` we can furthermore discriminate weekdays <span style="color:black">(black)</span> from weekends <span style="color:red">(red)</span>. 
@@ -125,9 +126,14 @@ plot( peter_principle,
 lines(peter_principle)
 ```
 
-![](./Readme_files/figure-html/unnamed-chunk-5-1.png) 
+![](./Readme_files/figure-html/unnamed-chunk-4-1.png) 
 
 Looking at the graph we can conclude that the *Peter Principle* as a work related phenomenon obviously is something that is most pressing on workdays -- or maybe people in general just tend to use their computers less on weekends.
+
+
+
+
+
 
 
 ## Being friendly
@@ -213,7 +219,7 @@ plot( isis,
       type="l")
 ```
 
-![](./Readme_files/figure-html/unnamed-chunk-9-1.png) 
+![](./Readme_files/figure-html/unnamed-chunk-8-1.png) 
 
 ... revealing what most might have already suspected: ISIS is quite a new phenomenon. 
 
@@ -232,7 +238,87 @@ cats <- wp_trend("Cat", from="2007-01-01", friendly=T)
 ```
 ## http://stats.grok.se/json/en/200712/Cat
 ## http://stats.grok.se/json/en/200801/Cat
+## http://stats.grok.se/json/en/200802/Cat
+## http://stats.grok.se/json/en/200803/Cat
+## http://stats.grok.se/json/en/200804/Cat
+## http://stats.grok.se/json/en/200805/Cat
+## http://stats.grok.se/json/en/200806/Cat
 ## http://stats.grok.se/json/en/200807/Cat
+## http://stats.grok.se/json/en/200808/Cat
+## http://stats.grok.se/json/en/200809/Cat
+## http://stats.grok.se/json/en/200810/Cat
+## http://stats.grok.se/json/en/200811/Cat
+## http://stats.grok.se/json/en/200812/Cat
+## http://stats.grok.se/json/en/200901/Cat
+## http://stats.grok.se/json/en/200902/Cat
+## http://stats.grok.se/json/en/200903/Cat
+## http://stats.grok.se/json/en/200904/Cat
+## http://stats.grok.se/json/en/200905/Cat
+## http://stats.grok.se/json/en/200906/Cat
+## http://stats.grok.se/json/en/200907/Cat
+## http://stats.grok.se/json/en/200908/Cat
+## http://stats.grok.se/json/en/200909/Cat
+## http://stats.grok.se/json/en/200910/Cat
+## http://stats.grok.se/json/en/200911/Cat
+## http://stats.grok.se/json/en/200912/Cat
+## http://stats.grok.se/json/en/201001/Cat
+## http://stats.grok.se/json/en/201002/Cat
+## http://stats.grok.se/json/en/201003/Cat
+## http://stats.grok.se/json/en/201004/Cat
+## http://stats.grok.se/json/en/201005/Cat
+## http://stats.grok.se/json/en/201006/Cat
+## http://stats.grok.se/json/en/201007/Cat
+## http://stats.grok.se/json/en/201008/Cat
+## http://stats.grok.se/json/en/201009/Cat
+## http://stats.grok.se/json/en/201010/Cat
+## http://stats.grok.se/json/en/201011/Cat
+## http://stats.grok.se/json/en/201012/Cat
+## http://stats.grok.se/json/en/201101/Cat
+## http://stats.grok.se/json/en/201102/Cat
+## http://stats.grok.se/json/en/201103/Cat
+## http://stats.grok.se/json/en/201104/Cat
+## http://stats.grok.se/json/en/201105/Cat
+## http://stats.grok.se/json/en/201106/Cat
+## http://stats.grok.se/json/en/201107/Cat
+## http://stats.grok.se/json/en/201108/Cat
+## http://stats.grok.se/json/en/201109/Cat
+## http://stats.grok.se/json/en/201110/Cat
+## http://stats.grok.se/json/en/201111/Cat
+## http://stats.grok.se/json/en/201112/Cat
+## http://stats.grok.se/json/en/201201/Cat
+## http://stats.grok.se/json/en/201202/Cat
+## http://stats.grok.se/json/en/201203/Cat
+## http://stats.grok.se/json/en/201204/Cat
+## http://stats.grok.se/json/en/201205/Cat
+## http://stats.grok.se/json/en/201206/Cat
+## http://stats.grok.se/json/en/201207/Cat
+## http://stats.grok.se/json/en/201208/Cat
+## http://stats.grok.se/json/en/201209/Cat
+## http://stats.grok.se/json/en/201210/Cat
+## http://stats.grok.se/json/en/201211/Cat
+## http://stats.grok.se/json/en/201212/Cat
+## http://stats.grok.se/json/en/201301/Cat
+## http://stats.grok.se/json/en/201302/Cat
+## http://stats.grok.se/json/en/201303/Cat
+## http://stats.grok.se/json/en/201304/Cat
+## http://stats.grok.se/json/en/201305/Cat
+## http://stats.grok.se/json/en/201306/Cat
+## http://stats.grok.se/json/en/201307/Cat
+## http://stats.grok.se/json/en/201308/Cat
+## http://stats.grok.se/json/en/201309/Cat
+## http://stats.grok.se/json/en/201310/Cat
+## http://stats.grok.se/json/en/201311/Cat
+## http://stats.grok.se/json/en/201312/Cat
+## http://stats.grok.se/json/en/201401/Cat
+## http://stats.grok.se/json/en/201402/Cat
+## http://stats.grok.se/json/en/201403/Cat
+## http://stats.grok.se/json/en/201404/Cat
+## http://stats.grok.se/json/en/201405/Cat
+## http://stats.grok.se/json/en/201406/Cat
+## http://stats.grok.se/json/en/201407/Cat
+## http://stats.grok.se/json/en/201408/Cat
+## http://stats.grok.se/json/en/201409/Cat
+## http://stats.grok.se/json/en/201410/Cat
 ## http://stats.grok.se/json/en/201411/Cat
 ## 
 ## Results written to:
@@ -255,7 +341,7 @@ plot( cats,
 lines(cats)
 ```
 
-![](./Readme_files/figure-html/unnamed-chunk-10-1.png) 
+![](./Readme_files/figure-html/unnamed-chunk-9-1.png) 
 
 ... and triumphantly can conclude: 
 
@@ -272,7 +358,87 @@ ebola_en <- wp_trend("Ebola", from="2008-01-01", friendly=T)
 
 ```
 ## http://stats.grok.se/json/en/200801/Ebola
+## http://stats.grok.se/json/en/200802/Ebola
+## http://stats.grok.se/json/en/200803/Ebola
+## http://stats.grok.se/json/en/200804/Ebola
+## http://stats.grok.se/json/en/200805/Ebola
+## http://stats.grok.se/json/en/200806/Ebola
 ## http://stats.grok.se/json/en/200807/Ebola
+## http://stats.grok.se/json/en/200808/Ebola
+## http://stats.grok.se/json/en/200809/Ebola
+## http://stats.grok.se/json/en/200810/Ebola
+## http://stats.grok.se/json/en/200811/Ebola
+## http://stats.grok.se/json/en/200812/Ebola
+## http://stats.grok.se/json/en/200901/Ebola
+## http://stats.grok.se/json/en/200902/Ebola
+## http://stats.grok.se/json/en/200903/Ebola
+## http://stats.grok.se/json/en/200904/Ebola
+## http://stats.grok.se/json/en/200905/Ebola
+## http://stats.grok.se/json/en/200906/Ebola
+## http://stats.grok.se/json/en/200907/Ebola
+## http://stats.grok.se/json/en/200908/Ebola
+## http://stats.grok.se/json/en/200909/Ebola
+## http://stats.grok.se/json/en/200910/Ebola
+## http://stats.grok.se/json/en/200911/Ebola
+## http://stats.grok.se/json/en/200912/Ebola
+## http://stats.grok.se/json/en/201001/Ebola
+## http://stats.grok.se/json/en/201002/Ebola
+## http://stats.grok.se/json/en/201003/Ebola
+## http://stats.grok.se/json/en/201004/Ebola
+## http://stats.grok.se/json/en/201005/Ebola
+## http://stats.grok.se/json/en/201006/Ebola
+## http://stats.grok.se/json/en/201007/Ebola
+## http://stats.grok.se/json/en/201008/Ebola
+## http://stats.grok.se/json/en/201009/Ebola
+## http://stats.grok.se/json/en/201010/Ebola
+## http://stats.grok.se/json/en/201011/Ebola
+## http://stats.grok.se/json/en/201012/Ebola
+## http://stats.grok.se/json/en/201101/Ebola
+## http://stats.grok.se/json/en/201102/Ebola
+## http://stats.grok.se/json/en/201103/Ebola
+## http://stats.grok.se/json/en/201104/Ebola
+## http://stats.grok.se/json/en/201105/Ebola
+## http://stats.grok.se/json/en/201106/Ebola
+## http://stats.grok.se/json/en/201107/Ebola
+## http://stats.grok.se/json/en/201108/Ebola
+## http://stats.grok.se/json/en/201109/Ebola
+## http://stats.grok.se/json/en/201110/Ebola
+## http://stats.grok.se/json/en/201111/Ebola
+## http://stats.grok.se/json/en/201112/Ebola
+## http://stats.grok.se/json/en/201201/Ebola
+## http://stats.grok.se/json/en/201202/Ebola
+## http://stats.grok.se/json/en/201203/Ebola
+## http://stats.grok.se/json/en/201204/Ebola
+## http://stats.grok.se/json/en/201205/Ebola
+## http://stats.grok.se/json/en/201206/Ebola
+## http://stats.grok.se/json/en/201207/Ebola
+## http://stats.grok.se/json/en/201208/Ebola
+## http://stats.grok.se/json/en/201209/Ebola
+## http://stats.grok.se/json/en/201210/Ebola
+## http://stats.grok.se/json/en/201211/Ebola
+## http://stats.grok.se/json/en/201212/Ebola
+## http://stats.grok.se/json/en/201301/Ebola
+## http://stats.grok.se/json/en/201302/Ebola
+## http://stats.grok.se/json/en/201303/Ebola
+## http://stats.grok.se/json/en/201304/Ebola
+## http://stats.grok.se/json/en/201305/Ebola
+## http://stats.grok.se/json/en/201306/Ebola
+## http://stats.grok.se/json/en/201307/Ebola
+## http://stats.grok.se/json/en/201308/Ebola
+## http://stats.grok.se/json/en/201309/Ebola
+## http://stats.grok.se/json/en/201310/Ebola
+## http://stats.grok.se/json/en/201311/Ebola
+## http://stats.grok.se/json/en/201312/Ebola
+## http://stats.grok.se/json/en/201401/Ebola
+## http://stats.grok.se/json/en/201402/Ebola
+## http://stats.grok.se/json/en/201403/Ebola
+## http://stats.grok.se/json/en/201404/Ebola
+## http://stats.grok.se/json/en/201405/Ebola
+## http://stats.grok.se/json/en/201406/Ebola
+## http://stats.grok.se/json/en/201407/Ebola
+## http://stats.grok.se/json/en/201408/Ebola
+## http://stats.grok.se/json/en/201409/Ebola
+## http://stats.grok.se/json/en/201410/Ebola
 ## http://stats.grok.se/json/en/201411/Ebola
 ## 
 ## Results written to:
@@ -288,7 +454,7 @@ plot( ebola_en,
 lines(ebola_en)
 ```
 
-![](./Readme_files/figure-html/unnamed-chunk-11-1.png) 
+![](./Readme_files/figure-html/unnamed-chunk-10-1.png) 
 
 Which unsurprisingly peaks in 2014 with the Ebola outbreak in Western Africa. 
 
@@ -302,7 +468,87 @@ ebola_de <- wp_trend("Ebola", lang="de", from="2008-01-01", friendly=T)
 
 ```
 ## http://stats.grok.se/json/de/200801/Ebola
+## http://stats.grok.se/json/de/200802/Ebola
+## http://stats.grok.se/json/de/200803/Ebola
+## http://stats.grok.se/json/de/200804/Ebola
+## http://stats.grok.se/json/de/200805/Ebola
+## http://stats.grok.se/json/de/200806/Ebola
 ## http://stats.grok.se/json/de/200807/Ebola
+## http://stats.grok.se/json/de/200808/Ebola
+## http://stats.grok.se/json/de/200809/Ebola
+## http://stats.grok.se/json/de/200810/Ebola
+## http://stats.grok.se/json/de/200811/Ebola
+## http://stats.grok.se/json/de/200812/Ebola
+## http://stats.grok.se/json/de/200901/Ebola
+## http://stats.grok.se/json/de/200902/Ebola
+## http://stats.grok.se/json/de/200903/Ebola
+## http://stats.grok.se/json/de/200904/Ebola
+## http://stats.grok.se/json/de/200905/Ebola
+## http://stats.grok.se/json/de/200906/Ebola
+## http://stats.grok.se/json/de/200907/Ebola
+## http://stats.grok.se/json/de/200908/Ebola
+## http://stats.grok.se/json/de/200909/Ebola
+## http://stats.grok.se/json/de/200910/Ebola
+## http://stats.grok.se/json/de/200911/Ebola
+## http://stats.grok.se/json/de/200912/Ebola
+## http://stats.grok.se/json/de/201001/Ebola
+## http://stats.grok.se/json/de/201002/Ebola
+## http://stats.grok.se/json/de/201003/Ebola
+## http://stats.grok.se/json/de/201004/Ebola
+## http://stats.grok.se/json/de/201005/Ebola
+## http://stats.grok.se/json/de/201006/Ebola
+## http://stats.grok.se/json/de/201007/Ebola
+## http://stats.grok.se/json/de/201008/Ebola
+## http://stats.grok.se/json/de/201009/Ebola
+## http://stats.grok.se/json/de/201010/Ebola
+## http://stats.grok.se/json/de/201011/Ebola
+## http://stats.grok.se/json/de/201012/Ebola
+## http://stats.grok.se/json/de/201101/Ebola
+## http://stats.grok.se/json/de/201102/Ebola
+## http://stats.grok.se/json/de/201103/Ebola
+## http://stats.grok.se/json/de/201104/Ebola
+## http://stats.grok.se/json/de/201105/Ebola
+## http://stats.grok.se/json/de/201106/Ebola
+## http://stats.grok.se/json/de/201107/Ebola
+## http://stats.grok.se/json/de/201108/Ebola
+## http://stats.grok.se/json/de/201109/Ebola
+## http://stats.grok.se/json/de/201110/Ebola
+## http://stats.grok.se/json/de/201111/Ebola
+## http://stats.grok.se/json/de/201112/Ebola
+## http://stats.grok.se/json/de/201201/Ebola
+## http://stats.grok.se/json/de/201202/Ebola
+## http://stats.grok.se/json/de/201203/Ebola
+## http://stats.grok.se/json/de/201204/Ebola
+## http://stats.grok.se/json/de/201205/Ebola
+## http://stats.grok.se/json/de/201206/Ebola
+## http://stats.grok.se/json/de/201207/Ebola
+## http://stats.grok.se/json/de/201208/Ebola
+## http://stats.grok.se/json/de/201209/Ebola
+## http://stats.grok.se/json/de/201210/Ebola
+## http://stats.grok.se/json/de/201211/Ebola
+## http://stats.grok.se/json/de/201212/Ebola
+## http://stats.grok.se/json/de/201301/Ebola
+## http://stats.grok.se/json/de/201302/Ebola
+## http://stats.grok.se/json/de/201303/Ebola
+## http://stats.grok.se/json/de/201304/Ebola
+## http://stats.grok.se/json/de/201305/Ebola
+## http://stats.grok.se/json/de/201306/Ebola
+## http://stats.grok.se/json/de/201307/Ebola
+## http://stats.grok.se/json/de/201308/Ebola
+## http://stats.grok.se/json/de/201309/Ebola
+## http://stats.grok.se/json/de/201310/Ebola
+## http://stats.grok.se/json/de/201311/Ebola
+## http://stats.grok.se/json/de/201312/Ebola
+## http://stats.grok.se/json/de/201401/Ebola
+## http://stats.grok.se/json/de/201402/Ebola
+## http://stats.grok.se/json/de/201403/Ebola
+## http://stats.grok.se/json/de/201404/Ebola
+## http://stats.grok.se/json/de/201405/Ebola
+## http://stats.grok.se/json/de/201406/Ebola
+## http://stats.grok.se/json/de/201407/Ebola
+## http://stats.grok.se/json/de/201408/Ebola
+## http://stats.grok.se/json/de/201409/Ebola
+## http://stats.grok.se/json/de/201410/Ebola
 ## http://stats.grok.se/json/de/201411/Ebola
 ## 
 ## Results written to:
@@ -325,9 +571,37 @@ legend("topleft",
        )
 ```
 
-![](./Readme_files/figure-html/unnamed-chunk-13-1.png) 
+![](./Readme_files/figure-html/unnamed-chunk-12-1.png) 
 
 The similarities are striking. 
+
+
+## Package specific time functions
+
+Because data received from stad.grok.se is not always clean -- one might e.g. get dates like `2008-02-30` which is impossible -- the package has its own error robust date functions.
+
+Furthermore, these functions work on all kinds of date formats like Date, numeric, character, POSIXlt, and POSIXct without having to make transformations all the time. The downside of this implementation is that edecuted guesses have to be made: 
+
+  - character data is assumed to be given in format "yyyy-mm-dd" like in 2014-11-08
+  - numerics are assumed to be days since `1970-01-01` (which is R's default anyways)
+  
+To conclude, wikipediatrend time functions are easy to use efficient little helpers to work with the data provided by the package but are to be used with caution outside the package due the fact that convenience is based on educated guesses that can go wrong. 
+
+1. `wp_date()`
+  - is equivalent to `as.Date()` from the base package:
+    - except that it will return `NA` in response to rediculous dates instead of an error
+    - it will always assume `1970-01-01` to be the origin whenever numerics have to be tranfered to date but no origin is supplied 
+2. `wp_day`
+  - extracts the day from a data
+3. `wp_month`
+  - extracts the month from a date
+4. `wp_month`
+  - extracts the year from a date
+5. `wp_wday`
+  - extracts week day from a data (1 for Mondays, 2 for Tuesdays, ...)
+6. `wp_yearmonth`
+  - extracts the year and month of a date and glues them together -- e.g. `2014-03-05` gets transformed to `201403`
+
 
 
 # Credits

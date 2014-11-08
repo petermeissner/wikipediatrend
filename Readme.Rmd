@@ -8,32 +8,31 @@ output:
     self_contained: no
 ---
 
-```{r, echo=FALSE}
-setInternet2(use = TRUE)
-download.file("https://travis-ci.org/petermeissner/wikipediatrend.svg?branch=master", "travischeck.svg")
-```
-
 `r Sys.Date()`
 
+## Current version auto-build status
 <img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master"></img>
+
 
 ## Introduction
 
 Wikipedia provides a lot of valuable meta data. 
 One type of information are page access statistics -- e.g. http://stats.grok.se/en/201409/Peter_Principle. Another type are the info pages -- e.g. https://en.wikipedia.org/w/index.php?title=Peter_Principle&action=info. While the latter falls into the jurisdiction of the [MediaWiki](http://cran.r-project.org/web/packages/WikipediR/index.html)-package , this package allows loading page view statistics into R. 
 
+
 ## Stats.grok.se API and the wikipediatrend package
 
 `http://stats.grok.se` retrieves Wikipedia page access statistics on a daily 
 basis. The information is either presented in HTML or provided as JSON data.
 
-```
+
 http://stats.grok.se/en/201409/Peter_Principle
-```
+
 versus
-```
+
 http://stats.grok.se/json/en/201409/Peter_Principle
-```
+
+
 
 A single request results in data for a specific entry, from one of Wikipedia's different language subdomains and for all days of a given month. The `wikipediatrend` package draws on this Web API and provides a consistent and convenient way to use those data within R. Furthermore the package not only takes care of the communication between the Web API at `stats.grok.se` and your local R session but also provides means to minimize traffic and workload for `stats.grok.se`-server  -- data is (if user decides so) stored locally in CSV format and reused for subsequent requests. 
 
@@ -90,6 +89,11 @@ lines(peter_principle)
 ```
 
 Looking at the graph we can conclude that the *Peter Principle* as a work related phenomenon obviously is something that is most pressing on workdays -- or maybe people in general just tend to use their computers less on weekends.
+
+
+
+
+
 
 
 ## Being friendly
@@ -203,6 +207,34 @@ legend("topleft",
 ```
 
 The similarities are striking. 
+
+
+## Package specific time functions
+
+Because data received from stad.grok.se is not always clean -- one might e.g. get dates like `2008-02-30` which is impossible -- the package has its own error robust date functions.
+
+Furthermore, these functions work on all kinds of date formats like Date, numeric, character, POSIXlt, and POSIXct without having to make transformations all the time. The downside of this implementation is that edecuted guesses have to be made: 
+
+  - character data is assumed to be given in format "yyyy-mm-dd" like in `r Sys.Date()`
+  - numerics are assumed to be days since `1970-01-01` (which is R's default anyways)
+  
+To conclude, wikipediatrend time functions are easy to use efficient little helpers to work with the data provided by the package but are to be used with caution outside the package due the fact that convenience is based on educated guesses that can go wrong. 
+
+1. `wp_date()`
+  - is equivalent to `as.Date()` from the base package:
+    - except that it will return `NA` in response to rediculous dates instead of an error
+    - it will always assume `1970-01-01` to be the origin whenever numerics have to be tranfered to date but no origin is supplied 
+2. `wp_day()`
+  - extracts the day from a data
+3. `wp_month()`
+  - extracts the month from a date
+4. `wp_month()`
+  - extracts the year from a date
+5. `wp_wday()`
+  - extracts week day from a data (1 for Mondays, 2 for Tuesdays, ...)
+6. `wp_yearmonth()`
+  - extracts the year and month of a date and glues them together -- e.g. `2014-03-05` gets transformed to `"201403"`
+
 
 
 # Credits

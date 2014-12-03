@@ -155,18 +155,20 @@ cats <- wp_trend("Cat", from="2007-01-01", friendly=T)
     quantile(cats$count, na.rm=T, 0.99) & 
   cats$count > 
     quantile(cats$count, na.rm=T, 0.01)  
-cats <- cats[no_outlier,]
-plot( cats, 
-      col=ifelse( wp_wday(cats$date) > 5 , rgb(1,0,0,0.3), rgb(0,0,0,0.3)) ,
-      ylim=c(0, max(cats$count)),
+plot( cats[no_outlier,], 
+      col="black",
+      ylim=c(0, max(cats[no_outlier,]$count)),
       main="Cats' Wikipedia Attention",
-      ylab="views per day", xlab="time")
-lines(cats)
+      ylab="views per day", xlab="time", type="h")
+soo_2012_13 <- wp_year(cats$date)== 2012 | wp_year(cats$date)== 2013 
+cats_model  <- lm(count ~ date + date^2 + date^3 + soo_2012_13 ,data=cats)
+cats_smooth <- data.frame(date=cats$date, count_smooth=predict(cats_model))
+lines(cats_smooth,col=rgb(1,0,0,0.5),lwd=5)
 ```
 
 ... and triumphantly can conclude: 
 
-**Cats are sooooo 2012 and 2013.**.
+**Cats' popularity is in decline overal and more so cats are soooo old fashioned 2012 and 2013.**.
 
 ### Ebola
 

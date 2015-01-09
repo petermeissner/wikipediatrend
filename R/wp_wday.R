@@ -29,7 +29,7 @@ wp_wday.POSIXlt  <- function(timestamp, startmonday=T){
 
 #' @describeIn wp_wday
 wp_wday.default  <- function(timestamp, startmonday=T){
-  timestamp <- as.POSIXlt(timestamp)
+  timestamp <- as.POSIXlt(wp_date(timestamp))
   if(startmonday){
     tmp <- timestamp$wday
     tmp[tmp==0] <- 7

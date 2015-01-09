@@ -14,10 +14,10 @@ wp_day          <- function(timestamp) UseMethod("wp_day")
 
 #' @describeIn wp_day extract day from timestamp
 wp_day.POSIXlt  <- function(timestamp) {
-  timestamp$mday+1
+  timestamp$mday
 }
 
 #' @describeIn wp_day extract day from timestamp
 wp_day.default  <- function(timestamp) {
-  as.POSIXlt(timestamp)$mday+1
+  as.POSIXlt(wp_date(timestamp))$mday
 }

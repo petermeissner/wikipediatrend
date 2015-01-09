@@ -16,5 +16,5 @@ wp_year.POSIXlt  <- function(timestamp) {
 
 #' @describeIn wp_year extract
 wp_year.default  <- function(timestamp) {
-  as.POSIXlt(timestamp)$year+1900
+  as.POSIXlt(wp_date(timestamp))$year+1900
 }

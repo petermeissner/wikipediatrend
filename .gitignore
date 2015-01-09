@@ -1,7 +1,6 @@
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
-
 # Folder config file
 Desktop.ini
 # Recycle Bin used on file shares
@@ -37,3 +36,4 @@ devel/
 /wp*.csv
 inst/doc
 Readme_cache/html/*
+travischeck.svg

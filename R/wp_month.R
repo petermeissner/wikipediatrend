@@ -18,5 +18,5 @@ wp_month.POSIXlt  <- function(timestamp) {
 
 #' @describeIn wp_month extract
 wp_month.default  <- function(timestamp) {
-  as.POSIXlt(timestamp)$mon+1
+  as.POSIXlt(wp_date(timestamp))$mon+1
 }

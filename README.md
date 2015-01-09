@@ -1,29 +1,31 @@
 # Introducing Wikipediatrend -- Easy Analyses of Public Attention, Anxiety and Information Seeking
 Peter Meißner  
 
+2015-01-09
 
-
-2014-11-06
-
+## Current version auto-build status
 <img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master"></img>
+
 
 ## Introduction
 
 Wikipedia provides a lot of valuable meta data. 
 One type of information are page access statistics -- e.g. http://stats.grok.se/en/201409/Peter_Principle. Another type are the info pages -- e.g. https://en.wikipedia.org/w/index.php?title=Peter_Principle&action=info. While the latter falls into the jurisdiction of the [MediaWiki](http://cran.r-project.org/web/packages/WikipediR/index.html)-package , this package allows loading page view statistics into R. 
 
+
 ## Stats.grok.se API and the wikipediatrend package
 
 `http://stats.grok.se` retrieves Wikipedia page access statistics on a daily 
 basis. The information is either presented in HTML or provided as JSON data.
 
-```
+
 http://stats.grok.se/en/201409/Peter_Principle
-```
+
 versus
-```
+
 http://stats.grok.se/json/en/201409/Peter_Principle
-```
+
+
 
 A single request results in data for a specific entry, from one of Wikipedia's different language subdomains and for all days of a given month. The `wikipediatrend` package draws on this Web API and provides a consistent and convenient way to use those data within R. Furthermore the package not only takes care of the communication between the Web API at `stats.grok.se` and your local R session but also provides means to minimize traffic and workload for `stats.grok.se`-server  -- data is (if user decides so) stored locally in CSV format and reused for subsequent requests. 
 
@@ -67,15 +69,15 @@ peter_principle <- wp_trend()
 ```
 ## 
 ##     With option 'friendly' set to FALSE subsequent requests 
-##     of the same wikipedia-page cause the server -- which is kindly 
+##     of the same wikipedia-entry cause the server -- which is kindly 
 ##     providing information for you -- to work hard to get the same 
 ##     stuff over and over and over and over again. Do not bore 
 ##     the server - be friendly. 
 ##     
-##     More information is found via '?wp_trend'.
+##     See: '?wp_trend'
 ##     
-## http://stats.grok.se/json/en/201410/Peter_principle
-## http://stats.grok.se/json/en/201411/Peter_principle
+## http://stats.grok.se/json/en/201412/Peter_principle
+## http://stats.grok.se/json/en/201501/Peter_principle
 ```
 
 The function informs us that using the friendly option might be a good idea and shows us which URLs it used to retrieve the information we were asking for. 
@@ -105,12 +107,12 @@ head(peter_principle)
 
 ```
 ##         date count
-## 1 2014-10-06  1272
-## 2 2014-10-07  1473
-## 3 2014-10-08  1312
-## 4 2014-10-09  1486
-## 5 2014-10-10  1107
-## 6 2014-10-11   652
+## 1 2014-12-10  1169
+## 2 2014-12-11  1304
+## 3 2014-12-12  1228
+## 4 2014-12-13   656
+## 5 2014-12-14   616
+## 6 2014-12-15  1078
 ```
 
 We can use this information to visualize the page view trend. Using `wp_wday()` we can furthermore discriminate weekdays <span style="color:black">(black)</span> from weekends <span style="color:red">(red)</span>. 
@@ -125,9 +127,14 @@ plot( peter_principle,
 lines(peter_principle)
 ```
 
-![](./Readme_files/figure-html/unnamed-chunk-5-1.png) 
+![](Readme_files/figure-html/unnamed-chunk-4-1.png) 
 
 Looking at the graph we can conclude that the *Peter Principle* as a work related phenomenon obviously is something that is most pressing on workdays -- or maybe people in general just tend to use their computers less on weekends.
+
+
+
+
+
 
 
 ## Being friendly
@@ -181,6 +188,8 @@ isis <- wp_trend("Islamic_State_of_Iraq_and_the_Levant", from="2013-01-01", frie
 ## http://stats.grok.se/json/en/201409/Islamic_State_of_Iraq_and_the_Levant
 ## http://stats.grok.se/json/en/201410/Islamic_State_of_Iraq_and_the_Levant
 ## http://stats.grok.se/json/en/201411/Islamic_State_of_Iraq_and_the_Levant
+## http://stats.grok.se/json/en/201412/Islamic_State_of_Iraq_and_the_Levant
+## http://stats.grok.se/json/en/201501/Islamic_State_of_Iraq_and_the_Levant
 ## 
 ## Results written to:
 ## D:/Peter/Dropbox/RPackages/wikipediatrend/wp__Islamic_State_of_Iraq_and_the_Levant__en.csv
@@ -196,7 +205,7 @@ isis <- wp_trend("Islamic_State_of_Iraq_and_the_Levant", from="2012-12-01", frie
 
 ```
 ## http://stats.grok.se/json/en/201212/Islamic_State_of_Iraq_and_the_Levant
-## http://stats.grok.se/json/en/201411/Islamic_State_of_Iraq_and_the_Levant
+## http://stats.grok.se/json/en/201501/Islamic_State_of_Iraq_and_the_Levant
 ## 
 ## Results written to:
 ## D:/Peter/Dropbox/RPackages/wikipediatrend/wp__Islamic_State_of_Iraq_and_the_Levant__en.csv
@@ -213,7 +222,7 @@ plot( isis,
       type="l")
 ```
 
-![](./Readme_files/figure-html/unnamed-chunk-9-1.png) 
+![](Readme_files/figure-html/unnamed-chunk-8-1.png) 
 
 ... revealing what most might have already suspected: ISIS is quite a new phenomenon. 
 
@@ -233,7 +242,8 @@ cats <- wp_trend("Cat", from="2007-01-01", friendly=T)
 ## http://stats.grok.se/json/en/200712/Cat
 ## http://stats.grok.se/json/en/200801/Cat
 ## http://stats.grok.se/json/en/200807/Cat
-## http://stats.grok.se/json/en/201411/Cat
+## http://stats.grok.se/json/en/201412/Cat
+## http://stats.grok.se/json/en/201501/Cat
 ## 
 ## Results written to:
 ## D:/Peter/Dropbox/RPackages/wikipediatrend/wp__Cat__en.csv
@@ -246,20 +256,22 @@ cats <- wp_trend("Cat", from="2007-01-01", friendly=T)
     quantile(cats$count, na.rm=T, 0.99) & 
   cats$count > 
     quantile(cats$count, na.rm=T, 0.01)  
-cats <- cats[no_outlier,]
-plot( cats, 
-      col=ifelse( wp_wday(cats$date) > 5 , rgb(1,0,0,0.3), rgb(0,0,0,0.3)) ,
-      ylim=c(0, max(cats$count)),
+plot( cats[no_outlier,], 
+      col="black",
+      ylim=c(0, max(cats[no_outlier,]$count)),
       main="Cats' Wikipedia Attention",
-      ylab="views per day", xlab="time")
-lines(cats)
+      ylab="views per day", xlab="time", type="h")
+soo_2012_13 <- wp_year(cats$date)== 2012 | wp_year(cats$date)== 2013 
+cats_model  <- lm(count ~ date + date^2 + date^3 + soo_2012_13 ,data=cats)
+cats_smooth <- data.frame(date=cats$date, count_smooth=predict(cats_model))
+lines(cats_smooth,col=rgb(1,0,0,0.5),lwd=5)
 ```
 
-![](./Readme_files/figure-html/unnamed-chunk-10-1.png) 
+![](Readme_files/figure-html/unnamed-chunk-9-1.png) 
 
 ... and triumphantly can conclude: 
 
-**Cats are sooooo 2012 and 2013.**.
+**Cats' popularity is in decline overal and more so cats are soooo old fashioned 2012 and 2013.**.
 
 ### Ebola
 
@@ -273,7 +285,8 @@ ebola_en <- wp_trend("Ebola", from="2008-01-01", friendly=T)
 ```
 ## http://stats.grok.se/json/en/200801/Ebola
 ## http://stats.grok.se/json/en/200807/Ebola
-## http://stats.grok.se/json/en/201411/Ebola
+## http://stats.grok.se/json/en/201412/Ebola
+## http://stats.grok.se/json/en/201501/Ebola
 ## 
 ## Results written to:
 ## D:/Peter/Dropbox/RPackages/wikipediatrend/wp__Ebola__en.csv
@@ -288,7 +301,7 @@ plot( ebola_en,
 lines(ebola_en)
 ```
 
-![](./Readme_files/figure-html/unnamed-chunk-11-1.png) 
+![](Readme_files/figure-html/unnamed-chunk-10-1.png) 
 
 Which unsurprisingly peaks in 2014 with the Ebola outbreak in Western Africa. 
 
@@ -303,7 +316,8 @@ ebola_de <- wp_trend("Ebola", lang="de", from="2008-01-01", friendly=T)
 ```
 ## http://stats.grok.se/json/de/200801/Ebola
 ## http://stats.grok.se/json/de/200807/Ebola
-## http://stats.grok.se/json/de/201411/Ebola
+## http://stats.grok.se/json/de/201412/Ebola
+## http://stats.grok.se/json/de/201501/Ebola
 ## 
 ## Results written to:
 ## D:/Peter/Dropbox/RPackages/wikipediatrend/wp__Ebola__de.csv
@@ -325,9 +339,37 @@ legend("topleft",
        )
 ```
 
-![](./Readme_files/figure-html/unnamed-chunk-13-1.png) 
+![](Readme_files/figure-html/unnamed-chunk-12-1.png) 
 
 The similarities are striking. 
+
+
+## Package specific time functions
+
+Because data received from stad.grok.se is not always clean -- one might e.g. get dates like `2008-02-30` which is impossible -- the package has its own error robust date functions.
+
+Furthermore, these functions work on all kinds of date formats like Date, numeric, character, POSIXlt, and POSIXct without having to make transformations all the time. The downside of this implementation is that edecuted guesses have to be made: 
+
+  - character data is assumed to be given in format "yyyy-mm-dd" like in 2015-01-09
+  - numerics are assumed to be days since `1970-01-01` (which is R's default anyways)
+  
+To conclude, wikipediatrend time functions are easy to use efficient little helpers to work with the data provided by the package but are to be used with caution outside the package due the fact that convenience is based on educated guesses that can go wrong. 
+
+1. `wp_date()`
+  - is equivalent to `as.Date()` from the base package:
+    - except that it will return `NA` in response to rediculous dates instead of an error
+    - it will always assume `1970-01-01` to be the origin whenever numerics have to be tranfered to date but no origin is supplied 
+2. `wp_day()`
+  - extracts the day from a data
+3. `wp_month()`
+  - extracts the month from a date
+4. `wp_month()`
+  - extracts the year from a date
+5. `wp_wday()`
+  - extracts week day from a data (1 for Mondays, 2 for Tuesdays, ...)
+6. `wp_yearmonth()`
+  - extracts the year and month of a date and glues them together -- e.g. `2014-03-05` gets transformed to `"201403"`
+
 
 
 # Credits

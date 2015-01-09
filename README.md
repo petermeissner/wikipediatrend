@@ -1,7 +1,7 @@
 # Introducing Wikipediatrend -- Easy Analyses of Public Attention, Anxiety and Information Seeking
 Peter Meißner  
 
-2014-12-03
+2015-01-09
 
 ## Current version auto-build status
 <img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master"></img>
@@ -69,14 +69,15 @@ peter_principle <- wp_trend()
 ```
 ## 
 ##     With option 'friendly' set to FALSE subsequent requests 
-##     of the same wikipedia-page cause the server -- which is kindly 
+##     of the same wikipedia-entry cause the server -- which is kindly 
 ##     providing information for you -- to work hard to get the same 
 ##     stuff over and over and over and over again. Do not bore 
 ##     the server - be friendly. 
 ##     
-##     More information is found via '?wp_trend'.
+##     See: '?wp_trend'
 ##     
-## http://stats.grok.se/json/en/201410/Peter_principle
+## http://stats.grok.se/json/en/201412/Peter_principle
+## http://stats.grok.se/json/en/201501/Peter_principle
 ```
 
 The function informs us that using the friendly option might be a good idea and shows us which URLs it used to retrieve the information we were asking for. 
@@ -105,13 +106,13 @@ head(peter_principle)
 ```
 
 ```
-##                  date count
-## 2014-10-01 2014-10-01  1892
-## 2014-10-02 2014-10-02  1974
-## 2014-10-03 2014-10-03  1638
-## 2014-10-04 2014-10-04   800
-## 2014-10-05 2014-10-05   826
-## 2014-10-06 2014-10-06  1272
+##         date count
+## 1 2014-12-10  1169
+## 2 2014-12-11  1304
+## 3 2014-12-12  1228
+## 4 2014-12-13   656
+## 5 2014-12-14   616
+## 6 2014-12-15  1078
 ```
 
 We can use this information to visualize the page view trend. Using `wp_wday()` we can furthermore discriminate weekdays <span style="color:black">(black)</span> from weekends <span style="color:red">(red)</span>. 
@@ -126,7 +127,7 @@ plot( peter_principle,
 lines(peter_principle)
 ```
 
-![](./Readme_files/figure-html/unnamed-chunk-4-1.png) 
+![](Readme_files/figure-html/unnamed-chunk-4-1.png) 
 
 Looking at the graph we can conclude that the *Peter Principle* as a work related phenomenon obviously is something that is most pressing on workdays -- or maybe people in general just tend to use their computers less on weekends.
 
@@ -188,6 +189,7 @@ isis <- wp_trend("Islamic_State_of_Iraq_and_the_Levant", from="2013-01-01", frie
 ## http://stats.grok.se/json/en/201410/Islamic_State_of_Iraq_and_the_Levant
 ## http://stats.grok.se/json/en/201411/Islamic_State_of_Iraq_and_the_Levant
 ## http://stats.grok.se/json/en/201412/Islamic_State_of_Iraq_and_the_Levant
+## http://stats.grok.se/json/en/201501/Islamic_State_of_Iraq_and_the_Levant
 ## 
 ## Results written to:
 ## D:/Peter/Dropbox/RPackages/wikipediatrend/wp__Islamic_State_of_Iraq_and_the_Levant__en.csv
@@ -203,7 +205,7 @@ isis <- wp_trend("Islamic_State_of_Iraq_and_the_Levant", from="2012-12-01", frie
 
 ```
 ## http://stats.grok.se/json/en/201212/Islamic_State_of_Iraq_and_the_Levant
-## http://stats.grok.se/json/en/201412/Islamic_State_of_Iraq_and_the_Levant
+## http://stats.grok.se/json/en/201501/Islamic_State_of_Iraq_and_the_Levant
 ## 
 ## Results written to:
 ## D:/Peter/Dropbox/RPackages/wikipediatrend/wp__Islamic_State_of_Iraq_and_the_Levant__en.csv
@@ -220,7 +222,7 @@ plot( isis,
       type="l")
 ```
 
-![](./Readme_files/figure-html/unnamed-chunk-8-1.png) 
+![](Readme_files/figure-html/unnamed-chunk-8-1.png) 
 
 ... revealing what most might have already suspected: ISIS is quite a new phenomenon. 
 
@@ -241,6 +243,7 @@ cats <- wp_trend("Cat", from="2007-01-01", friendly=T)
 ## http://stats.grok.se/json/en/200801/Cat
 ## http://stats.grok.se/json/en/200807/Cat
 ## http://stats.grok.se/json/en/201412/Cat
+## http://stats.grok.se/json/en/201501/Cat
 ## 
 ## Results written to:
 ## D:/Peter/Dropbox/RPackages/wikipediatrend/wp__Cat__en.csv
@@ -264,7 +267,7 @@ cats_smooth <- data.frame(date=cats$date, count_smooth=predict(cats_model))
 lines(cats_smooth,col=rgb(1,0,0,0.5),lwd=5)
 ```
 
-![](./Readme_files/figure-html/unnamed-chunk-9-1.png) 
+![](Readme_files/figure-html/unnamed-chunk-9-1.png) 
 
 ... and triumphantly can conclude: 
 
@@ -282,8 +285,8 @@ ebola_en <- wp_trend("Ebola", from="2008-01-01", friendly=T)
 ```
 ## http://stats.grok.se/json/en/200801/Ebola
 ## http://stats.grok.se/json/en/200807/Ebola
-## http://stats.grok.se/json/en/201411/Ebola
 ## http://stats.grok.se/json/en/201412/Ebola
+## http://stats.grok.se/json/en/201501/Ebola
 ## 
 ## Results written to:
 ## D:/Peter/Dropbox/RPackages/wikipediatrend/wp__Ebola__en.csv
@@ -298,7 +301,7 @@ plot( ebola_en,
 lines(ebola_en)
 ```
 
-![](./Readme_files/figure-html/unnamed-chunk-10-1.png) 
+![](Readme_files/figure-html/unnamed-chunk-10-1.png) 
 
 Which unsurprisingly peaks in 2014 with the Ebola outbreak in Western Africa. 
 
@@ -313,8 +316,8 @@ ebola_de <- wp_trend("Ebola", lang="de", from="2008-01-01", friendly=T)
 ```
 ## http://stats.grok.se/json/de/200801/Ebola
 ## http://stats.grok.se/json/de/200807/Ebola
-## http://stats.grok.se/json/de/201411/Ebola
 ## http://stats.grok.se/json/de/201412/Ebola
+## http://stats.grok.se/json/de/201501/Ebola
 ## 
 ## Results written to:
 ## D:/Peter/Dropbox/RPackages/wikipediatrend/wp__Ebola__de.csv
@@ -336,7 +339,7 @@ legend("topleft",
        )
 ```
 
-![](./Readme_files/figure-html/unnamed-chunk-12-1.png) 
+![](Readme_files/figure-html/unnamed-chunk-12-1.png) 
 
 The similarities are striking. 
 
@@ -347,7 +350,7 @@ Because data received from stad.grok.se is not always clean -- one might e.g. ge
 
 Furthermore, these functions work on all kinds of date formats like Date, numeric, character, POSIXlt, and POSIXct without having to make transformations all the time. The downside of this implementation is that edecuted guesses have to be made: 
 
-  - character data is assumed to be given in format "yyyy-mm-dd" like in 2014-12-03
+  - character data is assumed to be given in format "yyyy-mm-dd" like in 2015-01-09
   - numerics are assumed to be days since `1970-01-01` (which is R's default anyways)
   
 To conclude, wikipediatrend time functions are easy to use efficient little helpers to work with the data provided by the package but are to be used with caution outside the package due the fact that convenience is based on educated guesses that can go wrong. 

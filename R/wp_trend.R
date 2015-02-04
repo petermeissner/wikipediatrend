@@ -41,6 +41,11 @@
 #'   requests: \code{paste( "wikipediatrend running on: ", R.version$platform,
 #'   R.version$version.string, sep=", ")}
 #'   
+#' @param dataDir Directory where data will be stored if friendly is set to 
+#'   \code{TRUE}, \code{1} or \code{2}. If this option is not set, the data will
+#'   be stored in a temporary folder and will be retrieved in subsequent calls if
+#'   during the same R session.
+#'   
 #' @examples 
 #' wp_trend(page        = "Main_Page", 
 #'          from        = "2014-11-01", 
@@ -48,15 +53,17 @@
 #'          lang        = "en", 
 #'          friendly    = FALSE, 
 #'          requestFrom = "wp.trend.tester at wptt.wptt",
-#'          userAgent   =   TRUE)
+#'          userAgent   =   TRUE,
+#'          dataDir     = "../data")
 
 wp_trend <- function( page        = "Peter_principle", 
                       from        = Sys.Date()-30, 
                       to          = Sys.Date(),
                       lang        = "en", 
-                      friendly    = F,
+                      friendly    = T,
                       requestFrom = "anonymous",
-                      userAgent   = F
+                      userAgent   = F,
+                      dataDir     = ""
 ){
   # encourage being freindly
   if ( !friendly ) {
@@ -80,8 +87,10 @@ wp_trend <- function( page        = "Peter_principle",
                                                   sep=", "))
   }
   
-  # file name for beeing friendly
-  resname <- paste0("wp", "__", page, "__", lang, ".csv")
+  # data directory and file name for being friendly
+  if ( dataDir == "" ) dataDir <- tempdir()
+  if ( substr(dataDir, nchar(dataDir), nchar(dataDir)) != "/" ) dataDir <- paste0(dataDir, "/")
+  resname <- paste0(dataDir, "wp", "__", page, "__", lang, ".csv")
   
   # check dates
   tmp  <- wp_check_date_inputs(from, to)

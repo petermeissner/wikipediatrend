@@ -87,54 +87,54 @@ wp_trend <- function( page        = "Peter_principle",
   
   for(i in 1:length(page)) {
   
-    # file name for beeing friendly
-    resname <- paste0("wp", "__", page[i], "__", lang, ".csv")
+  # file name for beeing friendly
+  resname <- paste0("wp", "__", page[i], "__", lang, ".csv")
   
-    # beeing friendly
-    friendly_data <- wp_friendly_load(resname, friendly)
+  # beeing friendly
+  friendly_data <- wp_friendly_load(resname, friendly)
   
-    # checking for months with missing data
-    dates_day <- wp_expand_ts(from, to, "day")
-    not_in_fd <- !(dates_day %in% friendly_data$date)
-    dates_url <- unique(wp_yearmonth(dates_day[ not_in_fd ]))
+  # checking for months with missing data
+  dates_day <- wp_expand_ts(from, to, "day")
+  not_in_fd <- !(dates_day %in% friendly_data$date)
+  dates_url <- unique(wp_yearmonth(dates_day[ not_in_fd ]))
   
-    # prepare urls
-    urls  <- paste( "http://stats.grok.se/json",
-                    lang, dates_url, page[i], sep="/")
-    if(all(dates_url=="")) urls  <- NULL
+  # prepare urls
+  urls  <- paste( "http://stats.grok.se/json",
+                  lang, dates_url, page[i], sep="/")
+  if(all(dates_url=="")) urls  <- NULL
   
-    # chunking urls
-    urlchunks <- chunk(urls, 5)
+  # chunking urls
+  urlchunks <- chunk(urls, 5)
   
-    # make http requests
-    jsons <- list()
-    for(i in seq_along(urlchunks)){
-      jsons <- c(
-        jsons, 
-        RCurl::getURL(url = urlchunks[[i]], httpheader = standardHeader)
-       )
-      message(paste(urlchunks[[i]], collapse="\n"))
-      Sys.sleep(1)
-    }
+  # make http requests
+  jsons <- list()
+  for(i in seq_along(urlchunks)){
+    jsons <- c(
+      jsons, 
+      RCurl::getURL(url = urlchunks[[i]], httpheader = standardHeader)
+     )
+    message(paste(urlchunks[[i]], collapse="\n"))
+    Sys.sleep(1)
+  }
   
-    # extract data
-    res <- wp_extract_data(jsons)
+  # extract data
+  res <- wp_extract_data(jsons)
   
-    # combine new data and old data
-    not_in_res <- !(friendly_data$date %in% res$date)
-    res <- rbind(res, friendly_data[not_in_res,])
-    res <- res[order(res$date), ]
+  # combine new data and old data
+  not_in_res <- !(friendly_data$date %in% res$date)
+  res <- rbind(res, friendly_data[not_in_res,])
+  res <- res[order(res$date), ]
   
-    # beeing friendly: saving results to file for possible later use
-    wp_friendly_save(res, friendly, resname)
+  # beeing friendly: saving results to file for possible later use
+  wp_friendly_save(res, friendly, resname)
     
-    # accumulate result for the several pages
-    res <- res[ res$date <= to & res$date >= from ,]
-    if( !exists("res_accum") ) {
-      res_accum <- res
-    } else {
-      res_accum <- cbind(res_accum, res$count)
-    }
+  # accumulate result for the several pages
+  res <- res[ res$date <= to & res$date >= from ,]
+  if( !exists("res_accum") ) {
+    res_accum <- res
+  } else {
+    res_accum <- cbind(res_accum, res$count)
+  }
   }
   
   # return

@@ -1,26 +1,19 @@
 Package: wikipediatrend
 Title: Public Subject Attention via Wikipedia Page Access Statistics
-Date: 2015-01-09
-Version: 0.2.1
+Version: 0.3.0.9002
+Date: 2015-02-06
+Author: Peter Meissner [aut, cre], Fernando Reis [ctb], R Core team
+        [ctb] (wp_date derived from base package as.Date)
 Maintainer: Peter Meissner <retep.meissner@gmail.com>
-Authors@R: as.person(c(
-    "Peter Meissner <retep.meissner@gmail.com> [aut, cre]",
-    "R Core team [ctb] (wp_date derived from base package as.Date)"
-    ))
-Description: Public attention is an interesting field of study.
-    The internet not only allows to access information in no time on virtually
-    any subject but via page access statistics gathered by website authors the
-    subject of attention as well can be studied. For the omnipresent Wikipedia
-    those access statistics are made available via stats.grok.se a server
-    providing the information as file dumps as well as as web API.
-    This package provides an easy to  use, consistent and traffic
-    minimizing approach to make those data accessible within R.
-Depends:
-    R (>= 3.0.0)
-Imports:
-    jsonlite (>= 0.9.13),
-    stringr  (>= 0.6.2),
-    RCurl    (>= 1.95-4.3)
+Description: Public attention is an interesting field of study. The
+        internet not only allows to access information in no time on
+        virtually any subject but via page access statistics gathered
+        by website authors the subject of attention as well can be
+        studied. For the omnipresent Wikipedia those access statistics
+        are made available via stats.grok.se a server providing the
+        information as file dumps as well as as web API. This package
+        provides an easy to use, consistent and traffic minimizing
+        approach to make those data accessible within R.
 License: GPL (>= 2)
-LazyData: true
-URL: https://github.com/petermeissner/wikipediatrend
+Depends: R (>= 3.0.0)
+Imports: jsonlite (>= 0.9.13), stringr (>= 0.6.2), RCurl (>= 1.95-4.3)

@@ -1,7 +1,7 @@
 ﻿NEWS wikipediatrend 
 ===============================================================================
 
-version 0.3.1
+version 0.3.0
 -------------------------------------------------------------------------------
 
 - option userAgent now is optional: the default is to send information on 

@@ -80,13 +80,15 @@ wp_trend <- function( page        = "Peter_principle",
                                                   sep=", "))
   }
   
-  # file name for beeing friendly
-  resname <- paste0("wp", "__", page, "__", lang, ".csv")
-  
   # check dates
   tmp  <- wp_check_date_inputs(from, to)
   from <- tmp$from
   to   <- tmp$to
+  
+  for(i in 1:length(page)) {
+  
+  # file name for beeing friendly
+  resname <- paste0("wp", "__", page[i], "__", lang, ".csv")
   
   # beeing friendly
   friendly_data <- wp_friendly_load(resname, friendly)
@@ -98,7 +100,7 @@ wp_trend <- function( page        = "Peter_principle",
   
   # prepare urls
   urls  <- paste( "http://stats.grok.se/json",
-                  lang, dates_url, page, sep="/")
+                  lang, dates_url, page[i], sep="/")
   if(all(dates_url=="")) urls  <- NULL
   
   # chunking urls
@@ -125,11 +127,20 @@ wp_trend <- function( page        = "Peter_principle",
   
   # beeing friendly: saving results to file for possible later use
   wp_friendly_save(res, friendly, resname)
-
-  # return
+    
+  # accumulate result for the several pages
   res <- res[ res$date <= to & res$date >= from ,]
-  rownames(res) <- NULL
-  return(res)
+  if( !exists("res_accum") ) {
+    res_accum <- res
+  } else {
+    res_accum <- cbind(res_accum, res$count)
+  }
+  }
+  
+  # return
+  rownames(res_accum) <- NULL
+  names(res_accum) <- c("date", page)
+  return(res_accum)
 }
 
 

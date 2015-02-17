@@ -47,7 +47,7 @@
 #'          to          = "2014-11-30", 
 #'          lang        = "en", 
 #'          friendly    = FALSE, 
-#'          requestFrom = "wp.trend.tester at wptt.wptt",
+#'          requestFrom = "wp.trend.tester at wptt.com",
 #'          userAgent   =   TRUE)
 
 wp_trend <- function( page        = "Peter_principle", 
@@ -68,17 +68,14 @@ wp_trend <- function( page        = "Peter_principle",
     See: '?wp_trend'
     ")
   }
+  # extra options for HTTP request
   standardHeader <- list( 'user-agent' = paste0( 
                             R.version$version.string, " ",
                             "wikipediatrend/", packageVersion("wikipediatrend"), " ",
                             "curl/", RCurl::curlVersion()$version, " ",
-                            "Rcurl/", packageVersion("RCurl"), " ",
-                            sep=", ") 
+                            "Rcurl/", packageVersion("RCurl"), " ") 
                         )
-  if ( exists("userAgent", inherits=F) ) {
-  } 
-  if ( exists("userAgent", inherits=F) ) {
-  } 
+
   # file name for beeing friendly
   resname <- paste0("wp", "__", page, "__", lang, ".csv")
   

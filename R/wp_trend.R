@@ -54,9 +54,7 @@ wp_trend <- function( page        = "Peter_principle",
                       from        = Sys.Date()-30, 
                       to          = Sys.Date(),
                       lang        = "en", 
-                      friendly    = F,
-                      requestFrom = "anonymous",
-                      userAgent   = F
+                      friendly    = F
 ){
   # encourage being freindly
   if ( !friendly ) {
@@ -70,16 +68,17 @@ wp_trend <- function( page        = "Peter_principle",
     See: '?wp_trend'
     ")
   }
-  if ( !userAgent ) {
-    standardHeader <- list( from         = requestFrom)
-  }else{
-    standardHeader <- list( from         = requestFrom,
-                            'user-agent' = paste( "wikipediatrend running on: ", 
-                                                  R.version$platform,
-                                                  R.version$version.string,
-                                                  sep=", "))
-  }
-  
+  standardHeader <- list( 'user-agent' = paste0( 
+                            R.version$version.string, " ",
+                            "wikipediatrend/", packageVersion("wikipediatrend"), " ",
+                            "curl/", RCurl::curlVersion()$version, " ",
+                            "Rcurl/", packageVersion("RCurl"), " ",
+                            sep=", ") 
+                        )
+  if ( exists("userAgent", inherits=F) ) {
+  } 
+  if ( exists("userAgent", inherits=F) ) {
+  } 
   # file name for beeing friendly
   resname <- paste0("wp", "__", page, "__", lang, ".csv")
   

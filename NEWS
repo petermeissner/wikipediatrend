@@ -1,0 +1,13 @@
+﻿NEWS wikipediatrend 
+===============================================================================
+
+version 0.3.1
+-------------------------------------------------------------------------------
+
+- option userAgent now is optional: the default is to send information on 
+versions of R, wikipediatrend, curl as well as RCurl
+
+- option requestFrom now is optional: the default is to not send the header
+
+- wp_trend() now checks date inputs better for logical inconsistencies 
+[see: wp_check_date_inputs()]

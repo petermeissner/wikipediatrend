@@ -5,8 +5,7 @@
 \title{Function for getting access statistics for wikipedia pages}
 \usage{
 wp_trend(page = "Peter_principle", from = Sys.Date() - 30,
-  to = Sys.Date(), lang = "en", friendly = F, requestFrom = "anonymous",
-  userAgent = F)
+  to = Sys.Date(), lang = "en", friendly = F, userAgent = NULL)
 }
 \arguments{
 \item{page}{The name of the Wikipedia page as to be found in the URL to the
@@ -42,13 +41,13 @@ wp_trend(page = "Peter_principle", from = Sys.Date() - 30,
   For storage on disk \code{write.csv()} (friendly=TRUE or friendly=1) and
   \code{write.csv2()} (friendly=2) are used.}
 
-\item{requestFrom}{This parameter sends an identifier (i.e. your email
-  address to contact you if necessary) to stats.grok.se (the server that
-  kindly provides the information you request).}
-
 \item{userAgent}{Whether or not to send the following information along your
   requests: \code{paste( "wikipediatrend running on: ", R.version$platform,
   R.version$version.string, sep=", ")}}
+
+\item{requestFrom}{This parameter sends an identifier (i.e. your email
+  address to contact you if necessary) to stats.grok.se (the server that
+  kindly provides the information you request).}
 }
 \description{
 Function for getting access statistics for wikipedia pages

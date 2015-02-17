@@ -11,8 +11,8 @@
 
 wp_friendly_save <- function(res, friendly, resname){
   if ( friendly==1 | friendly==2 ) {
-    if ( friendly==1 ) write.csv(res, resname)
-    if ( friendly==2 ) write.csv2(res, resname)
+    if ( friendly==1 ) write.csv(res, resname, row.names=FALSE)
+    if ( friendly==2 ) write.csv2(res, resname, row.names=FALSE)
     message(paste0("\nResults written to:\n", getwd(), "/", resname ,"\n"))
     return( paste0(getwd(),"/",resname) )
   }

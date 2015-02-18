@@ -25,8 +25,8 @@ wp_check_date_inputs <- function(from, to){
     from <- Sys.Date()
   } 
   # from larger than to
-  if ( wp_date(to) <= wp_date(from) ) {
-    error("In wp_check_date_inputs: from-date larger than to-date.")
+  if ( !(wp_date(from) <= wp_date(to)) ) {
+    stop("In wp_check_date_inputs: from-date larger than to-date.")
   }
   return( list(from=from, to=to) )
 }

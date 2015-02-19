@@ -112,8 +112,8 @@ img {
 ## 
 ## Results written to:
 ## D:\Users\Peter\AppData\Local\Temp\Rtmpi4DSLf\wp_trend_cache_21dc1ea2367d.csv</code></pre>
-<p>The function informs us that using the friendly option might be a good idea and shows us which URLs it used to retrieve the information we were asking for.</p>
-<p>The function’s return is a data frame with two variables <em>date</em> and <em>count</em>:</p>
+<p>Calling the function results in less downloads because those months already complete are not downloded again. Instead it is complemented by the data already stored within the cache.</p>
+<p>The function’s return is a data frame with six variables <em>date</em>, <em>count</em>, <em>project</em>, <em>title</em>, <em>rank</em>, <em>month</em> paralleling the data provided by the stats.grok.se server:</p>
 <pre class="r"><code>dim(peter_principle)</code></pre>
 <pre><code>## [1] 29  6</code></pre>
 <pre class="r"><code>class(peter_principle)</code></pre>
@@ -127,18 +127,16 @@ img {
 ## 5 2015-01-24   548      en Peter_principle   -1 201501
 ## 6 2015-01-25   573      en Peter_principle   -1 201501</code></pre>
 <p>We can use this information to visualize the page view trend. Using <code>wp_wday()</code> we can furthermore discriminate weekdays <span style="color:black">(black)</span> from weekends <span style="color:red">(red)</span>.</p>
-<pre class="r"><code>plot( peter_principle, 
+<pre class="r"><code>plot( peter_principle[,1:2], 
       col=ifelse( wp_wday(peter_principle$date) &gt; 5 , &quot;red&quot;, &quot;black&quot;) ,
       ylim=c(0, max(peter_principle$count)),
       main=&quot;Peter Principle&#39;s Wikipedia Attention&quot;,
       ylab=&quot;views per day&quot;, xlab=&quot;time&quot;)</code></pre>
-<pre><code>## Warning in data.matrix(x): NAs introduced by coercion</code></pre>
-<pre><code>## Warning in data.matrix(x): NAs introduced by coercion</code></pre>
 <pre><code>## Error in UseMethod(&quot;wp_wday&quot;): no applicable method for &#39;wp_wday&#39; applied to an object of class &quot;Date&quot;</code></pre>
 <pre class="r"><code>lines(peter_principle)</code></pre>
 <pre><code>## Warning in data.matrix(x): NAs introduced by coercion</code></pre>
 <pre><code>## Warning in data.matrix(x): NAs introduced by coercion</code></pre>
-<pre><code>## Error in plot.xy(xy.coords(x, y), type = type, ...): plot.new has not been called yet</code></pre>
+<p><img src="README_files/figure-html/unnamed-chunk-4-1.png" /></p>
 <p>Looking at the graph we can conclude that the <em>Peter Principle</em> as a work related phenomenon obviously is something that is most pressing on workdays – or maybe people in general just tend to use their computers less on weekends.</p>
 </div>
 <div id="being-friendly" class="section level2">
@@ -152,20 +150,20 @@ img {
 <li><strong>2</strong>, is the same as <strong>TRUE</strong> but storage takes place via <code>write.csv2()</code></li>
 </ul>
 <p>Let’s try it out by making two subsequent requests to get access statistics for for information on ISIS.</p>
-<pre class="r"><code>file.remove(&quot;wp__Islamic_State_of_Iraq_and_the_Levant__en.csv&quot;)</code></pre>
+<pre class="r"><code>file.remove(&quot;isil.csv&quot;)</code></pre>
 <p>While for the first request the server has to provide information many times, the second request only asks for those months for which we do not have complete data already. Furthermore, <code>wp_trend()</code> informs us that the data has been stored in a CSV-file.</p>
-<pre class="r"><code>isis &lt;- wp_trend(&quot;Islamic_State_of_Iraq_and_the_Levant&quot;, from=&quot;2013-01-01&quot;, friendly=T)</code></pre>
-<pre><code>## Error in wp_trend(&quot;Islamic_State_of_Iraq_and_the_Levant&quot;, from = &quot;2013-01-01&quot;, : unused argument (friendly = T)</code></pre>
+<pre class="r"><code>isil &lt;- wp_trend(&quot;Islamic_State_of_Iraq_and_the_Levant&quot;, from=&quot;2013-01-01&quot;, file=&quot;isil.csv&quot;)</code></pre>
+<pre><code>## Error in wp_load(file): wp_load(): File not found.</code></pre>
 <p>The second request uses this previous saved information to minimize traffic and function execution time. If it downloads new data, it updates the data already stored on disk.</p>
-<pre class="r"><code>isis &lt;- wp_trend(&quot;Islamic_State_of_Iraq_and_the_Levant&quot;, from=&quot;2012-12-01&quot;, friendly=T)</code></pre>
-<pre><code>## Error in wp_trend(&quot;Islamic_State_of_Iraq_and_the_Levant&quot;, from = &quot;2012-12-01&quot;, : unused argument (friendly = T)</code></pre>
+<pre class="r"><code>isil &lt;- wp_trend(&quot;Islamic_State_of_Iraq_and_the_Levant&quot;, from=&quot;2012-12-01&quot;, file=&quot;isil.csv&quot;)</code></pre>
+<pre><code>## Error in wp_load(file): wp_load(): File not found.</code></pre>
 <p>Last but not least, let’s have a look at the data …</p>
-<pre class="r"><code>plot( isis, 
+<pre class="r"><code>plot( isil[,1:2], 
       ylim=c(0, max(isis$count)),
-      main=&quot;ISIS&#39; Wikipedia Attention&quot;,
+      main=&quot;ISIL&#39; Wikipedia Attention&quot;,
       ylab=&quot;views per day&quot;, xlab=&quot;time&quot;,
       type=&quot;l&quot;)</code></pre>
-<pre><code>## Error in plot(isis, ylim = c(0, max(isis$count)), main = &quot;ISIS&#39; Wikipedia Attention&quot;, : object &#39;isis&#39; not found</code></pre>
+<pre><code>## Error in plot(isil[, 1:2], ylim = c(0, max(isis$count)), main = &quot;ISIL&#39; Wikipedia Attention&quot;, : object &#39;isil&#39; not found</code></pre>
 <p>… revealing what most might have already suspected: ISIS is quite a new phenomenon.</p>
 </div>
 <div id="so-what" class="section level2">
@@ -173,8 +171,8 @@ img {
 <div id="cats" class="section level3">
 <h3>Cats</h3>
 <p>First of all we are now able to study cats:</p>
-<pre class="r"><code>cats &lt;- wp_trend(&quot;Cat&quot;, from=&quot;2007-01-01&quot;, friendly=T)</code></pre>
-<pre><code>## Error in wp_trend(&quot;Cat&quot;, from = &quot;2007-01-01&quot;, friendly = T): unused argument (friendly = T)</code></pre>
+<pre class="r"><code>cats &lt;- wp_trend(&quot;Cat&quot;, from=&quot;2007-01-01&quot;, file=&quot;../wp_trend_cache.csv&quot;)</code></pre>
+<pre><code>## Error in wp_load(file): wp_load(): File not found.</code></pre>
 <pre class="r"><code>  # throw out extreme values
   no_outlier &lt;- 
   cats$count &lt; 
@@ -202,30 +200,30 @@ img {
 <div id="ebola" class="section level3">
 <h3>Ebola</h3>
 <p>Or we can study how the desire to inform oneself about Ebola varies over time:</p>
-<pre class="r"><code>ebola_en &lt;- wp_trend(&quot;Ebola&quot;, from=&quot;2008-01-01&quot;, friendly=T)</code></pre>
-<pre><code>## Error in wp_trend(&quot;Ebola&quot;, from = &quot;2008-01-01&quot;, friendly = T): unused argument (friendly = T)</code></pre>
-<pre class="r"><code>plot( ebola_en, 
+<pre class="r"><code>ebola_en &lt;- wp_trend(&quot;Ebola&quot;, from=&quot;2008-01-01&quot;, file=&quot;../wp_trend_cache.csv&quot;)</code></pre>
+<pre><code>## Error in wp_load(file): wp_load(): File not found.</code></pre>
+<pre class="r"><code>plot( ebola_en[,1:2], 
       ylim=c(0, max(ebola_en$count)),
       main=&quot;Ebola&#39;s Wikipedia Attention&quot;,
       ylab=&quot;views per day&quot;, xlab=&quot;time&quot;,
       type=&quot;l&quot;)</code></pre>
-<pre><code>## Error in plot(ebola_en, ylim = c(0, max(ebola_en$count)), main = &quot;Ebola&#39;s Wikipedia Attention&quot;, : object &#39;ebola_en&#39; not found</code></pre>
+<pre><code>## Error in plot(ebola_en[, 1:2], ylim = c(0, max(ebola_en$count)), main = &quot;Ebola&#39;s Wikipedia Attention&quot;, : object &#39;ebola_en&#39; not found</code></pre>
 <pre class="r"><code>lines(ebola_en)</code></pre>
 <pre><code>## Error in lines(ebola_en): object &#39;ebola_en&#39; not found</code></pre>
 <p>Which unsurprisingly peaks in 2014 with the Ebola outbreak in Western Africa.</p>
 <p>Using the language option we can also study if media attentions differ between languages / cultures by comparing the attention patterns for the English Wikipedia with those for the German Wikipedia:</p>
-<pre class="r"><code>ebola_de &lt;- wp_trend(&quot;Ebola&quot;, lang=&quot;de&quot;, from=&quot;2008-01-01&quot;, friendly=T)</code></pre>
-<pre><code>## Error in wp_trend(&quot;Ebola&quot;, lang = &quot;de&quot;, from = &quot;2008-01-01&quot;, friendly = T): unused argument (friendly = T)</code></pre>
-<pre class="r"><code>plot( ebola_en, 
+<pre class="r"><code>ebola_de &lt;- wp_trend(&quot;Ebola&quot;, lang=&quot;de&quot;, from=&quot;2008-01-01&quot;, file=&quot;../wp_trend_cache.csv&quot;)</code></pre>
+<pre><code>## Error in wp_load(file): wp_load(): File not found.</code></pre>
+<pre class="r"><code>plot( ebola_en[,1:2], 
       ylim=c(0, max(ebola_en$count)),
       main=&quot;Ebola&#39;s Wikipedia Attention&quot;,
       ylab=&quot;views per day&quot;, xlab=&quot;time&quot;,
       type=&quot;n&quot;)</code></pre>
-<pre><code>## Error in plot(ebola_en, ylim = c(0, max(ebola_en$count)), main = &quot;Ebola&#39;s Wikipedia Attention&quot;, : object &#39;ebola_en&#39; not found</code></pre>
-<pre class="r"><code>lines(ebola_en, col=&quot;red&quot;)</code></pre>
-<pre><code>## Error in lines(ebola_en, col = &quot;red&quot;): object &#39;ebola_en&#39; not found</code></pre>
-<pre class="r"><code>lines(ebola_de, col=rgb(0,0,0,0.7))</code></pre>
-<pre><code>## Error in lines(ebola_de, col = rgb(0, 0, 0, 0.7)): object &#39;ebola_de&#39; not found</code></pre>
+<pre><code>## Error in plot(ebola_en[, 1:2], ylim = c(0, max(ebola_en$count)), main = &quot;Ebola&#39;s Wikipedia Attention&quot;, : object &#39;ebola_en&#39; not found</code></pre>
+<pre class="r"><code>lines(ebola_en[,1:2], col=&quot;red&quot;)</code></pre>
+<pre><code>## Error in lines(ebola_en[, 1:2], col = &quot;red&quot;): object &#39;ebola_en&#39; not found</code></pre>
+<pre class="r"><code>lines(ebola_de[,1:2], col=rgb(0,0,0,0.7))</code></pre>
+<pre><code>## Error in lines(ebola_de[, 1:2], col = rgb(0, 0, 0, 0.7)): object &#39;ebola_de&#39; not found</code></pre>
 <pre class="r"><code>legend(&quot;topleft&quot;, 
        c(&quot;en&quot;, &quot;de&quot;), 
        col=c(&quot;red&quot;, rgb(0,0,0,0.7)),

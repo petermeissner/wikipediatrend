@@ -83,9 +83,9 @@ peter_principle <- wp_trend()
 ## D:\Users\Peter\AppData\Local\Temp\Rtmpi4DSLf\wp_trend_cache_21dc1ea2367d.csv
 ```
 
-The function informs us that using the friendly option might be a good idea and shows us which URLs it used to retrieve the information we were asking for. 
+Calling the function results in less downloads because those months already complete are not downloded again. Instead it is complemented by the data already stored within the cache. 
 
-The function's return is a data frame with two variables *date* and *count*:
+The function's return is a data frame with six variables *date*, *count*, *project*, *title*, *rank*, *month* paralleling the data provided by the stats.grok.se server:
 
 
 ```r
@@ -122,19 +122,11 @@ We can use this information to visualize the page view trend. Using `wp_wday()` 
 
 
 ```r
-plot( peter_principle, 
+plot( peter_principle[,1:2], 
       col=ifelse( wp_wday(peter_principle$date) > 5 , "red", "black") ,
       ylim=c(0, max(peter_principle$count)),
       main="Peter Principle's Wikipedia Attention",
       ylab="views per day", xlab="time")
-```
-
-```
-## Warning in data.matrix(x): NAs introduced by coercion
-```
-
-```
-## Warning in data.matrix(x): NAs introduced by coercion
 ```
 
 ```
@@ -153,9 +145,7 @@ lines(peter_principle)
 ## Warning in data.matrix(x): NAs introduced by coercion
 ```
 
-```
-## Error in plot.xy(xy.coords(x, y), type = type, ...): plot.new has not been called yet
-```
+![](README_files/figure-html/unnamed-chunk-4-1.png) 
 
 Looking at the graph we can conclude that the *Peter Principle* as a work related phenomenon obviously is something that is most pressing on workdays -- or maybe people in general just tend to use their computers less on weekends.
 
@@ -180,7 +170,7 @@ Let's try it out by making two subsequent requests to get access statistics for 
 
 
 ```r
-file.remove("wp__Islamic_State_of_Iraq_and_the_Levant__en.csv")
+file.remove("isil.csv")
 ```
 
 While for the first request the server has to provide information many times, the second request only asks for those months for which we do not have complete data already. Furthermore, `wp_trend()` informs us that the data has been stored in a CSV-file.
@@ -189,11 +179,11 @@ While for the first request the server has to provide information many times, th
 
 
 ```r
-isis <- wp_trend("Islamic_State_of_Iraq_and_the_Levant", from="2013-01-01", friendly=T)
+isil <- wp_trend("Islamic_State_of_Iraq_and_the_Levant", from="2013-01-01", file="isil.csv")
 ```
 
 ```
-## Error in wp_trend("Islamic_State_of_Iraq_and_the_Levant", from = "2013-01-01", : unused argument (friendly = T)
+## Error in wp_load(file): wp_load(): File not found.
 ```
 
 The second request uses this previous saved information to minimize traffic and function execution time. If it downloads new data, it updates the data already stored on disk.
@@ -201,26 +191,26 @@ The second request uses this previous saved information to minimize traffic and 
 
 
 ```r
-isis <- wp_trend("Islamic_State_of_Iraq_and_the_Levant", from="2012-12-01", friendly=T)
+isil <- wp_trend("Islamic_State_of_Iraq_and_the_Levant", from="2012-12-01", file="isil.csv")
 ```
 
 ```
-## Error in wp_trend("Islamic_State_of_Iraq_and_the_Levant", from = "2012-12-01", : unused argument (friendly = T)
+## Error in wp_load(file): wp_load(): File not found.
 ```
 
 Last but not least, let's have a look at the data ... 
 
 
 ```r
-plot( isis, 
+plot( isil[,1:2], 
       ylim=c(0, max(isis$count)),
-      main="ISIS' Wikipedia Attention",
+      main="ISIL' Wikipedia Attention",
       ylab="views per day", xlab="time",
       type="l")
 ```
 
 ```
-## Error in plot(isis, ylim = c(0, max(isis$count)), main = "ISIS' Wikipedia Attention", : object 'isis' not found
+## Error in plot(isil[, 1:2], ylim = c(0, max(isis$count)), main = "ISIL' Wikipedia Attention", : object 'isil' not found
 ```
 
 ... revealing what most might have already suspected: ISIS is quite a new phenomenon. 
@@ -234,11 +224,11 @@ First of all we are now able to study cats:
 
 
 ```r
-cats <- wp_trend("Cat", from="2007-01-01", friendly=T)
+cats <- wp_trend("Cat", from="2007-01-01", file="../wp_trend_cache.csv")
 ```
 
 ```
-## Error in wp_trend("Cat", from = "2007-01-01", friendly = T): unused argument (friendly = T)
+## Error in wp_load(file): wp_load(): File not found.
 ```
 
 ```r
@@ -308,15 +298,15 @@ Or we can study how the desire to inform oneself about Ebola varies over time:
 
 
 ```r
-ebola_en <- wp_trend("Ebola", from="2008-01-01", friendly=T)
+ebola_en <- wp_trend("Ebola", from="2008-01-01", file="../wp_trend_cache.csv")
 ```
 
 ```
-## Error in wp_trend("Ebola", from = "2008-01-01", friendly = T): unused argument (friendly = T)
+## Error in wp_load(file): wp_load(): File not found.
 ```
 
 ```r
-plot( ebola_en, 
+plot( ebola_en[,1:2], 
       ylim=c(0, max(ebola_en$count)),
       main="Ebola's Wikipedia Attention",
       ylab="views per day", xlab="time",
@@ -324,7 +314,7 @@ plot( ebola_en,
 ```
 
 ```
-## Error in plot(ebola_en, ylim = c(0, max(ebola_en$count)), main = "Ebola's Wikipedia Attention", : object 'ebola_en' not found
+## Error in plot(ebola_en[, 1:2], ylim = c(0, max(ebola_en$count)), main = "Ebola's Wikipedia Attention", : object 'ebola_en' not found
 ```
 
 ```r
@@ -342,16 +332,16 @@ Using the language option we can also study if media attentions differ between l
 
 
 ```r
-ebola_de <- wp_trend("Ebola", lang="de", from="2008-01-01", friendly=T)
+ebola_de <- wp_trend("Ebola", lang="de", from="2008-01-01", file="../wp_trend_cache.csv")
 ```
 
 ```
-## Error in wp_trend("Ebola", lang = "de", from = "2008-01-01", friendly = T): unused argument (friendly = T)
+## Error in wp_load(file): wp_load(): File not found.
 ```
 
 
 ```r
-plot( ebola_en, 
+plot( ebola_en[,1:2], 
       ylim=c(0, max(ebola_en$count)),
       main="Ebola's Wikipedia Attention",
       ylab="views per day", xlab="time",
@@ -359,23 +349,23 @@ plot( ebola_en,
 ```
 
 ```
-## Error in plot(ebola_en, ylim = c(0, max(ebola_en$count)), main = "Ebola's Wikipedia Attention", : object 'ebola_en' not found
+## Error in plot(ebola_en[, 1:2], ylim = c(0, max(ebola_en$count)), main = "Ebola's Wikipedia Attention", : object 'ebola_en' not found
 ```
 
 ```r
-lines(ebola_en, col="red")
+lines(ebola_en[,1:2], col="red")
 ```
 
 ```
-## Error in lines(ebola_en, col = "red"): object 'ebola_en' not found
+## Error in lines(ebola_en[, 1:2], col = "red"): object 'ebola_en' not found
 ```
 
 ```r
-lines(ebola_de, col=rgb(0,0,0,0.7))
+lines(ebola_de[,1:2], col=rgb(0,0,0,0.7))
 ```
 
 ```
-## Error in lines(ebola_de, col = rgb(0, 0, 0, 0.7)): object 'ebola_de' not found
+## Error in lines(ebola_de[, 1:2], col = rgb(0, 0, 0, 0.7)): object 'ebola_de' not found
 ```
 
 ```r

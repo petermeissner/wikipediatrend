@@ -7,7 +7,10 @@
 #' @param timestamp Some sort of timestamp e.g. of class POSIXlt, POSIXct, Date,
 #'   or character. If the option is of type character it should be in the form
 #'   of yyyy-mm-dd.
-#'   
+#'    
+#' 
+#' @export 
+#' 
 
 wp_month          <- function(timestamp) UseMethod("wp_month")
 

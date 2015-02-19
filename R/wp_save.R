@@ -8,13 +8,13 @@
 #'   passed down from \code{wp_trend()})
 #' @param resname  the name serving to save the data (option is passed down from
 #'   \code{wp_trend()})
+#'    
+#' 
+#' @export 
+#' 
 
-wp_friendly_save <- function(res, friendly, resname){
-  if ( friendly==1 | friendly==2 ) {
-    if ( friendly==1 ) write.csv(res, resname, row.names=FALSE)
-    if ( friendly==2 ) write.csv2(res, resname, row.names=FALSE)
-    message(paste0("\nResults written to:\n", getwd(), "/", resname ,"\n"))
-    return( paste0(getwd(),"/",resname) )
-  }
-  return(FALSE)
+wp_save <- function(res, file){
+    write.csv(res, file, row.names=FALSE)
+    message(paste0("\nResults written to:\n", file ,"\n"))
+    return( file )
 }

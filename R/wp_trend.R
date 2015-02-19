@@ -45,87 +45,60 @@
 #' wp_trend(page        = "Main_Page", 
 #'          from        = "2014-11-01", 
 #'          to          = "2014-11-30", 
-#'          lang        = "en", 
-#'          friendly    = FALSE, 
-#'          requestFrom = "wp.trend.tester at wptt.com",
-#'          userAgent   =   TRUE)
+#'          lang        = "en",
+#'          file        = ""
+#'          )
+#'          
+#' @export
 
 wp_trend <- function( page        = "Peter_principle", 
                       from        = Sys.Date()-30, 
                       to          = Sys.Date(),
                       lang        = "en", 
-                      friendly    = F
+                      file        = ""
 ){
-  # encourage being freindly
-  if ( !friendly ) {
-    message("
-    With option 'friendly' set to FALSE subsequent requests 
-    of the same wikipedia-entry cause the server -- which is kindly 
-    providing information for you -- to work hard to get the same 
-    stuff over and over and over and over again. Do not bore 
-    the server - be friendly. 
-    
-    See: '?wp_trend'
-    ")
+  # make first letter of page title always capital
+  page <- stringr::str_replace( 
+            page, 
+            "^.", 
+            substring(toupper(page),1,1) 
+          )
+  
+  # caching to user defined file or to session-long tempfile
+  if(file == ""){
+    file = .wp_trend_cache
   }
-  # extra options for HTTP request
-  standardHeader <- list( 'user-agent' = paste0( 
-                            R.version$version.string, " ",
-                            "wikipediatrend/", packageVersion("wikipediatrend"), " ",
-                            "curl/", RCurl::curlVersion()$version, " ",
-                            "Rcurl/", packageVersion("RCurl"), " ") 
-                        )
-
-  # file name for beeing friendly
-  resname <- paste0("wp", "__", page, "__", lang, ".csv")
   
   # check dates
-  tmp  <- wp_check_date_inputs(from, to)
-  from <- tmp$from
-  to   <- tmp$to
+  from <- wp_check_date_inputs(from, to)$from
+  to   <- wp_check_date_inputs(from, to)$to
   
-  # beeing friendly
-  friendly_data <- wp_friendly_load(resname, friendly)
+  # loading cached data
+  cache <- wp_load(file)
   
-  # checking for months with missing data
-  dates_day <- wp_expand_ts(from, to, "day")
-  not_in_fd <- !(dates_day %in% friendly_data$date)
-  dates_url <- unique(wp_yearmonth(dates_day[ not_in_fd ]))
+  # prepare URLs
+  urls <- wp_prepare_urls(page=page, 
+                          from=from, 
+                          to=to, 
+                          lang=lang, 
+                          cachedata=cache)
   
-  # prepare urls
-  urls  <- paste( "http://stats.grok.se/json",
-                  lang, dates_url, page, sep="/")
-  if(all(dates_url=="")) urls  <- NULL
-  
-  # chunking urls
-  urlchunks <- chunk(urls, 5)
-  
-  # make http requests
-  jsons <- list()
-  for(i in seq_along(urlchunks)){
-    jsons <- c(
-      jsons, 
-      RCurl::getURL(url = urlchunks[[i]], httpheader = standardHeader)
-     )
-    message(paste(urlchunks[[i]], collapse="\n"))
-    Sys.sleep(1)
-  }
+  # download data 
+  jsons <- wp_download_data(urls)
   
   # extract data
-  res <- wp_extract_data(jsons)
+  res <- wp_jsons_to_df(jsons)
   
   # combine new data and old data
-  not_in_res <- !(friendly_data$date %in% res$date)
-  res <- rbind(res, friendly_data[not_in_res,])
-  res <- res[order(res$date), ]
+  res <- wp_join_data(res, cache)
   
-  # beeing friendly: saving results to file for possible later use
-  wp_friendly_save(res, friendly, resname)
+  # saving data in cache or file
+  wp_save(res, file)
 
   # return
   res <- res[ res$date <= to & res$date >= from ,]
   rownames(res) <- NULL
-  return(res)
+  invisible(res)
 }
 
 

@@ -9,6 +9,9 @@
 #'   of yyyy-mm-dd.
 #'   
 #'   
+#' 
+#' @export 
+#'  
 
 wp_day          <- function(timestamp) UseMethod("wp_day")
 

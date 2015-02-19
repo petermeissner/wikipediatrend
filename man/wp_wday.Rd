@@ -18,7 +18,7 @@ wp_wday(timestamp, startmonday = T)
   of yyyy-mm-dd.}
 
 \item{startmonday}{whether the week should start on Monday (TRUE, the
-default) or it should start on Sunday (FALSE)}
+  default) or it should start on Sunday (FALSE)}
 }
 \description{
 Function to extract the day from a timestamp of e.g. class POSIXlt, POSIXct,

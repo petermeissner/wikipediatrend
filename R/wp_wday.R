@@ -10,6 +10,9 @@
 #'   
 #' @param startmonday whether the week should start on Monday (TRUE, the
 #'   default) or it should start on Sunday (FALSE)
+#'  
+#' 
+#' @export 
 #'   
 
 

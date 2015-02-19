@@ -11,3 +11,24 @@ versions of R, wikipediatrend, curl as well as RCurl
 
 - wp_trend() now checks date inputs better for logical inconsistencies 
 [see: wp_check_date_inputs()]
+
+- wp_trend() now by default caches data retrievals in a temporary file
+
+- wp_trend(file="save.csv") now allows to specify a file where retrievals are 
+stored (this will always add to the already existing data)
+
+- wp_trend() now allows to specify more than one page and/or language at a 
+time. data than will be retrieved for every combination of page/language/day
+
+- .wp_trend_cache stores the path to the temporary file (last for one session) 
+that is used by the package whenever no file is specified by user
+
+- while wp_trend() now (invisibly) returns only data from the current request 
+at hand the new function wp_cache() will retrieve data from cache files (by 
+default / if no file name is specified it retrieves data from 
+.wp_trend_cache) 
+
+- the data returned by wp_trend(), cached in cache-file, retrieved by 
+wp_cache() does consist of more variables: date, count, project, title,
+rank, month
+

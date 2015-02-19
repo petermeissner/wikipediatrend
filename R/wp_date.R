@@ -18,6 +18,9 @@
 #' @param origin See \code{?as.Date}
 #' @param tz See \code{?as.Date}
 #' @param ... See \code{?as.Date}
+#' 
+#' @export 
+#' 
 
 wp_date <- function (x, ...)
 {
@@ -28,6 +31,9 @@ wp_date <- function (x, ...)
 #' @describeIn wp_date Difference to \code{as.Date.character()}: Failing to
 #'   parse the date, \code{wp_date()} will give return a warning and \code{NA}
 #'   instead of killing itself with an error.
+#' 
+#' @export 
+#' 
 wp_date.character <- function (x, format = "", ...) 
 {
   if ( format=="" ) {
@@ -41,6 +47,9 @@ wp_date.character <- function (x, format = "", ...)
 
 
 #' @describeIn wp_date same as \code{as.Date()}
+#' 
+#' @export 
+#' 
 wp_date.default <- function (x, ...)
 {
   if (inherits(x, "Date")) 
@@ -56,6 +65,9 @@ wp_date.default <- function (x, ...)
 #'   origin is needed but not supplied isntead of breaking, \code{wp_date()} 
 #'   will raise a warning and proceed by assuming "1970-01-01" to be the origin 
 #'   instead of killing itself with an error.
+#' 
+#' @export 
+#' 
 wp_date.numeric <- function (x, origin, ...) 
 {
   if (missing(origin)) 
@@ -75,7 +87,10 @@ wp_date.date <- function (x, ...)
 }
 
 
-#' @describeIn wp_date  same as \code{as.Date()}
+#' @describeIn wp_date  same as \code{as.Date()} 
+#' 
+#' @export 
+#' 
 wp_date.dates <- function (x, ...) 
 {
   if (inherits(x, "dates")) {
@@ -90,14 +105,20 @@ wp_date.dates <- function (x, ...)
 }
 
 
-#' @describeIn wp_date  same as \code{as.Date()}
+#' @describeIn wp_date  same as \code{as.Date()} 
+#' 
+#' @export 
+#' 
 wp_date.factor <- function (x, ...) 
 {
   wp_date(as.character(x), ...) 
 }
 
 
-#' @describeIn wp_date  same as \code{as.Date()}
+#' @describeIn wp_date  same as \code{as.Date()} 
+#' 
+#' @export 
+#' 
 wp_date.POSIXct    <- function (x, tz = "UTC", ...) 
 {
   if (tz == "UTC") {
@@ -109,7 +130,10 @@ wp_date.POSIXct    <- function (x, tz = "UTC", ...)
 }
 
 
-#' @describeIn wp_date  using \code{as.Date()}
+#' @describeIn wp_date  using \code{as.Date()} 
+#' 
+#' @export 
+#' 
 wp_date.POSIXlt <- function (x, ...) 
 {
   as.Date(x)

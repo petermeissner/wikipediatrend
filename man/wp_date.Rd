@@ -58,15 +58,15 @@ and are not recommended for any other than wikipediatrend internal use.
 \section{Methods (by class)}{
 \itemize{
 \item \code{character}: Difference to \code{as.Date.character()}: Failing to
-parse the date, \code{wp_date()} will give return a warning and \code{NA}
-instead of killing itself with an error.
+  parse the date, \code{wp_date()} will give return a warning and \code{NA}
+  instead of killing itself with an error.
 
 \item \code{default}: same as \code{as.Date()}
 
 \item \code{numeric}: Difference to \code{as.Date.character()}: Whenever an
-origin is needed but not supplied isntead of breaking, \code{wp_date()}
-will raise a warning and proceed by assuming "1970-01-01" to be the origin
-instead of killing itself with an error.
+  origin is needed but not supplied isntead of breaking, \code{wp_date()}
+  will raise a warning and proceed by assuming "1970-01-01" to be the origin
+  instead of killing itself with an error.
 
 \item \code{date}: same as \code{as.Date()}
 

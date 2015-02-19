@@ -14,8 +14,8 @@ wp_year(timestamp)
 }
 \arguments{
 \item{timestamp}{Some sort of timestamp e.g. of class POSIXlt, POSIXct, Date,
-or character. If the option is of type character it should be in the form
-of yyyy-mm-dd.}
+  or character. If the option is of type character it should be in the form
+  of yyyy-mm-dd.}
 }
 \description{
 Function to extract the year from a timestamp of e.g. class POSIXlt, POSIXct, Date, or character. If the option is of type character it should be in the form of yyyy-mm-dd.

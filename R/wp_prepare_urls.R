@@ -15,8 +15,8 @@ wp_prepare_urls <- function(page, from, to, lang, cachedata=NULL){
   # comparing data in cache with data requested
   cache_dpoints   <-  unique(
                         paste(cachedata$date, 
-                              cachedata$project, 
-                              cachedata$title)
+                              cachedata$lang, 
+                              cachedata$page)
                       )
   request_comb    <- expand.grid(timeframe, lang, page, stringsAsFactors=F)
   names(request_comb) <- c("date", "lang", "page")

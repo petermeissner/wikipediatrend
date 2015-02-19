@@ -13,8 +13,8 @@ wp_jsons_to_df <- function(wp_json){
     tmp         <- jsonlite::fromJSON(wp_json)
     tmp_data <- data.frame( date    = wp_date( names(tmp$daily_views) ), 
                             count   = unlist(tmp$daily_views),
-                            project = tmp$project,
-                            title   = tmp$title,
+                            lang    = tmp$project,
+                            page    = tmp$title,
                             rank    = tmp$rank,
                             month   = tmp$month,
                             stringsAsFactors=F)
@@ -22,7 +22,7 @@ wp_jsons_to_df <- function(wp_json){
   }
   # case of no data
   if( length(wp_json)==0 ){
-    res <- data.frame(date=NULL, count=NULL, project=NULL, title=NULL)
+    res <- data.frame()
     return(res)
   }
   # case of only one json

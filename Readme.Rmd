@@ -40,38 +40,47 @@ A single request results in data for a specific entry, from one of Wikipedia's d
 
 ## A first tutorial
 
-```{r}
+```{r, error=TRUE}
 require(wikipediatrend)
 ```
 
 The workhorse of the package is the `wp_trend()` function with several arguments:
 
 - **page**        [ `"Peter_principle"` ]: <br>
-... here goes the name of the page
+... here goes the name of the page (might also be a vector of page names, e.g.: `c("cat","dog")`)
+
 - **from**        [ `Sys.Date()-30` ]: <br>
 ... starting date of the timespan to be considered
+
 - **to**          [ `Sys.Date()` ]: <br>
 ... end date of the timespan to be considered
-- **lang**        [ `"en"` ]: <br>
-... language of the page
-- **friendly**    [ `F` ]: <br>
-... should `wp_trend()` try minimize workload on behalf of `stats.grok.se`
-- **requestFrom** [ `"anonymous"` ]: <br>
-... do you care to identify yourself towards `stats.grok.se`
-- **userAgent** [ `FALSE` ] <br>
-... do you care to send information on your plattform, R version and the package used to make server requests
 
+- **lang**        [ `"en"` ]: <br>
+... language of the page (might also be a vector of languages, e.g.: `c("de","en")`)
+
+- **file**        [ `.wp_trend_cache` ]: <br>
+... file to be used as cache / data storage (By default all data retreived will be stored in a temporary file. If a file name is provided, date will be stored there as CSV. Data will always be appended to an already existing data storage file.)
+
+
+<!-- thrown out since version 0.3.xxx
+  - **friendly**    [ `F` ]: <br>
+  ... should `wp_trend()` try minimize workload on behalf of `stats.grok.se`
+  - **requestFrom** [ `"anonymous"` ]: <br>
+  ... do you care to identify yourself towards `stats.grok.se`
+  - **userAgent** [ `FALSE` ] <br>
+  ... do you care to send information on your plattform, R version and the package used to make server requests
+-->
 
 Let's have a first run using the defaults:
-```{r, cache=TRUE}
+```{r, cache=TRUE, error=TRUE}
 peter_principle <- wp_trend()
 ```
 
-The function informs us that using the friendly option might be a good idea and shows us which URLs it used to retrieve the information we were asking for. 
+Calling the function results in less downloads because those months already complete are not downloded again. Instead it is complemented by the data already stored within the cache. 
 
-The function's return is a data frame with two variables *date* and *count*:
+The function's return is a data frame with six variables *date*, *count*, *project*, *title*, *rank*, *month* paralleling the data provided by the stats.grok.se server:
 
-```{r, cache=TRUE}
+```{r, cache=TRUE, error=TRUE}
 dim(peter_principle)
 class(peter_principle)
 head(peter_principle)
@@ -79,7 +88,7 @@ head(peter_principle)
 
 We can use this information to visualize the page view trend. Using `wp_wday()` we can furthermore discriminate weekdays <span style="color:black">(black)</span> from weekends <span style="color:red">(red)</span>. 
 
-```{r, cache=TRUE}
+```{r, cache=TRUE, error=TRUE}
 plot( peter_principle, 
       col=ifelse( wp_wday(peter_principle$date) > 5 , "red", "black") ,
       ylim=c(0, max(peter_principle$count)),
@@ -117,20 +126,20 @@ While for the first request the server has to provide information many times, th
 
 
 
-```{r, cache=FALSE}
+```{r, cache=FALSE, error=TRUE}
 isis <- wp_trend("Islamic_State_of_Iraq_and_the_Levant", from="2013-01-01", friendly=T)
 ```
 
 The second request uses this previous saved information to minimize traffic and function execution time. If it downloads new data, it updates the data already stored on disk.
 
 
-```{r, cache=FALSE}
+```{r, cache=FALSE, error=TRUE}
 isis <- wp_trend("Islamic_State_of_Iraq_and_the_Levant", from="2012-12-01", friendly=T)
 ```
 
 Last but not least, let's have a look at the data ... 
 
-```{r, cache=FALSE}
+```{r, cache=FALSE, error=TRUE}
 plot( isis, 
       ylim=c(0, max(isis$count)),
       main="ISIS' Wikipedia Attention",
@@ -147,7 +156,7 @@ plot( isis,
 
 First of all we are now able to study cats:
 
-```{r, cache=FALSE}
+```{r, cache=FALSE, error=TRUE}
 cats <- wp_trend("Cat", from="2007-01-01", friendly=T)
   # throw out extreme values
   no_outlier <- 
@@ -174,7 +183,7 @@ lines(cats_smooth,col=rgb(1,0,0,0.5),lwd=5)
 
 Or we can study how the desire to inform oneself about Ebola varies over time:
 
-```{r, cache=FALSE}
+```{r, cache=FALSE, error=TRUE}
 ebola_en <- wp_trend("Ebola", from="2008-01-01", friendly=T)
 plot( ebola_en, 
       ylim=c(0, max(ebola_en$count)),
@@ -189,11 +198,11 @@ Which unsurprisingly peaks in 2014 with the Ebola outbreak in Western Africa.
 Using the language option we can also study if media attentions differ between languages / cultures by comparing the attention patterns for the English Wikipedia with those for the German Wikipedia:
 
 
-```{r, cache=FALSE}
+```{r, cache=FALSE, error=TRUE}
 ebola_de <- wp_trend("Ebola", lang="de", from="2008-01-01", friendly=T)
 ```
 
-```{r, cache=FALSE}
+```{r, cache=FALSE, error=TRUE}
 plot( ebola_en, 
       ylim=c(0, max(ebola_en$count)),
       main="Ebola's Wikipedia Attention",

@@ -1,8 +1,5 @@
 #' Function for getting access statistics for wikipedia pages
 #' 
-#' @param requestFrom This parameter sends an identifier (i.e. your email 
-#'   address to contact you if necessary) to stats.grok.se (the server that 
-#'   kindly provides the information you request).
 #'   
 #' @param page The name of the Wikipedia page as to be found in the URL to the 
 #'   wikipedia article. If e.g. the URL is: 
@@ -26,20 +23,7 @@
 #'   character. If the option is of type character it should be in the form of 
 #'   yyyy-mm-dd.
 #'   
-#' @param friendly Either \code{TRUE}, \code{FALSE}, \code{1} or \code{2} This 
-#'   option causes twofold. First, if the value is set to TRUE, 1, or 2 the 
-#'   results of the request are saved in the current working directory in a CSV 
-#'   file with name scheme: \code{wp__[page name]_[country code].csv}. Second, 
-#'   the function will look if perhaps a previously saved result is available to
-#'   be used to only download those information that are still missing instead 
-#'   of the whole timespan.
-#'   
-#'   For storage on disk \code{write.csv()} (friendly=TRUE or friendly=1) and 
-#'   \code{write.csv2()} (friendly=2) are used.
-#'   
-#' @param userAgent Whether or not to send the following information along your
-#'   requests: \code{paste( "wikipediatrend running on: ", R.version$platform,
-#'   R.version$version.string, sep=", ")}
+#' @param file Where to cache/store the retrieved data? By default a temporary file is used for as long as the R session takes place. The data is stored in CSV format. If an already existing file is used for storage, the old data will not be deleted but instead new data will be added to this file. 
 #'   
 #' @examples 
 #' wp_trend(page        = "Main_Page", 
@@ -51,23 +35,20 @@
 #'          
 #' @export
 
-wp_trend <- function( page        = "Peter_principle", 
+wp_trend <- function( page , 
                       from        = Sys.Date()-30, 
                       to          = Sys.Date(),
                       lang        = "en", 
-                      file        = ""
+                      file        = .wp_trend_cache
 ){
+  stopifnot(grepl("\\w",page))
+  
   # make first letter of page title always capital
   page <- stringr::str_replace( 
             page, 
             "^.", 
             substring(toupper(page),1,1) 
           )
-  
-  # caching to user defined file or to session-long tempfile
-  if(file == ""){
-    file = .wp_trend_cache
-  }
   
   # check dates
   from <- wp_check_date_inputs(from, to)$from
@@ -96,7 +77,10 @@ wp_trend <- function( page        = "Peter_principle",
   wp_save(res, file)
 
   # return
-  res <- res[ res$date <= to & res$date >= from ,]
+  res <- res[ res$date <= to & 
+              res$date >= from &
+              res$lang %in% lang &
+              res$page %in% page, ]
   rownames(res) <- NULL
   invisible(res)
 }

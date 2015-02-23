@@ -18,8 +18,13 @@
 
 wp_wday         <- function(timestamp, startmonday=T) UseMethod("wp_wday")
 
+
 #' @describeIn wp_wday
+#'  @export 
+#'  
+
 wp_wday.POSIXlt  <- function(timestamp, startmonday=T){
+  if( is.null(timestamp) ) return(NULL)
   if(startmonday){
     tmp <- timestamp$wday
     tmp[tmp==0] <- 7
@@ -30,7 +35,12 @@ wp_wday.POSIXlt  <- function(timestamp, startmonday=T){
   }
 }
 
+
+
 #' @describeIn wp_wday
+#' @export 
+#' 
+
 wp_wday.default  <- function(timestamp, startmonday=T){
   timestamp <- as.POSIXlt(wp_date(timestamp))
   if(startmonday){

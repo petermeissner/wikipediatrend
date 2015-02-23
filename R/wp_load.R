@@ -22,6 +22,6 @@ wp_load <- function(file=.wp_trend_cache){
                       month=NULL)
     return(dat)
   }
-  stop("wp_load(): File not found.")
+  return(data.frame())
 }
 

@@ -50,8 +50,10 @@ wp_date.character <- function (x, format = "", ...)
 #' 
 #' @export 
 #' 
+
 wp_date.default <- function (x, ...)
 {
+  if( is.null(x) ) return(NULL)
   if (inherits(x, "Date")) 
     return(x)
   if (is.logical(x) && all(is.na(x))) 
@@ -68,6 +70,7 @@ wp_date.default <- function (x, ...)
 #' 
 #' @export 
 #' 
+
 wp_date.numeric <- function (x, origin, ...) 
 {
   if (missing(origin)) 

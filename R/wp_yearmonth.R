@@ -8,6 +8,7 @@
 #' 
 
 wp_yearmonth <- function(timestamp){
+  if( is.null(timestamp) ) return(NULL)
   paste0(
     wp_year(wp_date(timestamp)), 
     stringr::str_pad(wp_month(wp_date(timestamp)), 2, "left", 0)

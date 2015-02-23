@@ -10,7 +10,16 @@
 wp_jsons_to_df <- function(wp_json){
   # function doing the extraction work
   worker <- function(wp_json){
-    tmp         <- jsonlite::fromJSON(wp_json)
+    tmp <- 
+      tryCatch(
+        {
+          jsonlite::fromJSON(wp_json)
+        }, 
+          error=function(e){
+            warning("[wp_jsons_to_df()]\nCould not extract data from server response. Data for one month will be missing.")
+            data.frame()
+          }
+      )
     tmp_data <- data.frame( date    = wp_date( names(tmp$daily_views) ), 
                             count   = unlist(tmp$daily_views),
                             lang    = tmp$project,
@@ -28,7 +37,7 @@ wp_jsons_to_df <- function(wp_json){
   # case of only one json
   if( length(wp_json)==1 & is.character(wp_json[[1]])){
     res <- worker(wp_json[[1]])
-    res <- res[!is.na(res$date),]
+    suppressWarnings(res <- res[!is.na(res$date),])
     return(res)
   }
   # case of multiple jsons
@@ -36,7 +45,7 @@ wp_jsons_to_df <- function(wp_json){
     tmp <- lapply(wp_json, worker)
     res <- do.call(rbind, tmp)
     rownames(res) <- NULL
-    res <- res[!is.na(res$date),]
+    suppressWarnings(res <- res[!is.na(res$date),])
     return(res)
   }
 }

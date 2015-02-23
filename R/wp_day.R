@@ -10,17 +10,28 @@
 #'   
 #'   
 #' 
-#' @export 
+#' @export
 #'  
 
-wp_day          <- function(timestamp) UseMethod("wp_day")
+wp_day          <- function(timestamp){
+  UseMethod("wp_day")
+}
 
 #' @describeIn wp_day extract day from timestamp
+#' 
+#' @export
+#' 
+ 
 wp_day.POSIXlt  <- function(timestamp) {
   timestamp$mday
 }
 
 #' @describeIn wp_day extract day from timestamp
+#' 
+#' @export
+#' 
+
 wp_day.default  <- function(timestamp) {
+  if( is.null(timestamp) ) return(NULL)
   as.POSIXlt(wp_date(timestamp))$mday
 }

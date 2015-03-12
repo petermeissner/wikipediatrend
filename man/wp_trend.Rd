@@ -5,7 +5,7 @@
 \title{Function for getting access statistics for wikipedia pages}
 \usage{
 wp_trend(page, from = Sys.Date() - 30, to = Sys.Date(), lang = "en",
-  file = .wp_trend_cache)
+  file = wp_cache_file())
 }
 \arguments{
 \item{page}{The name of the Wikipedia page as to be found in the URL to the
@@ -36,11 +36,12 @@ wp_trend(page, from = Sys.Date() - 30, to = Sys.Date(), lang = "en",
 Function for getting access statistics for wikipedia pages
 }
 \examples{
+library(wikipediatrend)
 wp_trend(page        = "Main_Page",
          from        = "2014-11-01",
          to          = "2014-11-30",
          lang        = "en",
-         file        = ""
+         file        = tempfile()
          )
 }
 

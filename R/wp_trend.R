@@ -26,11 +26,12 @@
 #' @param file Where to cache/store the retrieved data? By default a temporary file is used for as long as the R session takes place. The data is stored in CSV format. If an already existing file is used for storage, the old data will not be deleted but instead new data will be added to this file. 
 #'   
 #' @examples 
+#' library(wikipediatrend)
 #' wp_trend(page        = "Main_Page", 
 #'          from        = "2014-11-01", 
 #'          to          = "2014-11-30", 
 #'          lang        = "en",
-#'          file        = ""
+#'          file        = tempfile()
 #'          )
 #'          
 #' @export
@@ -39,7 +40,7 @@ wp_trend <- function( page ,
                       from        = Sys.Date()-30, 
                       to          = Sys.Date(),
                       lang        = "en", 
-                      file        = .wp_trend_cache
+                      file        = wp_cache_file()
 ){
   stopifnot(grepl("\\w",page))
   

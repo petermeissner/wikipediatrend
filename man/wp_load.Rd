@@ -4,14 +4,11 @@
 \alias{wp_load}
 \title{Helper function for wp_trend that loads previous saved wp_trend results}
 \usage{
-wp_load(file = .wp_trend_cache)
+wp_load(file = wp_cache_file())
 }
 \arguments{
-\item{resname}{name of the file from which previous \code{wp_trend()}
-results should be loaded (option is passed down from \code{wp_trend()})}
-
-\item{friendly}{should previous results be ignored or loaded (option is
-  passed down from \code{wp_trend()})}
+\item{file}{name of the file from which previous \code{wp_trend()}
+  results should be loaded}
 }
 \description{
 Helper function for wp_trend that loads previous saved wp_trend results

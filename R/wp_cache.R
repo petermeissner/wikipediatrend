@@ -8,13 +8,13 @@ wp_cache_file <- function(){
 #' function for resetting cache
 #' @export
 #'
-wp_reset_cache <- function(){
+wp_cache_reset <- function(){
   file.remove(wp_cache_file())
 }
 
 #' function for loading data in cache
 #' @export
 #'
-wp_load_cache <- function(){
+wp_cache_load <- function(){
   wp_load(wp_cache_file())
 }

@@ -12,12 +12,12 @@ wp_load <- function(file=wp_cache_file()){
     return(dat)
   }
   if ( file == wp_cache_file() ){
-    dat <- data.frame(date=NULL, 
-                      count=NULL, 
-                      project=NULL, 
-                      title=NULL, 
-                      rank=NULL, 
-                      month=NULL)
+    dat <- data.frame(date    = NULL, 
+                      count   = NULL, 
+                      project = NULL, 
+                      title   = NULL, 
+                      rank    = NULL, 
+                      month   = NULL)
     return(dat)
   }
   # else ...

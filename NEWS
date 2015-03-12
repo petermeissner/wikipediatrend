@@ -1,4 +1,4 @@
-﻿NEWS wikipediatrend 
+NEWS wikipediatrend 
 ===============================================================================
 
 version 0.3.0
@@ -20,8 +20,9 @@ stored (this will always add to the already existing data)
 - wp_trend() now allows to specify more than one page and/or language at a 
 time. data than will be retrieved for every combination of page/language/day
 
-- .wp_trend_cache stores the path to the temporary file (last for one session) 
-that is used by the package whenever no file is specified by user
+- caching system is persistant wp_cache_file() will report file used for 
+caching; wp_cache_reset() will reset cache; wp_cache_load() will retunr its 
+content as data.frame()
 
 - while wp_trend() now (invisibly) returns only data from the current request 
 at hand the new function wp_cache() will retrieve data from cache files (by 

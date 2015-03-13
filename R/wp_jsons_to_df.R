@@ -32,13 +32,13 @@ wp_jsons_to_df <- function(wp_json){
   # case of no data
   if( length(wp_json)==0 ){
     res <- data.frame()
-    return(res)
+    return(unique(res))
   }
   # case of only one json
   if( length(wp_json)==1 & is.character(wp_json[[1]])){
     res <- worker(wp_json[[1]])
     suppressWarnings(res <- res[!is.na(res$date),])
-    return(res)
+    return(unique(res))
   }
   # case of multiple jsons
   if(length(wp_json)> 1 & is.character(wp_json[[1]])){
@@ -46,6 +46,6 @@ wp_jsons_to_df <- function(wp_json){
     res <- do.call(rbind, tmp)
     rownames(res) <- NULL
     suppressWarnings(res <- res[!is.na(res$date),])
-    return(res)
+    return(unique(res))
   }
 }

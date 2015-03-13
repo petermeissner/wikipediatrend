@@ -1,19 +1,15 @@
 #' Helper function for wp_trend
 #' 
-#' Function writes wp_trend data to a CSV file that can be used for subsequent
-#' requests
+#' Function writes wp_trend() data to a CSV file that serves as cache/storage
 #' 
-#' @param res      internal data retreived by \code{wp_trend()}
-#' @param friendly should retrieved data be saved for later use (option is
-#'   passed down from \code{wp_trend()})
-#' @param resname  the name serving to save the data (option is passed down from
-#'   \code{wp_trend()})
-#'    
-#' 
-#' @export 
+#' @param res data retreived by \code{wp_trend()}
+#' @param file where to save/cache results (defaults to \code{wp_cache_file()})
+#'   
+#'   
+#' @export
 #' 
 
-wp_save <- function(res, file){
+wp_save <- function(res, file=wp_cache_file()){
     write.csv(res, file, row.names=FALSE)
     message(paste0("\nResults written to:\n", file ,"\n"))
     return( file )

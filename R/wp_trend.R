@@ -27,12 +27,12 @@
 #'   
 #' @examples 
 #' library(wikipediatrend)
-#' wp_trend(page        = "Main_Page", 
-#'          from        = "2014-11-01", 
-#'          to          = "2014-11-30", 
-#'          lang        = "en",
-#'          file        = tempfile()
-#'          )
+# wp_trend(page        = "Main_Page", 
+#          from        = "2014-11-01", 
+#          to          = "2014-11-30", 
+#          lang        = "en",
+#          file        = wp_cache_file()
+#          )
 #'          
 #' @export
 

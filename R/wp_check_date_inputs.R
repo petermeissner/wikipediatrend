@@ -11,9 +11,13 @@
 #' 
 
 wp_check_date_inputs <- function(from, to){
-  from <- as.character(from)
+  from <- as.character(from) 
   to   <- as.character(to)
-  # to small a value (no data before 2007)
+  # from larger than to
+  if ( !(wp_date(from) <= wp_date(to)) ) {
+    stop("In wp_check_date_inputs: from-date larger than to-date.")
+  }
+    # to small a value (no data before 2007)
   if ( wp_date(from) < wp_date("2007-12-01")  ) { 
     from <- wp_date("2007-12-01")
   } 
@@ -27,9 +31,5 @@ wp_check_date_inputs <- function(from, to){
   if ( wp_date(from) > Sys.Date()  ) { 
     from <- Sys.Date()
   } 
-  # from larger than to
-  if ( !(wp_date(from) <= wp_date(to)) ) {
-    stop("In wp_check_date_inputs: from-date larger than to-date.")
-  }
   return( list(from=from, to=to) )
 }

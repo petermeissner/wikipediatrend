@@ -4,19 +4,14 @@
 \alias{wp_save}
 \title{Helper function for wp_trend}
 \usage{
-wp_save(res, file)
+wp_save(res, file = wp_cache_file())
 }
 \arguments{
-\item{res}{internal data retreived by \code{wp_trend()}}
+\item{res}{data retreived by \code{wp_trend()}}
 
-\item{friendly}{should retrieved data be saved for later use (option is
-passed down from \code{wp_trend()})}
-
-\item{resname}{the name serving to save the data (option is passed down from
-  \code{wp_trend()})}
+\item{file}{where to save/cache results (defaults to \code{wp_cache_file()})}
 }
 \description{
-Function writes wp_trend data to a CSV file that can be used for subsequent
-requests
+Function writes wp_trend() data to a CSV file that serves as cache/storage
 }
 

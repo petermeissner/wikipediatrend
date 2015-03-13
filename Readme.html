@@ -13,17 +13,17 @@
 
 <title>Introducing Wikipediatrend – Easy Analyses of Public Attention, Anxiety and Information Seeking</title>
 
-<script src="README_files/jquery-1.11.0/jquery.min.js"></script>
+<script src="Readme_files/jquery-1.11.0/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link href="README_files/bootstrap-2.3.2/css/bootstrap.min.css" rel="stylesheet" />
-<link href="README_files/bootstrap-2.3.2/css/bootstrap-responsive.min.css" rel="stylesheet" />
-<script src="README_files/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+<link href="Readme_files/bootstrap-2.3.2/css/bootstrap.min.css" rel="stylesheet" />
+<link href="Readme_files/bootstrap-2.3.2/css/bootstrap-responsive.min.css" rel="stylesheet" />
+<script src="Readme_files/bootstrap-2.3.2/js/bootstrap.min.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <link rel="stylesheet"
-      href="README_files/highlight/default.css"
+      href="Readme_files/highlight/default.css"
       type="text/css" />
-<script src="README_files/highlight/highlight.js"></script>
+<script src="Readme_files/highlight/highlight.js"></script>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
@@ -59,7 +59,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 </div>
 
 
-<p>2015-02-20</p>
+<p>2015-03-13</p>
 <p><em>Current version auto-build status:</em></p>
 <p><img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master"></img></p>
 <div id="introduction" class="section level2">
@@ -97,21 +97,21 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 <p>Let’s have a first run using the defaults:</p>
 <pre class="r"><code>peter_principle &lt;- wp_trend(&quot;peter_principle&quot;)</code></pre>
-<pre><code>## http://stats.grok.se/json/en/201501/Peter_principle
-## http://stats.grok.se/json/en/201502/Peter_principle
+<pre><code>## http://stats.grok.se/json/en/201502/Peter_principle
+## http://stats.grok.se/json/en/201503/Peter_principle
 ## 
 ## Results written to:
-## C:\Users\Peter\AppData\Local\Temp\RtmpiIK4n1\wp_trend_cache_1e846b57419d.csv</code></pre>
+## C:/Users/Peter/AppData/Local/Temp/wikipediatrend_cache.csv</code></pre>
 <p>Calling the function results in less downloads because those months already complete are not downloded again. Instead it is complemented by the data already stored within the cache.</p>
 <p>The function’s return is a data frame with six variables <em>date</em>, <em>count</em>, <em>project</em>, <em>title</em>, <em>rank</em>, <em>month</em> paralleling the data provided by the stats.grok.se server:</p>
 <pre class="r"><code>head(peter_principle)</code></pre>
-<pre><code>##         date count project           title rank  month
-## 1 2015-01-20  1290      en Peter_principle   -1 201501
-## 2 2015-01-21  1481      en Peter_principle   -1 201501
-## 3 2015-01-22  1285      en Peter_principle   -1 201501
-## 4 2015-01-23  1322      en Peter_principle   -1 201501
-## 5 2015-01-24   548      en Peter_principle   -1 201501
-## 6 2015-01-25   573      en Peter_principle   -1 201501</code></pre>
+<pre><code>##         date count lang            page rank  month
+## 1 2015-02-11  1228   en Peter_principle   -1 201502
+## 2 2015-02-12  1269   en Peter_principle   -1 201502
+## 3 2015-02-13  1066   en Peter_principle   -1 201502
+## 4 2015-02-14   561   en Peter_principle   -1 201502
+## 5 2015-02-15   450   en Peter_principle   -1 201502
+## 6 2015-02-16   947   en Peter_principle   -1 201502</code></pre>
 <p>We can use this information to visualize the page view trend. Using <code>wp_wday()</code> we can furthermore discriminate weekdays <span style="color:black">(black)</span> from weekends <span style="color:red">(red)</span>.</p>
 <pre class="r"><code>plot( peter_principle[,1:2], 
       col=ifelse( wp_wday(peter_principle$date) &gt; 5 , 
@@ -121,7 +121,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
       main=&quot;Peter Principle&#39;s Wikipedia Attention&quot;,
       ylab=&quot;views per day&quot;, xlab=&quot;time&quot;)
 lines(peter_principle[,1:2], lwd=5, col=&quot;#00101010&quot;)</code></pre>
-<p><img src="README_files/figure-html/unnamed-chunk-4-1.png" /></p>
+<p><img src="Readme_files/figure-html/unnamed-chunk-4-1.png" /></p>
 <p>Looking at the graph we can conclude that the <em>Peter Principle</em> as a work related phenomenon obviously is something that is most pressing on workdays – or maybe people in general just tend to use their computers less on weekends.</p>
 </div>
 <div id="being-friendly" class="section level2">
@@ -163,25 +163,16 @@ lines(peter_principle[,1:2], lwd=5, col=&quot;#00101010&quot;)</code></pre>
 ## http://stats.grok.se/json/en/201411/Islamic_State_of_Iraq_and_the_Levant
 ## http://stats.grok.se/json/en/201412/Islamic_State_of_Iraq_and_the_Levant
 ## http://stats.grok.se/json/en/201501/Islamic_State_of_Iraq_and_the_Levant
-## http://stats.grok.se/json/en/201502/Islamic_State_of_Iraq_and_the_Levant</code></pre>
-<pre><code>## Warning in value[[3L]](cond): [wp_jsons_to_df()]
-## Could not extract data from server response. Data for one month will be missing.</code></pre>
-<pre><code>## Warning in value[[3L]](cond): [wp_jsons_to_df()]
-## Could not extract data from server response. Data for one month will be missing.</code></pre>
-<pre><code>## 
+## http://stats.grok.se/json/en/201502/Islamic_State_of_Iraq_and_the_Levant
+## http://stats.grok.se/json/en/201503/Islamic_State_of_Iraq_and_the_Levant
+## 
 ## Results written to:
 ## ../isil.csv</code></pre>
 <p>The second request uses this previous saved information to minimize traffic and function execution time. If it downloads new data, it updates the data already stored on disk.</p>
 <pre class="r"><code>isil &lt;- wp_trend(&quot;Islamic_State_of_Iraq_and_the_Levant&quot;, from=&quot;2012-12-01&quot;, file=&quot;../isil.csv&quot;)</code></pre>
 <pre><code>## http://stats.grok.se/json/en/201212/Islamic_State_of_Iraq_and_the_Levant
-## http://stats.grok.se/json/en/201403/Islamic_State_of_Iraq_and_the_Levant
-## http://stats.grok.se/json/en/201404/Islamic_State_of_Iraq_and_the_Levant
-## http://stats.grok.se/json/en/201502/Islamic_State_of_Iraq_and_the_Levant</code></pre>
-<pre><code>## Warning in value[[3L]](cond): [wp_jsons_to_df()]
-## Could not extract data from server response. Data for one month will be missing.</code></pre>
-<pre><code>## Warning in value[[3L]](cond): [wp_jsons_to_df()]
-## Could not extract data from server response. Data for one month will be missing.</code></pre>
-<pre><code>## 
+## http://stats.grok.se/json/en/201503/Islamic_State_of_Iraq_and_the_Levant
+## 
 ## Results written to:
 ## ../isil.csv</code></pre>
 <p>Last but not least, let’s have a look at the data …</p>
@@ -190,7 +181,7 @@ lines(peter_principle[,1:2], lwd=5, col=&quot;#00101010&quot;)</code></pre>
       main=&quot;ISIL&#39;s Wikipedia Attention&quot;,
       ylab=&quot;views per day&quot;, xlab=&quot;time&quot;,
       type=&quot;l&quot;)</code></pre>
-<p><img src="README_files/figure-html/unnamed-chunk-8-1.png" /></p>
+<p><img src="Readme_files/figure-html/unnamed-chunk-8-1.png" /></p>
 <p>… revealing what most might have already suspected: ISIL is quite a new phenomenon.</p>
 </div>
 <div id="so-what" class="section level2">
@@ -202,13 +193,37 @@ lines(peter_principle[,1:2], lwd=5, col=&quot;#00101010&quot;)</code></pre>
                     from = &quot;2013-01-01&quot;, 
                     to   = &quot;2014-03-01&quot;, 
                     file = &quot;../wp_trend_cache.csv&quot;)</code></pre>
-<pre><code>## http://stats.grok.se/json/en/201403/Cat
-## http://stats.grok.se/json/en/201403/Dog</code></pre>
-<pre><code>## Warning in value[[3L]](cond): [wp_jsons_to_df()]
-## Could not extract data from server response. Data for one month will be missing.</code></pre>
-<pre><code>## Warning in value[[3L]](cond): [wp_jsons_to_df()]
-## Could not extract data from server response. Data for one month will be missing.</code></pre>
-<pre><code>## 
+<pre><code>## http://stats.grok.se/json/en/201301/Cat
+## http://stats.grok.se/json/en/201302/Cat
+## http://stats.grok.se/json/en/201303/Cat
+## http://stats.grok.se/json/en/201304/Cat
+## http://stats.grok.se/json/en/201305/Cat
+## http://stats.grok.se/json/en/201306/Cat
+## http://stats.grok.se/json/en/201307/Cat
+## http://stats.grok.se/json/en/201308/Cat
+## http://stats.grok.se/json/en/201309/Cat
+## http://stats.grok.se/json/en/201310/Cat
+## http://stats.grok.se/json/en/201311/Cat
+## http://stats.grok.se/json/en/201312/Cat
+## http://stats.grok.se/json/en/201401/Cat
+## http://stats.grok.se/json/en/201402/Cat
+## http://stats.grok.se/json/en/201403/Cat
+## http://stats.grok.se/json/en/201301/Dog
+## http://stats.grok.se/json/en/201302/Dog
+## http://stats.grok.se/json/en/201303/Dog
+## http://stats.grok.se/json/en/201304/Dog
+## http://stats.grok.se/json/en/201305/Dog
+## http://stats.grok.se/json/en/201306/Dog
+## http://stats.grok.se/json/en/201307/Dog
+## http://stats.grok.se/json/en/201308/Dog
+## http://stats.grok.se/json/en/201309/Dog
+## http://stats.grok.se/json/en/201310/Dog
+## http://stats.grok.se/json/en/201311/Dog
+## http://stats.grok.se/json/en/201312/Dog
+## http://stats.grok.se/json/en/201401/Dog
+## http://stats.grok.se/json/en/201402/Dog
+## http://stats.grok.se/json/en/201403/Dog
+## 
 ## Results written to:
 ## ../wp_trend_cache.csv</code></pre>
 <pre class="r"><code>plot( cats[,1:2], 
@@ -233,15 +248,93 @@ lines(peter_principle[,1:2], lwd=5, col=&quot;#00101010&quot;)</code></pre>
 <p>Or we can study how the desire to inform oneself about Ebola varies over time:</p>
 <pre class="r"><code>ebola_en &lt;- wp_trend(&quot;Ebola&quot;, from=&quot;2008-01-01&quot;, file=&quot;../wp_trend_cache.csv&quot;)</code></pre>
 <pre><code>## http://stats.grok.se/json/en/200801/Ebola
+## http://stats.grok.se/json/en/200802/Ebola
+## http://stats.grok.se/json/en/200803/Ebola
+## http://stats.grok.se/json/en/200804/Ebola
+## http://stats.grok.se/json/en/200805/Ebola
+## http://stats.grok.se/json/en/200806/Ebola
 ## http://stats.grok.se/json/en/200807/Ebola
+## http://stats.grok.se/json/en/200808/Ebola
+## http://stats.grok.se/json/en/200809/Ebola
+## http://stats.grok.se/json/en/200810/Ebola
+## http://stats.grok.se/json/en/200811/Ebola
+## http://stats.grok.se/json/en/200812/Ebola
+## http://stats.grok.se/json/en/200901/Ebola
+## http://stats.grok.se/json/en/200902/Ebola
+## http://stats.grok.se/json/en/200903/Ebola
+## http://stats.grok.se/json/en/200904/Ebola
+## http://stats.grok.se/json/en/200905/Ebola
+## http://stats.grok.se/json/en/200906/Ebola
+## http://stats.grok.se/json/en/200907/Ebola
+## http://stats.grok.se/json/en/200908/Ebola
+## http://stats.grok.se/json/en/200909/Ebola
+## http://stats.grok.se/json/en/200910/Ebola
+## http://stats.grok.se/json/en/200911/Ebola
+## http://stats.grok.se/json/en/200912/Ebola
+## http://stats.grok.se/json/en/201001/Ebola
+## http://stats.grok.se/json/en/201002/Ebola
+## http://stats.grok.se/json/en/201003/Ebola
+## http://stats.grok.se/json/en/201004/Ebola
+## http://stats.grok.se/json/en/201005/Ebola
+## http://stats.grok.se/json/en/201006/Ebola
+## http://stats.grok.se/json/en/201007/Ebola
+## http://stats.grok.se/json/en/201008/Ebola
+## http://stats.grok.se/json/en/201009/Ebola
+## http://stats.grok.se/json/en/201010/Ebola
+## http://stats.grok.se/json/en/201011/Ebola
+## http://stats.grok.se/json/en/201012/Ebola
+## http://stats.grok.se/json/en/201101/Ebola
+## http://stats.grok.se/json/en/201102/Ebola
+## http://stats.grok.se/json/en/201103/Ebola
+## http://stats.grok.se/json/en/201104/Ebola
+## http://stats.grok.se/json/en/201105/Ebola
+## http://stats.grok.se/json/en/201106/Ebola
+## http://stats.grok.se/json/en/201107/Ebola
+## http://stats.grok.se/json/en/201108/Ebola
+## http://stats.grok.se/json/en/201109/Ebola
+## http://stats.grok.se/json/en/201110/Ebola
+## http://stats.grok.se/json/en/201111/Ebola
+## http://stats.grok.se/json/en/201112/Ebola
+## http://stats.grok.se/json/en/201201/Ebola
+## http://stats.grok.se/json/en/201202/Ebola
+## http://stats.grok.se/json/en/201203/Ebola
+## http://stats.grok.se/json/en/201204/Ebola
+## http://stats.grok.se/json/en/201205/Ebola
+## http://stats.grok.se/json/en/201206/Ebola
+## http://stats.grok.se/json/en/201207/Ebola
+## http://stats.grok.se/json/en/201208/Ebola
+## http://stats.grok.se/json/en/201209/Ebola
+## http://stats.grok.se/json/en/201210/Ebola
+## http://stats.grok.se/json/en/201211/Ebola
+## http://stats.grok.se/json/en/201212/Ebola
+## http://stats.grok.se/json/en/201301/Ebola
+## http://stats.grok.se/json/en/201302/Ebola
+## http://stats.grok.se/json/en/201303/Ebola
+## http://stats.grok.se/json/en/201304/Ebola
+## http://stats.grok.se/json/en/201305/Ebola
+## http://stats.grok.se/json/en/201306/Ebola
+## http://stats.grok.se/json/en/201307/Ebola
+## http://stats.grok.se/json/en/201308/Ebola
+## http://stats.grok.se/json/en/201309/Ebola
+## http://stats.grok.se/json/en/201310/Ebola
+## http://stats.grok.se/json/en/201311/Ebola
+## http://stats.grok.se/json/en/201312/Ebola
+## http://stats.grok.se/json/en/201401/Ebola
+## http://stats.grok.se/json/en/201402/Ebola
 ## http://stats.grok.se/json/en/201403/Ebola
 ## http://stats.grok.se/json/en/201404/Ebola
-## http://stats.grok.se/json/en/201502/Ebola</code></pre>
-<pre><code>## Warning in value[[3L]](cond): [wp_jsons_to_df()]
-## Could not extract data from server response. Data for one month will be missing.</code></pre>
-<pre><code>## Warning in value[[3L]](cond): [wp_jsons_to_df()]
-## Could not extract data from server response. Data for one month will be missing.</code></pre>
-<pre><code>## 
+## http://stats.grok.se/json/en/201405/Ebola
+## http://stats.grok.se/json/en/201406/Ebola
+## http://stats.grok.se/json/en/201407/Ebola
+## http://stats.grok.se/json/en/201408/Ebola
+## http://stats.grok.se/json/en/201409/Ebola
+## http://stats.grok.se/json/en/201410/Ebola
+## http://stats.grok.se/json/en/201411/Ebola
+## http://stats.grok.se/json/en/201412/Ebola
+## http://stats.grok.se/json/en/201501/Ebola
+## http://stats.grok.se/json/en/201502/Ebola
+## http://stats.grok.se/json/en/201503/Ebola
+## 
 ## Results written to:
 ## ../wp_trend_cache.csv</code></pre>
 <pre class="r"><code>plot( ebola_en[,1:2], 
@@ -252,20 +345,98 @@ lines(peter_principle[,1:2], lwd=5, col=&quot;#00101010&quot;)</code></pre>
 lines(ebola_en)</code></pre>
 <pre><code>## Warning in data.matrix(x): NAs introduced by coercion</code></pre>
 <pre><code>## Warning in data.matrix(x): NAs introduced by coercion</code></pre>
-<p><img src="README_files/figure-html/unnamed-chunk-10-1.png" /></p>
+<p><img src="Readme_files/figure-html/unnamed-chunk-10-1.png" /></p>
 <p>Which unsurprisingly peaks in 2014 with the Ebola outbreak in Western Africa.</p>
 <p>Using the language option we can also study if media attentions differ between languages / cultures by comparing the attention patterns for the English Wikipedia with those for the German Wikipedia:</p>
 <pre class="r"><code>ebola_de &lt;- wp_trend(&quot;Ebola&quot;, lang=&quot;de&quot;, from=&quot;2008-01-01&quot;, file=&quot;../wp_trend_cache.csv&quot;)</code></pre>
 <pre><code>## http://stats.grok.se/json/de/200801/Ebola
+## http://stats.grok.se/json/de/200802/Ebola
+## http://stats.grok.se/json/de/200803/Ebola
+## http://stats.grok.se/json/de/200804/Ebola
+## http://stats.grok.se/json/de/200805/Ebola
+## http://stats.grok.se/json/de/200806/Ebola
 ## http://stats.grok.se/json/de/200807/Ebola
+## http://stats.grok.se/json/de/200808/Ebola
+## http://stats.grok.se/json/de/200809/Ebola
+## http://stats.grok.se/json/de/200810/Ebola
+## http://stats.grok.se/json/de/200811/Ebola
+## http://stats.grok.se/json/de/200812/Ebola
+## http://stats.grok.se/json/de/200901/Ebola
+## http://stats.grok.se/json/de/200902/Ebola
+## http://stats.grok.se/json/de/200903/Ebola
+## http://stats.grok.se/json/de/200904/Ebola
+## http://stats.grok.se/json/de/200905/Ebola
+## http://stats.grok.se/json/de/200906/Ebola
+## http://stats.grok.se/json/de/200907/Ebola
+## http://stats.grok.se/json/de/200908/Ebola
+## http://stats.grok.se/json/de/200909/Ebola
+## http://stats.grok.se/json/de/200910/Ebola
+## http://stats.grok.se/json/de/200911/Ebola
+## http://stats.grok.se/json/de/200912/Ebola
+## http://stats.grok.se/json/de/201001/Ebola
+## http://stats.grok.se/json/de/201002/Ebola
+## http://stats.grok.se/json/de/201003/Ebola
+## http://stats.grok.se/json/de/201004/Ebola
+## http://stats.grok.se/json/de/201005/Ebola
+## http://stats.grok.se/json/de/201006/Ebola
+## http://stats.grok.se/json/de/201007/Ebola
+## http://stats.grok.se/json/de/201008/Ebola
+## http://stats.grok.se/json/de/201009/Ebola
+## http://stats.grok.se/json/de/201010/Ebola
+## http://stats.grok.se/json/de/201011/Ebola
+## http://stats.grok.se/json/de/201012/Ebola
+## http://stats.grok.se/json/de/201101/Ebola
+## http://stats.grok.se/json/de/201102/Ebola
+## http://stats.grok.se/json/de/201103/Ebola
+## http://stats.grok.se/json/de/201104/Ebola
+## http://stats.grok.se/json/de/201105/Ebola
+## http://stats.grok.se/json/de/201106/Ebola
+## http://stats.grok.se/json/de/201107/Ebola
+## http://stats.grok.se/json/de/201108/Ebola
+## http://stats.grok.se/json/de/201109/Ebola
+## http://stats.grok.se/json/de/201110/Ebola
+## http://stats.grok.se/json/de/201111/Ebola
+## http://stats.grok.se/json/de/201112/Ebola
+## http://stats.grok.se/json/de/201201/Ebola
+## http://stats.grok.se/json/de/201202/Ebola
+## http://stats.grok.se/json/de/201203/Ebola
+## http://stats.grok.se/json/de/201204/Ebola
+## http://stats.grok.se/json/de/201205/Ebola
+## http://stats.grok.se/json/de/201206/Ebola
+## http://stats.grok.se/json/de/201207/Ebola
+## http://stats.grok.se/json/de/201208/Ebola
+## http://stats.grok.se/json/de/201209/Ebola
+## http://stats.grok.se/json/de/201210/Ebola
+## http://stats.grok.se/json/de/201211/Ebola
+## http://stats.grok.se/json/de/201212/Ebola
+## http://stats.grok.se/json/de/201301/Ebola
+## http://stats.grok.se/json/de/201302/Ebola
+## http://stats.grok.se/json/de/201303/Ebola
+## http://stats.grok.se/json/de/201304/Ebola
+## http://stats.grok.se/json/de/201305/Ebola
+## http://stats.grok.se/json/de/201306/Ebola
+## http://stats.grok.se/json/de/201307/Ebola
+## http://stats.grok.se/json/de/201308/Ebola
+## http://stats.grok.se/json/de/201309/Ebola
+## http://stats.grok.se/json/de/201310/Ebola
+## http://stats.grok.se/json/de/201311/Ebola
+## http://stats.grok.se/json/de/201312/Ebola
+## http://stats.grok.se/json/de/201401/Ebola
+## http://stats.grok.se/json/de/201402/Ebola
 ## http://stats.grok.se/json/de/201403/Ebola
 ## http://stats.grok.se/json/de/201404/Ebola
-## http://stats.grok.se/json/de/201502/Ebola</code></pre>
-<pre><code>## Warning in value[[3L]](cond): [wp_jsons_to_df()]
-## Could not extract data from server response. Data for one month will be missing.</code></pre>
-<pre><code>## Warning in value[[3L]](cond): [wp_jsons_to_df()]
-## Could not extract data from server response. Data for one month will be missing.</code></pre>
-<pre><code>## 
+## http://stats.grok.se/json/de/201405/Ebola
+## http://stats.grok.se/json/de/201406/Ebola
+## http://stats.grok.se/json/de/201407/Ebola
+## http://stats.grok.se/json/de/201408/Ebola
+## http://stats.grok.se/json/de/201409/Ebola
+## http://stats.grok.se/json/de/201410/Ebola
+## http://stats.grok.se/json/de/201411/Ebola
+## http://stats.grok.se/json/de/201412/Ebola
+## http://stats.grok.se/json/de/201501/Ebola
+## http://stats.grok.se/json/de/201502/Ebola
+## http://stats.grok.se/json/de/201503/Ebola
+## 
 ## Results written to:
 ## ../wp_trend_cache.csv</code></pre>
 <pre class="r"><code>plot( ebola_en[,1:2], 
@@ -280,7 +451,7 @@ legend(&quot;topleft&quot;,
        col=c(&quot;red&quot;, rgb(0,0,0,0.7)),
        lty=1
        )</code></pre>
-<p><img src="README_files/figure-html/unnamed-chunk-12-1.png" /></p>
+<p><img src="Readme_files/figure-html/unnamed-chunk-12-1.png" /></p>
 <p>The similarities are striking.</p>
 </div>
 </div>
@@ -289,7 +460,7 @@ legend(&quot;topleft&quot;,
 <p>Because data received from stad.grok.se is not always clean – one might e.g. get dates like <code>2008-02-30</code> which is impossible – the package has its own error robust date functions.</p>
 <p>Furthermore, these functions work on all kinds of date formats like Date, numeric, character, POSIXlt, and POSIXct without having to make transformations all the time. The downside of this implementation is that edecuted guesses have to be made:</p>
 <ul>
-<li>character data is assumed to be given in format “yyyy-mm-dd” like in 2015-02-20</li>
+<li>character data is assumed to be given in format “yyyy-mm-dd” like in 2015-03-13</li>
 <li>numerics are assumed to be days since <code>1970-01-01</code> (which is R’s default anyways)</li>
 </ul>
 <p>To conclude, wikipediatrend time functions are easy to use efficient little helpers to work with the data provided by the package but are to be used with caution outside the package due the fact that convenience is based on educated guesses that can go wrong.</p>

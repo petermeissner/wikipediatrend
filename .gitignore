@@ -37,3 +37,6 @@ devel/
 inst/doc
 Readme_cache/html/*
 travischeck.svg
+R/pversion_inc.R
+man/pversion_inc.Rd
+R/DESCRIPTION

@@ -6,6 +6,8 @@
 #' 
 #' @param x The vector to be chunked.
 #' @param n The prefered size of those chunks.
+#' 
+#' @export
 
 chunk <- function(x,n){
   if(is.null(x)) return(NULL)

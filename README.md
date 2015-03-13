@@ -1,9 +1,10 @@
 # Introducing Wikipediatrend -- Easy Analyses of Public Attention, Anxiety and Information Seeking
 Peter Meißner  
 
-2015-01-09
+2015-02-20
 
-## Current version auto-build status
+*Current version auto-build status:*
+
 <img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master"></img>
 
 
@@ -45,89 +46,78 @@ require(wikipediatrend)
 The workhorse of the package is the `wp_trend()` function with several arguments:
 
 - **page**        [ `"Peter_principle"` ]: <br>
-... here goes the name of the page
+... here goes the name of the page (might also be a vector of page names, e.g.: `c("cat","dog")`)
+
 - **from**        [ `Sys.Date()-30` ]: <br>
 ... starting date of the timespan to be considered
+
 - **to**          [ `Sys.Date()` ]: <br>
 ... end date of the timespan to be considered
-- **lang**        [ `"en"` ]: <br>
-... language of the page
-- **friendly**    [ `F` ]: <br>
-... should `wp_trend()` try minimize workload on behalf of `stats.grok.se`
-- **requestFrom** [ `"anonymous"` ]: <br>
-... do you care to identify yourself towards `stats.grok.se`
-- **userAgent** [ `FALSE` ] <br>
-... do you care to send information on your plattform, R version and the package used to make server requests
 
+- **lang**        [ `"en"` ]: <br>
+... language of the page (might also be a vector of languages, e.g.: `c("de","en")`)
+
+- **file**        [ `.wp_trend_cache` ]: <br>
+... file to be used as cache / data storage (By default all data retreived will be stored in a temporary file. If a file name is provided, date will be stored there as CSV. Data will always be appended to an already existing data storage file.)
+
+
+<!-- thrown out since version 0.3.xxx
+  - **friendly**    [ `F` ]: <br>
+  ... should `wp_trend()` try minimize workload on behalf of `stats.grok.se`
+  - **requestFrom** [ `"anonymous"` ]: <br>
+  ... do you care to identify yourself towards `stats.grok.se`
+  - **userAgent** [ `FALSE` ] <br>
+  ... do you care to send information on your plattform, R version and the package used to make server requests
+-->
 
 Let's have a first run using the defaults:
 
 ```r
-peter_principle <- wp_trend()
+peter_principle <- wp_trend("peter_principle")
 ```
 
 ```
-## 
-##     With option 'friendly' set to FALSE subsequent requests 
-##     of the same wikipedia-entry cause the server -- which is kindly 
-##     providing information for you -- to work hard to get the same 
-##     stuff over and over and over and over again. Do not bore 
-##     the server - be friendly. 
-##     
-##     See: '?wp_trend'
-##     
-## http://stats.grok.se/json/en/201412/Peter_principle
 ## http://stats.grok.se/json/en/201501/Peter_principle
+## http://stats.grok.se/json/en/201502/Peter_principle
+## 
+## Results written to:
+## C:\Users\Peter\AppData\Local\Temp\RtmpiIK4n1\wp_trend_cache_1e846b57419d.csv
 ```
 
-The function informs us that using the friendly option might be a good idea and shows us which URLs it used to retrieve the information we were asking for. 
+Calling the function results in less downloads because those months already complete are not downloded again. Instead it is complemented by the data already stored within the cache. 
 
-The function's return is a data frame with two variables *date* and *count*:
+The function's return is a data frame with six variables *date*, *count*, *project*, *title*, *rank*, *month* paralleling the data provided by the stats.grok.se server:
 
-
-```r
-dim(peter_principle)
-```
-
-```
-## [1] 30  2
-```
-
-```r
-class(peter_principle)
-```
-
-```
-## [1] "data.frame"
-```
 
 ```r
 head(peter_principle)
 ```
 
 ```
-##         date count
-## 1 2014-12-10  1169
-## 2 2014-12-11  1304
-## 3 2014-12-12  1228
-## 4 2014-12-13   656
-## 5 2014-12-14   616
-## 6 2014-12-15  1078
+##         date count project           title rank  month
+## 1 2015-01-20  1290      en Peter_principle   -1 201501
+## 2 2015-01-21  1481      en Peter_principle   -1 201501
+## 3 2015-01-22  1285      en Peter_principle   -1 201501
+## 4 2015-01-23  1322      en Peter_principle   -1 201501
+## 5 2015-01-24   548      en Peter_principle   -1 201501
+## 6 2015-01-25   573      en Peter_principle   -1 201501
 ```
 
 We can use this information to visualize the page view trend. Using `wp_wday()` we can furthermore discriminate weekdays <span style="color:black">(black)</span> from weekends <span style="color:red">(red)</span>. 
 
 
 ```r
-plot( peter_principle, 
-      col=ifelse( wp_wday(peter_principle$date) > 5 , "red", "black") ,
+plot( peter_principle[,1:2], 
+      col=ifelse( wp_wday(peter_principle$date) > 5 , 
+                  "#00000090", "#e01010e0") ,
+      pch=19,
       ylim=c(0, max(peter_principle$count)),
       main="Peter Principle's Wikipedia Attention",
       ylab="views per day", xlab="time")
-lines(peter_principle)
+lines(peter_principle[,1:2], lwd=5, col="#00101010")
 ```
 
-![](Readme_files/figure-html/unnamed-chunk-4-1.png) 
+![](README_files/figure-html/unnamed-chunk-4-1.png) 
 
 Looking at the graph we can conclude that the *Peter Principle* as a work related phenomenon obviously is something that is most pressing on workdays -- or maybe people in general just tend to use their computers less on weekends.
 
@@ -152,7 +142,7 @@ Let's try it out by making two subsequent requests to get access statistics for 
 
 
 ```r
-file.remove("wp__Islamic_State_of_Iraq_and_the_Levant__en.csv")
+file.remove("../isil.csv")
 ```
 
 While for the first request the server has to provide information many times, the second request only asks for those months for which we do not have complete data already. Furthermore, `wp_trend()` informs us that the data has been stored in a CSV-file.
@@ -161,7 +151,7 @@ While for the first request the server has to provide information many times, th
 
 
 ```r
-isis <- wp_trend("Islamic_State_of_Iraq_and_the_Levant", from="2013-01-01", friendly=T)
+isil <- wp_trend("Islamic_State_of_Iraq_and_the_Levant", from="2013-01-01", file="../isil.csv")
 ```
 
 ```
@@ -190,9 +180,23 @@ isis <- wp_trend("Islamic_State_of_Iraq_and_the_Levant", from="2013-01-01", frie
 ## http://stats.grok.se/json/en/201411/Islamic_State_of_Iraq_and_the_Levant
 ## http://stats.grok.se/json/en/201412/Islamic_State_of_Iraq_and_the_Levant
 ## http://stats.grok.se/json/en/201501/Islamic_State_of_Iraq_and_the_Levant
+## http://stats.grok.se/json/en/201502/Islamic_State_of_Iraq_and_the_Levant
+```
+
+```
+## Warning in value[[3L]](cond): [wp_jsons_to_df()]
+## Could not extract data from server response. Data for one month will be missing.
+```
+
+```
+## Warning in value[[3L]](cond): [wp_jsons_to_df()]
+## Could not extract data from server response. Data for one month will be missing.
+```
+
+```
 ## 
 ## Results written to:
-## D:/Peter/Dropbox/RPackages/wikipediatrend/wp__Islamic_State_of_Iraq_and_the_Levant__en.csv
+## ../isil.csv
 ```
 
 The second request uses this previous saved information to minimize traffic and function execution time. If it downloads new data, it updates the data already stored on disk.
@@ -200,31 +204,46 @@ The second request uses this previous saved information to minimize traffic and 
 
 
 ```r
-isis <- wp_trend("Islamic_State_of_Iraq_and_the_Levant", from="2012-12-01", friendly=T)
+isil <- wp_trend("Islamic_State_of_Iraq_and_the_Levant", from="2012-12-01", file="../isil.csv")
 ```
 
 ```
 ## http://stats.grok.se/json/en/201212/Islamic_State_of_Iraq_and_the_Levant
-## http://stats.grok.se/json/en/201501/Islamic_State_of_Iraq_and_the_Levant
+## http://stats.grok.se/json/en/201403/Islamic_State_of_Iraq_and_the_Levant
+## http://stats.grok.se/json/en/201404/Islamic_State_of_Iraq_and_the_Levant
+## http://stats.grok.se/json/en/201502/Islamic_State_of_Iraq_and_the_Levant
+```
+
+```
+## Warning in value[[3L]](cond): [wp_jsons_to_df()]
+## Could not extract data from server response. Data for one month will be missing.
+```
+
+```
+## Warning in value[[3L]](cond): [wp_jsons_to_df()]
+## Could not extract data from server response. Data for one month will be missing.
+```
+
+```
 ## 
 ## Results written to:
-## D:/Peter/Dropbox/RPackages/wikipediatrend/wp__Islamic_State_of_Iraq_and_the_Levant__en.csv
+## ../isil.csv
 ```
 
 Last but not least, let's have a look at the data ... 
 
 
 ```r
-plot( isis, 
-      ylim=c(0, max(isis$count)),
-      main="ISIS' Wikipedia Attention",
+plot( isil[,1:2], 
+      ylim=c(0, max(isil$count)),
+      main="ISIL's Wikipedia Attention",
       ylab="views per day", xlab="time",
       type="l")
 ```
 
-![](Readme_files/figure-html/unnamed-chunk-8-1.png) 
+![](README_files/figure-html/unnamed-chunk-8-1.png) 
 
-... revealing what most might have already suspected: ISIS is quite a new phenomenon. 
+... revealing what most might have already suspected: ISIL is quite a new phenomenon. 
 
 
 ## So what? 
@@ -235,39 +254,76 @@ First of all we are now able to study cats:
 
 
 ```r
-cats <- wp_trend("Cat", from="2007-01-01", friendly=T)
+catdog <- wp_trend( c("cat","dog"), 
+                    from = "2013-01-01", 
+                    to   = "2014-03-01", 
+                    file = "../wp_trend_cache.csv")
 ```
 
 ```
-## http://stats.grok.se/json/en/200712/Cat
-## http://stats.grok.se/json/en/200801/Cat
-## http://stats.grok.se/json/en/200807/Cat
-## http://stats.grok.se/json/en/201412/Cat
-## http://stats.grok.se/json/en/201501/Cat
+## http://stats.grok.se/json/en/201403/Cat
+## http://stats.grok.se/json/en/201403/Dog
+```
+
+```
+## Warning in value[[3L]](cond): [wp_jsons_to_df()]
+## Could not extract data from server response. Data for one month will be missing.
+```
+
+```
+## Warning in value[[3L]](cond): [wp_jsons_to_df()]
+## Could not extract data from server response. Data for one month will be missing.
+```
+
+```
 ## 
 ## Results written to:
-## D:/Peter/Dropbox/RPackages/wikipediatrend/wp__Cat__en.csv
+## ../wp_trend_cache.csv
 ```
 
 ```r
-  # throw out extreme values
-  no_outlier <- 
-  cats$count < 
-    quantile(cats$count, na.rm=T, 0.99) & 
-  cats$count > 
-    quantile(cats$count, na.rm=T, 0.01)  
-plot( cats[no_outlier,], 
+plot( cats[,1:2], 
       col="black",
-      ylim=c(0, max(cats[no_outlier,]$count)),
+      ylim=c(0, max(cats$count)),
       main="Cats' Wikipedia Attention",
       ylab="views per day", xlab="time", type="h")
+```
+
+```
+## Error in plot(cats[, 1:2], col = "black", ylim = c(0, max(cats$count)), : object 'cats' not found
+```
+
+```r
 soo_2012_13 <- wp_year(cats$date)== 2012 | wp_year(cats$date)== 2013 
+```
+
+```
+## Error in wp_year(cats$date): object 'cats' not found
+```
+
+```r
 cats_model  <- lm(count ~ date + date^2 + date^3 + soo_2012_13 ,data=cats)
+```
+
+```
+## Error in is.data.frame(data): object 'cats' not found
+```
+
+```r
 cats_smooth <- data.frame(date=cats$date, count_smooth=predict(cats_model))
+```
+
+```
+## Error in data.frame(date = cats$date, count_smooth = predict(cats_model)): object 'cats' not found
+```
+
+```r
 lines(cats_smooth,col=rgb(1,0,0,0.5),lwd=5)
 ```
 
-![](Readme_files/figure-html/unnamed-chunk-9-1.png) 
+```
+## Error in lines(cats_smooth, col = rgb(1, 0, 0, 0.5), lwd = 5): object 'cats_smooth' not found
+```
 
 ... and triumphantly can conclude: 
 
@@ -279,21 +335,35 @@ Or we can study how the desire to inform oneself about Ebola varies over time:
 
 
 ```r
-ebola_en <- wp_trend("Ebola", from="2008-01-01", friendly=T)
+ebola_en <- wp_trend("Ebola", from="2008-01-01", file="../wp_trend_cache.csv")
 ```
 
 ```
 ## http://stats.grok.se/json/en/200801/Ebola
 ## http://stats.grok.se/json/en/200807/Ebola
-## http://stats.grok.se/json/en/201412/Ebola
-## http://stats.grok.se/json/en/201501/Ebola
+## http://stats.grok.se/json/en/201403/Ebola
+## http://stats.grok.se/json/en/201404/Ebola
+## http://stats.grok.se/json/en/201502/Ebola
+```
+
+```
+## Warning in value[[3L]](cond): [wp_jsons_to_df()]
+## Could not extract data from server response. Data for one month will be missing.
+```
+
+```
+## Warning in value[[3L]](cond): [wp_jsons_to_df()]
+## Could not extract data from server response. Data for one month will be missing.
+```
+
+```
 ## 
 ## Results written to:
-## D:/Peter/Dropbox/RPackages/wikipediatrend/wp__Ebola__en.csv
+## ../wp_trend_cache.csv
 ```
 
 ```r
-plot( ebola_en, 
+plot( ebola_en[,1:2], 
       ylim=c(0, max(ebola_en$count)),
       main="Ebola's Wikipedia Attention",
       ylab="views per day", xlab="time",
@@ -301,7 +371,15 @@ plot( ebola_en,
 lines(ebola_en)
 ```
 
-![](Readme_files/figure-html/unnamed-chunk-10-1.png) 
+```
+## Warning in data.matrix(x): NAs introduced by coercion
+```
+
+```
+## Warning in data.matrix(x): NAs introduced by coercion
+```
+
+![](README_files/figure-html/unnamed-chunk-10-1.png) 
 
 Which unsurprisingly peaks in 2014 with the Ebola outbreak in Western Africa. 
 
@@ -310,28 +388,42 @@ Using the language option we can also study if media attentions differ between l
 
 
 ```r
-ebola_de <- wp_trend("Ebola", lang="de", from="2008-01-01", friendly=T)
+ebola_de <- wp_trend("Ebola", lang="de", from="2008-01-01", file="../wp_trend_cache.csv")
 ```
 
 ```
 ## http://stats.grok.se/json/de/200801/Ebola
 ## http://stats.grok.se/json/de/200807/Ebola
-## http://stats.grok.se/json/de/201412/Ebola
-## http://stats.grok.se/json/de/201501/Ebola
+## http://stats.grok.se/json/de/201403/Ebola
+## http://stats.grok.se/json/de/201404/Ebola
+## http://stats.grok.se/json/de/201502/Ebola
+```
+
+```
+## Warning in value[[3L]](cond): [wp_jsons_to_df()]
+## Could not extract data from server response. Data for one month will be missing.
+```
+
+```
+## Warning in value[[3L]](cond): [wp_jsons_to_df()]
+## Could not extract data from server response. Data for one month will be missing.
+```
+
+```
 ## 
 ## Results written to:
-## D:/Peter/Dropbox/RPackages/wikipediatrend/wp__Ebola__de.csv
+## ../wp_trend_cache.csv
 ```
 
 
 ```r
-plot( ebola_en, 
+plot( ebola_en[,1:2], 
       ylim=c(0, max(ebola_en$count)),
       main="Ebola's Wikipedia Attention",
       ylab="views per day", xlab="time",
       type="n")
-lines(ebola_en, col="red")
-lines(ebola_de, col=rgb(0,0,0,0.7))
+lines(ebola_en[,1:2], col="red")
+lines(ebola_de[,1:2], col=rgb(0,0,0,0.7))
 legend("topleft", 
        c("en", "de"), 
        col=c("red", rgb(0,0,0,0.7)),
@@ -339,7 +431,7 @@ legend("topleft",
        )
 ```
 
-![](Readme_files/figure-html/unnamed-chunk-12-1.png) 
+![](README_files/figure-html/unnamed-chunk-12-1.png) 
 
 The similarities are striking. 
 
@@ -350,7 +442,7 @@ Because data received from stad.grok.se is not always clean -- one might e.g. ge
 
 Furthermore, these functions work on all kinds of date formats like Date, numeric, character, POSIXlt, and POSIXct without having to make transformations all the time. The downside of this implementation is that edecuted guesses have to be made: 
 
-  - character data is assumed to be given in format "yyyy-mm-dd" like in 2015-01-09
+  - character data is assumed to be given in format "yyyy-mm-dd" like in 2015-02-20
   - numerics are assumed to be days since `1970-01-01` (which is R's default anyways)
   
 To conclude, wikipediatrend time functions are easy to use efficient little helpers to work with the data provided by the package but are to be used with caution outside the package due the fact that convenience is based on educated guesses that can go wrong. 

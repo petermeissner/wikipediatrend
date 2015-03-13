@@ -4,9 +4,8 @@
 \alias{wp_trend}
 \title{Function for getting access statistics for wikipedia pages}
 \usage{
-wp_trend(page = "Peter_principle", from = Sys.Date() - 30,
-  to = Sys.Date(), lang = "en", friendly = F, requestFrom = "anonymous",
-  userAgent = F)
+wp_trend(page, from = Sys.Date() - 30, to = Sys.Date(), lang = "en",
+  file = wp_cache_file())
 }
 \arguments{
 \item{page}{The name of the Wikipedia page as to be found in the URL to the
@@ -31,35 +30,12 @@ wp_trend(page = "Peter_principle", from = Sys.Date() - 30,
   http://de.wikipedia.org or perhaps \code{"als"} for the Alemannic dialect
   found under http://als.wikipedia.org/.}
 
-\item{friendly}{Either \code{TRUE}, \code{FALSE}, \code{1} or \code{2} This
-  option causes twofold. First, if the value is set to TRUE, 1, or 2 the
-  results of the request are saved in the current working directory in a CSV
-  file with name scheme: \code{wp__[page name]_[country code].csv}. Second,
-  the function will look if perhaps a previously saved result is available to
-  be used to only download those information that are still missing instead
-  of the whole timespan.
-
-  For storage on disk \code{write.csv()} (friendly=TRUE or friendly=1) and
-  \code{write.csv2()} (friendly=2) are used.}
-
-\item{requestFrom}{This parameter sends an identifier (i.e. your email
-  address to contact you if necessary) to stats.grok.se (the server that
-  kindly provides the information you request).}
-
-\item{userAgent}{Whether or not to send the following information along your
-  requests: \code{paste( "wikipediatrend running on: ", R.version$platform,
-  R.version$version.string, sep=", ")}}
+\item{file}{Where to cache/store the retrieved data? By default a temporary file is used for as long as the R session takes place. The data is stored in CSV format. If an already existing file is used for storage, the old data will not be deleted but instead new data will be added to this file.}
 }
 \description{
 Function for getting access statistics for wikipedia pages
 }
 \examples{
-wp_trend(page        = "Main_Page",
-         from        = "2014-11-01",
-         to          = "2014-11-30",
-         lang        = "en",
-         friendly    = FALSE,
-         requestFrom = "wp.trend.tester at wptt.wptt",
-         userAgent   =   TRUE)
+library(wikipediatrend)
 }
 

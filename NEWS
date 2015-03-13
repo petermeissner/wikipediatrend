@@ -33,3 +33,5 @@ default / if no file name is specified it retrieves data from
 wp_cache() does consist of more variables: date, count, project, title,
 rank, month
 
+- testthat tests now check base functionality of the package
+

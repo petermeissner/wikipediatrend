@@ -17,38 +17,61 @@ output:
 
 ## Introduction
 
-Wikipedia provides a lot of valuable meta data. 
-One type of information are page access statistics -- e.g. http://stats.grok.se/en/201409/Peter_Principle. Another type are the info pages -- e.g. https://en.wikipedia.org/w/index.php?title=Peter_Principle&action=info. While the latter falls into the jurisdiction of the [MediaWiki](http://cran.r-project.org/web/packages/WikipediR/index.html)-package , this package allows loading page view statistics into R. 
+Besides the well know information provided at Wikipedia -- the articles. Wikipedia provides a lot of valuable meta data, too. 
+One type of information are page access statistics -- e.g. http://stats.grok.se/en/201409/Peter_Principle. Another type are the info pages -- e.g. https://en.wikipedia.org/w/index.php?title=Peter_Principle&action=info. While the latter falls into the jurisdiction of the [MediaWiki](http://cran.r-project.org/web/packages/WikipediR/index.html)-package , 
+the wikipediatrend package allows easy access to Wikipedia page view statistics. 
 
 
 ## Stats.grok.se API and the wikipediatrend package
 
-`http://stats.grok.se` retrieves Wikipedia page access statistics on a daily 
-basis. The information is either presented in HTML or provided as JSON data.
+The server `http://stats.grok.se` retrieves Wikipedia page access statistics on a daily basis and makes them available to the puplic. Page views are presented per article and language for a whole month for each single day. In addition to the HTML version with that presents the data as bar chart ... 
 
 
 http://stats.grok.se/en/201409/Peter_Principle
 
-versus
+... daily page views are availible in JSON fomrat as well ...
 
 http://stats.grok.se/json/en/201409/Peter_Principle
 
 
 
-A single request results in data for a specific entry, from one of Wikipedia's different language subdomains and for all days of a given month. The `wikipediatrend` package draws on this Web API and provides a consistent and convenient way to use those data within R. Furthermore the package not only takes care of the communication between the Web API at `stats.grok.se` and your local R session but also provides means to minimize traffic and workload for `stats.grok.se`-server  -- data is (if user decides so) stored locally in CSV format and reused for subsequent requests. 
+The wikipeditrend package is designed around the idea to make these data availible in R in a most convenient way. 
+
+*Consequently the package provides* 
+
+- daily page views as data frames 
+- page views for user set time spans
+- page views for multiple articles in one function call
+- page views for articles in different language domains 
+- background caching of results minimize function execution time as well as server burdens
 
 
 
-## A first tutorial
+## Using the package
 
-```{r, error=TRUE}
-require(wikipediatrend)
+### Installation 
+
+A stable version of the package can be found on CRAN and installed via ...
+```{r, eval=FALSE}
+install.packages("wikipediatrend")
+```
+
+... while the current developement version can be retrieved by using `install_github()` from the devtools package ... 
+
+```{r, eval=FALSE}
+devtools::install_github("petermeissner/wikipediatrend")
+```
+
+After loading the package several functions are available.
+
+```{r, error=TRUE, message=FALSE}
+library(wikipediatrend)
 ```
 
 The workhorse of the package is the `wp_trend()` function with several arguments:
 
-- **page**        [ `"Peter_principle"` ]: <br>
-... here goes the name of the page (might also be a vector of page names, e.g.: `c("cat","dog")`)
+- **page**        []: <br>
+... here goes the name or names of the page or pages one might want to get page views from, e.g.: `c("cat","dog")`)
 
 - **from**        [ `Sys.Date()-30` ]: <br>
 ... starting date of the timespan to be considered
@@ -72,12 +95,11 @@ The workhorse of the package is the `wp_trend()` function with several arguments
   ... do you care to send information on your plattform, R version and the package used to make server requests
 -->
 
-Let's have a first run using the defaults:
+Let's have a first run using the defaults and telling the function to get page views for the article on the peter principle:
+
 ```{r, cache=TRUE, error=TRUE}
 peter_principle <- wp_trend("peter_principle")
 ```
-
-Calling the function results in less downloads because those months already complete are not downloded again. Instead it is complemented by the data already stored within the cache. 
 
 The function's return is a data frame with six variables *date*, *count*, *project*, *title*, *rank*, *month* paralleling the data provided by the stats.grok.se server:
 
@@ -85,20 +107,21 @@ The function's return is a data frame with six variables *date*, *count*, *proje
 head(peter_principle)
 ```
 
-We can use this information to visualize the page view trend. Using `wp_wday()` we can furthermore discriminate weekdays <span style="color:black">(black)</span> from weekends <span style="color:red">(red)</span>. 
 
-```{r, cache=TRUE, error=TRUE}
-plot( peter_principle[,1:2], 
-      col=ifelse( wp_wday(peter_principle$date) > 5 , 
-                  "#00000090", "#e01010e0") ,
-      pch=19,
-      ylim=c(0, max(peter_principle$count)),
-      main="Peter Principle's Wikipedia Attention",
-      ylab="views per day", xlab="time")
-lines(peter_principle[,1:2], lwd=5, col="#00101010")
+We can use this information to visualize the page view trend. Using `wp_wday()` we can furthermore discriminate weekdays <span style="color:red">(red)</span> from weekends <span style="color:black">(black)</span>. 
+
+```{r, cache=TRUE, error=TRUE, message=FALSE}
+library(ggplot2)
+
+weekend <- ifelse(wp_wday(peter_principle$date) > 5, "Sa-Su", "Mo-Fr")
+
+ggplot(peter_principle, aes(date, count)) + 
+  geom_line() + 
+  geom_point(size=4, aes(date, count, color=weekend)) +
+  theme_bw()
 ```
 
-Looking at the graph we can conclude that the *Peter Principle* as a work related phenomenon obviously is something that is most pressing on workdays -- or maybe people in general just tend to use their computers less on weekends.
+Looking at the graph we can conclude that the *Peter Principle* as a work related phenomenon obviously is something that is most pressing on workdays -- or maybe people in general just tend to use their computers less on weekends -- we might never know for certain. 
 
 
 

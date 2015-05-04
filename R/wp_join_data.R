@@ -15,5 +15,6 @@ wp_join_data <- function(request, cache){
             request
           )
   res <- res[order(res$page, res$lang, res$date),]
+  row.names(res) <- NULL
   return(res)
 }

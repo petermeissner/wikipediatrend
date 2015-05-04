@@ -10,7 +10,10 @@
 #' 
 
 wp_save <- function(res, file=wp_cache_file()){
-    write.csv(res, file, row.names=FALSE)
+    write.csv( x = res, 
+               file = file, 
+               row.names = FALSE,
+               fileEncoding = "UTF-8")
     message(paste0("\nResults written to:\n", file ,"\n"))
     return( file )
 }

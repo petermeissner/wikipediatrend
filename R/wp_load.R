@@ -7,7 +7,9 @@
 
 wp_load <- function(file=wp_cache_file()){
   if ( file.exists(file) ) {
-    dat <- read.csv(file,stringsAsFactors=F)
+    dat <- read.csv( file = file,
+                     stringsAsFactors = F, 
+                     fileEncoding = "UTF-8")
     dat$date <- wp_date(dat$date)
     return(dat)
   }

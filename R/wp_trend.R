@@ -42,7 +42,16 @@ wp_trend <- function( page ,
                       lang        = "en", 
                       file        = wp_cache_file()
 ){
-  stopifnot(grepl("\\w",page))
+  # dev # 
+  # page="main"; from=Sys.Date()-30; to=Sys.Date(); lang="en"; file=wp_cache_file()
+  
+  # input check
+  stopifnot( grepl("\\w",page) )
+  stopifnot( length(page)==length(lang) | length(lang)==1 )
+  
+  # check dates
+  from <- wp_check_date_inputs(from, to)$from
+  to   <- wp_check_date_inputs(from, to)$to
   
   # make first letter of page title always capital
   page <- stringr::str_replace( 
@@ -51,9 +60,6 @@ wp_trend <- function( page ,
             substring(toupper(page),1,1) 
           )
   
-  # check dates
-  from <- wp_check_date_inputs(from, to)$from
-  to   <- wp_check_date_inputs(from, to)$to
   
   # loading cached data
   cache <- wp_load(file)
@@ -80,8 +86,13 @@ wp_trend <- function( page ,
   # return
   res <- res[ res$date <= to & 
               res$date >= from &
-              res$lang %in% lang &
-              res$page %in% page, ]
+              paste(  res$lang, 
+                      toupper(unlist(lapply(res$page, URLencode))) 
+                    ) %in% 
+              paste(  lang, 
+                      toupper(page)
+                    ), 
+            ]
   rownames(res) <- NULL
   invisible(res)
 }

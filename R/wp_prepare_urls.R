@@ -18,7 +18,12 @@ wp_prepare_urls <- function(page, from, to, lang, cachedata=NULL){
                               cachedata$lang, 
                               cachedata$page)
                       )
-  request_comb    <- expand.grid(timeframe, lang, page, stringsAsFactors=F)
+  request_comb <- 
+    cbind(
+      expand.grid(timeframe, lang, stringsAsFactors=F),
+      expand.grid(timeframe, page, stringsAsFactors=F)[,2],
+      stringsAsFactors=F
+    )
   names(request_comb) <- c("date", "lang", "page")
   request_dpoints <- apply(request_comb, 1, paste, collapse=" ")
   

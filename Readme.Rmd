@@ -14,6 +14,7 @@ output:
 
 <img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master"></img>
 
+<img src="http://cranlogs.r-pkg.org/badges/wikipediatrend"></img>
 
 ## Introduction
 

@@ -40,3 +40,5 @@ travischeck.svg
 R/pversion_inc.R
 man/pversion_inc.Rd
 R/DESCRIPTION
+R/aa_pversion_inc.r
+text.csv

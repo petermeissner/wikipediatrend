@@ -20,14 +20,19 @@ wp_jsons_to_df <- function(wp_json){
             data.frame()
           }
       )
-    tmp_data <- data.frame( date    = wp_date( names(tmp$daily_views) ), 
-                            count   = unlist(tmp$daily_views),
-                            lang    = tmp$project,
-                            page    = tmp$title,
-                            rank    = tmp$rank,
-                            month   = tmp$month,
-                            stringsAsFactors=F)
-    return(tmp_data)
+    # no data? OR some data?
+    if( length(tmp$daily_views)==0 ){
+      return( data.frame() )
+    }else{
+      tmp_data <- data.frame( date    = wp_date( names(tmp$daily_views) ), 
+                              count   = unlist(tmp$daily_views),
+                              lang    = tmp$project,
+                              page    = tmp$title,
+                              rank    = tmp$rank,
+                              month   = tmp$month,
+                              stringsAsFactors=F)
+      return(tmp_data)
+    }
   }
   # case of no data
   if( length(wp_json)==0 ){

@@ -37,6 +37,7 @@ wp_linked_pages <- function(page, lang){
   Encoding(tmp) <- "UTF-8"
   lang_df$title <- tmp
   # return
+  class(lang_df) <- c("wp_df","data.frame")
   return(lang_df)
 }
 

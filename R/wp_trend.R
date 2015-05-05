@@ -40,10 +40,41 @@ wp_trend <- function( page ,
                       from        = Sys.Date()-30, 
                       to          = Sys.Date(),
                       lang        = "en", 
-                      file        = wp_cache_file()
+                      file        = wp_cache_file(), 
+                      friendly,
+                      requestFrom,
+                      userAgent
 ){
   # dev # 
   # page="main"; from=Sys.Date()-30; to=Sys.Date(); lang="en"; file=wp_cache_file()
+  
+  # deprecation
+  if( !missing("requestFrom") ) 
+    message("Option 'requestFrom' is deprecated and will cause errors 
+            in futuere versions of the wp_trend() function. Please read 
+            the package vignette and/or README to learn about the new
+            set of options.
+            
+            Check wp_http_header() to know which information are send to 
+            stats.grok.se (R and package versions)
+            ")
+  if( !missing("friendly") ) 
+    message("Option 'friendly' is deprecated and will cause errors 
+            in futuere versions of the wp_trend() function. Please read 
+            the package vignette and/or README to learn about the new
+            set of options.
+            
+            The package now is friendly by default.
+            ")
+  if( !missing("userAgent") ) 
+    message("Option 'userAgent' is deprecated and will cause errors 
+            in futuere versions of the wp_trend() function. Please read 
+            the package vignette and/or README to learn about the new
+            set of options.
+            
+            Check wp_http_header() to know which information are send to 
+            stats.grok.se (R and package versions)
+            ")
   
   # input check
   stopifnot( grepl("\\w",page) )
@@ -94,7 +125,8 @@ wp_trend <- function( page ,
                     ), 
             ]
   rownames(res) <- NULL
-  invisible(res)
+  #dev# class(res) <- c("wp_df", "data.frame")
+  return(res)
 }
 
 

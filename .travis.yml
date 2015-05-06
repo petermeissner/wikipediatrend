@@ -2,3 +2,4 @@ language: r
 warnings_are_errors: true
 sudo: required
 r_binary_packages: knitr, stringr, jsonlite, rvest, httr, testthat, rmarkdown 
+r_check_args: --no-build-vignettes 

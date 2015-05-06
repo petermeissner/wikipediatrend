@@ -19,7 +19,8 @@ wp_linked_pages <- function(page, lang){
   # url 
   url <- paste0("http://", lang, ".wikipedia.org/wiki/", page)
   # getting language links
-  lang_nodes <- rvest::html_nodes( rvest::html(url), "[hreflang]")  
+  html_doc   <- rvest::html( url, httr::user_agent(wp_http_header()$`user-agent`) )
+  lang_nodes <- rvest::html_nodes( html_doc, "[hreflang]")  
   lang_attr  <- rvest::html_attrs( lang_nodes )  
   lang_df    <- 
     data.frame(

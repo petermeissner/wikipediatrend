@@ -7,9 +7,9 @@
 #' 
 #' @export 
 
-wp_jsons_to_df <- function(wp_json){
+wp_jsons_to_df <- function(wp_json, page){
   # function doing the extraction work
-  worker <- function(wp_json){
+  worker <- function(wp_json, page){
     tmp <- 
       tryCatch(
         {
@@ -27,9 +27,10 @@ wp_jsons_to_df <- function(wp_json){
       tmp_data <- data.frame( date    = wp_date( names(tmp$daily_views) ), 
                               count   = unlist(tmp$daily_views),
                               lang    = tmp$project,
-                              page    = tmp$title,
+                              page    = page,
                               rank    = tmp$rank,
                               month   = tmp$month,
+                              title   = tmp$title,
                               stringsAsFactors=F)
       return(tmp_data)
     }
@@ -41,13 +42,13 @@ wp_jsons_to_df <- function(wp_json){
   }
   # case of only one json
   if( length(wp_json)==1 & is.character(wp_json[[1]])){
-    res <- worker(wp_json[[1]])
+    res <- worker(wp_json[[1]], page = page)
     suppressWarnings(res <- res[!is.na(res$date),])
     return(unique(res))
   }
   # case of multiple jsons
   if(length(wp_json)> 1 & is.character(wp_json[[1]])){
-    tmp <- lapply(wp_json, worker)
+    tmp <- lapply(wp_json, worker, page = page)
     res <- do.call(rbind, tmp)
     rownames(res) <- NULL
     suppressWarnings(res <- res[!is.na(res$date),])

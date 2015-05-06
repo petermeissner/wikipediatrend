@@ -24,7 +24,11 @@
 #'   yyyy-mm-dd.
 #'   
 #' @param file Where to cache/store the retrieved data? By default a temporary file is used for as long as the R session takes place. The data is stored in CSV format. If an already existing file is used for storage, the old data will not be deleted but instead new data will be added to this file. 
-#'   
+#'
+#' @param friendly deprecated
+#' @param requestFrom deprecated
+#' @param userAgent deprecated
+#'
 #' @examples 
 #' library(wikipediatrend)
 # wp_trend(page        = "Main_Page", 
@@ -37,8 +41,8 @@
 #' @export
 
 wp_trend <- function( page , 
-                      from        = Sys.Date()-30, 
-                      to          = Sys.Date(),
+                      from        = prev_month_start(), 
+                      to          = prev_month_end(),
                       lang        = "en", 
                       file        = wp_cache_file(), 
                       friendly,
@@ -77,55 +81,44 @@ wp_trend <- function( page ,
             ")
   
   # input check
-  stopifnot( grepl("\\w",page) )
   stopifnot( length(page)==length(lang) | length(lang)==1 )
   
   # check dates
   from <- wp_check_date_inputs(from, to)$from
   to   <- wp_check_date_inputs(from, to)$to
   
-  # make first letter of page title always capital
-  page <- stringr::str_replace( 
-            page, 
-            "^.", 
-            substring(toupper(page),1,1) 
-          )
-  
-  
-  # loading cached data
-  cache <- wp_load(file)
+  # check page
+  page <- stringr::str_replace( page, "^.", substring(toupper(page),1,1) )
+  page <- stringr::str_replace( page, " ", "_" )
+  for( i in seq_along(page) ){
+    if ( !stringr::str_detect( page[i], "%" ) ){
+      page[i] <- URLencode(page[i])
+    }
+  }
   
   # prepare URLs
   urls <- wp_prepare_urls(page=page, 
                           from=from, 
                           to=to, 
                           lang=lang, 
-                          cachedata=cache)
+                          cachedata=cache$cache)
   
-  # download data 
-  jsons <- wp_download_data(urls)
-  
-  # extract data
-  res <- wp_jsons_to_df(jsons)
-  
-  # combine new data and old data
-  res <- wp_join_data(res, cache)
-  
+  # download data and extract data
+  res <- wp_get_data(urls)
+
   # saving data in cache or file
-  wp_save(res, file)
+  if ( file != wp_cache_file() ) wp_save(res, file)
 
   # return
-  res <- res[ res$date <= to & 
-              res$date >= from &
-              paste(  res$lang, 
-                      toupper(unlist(lapply(res$page, URLencode))) 
-                    ) %in% 
-              paste(  lang, 
-                      toupper(page)
-                    ), 
+  res <- 
+    cache$cache[ 
+      cache$cache$date <= to & 
+      cache$cache$date >= from &
+      paste( cache$cache$lang, toupper(cache$cache$page))  %in% 
+        paste( lang, toupper(page) ), 
             ]
   rownames(res) <- NULL
-  #dev# class(res) <- c("wp_df", "data.frame")
+  class(res) <- c("wp_df", "data.frame")
   return(res)
 }
 

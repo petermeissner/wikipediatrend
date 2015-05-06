@@ -10,7 +10,7 @@ wp_join_data <- function(request, cache){
   cache_ids   <- apply(cache_tmp, 1, paste, collapse=" ")
   request_tmp <- data.frame(request$date, request$lang, request$page)
   request_ids <- apply(request_tmp, 1, paste, collapse=" ")
-  res <-  rbind( 
+  res <-  plyr::rbind.fill( 
             cache[ !(cache_ids %in% request_ids) , ], 
             request
           )

@@ -1,22 +1,31 @@
 #' function downloading prepared URLs 
 #'
 #' @param urls a vector of urls to be downloaded
-#' @param size the size of url chunks to be downloaded at once before pausing fo a while (default=5)
 #' @param wait the time to wait in seconds before downloading the next chunk (default=1)
 #' @export
 
-
-wp_download_data <- function(urls, size=5, wait=1){
-  # chunking urls
-  urlchunks <- chunk(urls, size)
+wp_download_data <- function(urls, wait=1){
   # make http requests
   jsons <- list()
-  for(i in seq_along(urlchunks)){
+  # make sure to use a handle
+  if ( !exists("h") ){
+    h <- httr::handle("http://stats.grok.se")
+  }
+  # looping
+  for(i in seq_along(urls)){
     jsons <- c(
       jsons, 
-      RCurl::getURL(url = urlchunks[[i]], httpheader = wp_http_header())
+      try(
+        rvest::html_text(
+          rvest::html( 
+            urls[i], 
+            httr::user_agent(wp_http_header()$`user-agent`),
+            handle = h
+          ) 
+        )
+      )
     )
-    message(paste(urlchunks[[i]], collapse="\n"))
+    message(urls[i])
     Sys.sleep(wait)
   }
   # return

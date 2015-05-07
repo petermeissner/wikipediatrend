@@ -13,8 +13,8 @@ output:
 *Current version auto-build status:*
 
 <img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master"></img>
-
 <img src="http://cranlogs.r-pkg.org/badges/wikipediatrend"></img>
+[![Coverage Status](https://coveralls.io/repos/petermeissner/wikipediatrend/badge.svg)](https://coveralls.io/r/petermeissner/wikipediatrend)
 
 ## Introduction
 

@@ -2,7 +2,7 @@
 #' 
 #' @param request data downloaded
 #' @param cache data loaded from cache file
-#' @export 
+#' #@export 
 
 
 wp_join_data <- function(request, cache){

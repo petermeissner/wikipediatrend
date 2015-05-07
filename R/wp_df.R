@@ -1,26 +1,27 @@
 #' a wikipediastrend specific data frame
 #' 
 #' @aliases print
+#' @param x x
+#' @param ... ...
 #' @export
 
 
-print.wp_df <- function (df, ..., digits = NULL, quote = FALSE, right = TRUE, 
-          row.names = TRUE) 
+print.wp_df <- function (x, ...) 
 {
-  n <- length(row.names(df))
-  if (length(df) == 0L) {
+  n <- length(row.names(x))
+  if (length(x) == 0L) {
     cat(sprintf(ngettext(n, "data frame with 0 columns and %d row", 
                          "data frame with 0 columns and %d rows", domain = "R-base"), 
                 n), "\n", sep = "")
   }
   else if (n == 0L) {
-    print.default(names(df), quote = FALSE)
+    print.default(names(x), quote = FALSE)
     cat(gettext("<0 rows> (or 0-length row.names)\n"))
   }
   else {
     #m <- as.matrix(format.data.frame(df, digits = digits, 
     #                                 na.encode = FALSE))
-    m <- as.matrix(df)
+    m <- as.matrix(x)
     dummy <- function(x){
       ifelse(
         nchar(x) > 30, 
@@ -34,7 +35,7 @@ print.wp_df <- function (df, ..., digits = NULL, quote = FALSE, right = TRUE,
     #  print(m[1:29,], ..., quote = quote, right = right)
     #  cat(paste0("\n... ", dim(m)[1]-29, " rows of data not shown"))  
     #}else{
-      print(m, ..., quote = quote, right = right)
+      print(m, ...)
     #}
     
     

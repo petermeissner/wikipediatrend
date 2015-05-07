@@ -13,7 +13,9 @@ wp_expand_ts(from, to, by)
 \item{to}{end of timespan}
 
 \item{by}{in which time unit expansion should take place: \code{"day"},
-  \code{"month"}, \code{"year"}}
+  \code{"month"}, \code{"year"}
+
+  #}
 }
 \description{
 Helper function for wp_trend that transforms a time span into a series of

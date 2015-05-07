@@ -7,7 +7,8 @@
 toUTF8(x)
 }
 \arguments{
-\item{x}{the vector to be converted}
+\item{x}{the vector to be converted
+#}
 }
 \description{
 function to convert character vectors to UTF-8 encoding

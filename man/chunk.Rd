@@ -9,7 +9,9 @@ chunk(x, n)
 \arguments{
 \item{x}{The vector to be chunked.}
 
-\item{n}{The prefered size of those chunks.}
+\item{n}{The prefered size of those chunks.
+
+#}
 }
 \description{
 Credit goes to: Harlan (http://stackoverflow.com/users/135944/harlan) and

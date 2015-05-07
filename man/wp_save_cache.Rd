@@ -6,6 +6,10 @@
 \usage{
 wp_save_cache(file = wp_cache_file())
 }
+\arguments{
+\item{file}{to which file the cache should be saved (wp_cache_file by
+default)}
+}
 \description{
 functio to save cache to file
 }

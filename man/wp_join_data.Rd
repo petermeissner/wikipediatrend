@@ -9,7 +9,8 @@ wp_join_data(request, cache)
 \arguments{
 \item{request}{data downloaded}
 
-\item{cache}{data loaded from cache file}
+\item{cache}{data loaded from cache file
+#}
 }
 \description{
 function for joining cache and request data

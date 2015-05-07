@@ -2,7 +2,7 @@
 #' function to convert character vectors to UTF-8 encoding
 #'
 #' @param x the vector to be converted
-#' @export 
+#' #@export 
 
 toUTF8 <- 
   function(x){
@@ -19,7 +19,7 @@ toUTF8 <-
 #' function to write csv files with UTF-8 characters (even under Windwos)
 #' @param df data frame to be written to file
 #' @param file file name / path where to put the data
-#' @export 
+#' #@export 
 
 write_utf8_csv <- 
 function(df, file){
@@ -35,9 +35,8 @@ function(df, file){
 
 #' function to read csv file with UTF-8 characters (even under Windwos) that 
 #' were created by write_U
-#' @param df data frame to be written to file
-#' @param file file name / path where to put the data
-#' @export 
+#' @param file file name / path where to get the data
+#' #@export 
 
 read_utf8_csv <- function(file){
   if ( !file.exists(file) ) return( data.frame() )

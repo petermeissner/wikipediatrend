@@ -15,7 +15,9 @@ wp_prepare_urls(page, from, to, lang, cachedata = NULL)
 
 \item{lang}{lang supplied by wp_trend()}
 
-\item{cachedata}{cache data found in file supplied by file option in wp_trend()}
+\item{cachedata}{cache data found in file supplied by file option in wp_trend()
+
+#}
 }
 \description{
 function preparing URLs for downlaod

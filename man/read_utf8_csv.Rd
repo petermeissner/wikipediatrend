@@ -8,9 +8,8 @@ were created by write_U}
 read_utf8_csv(file)
 }
 \arguments{
-\item{file}{file name / path where to put the data}
-
-\item{df}{data frame to be written to file}
+\item{file}{file name / path where to get the data
+#}
 }
 \description{
 function to read csv file with UTF-8 characters (even under Windwos) that

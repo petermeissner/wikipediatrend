@@ -3,14 +3,16 @@
 \docType{data}
 \name{cache}
 \alias{cache}
-\title{a cache for downloads}
-\format{\preformatted{<environment: 0x0000000008982b78> 
+\title{a cache for downloads
+#}
+\format{\preformatted{<environment: 0x000000000708f668> 
 }}
 \usage{
 cache
 }
 \description{
 a cache for downloads
+#
 }
 \keyword{datasets}
 

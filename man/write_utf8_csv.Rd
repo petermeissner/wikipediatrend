@@ -9,7 +9,8 @@ write_utf8_csv(df, file)
 \arguments{
 \item{df}{data frame to be written to file}
 
-\item{file}{file name / path where to put the data}
+\item{file}{file name / path where to put the data
+#}
 }
 \description{
 function to write csv files with UTF-8 characters (even under Windwos)

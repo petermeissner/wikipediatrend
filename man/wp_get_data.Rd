@@ -6,6 +6,10 @@
 \usage{
 wp_get_data(urls)
 }
+\arguments{
+\item{urls}{urls to be downloeded
+#}
+}
 \description{
 function for getting data (download + extraction)
 }

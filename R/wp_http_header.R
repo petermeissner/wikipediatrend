@@ -10,7 +10,8 @@ wp_http_header <- function(){
         R.version$version.string, " ",
         "wikipediatrend/", packageVersion("wikipediatrend"), " ",
         "curl/", RCurl::curlVersion()$version, " ",
-        "Rcurl/", packageVersion("RCurl"), " "
+        "Rcurl/", packageVersion("RCurl"), " ",
+        "httr/", packageVersion("httr")
       ) 
   )
 }

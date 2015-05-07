@@ -5,8 +5,12 @@
 \alias{print.wp_df}
 \title{a wikipediastrend specific data frame}
 \usage{
-\method{print}{wp_df}(df, ..., digits = NULL, quote = FALSE, right = TRUE,
-  row.names = TRUE)
+\method{print}{wp_df}(x, ...)
+}
+\arguments{
+\item{x}{x}
+
+\item{...}{...}
 }
 \description{
 a wikipediastrend specific data frame

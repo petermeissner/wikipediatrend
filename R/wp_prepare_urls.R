@@ -6,7 +6,7 @@
 #' @param lang lang supplied by wp_trend()
 #' @param cachedata cache data found in file supplied by file option in wp_trend()
 #' 
-#' @export
+#' #@export
 
 wp_prepare_urls <- function(page, from, to, lang, cachedata=NULL){
   # expand from-date and to-date to sequence of days

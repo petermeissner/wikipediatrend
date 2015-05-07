@@ -1,12 +1,12 @@
 #' function for getting data (download + extraction)
 #' 
 #' 
-#' 
-#' @export
+#' @param urls urls to be downloeded
+#' #@export
 
 wp_get_data <- function(urls){
   tmp <- list()
-  h   <- httr::handle("http://stats.grok.se")
+  # does not work for linux!?# h   <- httr::handle("http://stats.grok.se")
   for ( i in seq_along(urls) ){
     url       <- urls[i]
     json      <- wp_download_data(url, wait = 0)

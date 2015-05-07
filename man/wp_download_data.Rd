@@ -9,7 +9,8 @@ wp_download_data(urls, wait = 1)
 \arguments{
 \item{urls}{a vector of urls to be downloaded}
 
-\item{wait}{the time to wait in seconds before downloading the next chunk (default=1)}
+\item{wait}{the time to wait in seconds before downloading the next chunk (default=1)
+#}
 }
 \description{
 function downloading prepared URLs

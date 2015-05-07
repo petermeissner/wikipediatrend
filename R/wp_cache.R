@@ -19,7 +19,6 @@ wp_cache_reset <- function(){
 #'
 wp_cache_load <- function(){
   tmp <- wp_load(wp_cache_file())
-  class(tmp) <- c("wp_df","data.frame")
   assign("cache", tmp, envir = cache )
 }
 
@@ -46,6 +45,7 @@ wp_add_to_cache <- function(df){
   }else{
     iffer <- T  
   }
+  df$count <- as.numeric(df$count)
   cache$cache <- rbind(cache$cache, df[iffer,])
   rownames(cache$cache) <- NULL
   return(sum(iffer))

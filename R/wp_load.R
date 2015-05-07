@@ -12,9 +12,13 @@ wp_load <- function(file=wp_cache_file()){
 #                     fileEncoding = "UTF-8")
     dat      <- read_utf8_csv(file)
     if(dim(dat)[1] > 0)  dat$date <- wp_date(dat$date)
+    dat$count  <- as.numeric(dat$count)
+    class(dat) <- c("wp_df","data.frame")
     return(dat)
   }
   # else ...
-    return(data.frame())
+  dat <- data.frame()  
+  class(dat) <- c("wp_df","data.frame")
+  return()
 }
 

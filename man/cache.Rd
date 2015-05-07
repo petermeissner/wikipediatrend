@@ -4,7 +4,7 @@
 \name{cache}
 \alias{cache}
 \title{a cache for downloads}
-\format{\preformatted{<environment: 0x0000000008647be8> 
+\format{\preformatted{<environment: 0x000000000862f7a0> 
 }}
 \usage{
 cache

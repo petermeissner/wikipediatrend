@@ -77,7 +77,10 @@ page_views
 
 ```{r}
 library(ggplot2)
-ggplot(page_views, aes(x=date, y=count)) + geom_line() + theme_bw()
+ggplot(page_views, aes(x=date, y=count)) + 
+  geom_line(size=1.5, colour="steelblue") + 
+  geom_smooth(method="loess", colour="#00000000", fill="#001090", alpha=0.1) +
+  theme_bw()
 ```
 
 
@@ -108,7 +111,7 @@ page_views <- wp_trend( page = c("Millennium_Development_Goals","Climate_Change"
 ```{r}
 library(ggplot2)
 ggplot(page_views, aes(x=date, y=count, group=page, color=page)) + 
-  geom_line() + theme_bw()
+  geom_line(size=1.5) + theme_bw()
 ```
 
 
@@ -120,14 +123,14 @@ These two options determine the time frame for which data shall be retrieved. Th
 page_views <- wp_trend( 
                 page = "Millennium_Development_Goals" ,
                 from = "2010-01-01",
-                to   = Sys.Date())
+                to   = prev_month_end())
 ```
 
 ```{r}
 library(ggplot2)
 ggplot(page_views, aes(x=date, y=count, color=wp_year(date))) + 
   geom_line() + 
-  stat_smooth(method = "lm", formula = y ~ poly(x, 8), color="red3", size=2) +  
+  stat_smooth(method = "lm", formula = y ~ poly(x, 8), color="red3", size=1.5) +  
   theme_bw() 
 ```
 
@@ -147,8 +150,9 @@ page_views <- wp_trend(
 
 ```{r}
 library(ggplot2)
-ggplot(page_views, aes(x=date, y=count, group=lang, color=lang)) + 
-  geom_line() + 
+ggplot(page_views, aes(x=date, y=count, group=lang, color=lang, fill=lang)) + 
+  geom_smooth(size=1.5) + 
+  geom_point() +
   theme_bw() 
 ```
 
@@ -166,7 +170,7 @@ wp_cache_file()
 To load all data from the cache one can use `wp_cache_load()`:
 
 ```{r}
-cache <- wp_cache_load()
+cache <- wp_get_cache()
 head(cache)
 dim(cache)
 ```
@@ -207,7 +211,7 @@ for(i in unique(page_views$lang) ){
 }
 
 ggplot(page_views, aes(x=date, y=count, group=lang, color=lang)) + 
-  geom_line() + ylab("standardized count (m=0, var=1)") +
+  geom_line(size=1.2) + ylab("standardized count (m=0, var=1)") +
   theme_bw() 
 ```
 

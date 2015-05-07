@@ -20,7 +20,7 @@ wp_cache_reset <- function(){
 wp_cache_load <- function(){
   tmp <- wp_load(wp_cache_file())
   assign("cache", tmp, envir = cache )
-}
+  }
 
 #' function to get cache content
 #' @export

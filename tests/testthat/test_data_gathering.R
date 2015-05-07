@@ -10,22 +10,22 @@ json_bad_list  <- list(json_good, "{{ {{  {!'§$%%§%' rubbish", json_good)
 test_that("wp_check_date_inputs() works as expected", {
   expect_error(wp_jsons_to_df())
   expect_is(
-    wp_jsons_to_df(json_good),
+    wp_jsons_to_df(json_good, "testpage"),
     "data.frame"
     )
   expect_is(
-    wp_jsons_to_df(json_good_list),
+    wp_jsons_to_df(json_good_list, "testpage"),
     "data.frame"
     )
   expect_is(
-    wp_jsons_to_df(list()), 
+    wp_jsons_to_df(list(), "testpage"), 
     "data.frame"
     )
   expect_warning(
-    wp_jsons_to_df(json_bad)
+    wp_jsons_to_df(json_bad, "testpage")
     )
   expect_warning(
-    wp_jsons_to_df(json_bad_list)
+    wp_jsons_to_df(json_bad_list, "testpage")
     )
 })
 

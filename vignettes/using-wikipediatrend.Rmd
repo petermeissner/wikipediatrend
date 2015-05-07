@@ -1,7 +1,7 @@
 ---
 title: "Using Wikipediatrend"
 author: "Peter Meißner"
-date: "`r Sys.Date()` <br> [![RSTUDIO CRAN MIRROR DOWNLOADS](http://cranlogs.r-pkg.org/badges/wikipediatrend)](http://cran.rstudio.com/web/packages/wikipediatrend)"
+date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     fig_caption: yes
@@ -88,11 +88,21 @@ ggplot(page_views, aes(x=date, y=count)) +
 
 `wp_trend()` has several options and most of them are set to defaults: 
 
+page , 
+                      from        = prev_month_start(), 
+                      to          = prev_month_end(),
+                      lang        = "en", 
+                      file        = wp_cache_file(), 
+                      
+
 - `page`
 - `from = Sys.Date() - 30`
 - `to   = Sys.Date()`
 - `lang = "en"`
 - `file = wp_cache_file()`
+- ~~`friendly`~~ *deprecated*
+- ~~`requestFrom`~~ *deprecated*
+- ~~`userAgent`~~ *deprecated*
 
 ### `page`
 
@@ -122,15 +132,16 @@ These two options determine the time frame for which data shall be retrieved. Th
 ```{r}
 page_views <- wp_trend( 
                 page = "Millennium_Development_Goals" ,
-                from = "2010-01-01",
+                from = "2000-01-01",
                 to   = prev_month_end())
 ```
 
-```{r}
+```{r, warning=FALSE}
 library(ggplot2)
 ggplot(page_views, aes(x=date, y=count, color=wp_year(date))) + 
   geom_line() + 
-  stat_smooth(method = "lm", formula = y ~ poly(x, 8), color="red3", size=1.5) +  
+  stat_smooth(method = "lm", formula = y ~ poly(x, 22), color="#CD0000a0", size=1.2) +
+  ylim(0,6000) +
   theme_bw() 
 ```
 
@@ -159,15 +170,15 @@ ggplot(page_views, aes(x=date, y=count, group=lang, color=lang, fill=lang)) +
 
 ### `file`
 
-This last option defines where the package should cache the data to prevent unecessary downloads od already existing data. The default is to use and reuse a file in the temporary folder but can be replaced by any valid filename, e.g. `file = MyCache.csv`.
+This last option defines where the package should cache the data to prevent unecessary downloads of already existing data. The default is to use and reuse a file in the temporary folder but can be replaced by any valid filename, e.g. `file = MyCache.csv`.
 
-To get the path of the default cache file use the `wp_cache_file()` function:
+To get the path and name of the default cache file use the `wp_cache_file()` function:
 
 ```{r}
 wp_cache_file()
 ```
 
-To load all data from the cache one can use `wp_cache_load()`:
+While `wp_trend()` will never return more data than specified by options `page`, `lang`, `from`, and `to`  `wp_get_cache()` can be used retrieve all the data cached sofar:
 
 ```{r}
 cache <- wp_get_cache()
@@ -175,7 +186,7 @@ head(cache)
 dim(cache)
 ```
 
-Last but not least the cache (that might across sessions) can also be reset:
+Last but not least the cache (file), that might exist across multiple sessions, can also be reset:
 
 ```{r, eval=FALSE}
 wp_cache_reset()

@@ -2,7 +2,7 @@
 #' function to convert character vectors to UTF-8 encoding
 #'
 #' @param x the vector to be converted
-#' #@export 
+
 
 toUTF8 <- 
   function(x){
@@ -19,7 +19,7 @@ toUTF8 <-
 #' function to write csv files with UTF-8 characters (even under Windwos)
 #' @param df data frame to be written to file
 #' @param file file name / path where to put the data
-#' #@export 
+
 
 write_utf8_csv <- 
 function(df, file){
@@ -36,7 +36,7 @@ function(df, file){
 #' function to read csv file with UTF-8 characters (even under Windwos) that 
 #' were created by write_U
 #' @param file file name / path where to get the data
-#' #@export 
+
 
 read_utf8_csv <- function(file){
   if ( !file.exists(file) ) return( data.frame() )
@@ -60,6 +60,54 @@ read_utf8_csv <- function(file){
   return(df)
 }
 
+#' Helper function for wp_trend that loads previous saved wp_trend results
+#' 
+#' @param file  name of the file from which previous \code{wp_trend()}
+#'   results should be loaded 
+#' 
+#' @export
+
+wp_load <- function(file=wp_cache_file()){
+  if ( file.exists(file) ) {
+#    dat <- read.csv( file = file,
+#                     stringsAsFactors = F, 
+#                     fileEncoding = "UTF-8")
+    dat      <- read_utf8_csv(file)
+    if( any(dim(dat)==0) ){
+      dat <- data.frame()
+    }
+    if( any(dim(dat)[1]>0&dim(dat)[2]>0) ){
+      dat$date   <- wp_date(dat$date)
+      dat$count  <- as.numeric(dat$count)
+    }else{
+      dat <- data.frame()
+    }
+    class(dat) <- c("wp_df","data.frame")
+    return(dat)
+  }
+  # else ...
+  dat <- data.frame()  
+  class(dat) <- c("wp_df","data.frame")
+  return(dat)
+}
+
+
+
+#' Helper function for wp_trend
+#' 
+#' Function writes wp_trend() data to a CSV file that serves as cache/storage
+#' 
+#' @param res data retreived by \code{wp_trend()}
+#' @param file where to save/cache results (defaults to \code{wp_cache_file()})
+#'   
+#'   
+#' 
+
+wp_save <- function(res, file=wp_cache_file()){
+    write_utf8_csv( df = res, file = file)
+    message(paste0(".\n"))
+    return( file )
+}
 
 
 

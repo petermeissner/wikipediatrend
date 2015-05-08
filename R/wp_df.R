@@ -1,11 +1,7 @@
 #' a wikipediastrend specific data frame
-#' 
-#' @aliases print
-#' @param x x
-#' @param ... ...
+#' @param x the thing to be printed
+#' @param ... print.default parameters
 #' @export
-
-
 print.wp_df <- function (x, ...) 
 {
   n <- length(row.names(x))
@@ -19,26 +15,46 @@ print.wp_df <- function (x, ...)
     cat(gettext("<0 rows> (or 0-length row.names)\n"))
   }
   else {
-    #m <- as.matrix(format.data.frame(df, digits = digits, 
-    #                                 na.encode = FALSE))
+    # print options 
+    if ( is.null(wp_cache$printoptions$rows) ) {
+      rows <- 29  
+    }else{
+      rows <- wp_cache$printoptions$rows
+    }
+    if ( is.null(wp_cache$printoptions$rows) ) {
+      width <- floor((options()$width - 51)/2) 
+    }else{
+      width <- wp_cache$printoptions$width
+    }
+    # printing
     m <- as.matrix(x)
     dummy <- function(x){
       ifelse(
-        nchar(x) > 30, 
-        paste(substring(x, 1, 26 ), "..." ),
+        nchar(x) >  width , 
+        paste(substring(x, 1, width ), "..." ),
         x
       )
     }
     m <- apply(m, c(1,2), dummy )
     dimnames(m)[[1L]] <- seq_len(dim(m)[1])
-    #if( dim(m)[1] > 30 ){
-    #  print(m[1:29,], ..., quote = quote, right = right)
-    #  cat(paste0("\n... ", dim(m)[1]-29, " rows of data not shown"))  
-    #}else{
-      print(m, ...)
-    #}
-    
-    
+    if( dim(m)[1] > rows+1 ){
+      text <-  paste0("\n... ", dim(m)[1]-rows, " rows of data not shown")
+      SAMPLE <- sample( seq_along( m[,1] ), rows)
+      m <- m[SAMPLE,]
+      m <- m[order(m[,3], m[,4], m[,1]), ]
+      print( m , ..., quote = FALSE)
+      cat(text)  
+    }else{
+      print(m, ..., quote = FALSE)
+    }
   }
   invisible(df)
+}
+
+#' function for setting print options for print.wp_df()
+#' @export
+#' @param x a list of options, e.g. list(rows=35, width=50) or list(rows=Inf, width=Inf)
+#'        
+wp_set_print_options <- function(x){
+  wp_cache$printoptions <- x
 }

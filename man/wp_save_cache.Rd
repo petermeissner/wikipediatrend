@@ -4,11 +4,7 @@
 \alias{wp_save_cache}
 \title{functio to save cache to file}
 \usage{
-wp_save_cache(file = wp_cache_file())
-}
-\arguments{
-\item{file}{to which file the cache should be saved (wp_cache_file by
-default)}
+wp_save_cache()
 }
 \description{
 functio to save cache to file

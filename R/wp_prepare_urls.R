@@ -4,20 +4,19 @@
 #' @param from from supplied by wp_trend()
 #' @param to to supplied by wp_trend()
 #' @param lang lang supplied by wp_trend()
-#' @param cachedata cache data found in file supplied by file option in wp_trend()
 #' 
-#' #@export
 
-wp_prepare_urls <- function(page, from, to, lang, cachedata=NULL){
+wp_prepare_urls <- function(page, from, to, lang){
   # expand from-date and to-date to sequence of days
   timeframe <- wp_expand_ts(from, to, "day")
   
   # comparing data in cache with data requested
+  cachedata <- wp_get_cache()
   cache_dpoints   <-  unique(
-                        paste(cachedata$date, 
-                              cachedata$lang, 
-                              cachedata$page)
-                      )
+                            paste(cachedata$date, 
+                                  cachedata$lang, 
+                                  cachedata$page)
+                          )
   request_comb <- 
     cbind(
       expand.grid(timeframe, lang, stringsAsFactors=F),

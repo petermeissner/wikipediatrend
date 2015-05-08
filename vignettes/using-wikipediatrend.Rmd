@@ -40,6 +40,7 @@ http://dumps.wikimedia.org/other/pagecounts-raw/ .
 If you think days are crude measures time but seconds might do if need be and info about which article was viewed is useless anyways - go to http://datahub.io/dataset/english-wikipedia-pageviews-by-second . 
 
 
+
 ## Installation
 
 ### stable CRAN version 
@@ -141,7 +142,6 @@ library(ggplot2)
 ggplot(page_views, aes(x=date, y=count, color=wp_year(date))) + 
   geom_line() + 
   stat_smooth(method = "lm", formula = y ~ poly(x, 22), color="#CD0000a0", size=1.2) +
-  ylim(0,6000) +
   theme_bw() 
 ```
 
@@ -192,6 +192,17 @@ Last but not least the cache (file), that might exist across multiple sessions, 
 wp_cache_reset()
 ```
 
+... or set to another file - this option stays for the rest of the R-session or if set to something else again:
+
+```{r}
+wp_set_cache_file("My_Other_Cache_File.csv")
+
+wp_cache_file()
+
+wp_get_cache()
+```
+
+
 
 ## Getting titles of Wikipedia articles in other languages
 
@@ -227,15 +238,14 @@ ggplot(page_views, aes(x=date, y=count, group=lang, color=lang)) +
 ```
 
 
-#### problems with checking for already existing results 
 
 
 
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace
 
-
-
-
-
+<script>
+var elements = document.getElementsByTagName("code");
+</script>
 
 
 

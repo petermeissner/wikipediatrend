@@ -4,7 +4,7 @@
 \alias{wp_prepare_urls}
 \title{function preparing URLs for downlaod}
 \usage{
-wp_prepare_urls(page, from, to, lang, cachedata = NULL)
+wp_prepare_urls(page, from, to, lang)
 }
 \arguments{
 \item{page}{page title supplied by wp_trend()}
@@ -14,10 +14,6 @@ wp_prepare_urls(page, from, to, lang, cachedata = NULL)
 \item{to}{to supplied by wp_trend()}
 
 \item{lang}{lang supplied by wp_trend()}
-
-\item{cachedata}{cache data found in file supplied by file option in wp_trend()
-
-#}
 }
 \description{
 function preparing URLs for downlaod

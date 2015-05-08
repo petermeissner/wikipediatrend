@@ -100,23 +100,21 @@ wp_trend <- function( page ,
   urls <- wp_prepare_urls(page=page, 
                           from=from, 
                           to=to, 
-                          lang=lang, 
-                          cachedata=cache$cache)
+                          lang=lang)
   
   # download data and extract data
-  res <- wp_get_data(urls)
-
-  # saving data in cache or file
-  if ( file != wp_cache_file() ) wp_save(res, file)
-
+  trash <- wp_get_data(urls)
+  
+  # save cache to file and load cache for returning results 
+  res <- wp_get_cache()
+  
   # return
   res <- 
-    cache$cache[ 
-      cache$cache$date <= to & 
-      cache$cache$date >= from &
-      paste( cache$cache$lang, toupper(cache$cache$page))  %in% 
-        paste( lang, toupper(page) ), 
-            ]
+    res[  res$date <= to & 
+          res$date >= from &
+          paste( res$lang, toupper(res$page))  %in% paste( lang, toupper(page) ) 
+          , 
+        ]
   rownames(res) <- NULL
   class(res) <- c("wp_df", "data.frame")
   return(res)

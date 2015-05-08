@@ -9,8 +9,7 @@ wp_jsons_to_df(wp_json, page)
 \arguments{
 \item{wp_json}{The results from server request in JSON format}
 
-\item{page}{the name of the downloaded page
-#}
+\item{page}{the name of the downloaded page}
 }
 \description{
 The function does accepts a list of JSON snippets and transforms the

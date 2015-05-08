@@ -2,7 +2,7 @@
 #' 
 #' 
 #' @param urls urls to be downloeded
-#' #@export
+
 
 wp_get_data <- function(urls){
   tmp <- list()

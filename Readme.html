@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<title>wikipediatrend</title>
+
+<script src="Readme_files/jquery-1.11.0/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="Readme_files/bootstrap-2.3.2/css/bootstrap.min.css" rel="stylesheet" />
+<link href="Readme_files/bootstrap-2.3.2/css/bootstrap-responsive.min.css" rel="stylesheet" />
+<script src="Readme_files/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<link rel="stylesheet"
+      href="Readme_files/highlight/default.css"
+      type="text/css" />
+<script src="Readme_files/highlight/highlight.js"></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<div class="container-fluid main-container">
+
+
+<div id="header">
+<h1 class="title">wikipediatrend</h1>
+</div>
+
+
+<p><strong>Author:</strong> Peter Meißner</p>
+<p><strong>Last update:</strong> 2015-05-09</p>
+<p><strong>Status:</strong> <img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master"></img> <img src="http://cranlogs.r-pkg.org/badges/wikipediatrend"></img> <a href="https://coveralls.io/r/petermeissner/wikipediatrend"><img src="https://coveralls.io/repos/petermeissner/wikipediatrend/badge.svg" alt="Coverage Status" /></a></p>
+<div id="purpose" class="section level1">
+<h1>Purpose</h1>
+<p>The wikipeditrend package is designed around the idea to make Wikipedia page view statistics data availible in R in a most convenient way.</p>
+<p><em>Consequently the package provides</em></p>
+<ul>
+<li>daily page views as data frames</li>
+<li>page views for user set time spans</li>
+<li>page views for multiple articles in one function call</li>
+<li>page views for articles in different language domains</li>
+<li>background caching of results minimize function execution time as well as server burdens</li>
+</ul>
+</div>
+<div id="installation" class="section level1">
+<h1>Installation</h1>
+<p>A stable version of the package can be found on CRAN and installed via …</p>
+<pre class="r"><code>install.packages(&quot;wikipediatrend&quot;)</code></pre>
+<p>… while the current developement version can be retrieved by using <code>install_github()</code> from the devtools package …</p>
+<pre class="r"><code>devtools::install_github(&quot;petermeissner/wikipediatrend&quot;)</code></pre>
+<p>After loading the package several functions are available.</p>
+<pre class="r"><code>library(wikipediatrend)</code></pre>
+</div>
+<div id="usage" class="section level1">
+<h1>Usage:</h1>
+<p>The workhorse of the package is the <code>wp_trend()</code> function:</p>
+<pre class="r"><code>wp &lt;- wp_trend(page = c(&quot;Fever&quot;,&quot;Fieber&quot;), 
+               from = &quot;2013-08-01&quot;, 
+               to   = prev_month_end(), 
+               lang = c(&quot;en&quot;,&quot;de&quot;))</code></pre>
+<pre><code>## .</code></pre>
+<p>The function’s return is a data frame with six variables <em>date</em>, <em>count</em>, <em>project</em>, <em>title</em>, <em>rank</em>, <em>month</em> paralleling the data provided by the stats.grok.se server:</p>
+<pre class="r"><code>head(wp)</code></pre>
+<pre><code>##   date       count lang page  rank month  title
+## 1 2015-01-18 1363  en   Fever 5014 201501 Fever
+## 2 2015-01-19 2036  en   Fever 5014 201501 Fever
+## 3 2015-01-10 1290  en   Fever 5014 201501 Fever
+## 4 2015-01-11 1379  en   Fever 5014 201501 Fever
+## 5 2015-01-12 1901  en   Fever 5014 201501 Fever
+## 6 2015-01-13 1841  en   Fever 5014 201501 Fever</code></pre>
+<pre class="r"><code>library(ggplot2)
+
+ggplot(wp, aes(date, count, group=page, color = page)) + 
+  geom_point() +
+  geom_smooth(method=&quot;lm&quot;, formula = y ~ poly(x, 20), size=1.5) +
+  theme_bw()</code></pre>
+<p><img src="Readme_files/figure-html/unnamed-chunk-6-1.png" /></p>
+</div>
+<div id="vignette" class="section level1">
+<h1>Vignette</h1>
+<p><em>For a more detailed usage have a look at the vignette accompanying the package. <code>vignette(&quot;using-wikipediatrend&quot;, package=&quot;wikipediatrend&quot;)</code></em></p>
+</div>
+<div id="thanks" class="section level1">
+<h1>Thanks</h1>
+<ul>
+<li>Fernando Reis</li>
+<li>Eryk Walczak</li>
+</ul>
+</div>
+<div id="credits" class="section level1">
+<h1>Credits</h1>
+<ul>
+<li>Parts of the package’s code have been shamelessly copied and modified from R base package written by R core team. This concerns the <code>wp_date()</code> generic and its methods and is detailed in the help files.</li>
+</ul>
+<!-- http://www.tandfonline.com/doi/pdf/10.1080/10410236.2011.571759 -->
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

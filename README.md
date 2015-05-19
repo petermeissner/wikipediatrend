@@ -1,13 +1,23 @@
 # wikipediatrend
 
-**Author:** Peter Meißner
+**Author:** <br> Peter Meißner
 
-**Last update:** 2015-05-19
+**Last update:**  <br> 2015-05-19
 
-**Status:**
-<img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master"></img>
-<img src="http://cranlogs.r-pkg.org/badges/wikipediatrend"></img>
-[![Coverage Status](https://coveralls.io/repos/petermeissner/wikipediatrend/badge.svg)](https://coveralls.io/r/petermeissner/wikipediatrend)
+**Status:**  <br> 
+[![Build Status
+](https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master)
+](https://travis-ci.org/petermeissner/wikipediatrend)
+ <br> 
+[![Coverage Status
+](https://coveralls.io/repos/petermeissner/wikipediatrend/badge.svg)
+](https://coveralls.io/r/petermeissner/wikipediatrend)
+ <br> 
+[![Downloads
+](http://cranlogs.r-pkg.org/badges/grand-total/wikipediatrend)
+](http://cranlogs.r-pkg.org/)
+
+
 
 
 
@@ -107,7 +117,7 @@ ggplot(wp, aes(date, count, group=page, color = page)) +
 
 *For a more detailed usage have a look at the vignette accompanying the package. `vignette("using-wikipediatrend", package="wikipediatrend")`*
 
-... or GoTo [CRAN]() or [Github]()
+... or GoTo [CRAN](http://cran.r-project.org/web/packages/wikipediatrend/index.html) or build it from scratch from [Github](https://raw.githubusercontent.com/petermeissner/wikipediatrend/master/vignettes/using-wikipediatrend.Rmd).
 
 
 

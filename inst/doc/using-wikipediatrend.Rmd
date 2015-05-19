@@ -4,10 +4,12 @@ author: "Peter Meißner"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
+    keep_md: true
     fig_caption: yes
     fig_width: 7 
     number_sections: yes
     toc: yes
+    toc_depth: 2
 vignette: >
   %\VignetteIndexEntry{Using Wikipediatrend}
   %\VignetteEngine{knitr::rmarkdown}
@@ -47,22 +49,22 @@ To get further information on the data source (Who? When? How? How good?) there 
 
 # Installation
 
-## stable CRAN version 
+**stable CRAN version**
 
-```{r, eval=FALSE}
+```{r, message=F, eval=FALSE}
 install.packages("wikipediatrend")
 ```
 
-## developemnt version
+**developemnt version**
 
-```{r, eval=FALSE}
+```{r, message=F, eval=FALSE}
 devtools::install_github("petermeissner/wikipediatrend")
 ```
 
-## ... and load it via:
+**... and load it via:**
 
 
-```{r}
+```{r, message=F}
 library(wikipediatrend)
 ```
 
@@ -72,7 +74,7 @@ library(wikipediatrend)
 The workhorse of the package is the `wp_trend()` function that allows you to get page 
 view counts as neat data frames like this:
 
-```{r}
+```{r, message=F}
 page_views <- wp_trend("main_page")
 page_views
 ```
@@ -80,7 +82,7 @@ page_views
 ... that can easily be turned into a plot ... 
 
 
-```{r}
+```{r, message=F}
 library(ggplot2)
 ggplot(page_views, aes(x=date, y=count)) + 
   geom_line(size=1.5, colour="steelblue") + 
@@ -121,12 +123,12 @@ the article is found here:  *"http://en.wikipedia.org/wiki/Millennium_Developmen
 
 To ease data gathering `wp_trend()` `page` accepts whole vectors of page  titles and will retrieve date for each one after another. 
 
-```{r}
+```{r, message=F}
 page_views <- wp_trend( page = c( "Millennium_Development_Goals",
                                   "Climate_Change") )
 ```
 
-```{r}
+```{r, message=F}
 library(ggplot2)
 ggplot(page_views, aes(x=date, y=count, group=page, color=page)) + 
   geom_line(size=1.5) + theme_bw()
@@ -137,14 +139,14 @@ ggplot(page_views, aes(x=date, y=count, group=page, color=page)) +
 
 These two options determine the time frame for which data shall be retrieved. The defaults are set to gather the last 30 days but might be set to cover larger time frames as well. Note, that there is no data prior to December 2007 so that any date prior will be set to this minimum. 
 
-```{r}
+```{r, message=F}
 page_views <- wp_trend( 
                 page = "Millennium_Development_Goals" ,
                 from = "2000-01-01",
                 to   = prev_month_end())
 ```
 
-```{r, warning=FALSE}
+```{r, message=F, warning=FALSE}
 library(ggplot2)
 ggplot(page_views, aes(x=date, y=count, color=wp_year(date))) + 
   geom_line() + 
@@ -157,7 +159,7 @@ ggplot(page_views, aes(x=date, y=count, color=wp_year(date))) +
 
 This option determines for which Wikipedia the page views shall be retrieved, English, German, Chinese, Spanish, ... . The default is set to `"en"` for the English Wikipedia. This option should get one language shorthand that than is used for all pages or for each page a corresponding language shorthand should be specified. 
 
-```{r}
+```{r, message=F}
 page_views <- wp_trend( 
                 page = c("Objetivos_de_Desarrollo_del_Milenio",
                          "Millennium_Development_Goals") ,
@@ -166,7 +168,7 @@ page_views <- wp_trend(
               )
 ```
 
-```{r}
+```{r, message=F}
 library(ggplot2)
 ggplot(page_views, aes(x=date, y=count, group=lang, color=lang, fill=lang)) + 
   geom_smooth(size=1.5) + 
@@ -181,13 +183,13 @@ This last option defines where the package should cache the data to prevent unec
 
 To get the path and name of the default cache file use the `wp_cache_file()` function:
 
-```{r}
+```{r, message=F}
 wp_cache_file()
 ```
 
 While `wp_trend()` will never return more data than specified by options `page`, `lang`, `from`, and `to`  `wp_get_cache()` can be used retrieve all the data cached sofar:
 
-```{r}
+```{r, message=F}
 cache <- wp_get_cache()
 head(cache)
 dim(cache)
@@ -195,13 +197,13 @@ dim(cache)
 
 Last but not least the cache (file), that might exist across multiple sessions, can also be reset:
 
-```{r, eval=FALSE}
+```{r, message=F, eval=FALSE}
 wp_cache_reset()
 ```
 
 ... or set to another file - this option stays for the rest of the R-session or if set to something else again:
 
-```{r}
+```{r, message=F}
 # save apth of curent cache file
 tmp <- wp_cache_file()
 
@@ -222,12 +224,12 @@ wp_get_cache()
 
 
 
-# Getting titles of Wikipedia articles in other languages
+# Counts for other languages
 
 If comparing languages is important one needs to specify the exact article titles for each language: While the article about the Millennium Goals has an English title in the English Wikipedia, it of course is named differently in Spanish, German, Chinese, ... . One might look these titles up by hand or use the handy `wp_linked_pages()` function like this:
 
 
-```{r}
+```{r, message=F}
 titles <- wp_linked_pages("Islamic_State_of_Iraq_and_the_Levant", "en")
 titles <- titles[titles$lang %in% c("en", "de", "es", "ar", "ru"),]
 titles 
@@ -235,14 +237,14 @@ titles
 
 ... than we can use the information to get data for several languages ... 
 
-```{r}
+```{r, message=F}
 page_views <- wp_trend(page = titles$page[1:5], 
                        lang = titles$lang[1:5],
                        from = "2014-08-01")
 ```
 
 
-```{r}
+```{r, message=F}
 library(ggplot2)
 
 for(i in unique(page_views$lang) ){
@@ -260,7 +262,9 @@ ggplot(page_views, aes(x=date, y=count, group=lang, color=lang)) +
 
 
 
-# Identifying time-series anomalies with `BreakoutDetection` by Twitter, Inc.
+# Going beyond Wikipediatrend -- Anomalies and mean shifts
+
+## Identifying time-series anomalies with `BreakoutDetection` by Twitter, Inc.
 
 > [...] BreakoutDetection, an open-source R package that makes breakout detection simple and fast. <br>
 > Source: https://blog.twitter.com/2014/breakout-detection-in-the-wild
@@ -268,7 +272,7 @@ ggplot(page_views, aes(x=date, y=count, group=lang, color=lang)) +
 **Package source:** https://github.com/twitter/BreakoutDetection <br>
 **Package introduction:** https://blog.twitter.com/2014/breakout-detection-in-the-wild
 
-```{r}
+```{r, message=F}
 if ( !require(BreakoutDetection) ){    
   devtools::install_github("twitter/BreakoutDetection")
   library(BreakoutDetection)
@@ -277,9 +281,9 @@ library(dplyr)
 ```
 
 
-# Identifying Anomalies with `AnomalyDetection`
+## Identifying anomalies with `AnomalyDetection`
 
-```{r}
+```{r, message=F}
 if ( !require(AnomalyDetection) ){    
   devtools::install_github("twitter/AnomalyDetection")
   library(AnomalyDetection)

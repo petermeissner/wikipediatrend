@@ -1,0 +1,332 @@
+---
+title: "Using Wikipediatrend"
+author: "Peter Meißner"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    fig_caption: yes
+    fig_width: 7 
+    number_sections: yes
+    toc: yes
+vignette: >
+  %\VignetteIndexEntry{Using Wikipediatrend}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+
+
+> What do Wikipedia's readers care about? Is Britney Spears more popular than Brittany? Is Asia Carrera more popular than Asia? How many people looked at the article on Santa Claus in December? How many looked at the article on Ron Paul?
+> <br> What can you find?
+> <br> *Source:* http://stats.grok.se/ 
+
+
+
+The *wikipediatrend* package provides convenience -- easy and reliable --
+access to the daily page view counts (*Wikipedia article traffic statistics*)
+stored at http://stats.grok.se/ . 
+
+If you want to know how often an article has been viewed over time and 
+work with the data from within R, this package is for you. 
+Maybe you want to compare how much attention articles from different languages got and when, 
+this package is for you.
+Are you up to policy studies or epidemiology? Have a look at page counts for *Flue*, *Ebola*, *Climate Change* or
+*Millennium Development Goals* and maybe build a model or two. Again, this package is for you. 
+
+If you simply want to browse Wikipedia page view statistics without all that coding
+visit http://stats.grok.se/ and have a look around. 
+
+If non-big data is not an option get the raw data in their entity at 
+http://dumps.wikimedia.org/other/pagecounts-raw/ . 
+
+If you think days are crude measures time but seconds might do if need be and info about which article was viewed is useless anyways - go to http://datahub.io/dataset/english-wikipedia-pageviews-by-second . 
+
+To get further information on the data source (Who? When? How? How good?) there is a Wikipedia article for that: http://en.wikipedia.org/wiki/Wikipedia:Pageview_statistics and another one: http://en.wikipedia.org/wiki/Wikipedia:About_page_view_statistics .
+
+
+
+# Installation
+
+## stable CRAN version 
+
+```{r, eval=FALSE}
+install.packages("wikipediatrend")
+```
+
+## developemnt version
+
+```{r, eval=FALSE}
+devtools::install_github("petermeissner/wikipediatrend")
+```
+
+## ... and load it via:
+
+
+```{r}
+library(wikipediatrend)
+```
+
+
+# A first try
+
+The workhorse of the package is the `wp_trend()` function that allows you to get page 
+view counts as neat data frames like this:
+
+```{r}
+page_views <- wp_trend("main_page")
+page_views
+```
+
+... that can easily be turned into a plot ... 
+
+
+```{r}
+library(ggplot2)
+ggplot(page_views, aes(x=date, y=count)) + 
+  geom_line(size=1.5, colour="steelblue") + 
+  geom_smooth(method="loess", colour="#00000000", fill="#001090", alpha=0.1) +
+  scale_y_continuous( breaks=c(10e6, 15e6, 20e6), 
+                      label=c("10 M","15 M","20 M")) +
+  theme_bw()
+```
+
+
+# `wp_trend()` options
+
+`wp_trend()` has several options and most of them are set to defaults: 
+
+page , 
+                      from        = prev_month_start(), 
+                      to          = prev_month_end(),
+                      lang        = "en", 
+                      file        = wp_cache_file(), 
+                      
+
+- `page`
+- `from = Sys.Date() - 30`
+- `to   = Sys.Date()`
+- `lang = "en"`
+- `file = wp_cache_file()`
+- ~~`friendly`~~ *deprecated*
+- ~~`requestFrom`~~ *deprecated*
+- ~~`userAgent`~~ *deprecated*
+
+## `page`
+
+The `page` option allows to specify one or more article titles for which data should be retrieved. 
+
+These titles should be in the same format as shown in the address bar of your browser to ensure that the pages are found. 
+If we want to get page views for the United Nations Millennium Development Goals and 
+the article is found here:  *"http://en.wikipedia.org/wiki/Millennium_Development_Goals"* the page title to pass to `wp_trend()` should be *Millennium_Development_Goals* not *Millennium Development Goals* or *Millennium_development_goals* or amy other *'mostly-like-the-original'* variation. 
+
+To ease data gathering `wp_trend()` `page` accepts whole vectors of page  titles and will retrieve date for each one after another. 
+
+```{r}
+page_views <- wp_trend( page = c( "Millennium_Development_Goals",
+                                  "Climate_Change") )
+```
+
+```{r}
+library(ggplot2)
+ggplot(page_views, aes(x=date, y=count, group=page, color=page)) + 
+  geom_line(size=1.5) + theme_bw()
+```
+
+
+## `from` and `to`
+
+These two options determine the time frame for which data shall be retrieved. The defaults are set to gather the last 30 days but might be set to cover larger time frames as well. Note, that there is no data prior to December 2007 so that any date prior will be set to this minimum. 
+
+```{r}
+page_views <- wp_trend( 
+                page = "Millennium_Development_Goals" ,
+                from = "2000-01-01",
+                to   = prev_month_end())
+```
+
+```{r, warning=FALSE}
+library(ggplot2)
+ggplot(page_views, aes(x=date, y=count, color=wp_year(date))) + 
+  geom_line() + 
+  stat_smooth(method = "lm", formula = y ~ poly(x, 22), color="#CD0000a0", size=1.2) +
+  theme_bw() 
+```
+
+
+## `lang`
+
+This option determines for which Wikipedia the page views shall be retrieved, English, German, Chinese, Spanish, ... . The default is set to `"en"` for the English Wikipedia. This option should get one language shorthand that than is used for all pages or for each page a corresponding language shorthand should be specified. 
+
+```{r}
+page_views <- wp_trend( 
+                page = c("Objetivos_de_Desarrollo_del_Milenio",
+                         "Millennium_Development_Goals") ,
+                lang = c("es", "en"),
+                from = Sys.Date()-100
+              )
+```
+
+```{r}
+library(ggplot2)
+ggplot(page_views, aes(x=date, y=count, group=lang, color=lang, fill=lang)) + 
+  geom_smooth(size=1.5) + 
+  geom_point() +
+  theme_bw() 
+```
+
+
+## `file`
+
+This last option defines where the package should cache the data to prevent unecessary downloads of already existing data. The default is to use and reuse a file in the temporary folder but can be replaced by any valid filename, e.g. `file = MyCache.csv`.
+
+To get the path and name of the default cache file use the `wp_cache_file()` function:
+
+```{r}
+wp_cache_file()
+```
+
+While `wp_trend()` will never return more data than specified by options `page`, `lang`, `from`, and `to`  `wp_get_cache()` can be used retrieve all the data cached sofar:
+
+```{r}
+cache <- wp_get_cache()
+head(cache)
+dim(cache)
+```
+
+Last but not least the cache (file), that might exist across multiple sessions, can also be reset:
+
+```{r, eval=FALSE}
+wp_cache_reset()
+```
+
+... or set to another file - this option stays for the rest of the R-session or if set to something else again:
+
+```{r}
+# save apth of curent cache file
+tmp <- wp_cache_file()
+
+# set cache file 
+wp_set_cache_file("My_Other_Cache_File.csv")
+
+wp_cache_file()
+
+wp_get_cache()
+
+# set cache file back
+wp_set_cache_file(tmp)
+
+wp_cache_file()
+
+wp_get_cache()
+```
+
+
+
+# Getting titles of Wikipedia articles in other languages
+
+If comparing languages is important one needs to specify the exact article titles for each language: While the article about the Millennium Goals has an English title in the English Wikipedia, it of course is named differently in Spanish, German, Chinese, ... . One might look these titles up by hand or use the handy `wp_linked_pages()` function like this:
+
+
+```{r}
+titles <- wp_linked_pages("Islamic_State_of_Iraq_and_the_Levant", "en")
+titles <- titles[titles$lang %in% c("en", "de", "es", "ar", "ru"),]
+titles 
+```
+
+... than we can use the information to get data for several languages ... 
+
+```{r}
+page_views <- wp_trend(page = titles$page[1:5], 
+                       lang = titles$lang[1:5],
+                       from = "2014-08-01")
+```
+
+
+```{r}
+library(ggplot2)
+
+for(i in unique(page_views$lang) ){
+  iffer <- page_views$lang==i
+  page_views[iffer, ]$count <- scale(page_views[iffer, ]$count)
+}
+
+ggplot(page_views, aes(x=date, y=count, group=lang, color=lang)) + 
+  geom_line(size=1.2, alpha=0.5) + 
+  ylab("standardized count\n(by lang: m=0, var=1)") +
+  theme_bw() + 
+  scale_colour_brewer(palette="Set1") + 
+  guides(colour = guide_legend(override.aes = list(alpha = 1)))
+```
+
+
+
+# Identifying time-series anomalies with `BreakoutDetection` by Twitter, Inc.
+
+> [...] BreakoutDetection, an open-source R package that makes breakout detection simple and fast. <br>
+> Source: https://blog.twitter.com/2014/breakout-detection-in-the-wild
+
+**Package source:** https://github.com/twitter/BreakoutDetection <br>
+**Package introduction:** https://blog.twitter.com/2014/breakout-detection-in-the-wild
+
+```{r}
+if ( !require(BreakoutDetection) ){    
+  devtools::install_github("twitter/BreakoutDetection")
+  library(BreakoutDetection)
+}
+library(dplyr)
+```
+
+
+# Identifying Anomalies with `AnomalyDetection`
+
+```{r}
+if ( !require(AnomalyDetection) ){    
+  devtools::install_github("twitter/AnomalyDetection")
+  library(AnomalyDetection)
+}
+library(dplyr)
+library(ggplot2)
+
+
+page_views <- wp_trend("Wikipedia:Pageview_statistics", from = "2012-01-01")
+
+page_views_br <- 
+  page_views  %>% 
+  select(date, count)  %>% 
+  rename(timestamp=date)  %>% 
+  unclass()  %>% 
+  as.data.frame() %>% 
+  mutate(timestamp = as.POSIXct(timestamp))
+
+res <- AnomalyDetectionTs(page_views_br, plot=TRUE, longterm=T)$anoms
+res$timestamp <- as.Date(res$timestamp)
+
+ggplot( data=page_views, aes(x=date, y=count) ) + 
+  #geom_smooth(color="#4D87B740", fill="#4D87B740") +
+  geom_smooth(
+    data=filter(page_views, !(page_views$date %in% res$timestamp) ), 
+    aes(x=date, y=count), color="#EE000040", fill="#EE000040") +
+  geom_point(data=res, aes(x=timestamp, y=anoms),color="red2",size=3) +
+  theme_bw() + stat_smooth(level=1-1e-15)
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

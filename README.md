@@ -68,48 +68,6 @@ wp <- wp_trend(page = c("Fever","Fieber"),
 ```
 
 ```
-## http://stats.grok.se/json/en/201308/Fever
-## http://stats.grok.se/json/en/201309/Fever
-## http://stats.grok.se/json/en/201310/Fever
-## http://stats.grok.se/json/en/201311/Fever
-## http://stats.grok.se/json/en/201312/Fever
-## http://stats.grok.se/json/en/201401/Fever
-## http://stats.grok.se/json/en/201402/Fever
-## http://stats.grok.se/json/en/201403/Fever
-## http://stats.grok.se/json/en/201404/Fever
-## http://stats.grok.se/json/en/201405/Fever
-## http://stats.grok.se/json/en/201406/Fever
-## http://stats.grok.se/json/en/201407/Fever
-## http://stats.grok.se/json/en/201408/Fever
-## http://stats.grok.se/json/en/201409/Fever
-## http://stats.grok.se/json/en/201410/Fever
-## http://stats.grok.se/json/en/201411/Fever
-## http://stats.grok.se/json/en/201412/Fever
-## http://stats.grok.se/json/en/201501/Fever
-## http://stats.grok.se/json/en/201502/Fever
-## http://stats.grok.se/json/en/201503/Fever
-## http://stats.grok.se/json/en/201504/Fever
-## http://stats.grok.se/json/de/201308/Fieber
-## http://stats.grok.se/json/de/201309/Fieber
-## http://stats.grok.se/json/de/201310/Fieber
-## http://stats.grok.se/json/de/201311/Fieber
-## http://stats.grok.se/json/de/201312/Fieber
-## http://stats.grok.se/json/de/201401/Fieber
-## http://stats.grok.se/json/de/201402/Fieber
-## http://stats.grok.se/json/de/201403/Fieber
-## http://stats.grok.se/json/de/201404/Fieber
-## http://stats.grok.se/json/de/201405/Fieber
-## http://stats.grok.se/json/de/201406/Fieber
-## http://stats.grok.se/json/de/201407/Fieber
-## http://stats.grok.se/json/de/201408/Fieber
-## http://stats.grok.se/json/de/201409/Fieber
-## http://stats.grok.se/json/de/201410/Fieber
-## http://stats.grok.se/json/de/201411/Fieber
-## http://stats.grok.se/json/de/201412/Fieber
-## http://stats.grok.se/json/de/201501/Fieber
-## http://stats.grok.se/json/de/201502/Fieber
-## http://stats.grok.se/json/de/201503/Fieber
-## http://stats.grok.se/json/de/201504/Fieber
 ## .
 ```
 
@@ -149,7 +107,7 @@ ggplot(wp, aes(date, count, group=page, color = page)) +
 
 *For a more detailed usage have a look at the vignette accompanying the package. `vignette("using-wikipediatrend", package="wikipediatrend")`*
 
-
+... or GoTo [CRAN]() or [Github]()
 
 
 

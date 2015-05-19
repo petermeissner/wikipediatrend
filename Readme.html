@@ -95,49 +95,7 @@ img {
                from = &quot;2013-08-01&quot;, 
                to   = prev_month_end(), 
                lang = c(&quot;en&quot;,&quot;de&quot;))</code></pre>
-<pre><code>## http://stats.grok.se/json/en/201308/Fever
-## http://stats.grok.se/json/en/201309/Fever
-## http://stats.grok.se/json/en/201310/Fever
-## http://stats.grok.se/json/en/201311/Fever
-## http://stats.grok.se/json/en/201312/Fever
-## http://stats.grok.se/json/en/201401/Fever
-## http://stats.grok.se/json/en/201402/Fever
-## http://stats.grok.se/json/en/201403/Fever
-## http://stats.grok.se/json/en/201404/Fever
-## http://stats.grok.se/json/en/201405/Fever
-## http://stats.grok.se/json/en/201406/Fever
-## http://stats.grok.se/json/en/201407/Fever
-## http://stats.grok.se/json/en/201408/Fever
-## http://stats.grok.se/json/en/201409/Fever
-## http://stats.grok.se/json/en/201410/Fever
-## http://stats.grok.se/json/en/201411/Fever
-## http://stats.grok.se/json/en/201412/Fever
-## http://stats.grok.se/json/en/201501/Fever
-## http://stats.grok.se/json/en/201502/Fever
-## http://stats.grok.se/json/en/201503/Fever
-## http://stats.grok.se/json/en/201504/Fever
-## http://stats.grok.se/json/de/201308/Fieber
-## http://stats.grok.se/json/de/201309/Fieber
-## http://stats.grok.se/json/de/201310/Fieber
-## http://stats.grok.se/json/de/201311/Fieber
-## http://stats.grok.se/json/de/201312/Fieber
-## http://stats.grok.se/json/de/201401/Fieber
-## http://stats.grok.se/json/de/201402/Fieber
-## http://stats.grok.se/json/de/201403/Fieber
-## http://stats.grok.se/json/de/201404/Fieber
-## http://stats.grok.se/json/de/201405/Fieber
-## http://stats.grok.se/json/de/201406/Fieber
-## http://stats.grok.se/json/de/201407/Fieber
-## http://stats.grok.se/json/de/201408/Fieber
-## http://stats.grok.se/json/de/201409/Fieber
-## http://stats.grok.se/json/de/201410/Fieber
-## http://stats.grok.se/json/de/201411/Fieber
-## http://stats.grok.se/json/de/201412/Fieber
-## http://stats.grok.se/json/de/201501/Fieber
-## http://stats.grok.se/json/de/201502/Fieber
-## http://stats.grok.se/json/de/201503/Fieber
-## http://stats.grok.se/json/de/201504/Fieber
-## .</code></pre>
+<pre><code>## .</code></pre>
 <p>The function’s return is a data frame with six variables <em>date</em>, <em>count</em>, <em>project</em>, <em>title</em>, <em>rank</em>, <em>month</em> paralleling the data provided by the stats.grok.se server:</p>
 <pre class="r"><code>head(wp)</code></pre>
 <pre><code>##   date       count lang page  rank month  title
@@ -158,6 +116,7 @@ ggplot(wp, aes(date, count, group=page, color = page)) +
 <div id="vignette" class="section level1">
 <h1>Vignette</h1>
 <p><em>For a more detailed usage have a look at the vignette accompanying the package. <code>vignette(&quot;using-wikipediatrend&quot;, package=&quot;wikipediatrend&quot;)</code></em></p>
+<p>… or GoTo <a href>CRAN</a> or <a href>Github</a></p>
 </div>
 <div id="some-examples-for-using-page-view-statistics" class="section level1">
 <h1>Some examples for using page view statistics</h1>

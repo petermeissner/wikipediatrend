@@ -34,11 +34,10 @@ Temporary Items
 .Rproj.user
 devel/
 /wp*.csv
-inst/doc
+# inst/doc
 Readme_cache/html/*
 travischeck.svg
 R/pversion_inc.R
 man/pversion_inc.Rd
-R/DESCRIPTION
 R/aa_pversion_inc.r
-text.csv
+

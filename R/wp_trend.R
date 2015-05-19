@@ -23,7 +23,19 @@
 #'   character. If the option is of type character it should be in the form of 
 #'   yyyy-mm-dd.
 #'   
-#' @param file Where to cache/store the retrieved data? By default a temporary file is used for as long as the R session takes place. The data is stored in CSV format. If an already existing file is used for storage, the old data will not be deleted but instead new data will be added to this file. 
+#' @param file Where to cache/store the retrieved data? By default a file within 
+#'   the user folder is used for as long as the R session takes place. The data 
+#'   is stored in CSV format. If an already existing file is used for storage, 
+#'   the old data will not be deleted but instead new data will be added to this 
+#'   file. 
+#'   
+#'   path to your current cache file:\cr
+#'   \code{wp_cache_file()}\cr
+#'   \code{dirname(wp_cache_file())}
+#'   
+#'
+#'   browse to the folder containing you current cache file:\cr
+#'   \code{browseURL(wp_cache_file())}
 #'
 #' @param friendly deprecated
 #' @param requestFrom deprecated
@@ -31,12 +43,12 @@
 #'
 #' @examples 
 #' library(wikipediatrend)
-# wp_trend(page        = "Main_Page", 
-#          from        = "2014-11-01", 
-#          to          = "2014-11-30", 
-#          lang        = "en",
-#          file        = wp_cache_file()
-#          )
+#' wp_trend(page        = c("Cheese", "K\u00e4se"),
+#'          from        = "2014-11-01", 
+#'          to          = "2014-11-30", 
+#'          lang        = c("en", "de"),
+#'          file        = wp_cache_file()
+#'          )
 #'          
 #' @export
 
@@ -95,13 +107,18 @@ wp_trend <- function( page ,
       page[i] <- URLencode(page[i])
     }
   }
-  
+
+  # setting cache-file (if necessary)
+  if ( file != wp_cache_file() ){
+    wp_set_cache_file(file)
+  }
+    
   # prepare URLs
   urls <- wp_prepare_urls(page=page, 
                           from=from, 
                           to=to, 
                           lang=lang)
-  
+
   # download data and extract data
   trash <- wp_get_data(urls)
   

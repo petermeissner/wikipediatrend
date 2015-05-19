@@ -2,7 +2,6 @@
 ^\.Rproj\.user$
 devel/.*$
 data-raw/.*$
-README.html
 README.Rmd
 ^\.travis\.yml$
 cran-comments.md

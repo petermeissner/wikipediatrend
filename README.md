@@ -2,12 +2,15 @@
 
 **Author:** Peter Meißner
 
-**Last update:** 2015-05-09
+**Last update:** 2015-05-19
 
 **Status:**
 <img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master"></img>
 <img src="http://cranlogs.r-pkg.org/badges/wikipediatrend"></img>
 [![Coverage Status](https://coveralls.io/repos/petermeissner/wikipediatrend/badge.svg)](https://coveralls.io/r/petermeissner/wikipediatrend)
+
+
+
 
 # Purpose
 
@@ -19,7 +22,11 @@ The wikipeditrend package is designed around the idea to make Wikipedia page vie
 - page views for user set time spans
 - page views for multiple articles in one function call
 - page views for articles in different language domains 
-- background caching of results minimize function execution time as well as server burdens
+- background caching of results to minimize function execution time as well as server burdens
+
+
+
+
 
 
 # Installation 
@@ -44,6 +51,9 @@ After loading the package several functions are available.
 library(wikipediatrend)
 ```
 
+
+
+
 # Usage:
 
 
@@ -58,6 +68,48 @@ wp <- wp_trend(page = c("Fever","Fieber"),
 ```
 
 ```
+## http://stats.grok.se/json/en/201308/Fever
+## http://stats.grok.se/json/en/201309/Fever
+## http://stats.grok.se/json/en/201310/Fever
+## http://stats.grok.se/json/en/201311/Fever
+## http://stats.grok.se/json/en/201312/Fever
+## http://stats.grok.se/json/en/201401/Fever
+## http://stats.grok.se/json/en/201402/Fever
+## http://stats.grok.se/json/en/201403/Fever
+## http://stats.grok.se/json/en/201404/Fever
+## http://stats.grok.se/json/en/201405/Fever
+## http://stats.grok.se/json/en/201406/Fever
+## http://stats.grok.se/json/en/201407/Fever
+## http://stats.grok.se/json/en/201408/Fever
+## http://stats.grok.se/json/en/201409/Fever
+## http://stats.grok.se/json/en/201410/Fever
+## http://stats.grok.se/json/en/201411/Fever
+## http://stats.grok.se/json/en/201412/Fever
+## http://stats.grok.se/json/en/201501/Fever
+## http://stats.grok.se/json/en/201502/Fever
+## http://stats.grok.se/json/en/201503/Fever
+## http://stats.grok.se/json/en/201504/Fever
+## http://stats.grok.se/json/de/201308/Fieber
+## http://stats.grok.se/json/de/201309/Fieber
+## http://stats.grok.se/json/de/201310/Fieber
+## http://stats.grok.se/json/de/201311/Fieber
+## http://stats.grok.se/json/de/201312/Fieber
+## http://stats.grok.se/json/de/201401/Fieber
+## http://stats.grok.se/json/de/201402/Fieber
+## http://stats.grok.se/json/de/201403/Fieber
+## http://stats.grok.se/json/de/201404/Fieber
+## http://stats.grok.se/json/de/201405/Fieber
+## http://stats.grok.se/json/de/201406/Fieber
+## http://stats.grok.se/json/de/201407/Fieber
+## http://stats.grok.se/json/de/201408/Fieber
+## http://stats.grok.se/json/de/201409/Fieber
+## http://stats.grok.se/json/de/201410/Fieber
+## http://stats.grok.se/json/de/201411/Fieber
+## http://stats.grok.se/json/de/201412/Fieber
+## http://stats.grok.se/json/de/201501/Fieber
+## http://stats.grok.se/json/de/201502/Fieber
+## http://stats.grok.se/json/de/201503/Fieber
+## http://stats.grok.se/json/de/201504/Fieber
 ## .
 ```
 
@@ -70,12 +122,12 @@ head(wp)
 
 ```
 ##   date       count lang page  rank month  title
-## 1 2015-01-18 1363  en   Fever 5014 201501 Fever
-## 2 2015-01-19 2036  en   Fever 5014 201501 Fever
-## 3 2015-01-10 1290  en   Fever 5014 201501 Fever
-## 4 2015-01-11 1379  en   Fever 5014 201501 Fever
-## 5 2015-01-12 1901  en   Fever 5014 201501 Fever
-## 6 2015-01-13 1841  en   Fever 5014 201501 Fever
+## 1 2013-08-26 2993  en   Fever 5014 201308 Fever
+## 2 2013-08-27 3153  en   Fever 5014 201308 Fever
+## 3 2013-08-28 2984  en   Fever 5014 201308 Fever
+## 4 2013-08-19 3229  en   Fever 5014 201308 Fever
+## 5 2013-08-18 2700  en   Fever 5014 201308 Fever
+## 6 2013-08-31 2441  en   Fever 5014 201308 Fever
 ```
 
 
@@ -90,14 +142,42 @@ ggplot(wp, aes(date, count, group=page, color = page)) +
 
 ![](Readme_files/figure-html/unnamed-chunk-6-1.png) 
 
+
+
+
 # Vignette
 
 *For a more detailed usage have a look at the vignette accompanying the package. `vignette("using-wikipediatrend", package="wikipediatrend")`*
 
-# Thanks
 
-- Fernando Reis
-- Eryk Walczak
+
+
+
+# Some examples for using page view statistics
+
+
+- Mellon, Jonathan (2014) *Internet Search Data and Issue Salience: The Properties of Google Trends as a Measure of Issue Salience* Journal of Elections, Public Opinion and Parties 24(1):4572.
+http://www.tandfonline.com/doi/abs/10.1080/17457289.2013.846346 
+
+- Ripberger, Joseph T. (2011): *Capturing curiosity: using Internet search trends to measure public attentiveness*. Policy Studies Journal 39(2):239-259.
+http://onlinelibrary.wiley.com/doi/10.1111/j.1541-0072.2011.00406.x/full
+
+- Yla Tausczik, Kate Faasse, James W. Pennebaker, Keith J. Petrie (2012): *Public Anxiety and Information Seeking Following the H1N1 Outbreak: Blogs, Newspaper Articles, and Wikipedia Visits*. Health Communication, Vol. 27, Iss. 2.
+ http://www.tandfonline.com/doi/pdf/10.1080/10410236.2011.571759
+
+- Taha Yasseri and Jonathan Bright (2015): *Predicting elections from online information flows: towards theoretically informed models*. http://arxiv.org/abs/1505.01818
+
+ 
+
+
+
+
+# Thanks 
+
+Fernando Reis, Eryk Walczak, Simon Munzert
+
+
+
 
 
 # Credits
@@ -106,7 +186,7 @@ ggplot(wp, aes(date, count, group=page, color = page)) +
 
 
 
-<!-- http://www.tandfonline.com/doi/pdf/10.1080/10410236.2011.571759 -->
+
 
 
 

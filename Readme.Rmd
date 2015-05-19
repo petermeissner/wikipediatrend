@@ -1,9 +1,9 @@
 ---
-title: wikipediatrend
+title: "wikipediatrend"
 output:
   html_document:
     keep_md: yes
-    self_contained: no
+    self_contained: yes
 ---
 
 **Author:** Peter Meißner
@@ -15,6 +15,9 @@ output:
 <img src="http://cranlogs.r-pkg.org/badges/wikipediatrend"></img>
 [![Coverage Status](https://coveralls.io/repos/petermeissner/wikipediatrend/badge.svg)](https://coveralls.io/r/petermeissner/wikipediatrend)
 
+
+
+
 # Purpose
 
 The wikipeditrend package is designed around the idea to make Wikipedia page view statistics data availible in R in a most convenient way. 
@@ -25,7 +28,11 @@ The wikipeditrend package is designed around the idea to make Wikipedia page vie
 - page views for user set time spans
 - page views for multiple articles in one function call
 - page views for articles in different language domains 
-- background caching of results minimize function execution time as well as server burdens
+- background caching of results to minimize function execution time as well as server burdens
+
+
+
+
 
 
 # Installation 
@@ -46,6 +53,9 @@ After loading the package several functions are available.
 ```{r, error=TRUE, message=FALSE}
 library(wikipediatrend)
 ```
+
+
+
 
 # Usage:
 
@@ -74,14 +84,42 @@ ggplot(wp, aes(date, count, group=page, color = page)) +
   theme_bw()
 ```
 
+
+
+
 # Vignette
 
 *For a more detailed usage have a look at the vignette accompanying the package. `vignette("using-wikipediatrend", package="wikipediatrend")`*
 
-# Thanks
+... or GoTo [CRAN]() or [Github]()
 
-- Fernando Reis
-- Eryk Walczak
+
+
+# Some examples for using page view statistics
+
+
+- Mellon, Jonathan (2014) *Internet Search Data and Issue Salience: The Properties of Google Trends as a Measure of Issue Salience* Journal of Elections, Public Opinion and Parties 24(1):45–72.
+http://www.tandfonline.com/doi/abs/10.1080/17457289.2013.846346 
+
+- Ripberger, Joseph T. (2011): *Capturing curiosity: using Internet search trends to measure public attentiveness*. Policy Studies Journal 39(2):239-259.
+http://onlinelibrary.wiley.com/doi/10.1111/j.1541-0072.2011.00406.x/full
+
+- Yla Tausczik, Kate Faasse, James W. Pennebaker, Keith J. Petrie (2012): *Public Anxiety and Information Seeking Following the H1N1 Outbreak: Blogs, Newspaper Articles, and Wikipedia Visits*. Health Communication, Vol. 27, Iss. 2.
+ http://www.tandfonline.com/doi/pdf/10.1080/10410236.2011.571759
+
+- Taha Yasseri and Jonathan Bright (2015): *Predicting elections from online information flows: towards theoretically informed models*. http://arxiv.org/abs/1505.01818
+
+ 
+
+
+
+
+# Thanks 
+
+Fernando Reis, Eryk Walczak, Simon Munzert
+
+
+
 
 
 # Credits
@@ -90,7 +128,7 @@ ggplot(wp, aes(date, count, group=page, color = page)) +
 
 
 
-<!-- http://www.tandfonline.com/doi/pdf/10.1080/10410236.2011.571759 -->
+
 
 
 

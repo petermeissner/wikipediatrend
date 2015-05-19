@@ -6,6 +6,8 @@ sudo: required
 
 r_github_packages:
   - jimhester/covr
+  - twitter/AnomalyDetection
+  - twitter/BreakoutDetection
 
 after_success:
   - Rscript -e 'library(covr);coveralls()'

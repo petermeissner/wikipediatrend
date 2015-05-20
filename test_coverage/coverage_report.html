@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>testCoverage Report wikipediatrend</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.1/themes/black-tie/jquery-ui.css" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+	  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script><!--<script>
+        $(function() {
+          $( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
+          $( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
+        });
+    </script>-->
+    <style>
+	.footer {
+		padding-top: 19px;
+		color: #777;
+		border-top: 1px solid #e5e5e5;
+	}
+  .btn,
+  .nav-pills>li>a,
+  .ui-corner-all,
+  .ui-corner-top,
+  .ui-corner-left,
+  .ui-corner-tl {
+    border-radius: 0;
+  }
+  .ui-widget-header {
+    border: 1px solid #aaa;
+  	background: #FAA531;
+  	color: #222222;
+  	font-weight: bold;
+  }
+  .fail {
+    color: #A94442;
+  background-color: #F2DEDE;
+  }
+  .pass {
+    color: #3C763D;
+  background-color: #DFF0D8;
+  }
+    </style>
+</head>
+<body>
+  <script>
+  var tagList = ["2_20","2_23","2_36","2_39","2_68","2_81","2_84","2_104","2_118","2_136","2_151","2_193","2_208","2_214","2_251","2_254","2_267","2_270","2_283","2_320","2_323","2_326","2_340","2_389","2_392","2_411","2_429","2_469","2_472","2_480","2_524","2_527","2_540","2_558","2_561","2_582","2_607","2_610","2_613","2_616","2_621","2_673","2_676","2_679","2_682","2_690","2_742","2_747","2_768","2_799","2_802","2_821","2_824","2_832","2_870","2_873","3_49","3_52","3_65","3_68","3_88","3_98","3_116","3_141","3_151","3_165","3_168","3_192","3_202","3_216","3_219","3_245","3_255","3_266","3_269","3_290","3_300","3_311","3_314","3_333","3_336","4_39","4_50","4_65","4_69","4_72","4_91","4_94","4_97","4_235","4_300","4_310","4_313","4_340","4_343","4_371","4_428","4_439","4_456","4_473","4_490","4_500","4_503","4_520","4_523","4_526","4_556","4_559","4_568","4_571","4_587","4_669","4_681","4_696","4_758","4_776","4_779","4_797","4_800","4_803","4_822","4_836","4_849","4_852","4_855","4_858","4_861","4_864","4_876","4_888","4_925","4_928","4_957","4_960","4_968","4_971","4_1036","4_1039","4_1107","4_1117","4_1120","4_1123","4_1165","4_1190","4_1193","4_1257","4_1348","4_1395","4_1440","4_1451","4_1466","4_1469","4_1550","4_1590","4_1638","4_1649","4_1664","4_1667","4_1769","4_1817","4_1828","4_1845","4_1851","4_1854","4_1883","4_1907","4_1914","4_1917","4_1982","4_1985","4_1988","4_2007","4_2013","4_2016","4_2045","4_2069","4_2076","4_2079","4_2160","4_2202","4_2252","4_2263","4_2278","4_2281","5_27","5_30","5_33","5_52","5_69","5_72","5_75","5_139","5_149","5_152","5_175","5_178","5_206","5_209","5_225","5_241","5_244","5_266","5_269","5_285","5_288","5_292","5_327","5_330","5_353","5_356","5_369","5_379","5_383","5_400","5_403","5_454","5_457","5_465","5_510","5_513","5_539","5_556","5_567","5_570","5_578","5_611","5_614","5_617","5_620","5_648","5_651","5_666","5_669","5_672","5_675","5_689","5_703","5_728","5_752","5_771","5_813","5_864","6_36","6_39","6_66","6_68","6_81","6_84","6_94","6_100","6_106","6_110","6_125","6_128","6_167","6_170","6_186","6_209","7_46","7_49","7_52","7_64","7_86","8_27","8_30","8_45","8_47","8_60","8_63","8_76","8_79","8_110","8_118","8_135","8_138","8_166","8_169","8_206","8_218","9_22","9_29","9_33","9_52","9_77","9_100","9_123","10_44","10_57","10_61","10_69","10_97","10_109","10_137","10_140","10_157","10_160","10_180","10_183","10_188","10_191","10_194","10_213","10_216","10_231","10_250","10_261","10_272","10_293","10_327","10_344","10_347","10_357","10_360","10_389","10_403","10_406","10_425","10_428","10_431","10_456","10_459","10_462","10_466","10_469","10_493","10_496","10_525","10_539","10_542","10_561","10_564","10_589","10_592","10_626","10_629","10_632","10_636","10_639","10_663","10_666","11_15","11_22","11_25","11_60","11_67","11_70","12_41","12_44","12_60","12_83","12_88","12_104","12_107","12_142","12_145","12_176","12_181","12_191","12_194","12_215","12_220","12_238","12_243","12_256","12_260","12_266","12_279","12_298","12_311","12_352","12_358","12_361","12_397","12_413","12_434","12_437","12_440","12_443","12_487","12_506","12_524","13_27","13_37","13_48","13_51","13_72","13_109","13_112","13_175","13_178","13_186","13_222","13_225","13_228","13_244","13_272","13_292","13_295","13_322","13_325","13_344","13_391","13_396","13_470","13_482","13_485","13_503","13_506","13_528","13_543","13_546","13_564","13_569","13_587","13_590","13_600","13_620","13_623","13_634","13_656","13_659","13_662","13_691","13_694","13_699","13_725","13_733","13_736","13_749","13_801","13_815","13_818","13_838","13_900","13_919","13_922","13_937","13_940","13_961","13_964","13_985","13_988","13_1009","13_1044","13_1047","13_1066","13_1069","13_1089","13_1092","13_1120","13_1138","13_1161","13_1164","13_1184","13_1202","13_1278","13_1299","13_1302","13_1318","14_45","14_48","14_76","14_79","14_89","14_92","14_96","14_99","14_108","14_117","14_135","14_139","14_143","14_168","14_225","14_248","14_251","14_283","14_288","14_307","14_311","14_315","14_319","14_328","14_331","14_344","14_381","14_384","14_404","14_421","14_424","14_427","14_456","14_476","15_235","15_248","15_266","15_279","15_297","15_310","15_328","15_331","15_341","15_352","15_378","15_381","15_402","15_405","15_431","15_436","15_449","15_452","15_483","15_488","15_513","15_515","15_533","15_536","15_569","15_572","15_611","15_614","15_625","15_649","15_652","15_696","15_699","15_717","15_720","15_735","15_739","15_742","15_753","15_765","15_768","15_776","15_779","15_793","15_801","15_854","15_872","16_14","16_23"];
+var sumTags = [1,1,1,1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,1,1,1,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var allTags = [[1,1,1,1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,1,1,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
+var coverage = [[[0,0],[15,41],[0,25],[6,97],[0,58],[0,16],[0,5],[0,16],[0,7],[0,54],[0,6],[0,35],[55,23],[0,34],[0,47],[0,2]],[[0,0],[0,56],[0,25],[0,103],[0,58],[0,16],[0,5],[0,16],[7,0],[54,0],[0,6],[0,35],[0,78],[0,34],[0,47],[0,2]],[[0,0],[0,56],[21,4],[40,63],[0,58],[0,16],[0,5],[0,16],[0,7],[0,54],[0,6],[0,35],[0,78],[0,34],[0,47],[0,2]]];
+var all_coverage = [[0,0],[15,41],[21,4],[46,57],[0,58],[0,16],[0,5],[0,16],[7,0],[54,0],[0,6],[0,35],[55,23],[0,34],[0,47],[0,2]];
+var sumAllTraces = {"0":542,"1":198};
+docolor = function(j, bb) {
+// $("#t_" + tagList[j]).css("backgroundColor", bb ? "lightgreen" : "lightpink");
+    if(bb > 0) {
+        $("#t_" + tagList[j]).removeClass("fail").addClass("pass");
+	} else {
+        $("#t_" + tagList[j]).removeClass("pass").addClass("fail");
+    }
+};
+pbsummed = function(j, cov) {
+    pct = 100 * (cov[0] / (cov[0] + cov[1]));
+    $("#progress-" + (j + 1)).progressbar({
+        value: pct
+    });
+};
+$(document).ready(function() {
+    $.each(sumTags, docolor);
+    $.each(all_coverage, pbsummed);
+    $("#trace_all").click(function() {
+        $.each(sumTags, docolor);
+        $.each(all_coverage, pbsummed)
+    });
+    $.each(allTags, function(i, dum) {
+        $("#run_" + (i + 1)).click(
+            function() {
+                $.each(allTags[i], docolor);
+                $.each(coverage[i], function(j, cov) {
+                    pct = 100 * (cov[0] / (cov[0] + cov[1]));
+                    $("#progress-" + (j + 1)).progressbar({
+                        value: pct
+                    });
+                })
+            });
+    });
+
+    //This will only run if jQuery has loaded.
+    $(".internet-connectivity").hide();
+});
+$( document ).ready(function() {
+  $(".internet-connectivity").hide();
+})
+  </script>
+  <div class="alert alert-danger internet-connectivity" role="alert"><h1><strong>Warning:</strong> An internet connection is required to load external assets.</h1></div>
+  <div class="container">
+  <div class="jumbotron">
+    <h1>testCoverage Report <small>wikipediatrend</small></h1>
+  </div>
+  <h2>Summary</h2>
+<!-- html table generated in R 3.2.0 by xtable 1.7-4 package -->
+<!-- Wed May 20 16:40:51 2015 -->
+<table class="table table-bordered">
+<tr> <th>  </th> <th> Total # Tracepoints </th> <th> # Executed </th> <th> % Coverage </th>  </tr>
+  <tr> <td align="right"> wikipediatrend </td> <td> 542 </td> <td> 198 </td> <td>  37% </td> </tr>
+   </table>
+<h2>testthat Tests</h2>
+	<button type="button" class="btn btn-default" id="trace_all">All Tests</button>&nbsp;<button type='button' class='btn btn-default' id='run_1'>test_caching_gathering.R</button>&nbsp;<button type='button' class='btn btn-default' id='run_2'>test_data_gathering.R</button>&nbsp;<button type='button' class='btn btn-default' id='run_3'>test_date_functions.R</button>&nbsp;<h2>Resource Files</h2><div class="row">
+       <div class="col-md-4">
+        <ul class="nav nav-pills nav-stacked" role="tablist"><li class="active"><a role="tab" data-toggle="tab" href="#tabs-1">aa_pversion_inc.r</a><div id="progress-1" ></div></li>
+<li class=""><a role="tab" data-toggle="tab" href="#tabs-2">wp_cache.R</a><div id="progress-2" ></div></li>
+<li class=""><a role="tab" data-toggle="tab" href="#tabs-3">wp_check_date_inputs.R</a><div id="progress-3" ></div></li>
+<li class=""><a role="tab" data-toggle="tab" href="#tabs-4">wp_date_functions.r</a><div id="progress-4" ></div></li>
+<li class=""><a role="tab" data-toggle="tab" href="#tabs-5">wp_df.R</a><div id="progress-5" ></div></li>
+<li class=""><a role="tab" data-toggle="tab" href="#tabs-6">wp_download_data.R</a><div id="progress-6" ></div></li>
+<li class=""><a role="tab" data-toggle="tab" href="#tabs-7">wp_expand_ts.R</a><div id="progress-7" ></div></li>
+<li class=""><a role="tab" data-toggle="tab" href="#tabs-8">wp_get_data.R</a><div id="progress-8" ></div></li>
+<li class=""><a role="tab" data-toggle="tab" href="#tabs-9">wp_http_header.R</a><div id="progress-9" ></div></li>
+<li class=""><a role="tab" data-toggle="tab" href="#tabs-10">wp_jsons_to_df.R</a><div id="progress-10" ></div></li>
+<li class=""><a role="tab" data-toggle="tab" href="#tabs-11">wp_last_month.R</a><div id="progress-11" ></div></li>
+<li class=""><a role="tab" data-toggle="tab" href="#tabs-12">wp_linked_pages.R</a><div id="progress-12" ></div></li>
+<li class=""><a role="tab" data-toggle="tab" href="#tabs-13">wp_load_and_save.r</a><div id="progress-13" ></div></li>
+<li class=""><a role="tab" data-toggle="tab" href="#tabs-14">wp_prepare_urls.R</a><div id="progress-14" ></div></li>
+<li class=""><a role="tab" data-toggle="tab" href="#tabs-15">wp_trend.R</a><div id="progress-15" ></div></li>
+<li class=""><a role="tab" data-toggle="tab" href="#tabs-16">zzz.R</a><div id="progress-16" ></div></li>
+</ul>
+    </div> 
+    <div class="col-md-8">
+    <div class="tab-content"><div class="tab-pane active" id="tabs-1"><pre>#' function that increases the packages version
+#' modified version of ...
+#' ## by:     alko989
+#' ## source: http://stackoverflow.com/q/24209336/1144966
+
+# read in DESCRIPTION file
+
+<span id="t_1_20">pversion_inc</span> &lt;- function(){
+<span id="t_1_28">files</span> &lt;- <span id="t_1_31">c("d:/peter/dropbox/rpackages/wikipediatrend/DESCRIPTION",
+  "C:/Dropbox/RPackages/wikipediatrend/DESCRIPTION",
+  "~/Dropbox/RPackages/wikipediatrend/DESCRIPTION")</span>
+<span id="t_1_56">fname</span> &lt;- <span id="t_1_59">files</span>[<span id="t_1_62">file.exists(files)</span>][1]
+
+  <span id="t_1_88">f</span>     &lt;- <span id="t_1_91">read.dcf(file=fname)</span>
+  
+  # get positions of ...
+  <span id="t_1_111">version_iffer</span> &lt;- <span id="t_1_114">names(<span id="t_1_117">f</span>[1,])</span>=="Version"
+  <span id="t_1_140">date_iffer</span>    &lt;- <span id="t_1_143">names(<span id="t_1_146">f</span>[1,])</span>=="Date"
+  <span id="t_1_169">built_iffer</span>   &lt;- <span id="t_1_172">names(<span id="t_1_175">f</span>[1,])</span>=="Built"
+  
+  # get version
+  <span id="t_1_203">curVer</span> &lt;- <span id="t_1_206">package_version(<span id="t_1_209">f</span>[version_iffer])</span>
+  
+  # add one to version
+  <span id="t_1_231">i</span>&lt;-1
+  while(!<span id="t_1_243">is.na(<span id="t_1_246">curVer</span>[[1,<span id="t_1_254">i</span>+1]])</span> ) <span id="t_1_272">i</span>&lt;-<span id="t_1_275">i</span>+1
+  curVer[[1,i]] &lt;- <span id="t_1_303">curVer</span>[[1,i]] + 1 
+  f[version_iffer] &lt;- <span id="t_1_336">toString(curVer)</span>
+   
+  ## Update also the date
+  f[date_iffer] &lt;- <span id="t_1_364">format (<span id="t_1_367">Sys.time()</span>, "%Y-%m-%d")</span>
+    
+  # write back 
+  <span id="t_1_391">write.dcf(<span id="t_1_394">t(<span id="t_1_397">f</span>[,!<span id="t_1_403">built_iffer</span>])</span>, file=fname)</span>
+}
+
+<span id="t_1_439">pversion_inc()</span></pre></div><div class="tab-pane " id="tabs-2"><pre>#' function for determining where downloaded information can be stored
+#' @export
+#'
+<span id="t_2_10">wp_cache_file</span> &lt;- function(){
+  if( <span id="t_2_20">is.null(<span id="t_2_23">wp_cache</span>$cachefile)</span> ){
+    <span id="t_2_36">file</span> &lt;- <span id="t_2_39">paste0("~", "/", "wikipediatrend_cache.csv")</span>
+    wp_cache$cachefile &lt;- <span id="t_2_68">file</span>
+  }else{
+    <span id="t_2_81">file</span> &lt;- <span id="t_2_84">wp_cache</span>$cachefile
+  }
+  if ( !<span id="t_2_104">file.exists(file)</span> ){
+    <span id="t_2_118">file.create(file)</span>
+    wp_cache$cachefile &lt;- <span id="t_2_136">file</span>
+  }
+  <span id="t_2_151">return(file)</span>
+}
+
+#' function to set a different cachefile as session default
+#' @export
+#' @param file name of the file to be used as cache
+<span id="t_2_183">wp_set_cache_file</span> &lt;- function(file){
+  <span id="t_2_193">wp_save_cache()</span>
+  wp_cache$cachefile &lt;- <span id="t_2_208">file</span>
+  <span id="t_2_214">wp_cache_load()</span>
+} 
+
+#' function for resetting cache
+#' @export
+#'
+<span id="t_2_243">wp_cache_reset</span> &lt;- function(){
+  <span id="t_2_251">file.remove(<span id="t_2_254">wp_cache_file()</span>)</span>
+  <span id="t_2_267">file.create(<span id="t_2_270">wp_cache_file()</span>)</span>
+  <span id="t_2_283">wp_cache_load()</span>
+}
+
+#' function for loading data in cache
+#' @export
+#'
+<span id="t_2_312">wp_cache_load</span> &lt;- function(){
+  <span id="t_2_320">tmp</span> &lt;- <span id="t_2_323">wp_load(<span id="t_2_326">wp_cache_file()</span>)</span>
+  <span id="t_2_340">assign("cache", tmp, envir = wp_cache )</span>
+  }
+
+#' function to get cache content
+#' @export
+<span id="t_2_381">wp_get_cache</span> &lt;- function(){
+  <span id="t_2_389">tmp</span> &lt;- <span id="t_2_392">wp_cache</span>$cache
+  class(tmp) &lt;- <span id="t_2_411">c("wp_df", "data.frame")</span>
+  <span id="t_2_429">return(tmp)</span>
+}
+
+#' functio to save cache to file
+#' @export
+#'   
+<span id="t_2_461">wp_save_cache</span> &lt;- function(){
+  <span id="t_2_469">wp_save(<span id="t_2_472">wp_cache</span>$cache, <span id="t_2_480">wp_cache_file()</span>)</span>
+}
+
+#' function adding downloaded data to the cache
+#' @param df data frame to be aded to cache
+
+<span id="t_2_512">wp_add_to_cache</span> &lt;- function(df){
+  if( <span id="t_2_524">is.null(<span id="t_2_527">wp_cache</span>$cache)</span> ){
+    <span id="t_2_540">iffer</span> &lt;- T
+  }else{
+    if( <span id="t_2_558">dim(<span id="t_2_561">wp_cache</span>$cache)</span>[1] &gt; 0 & <span id="t_2_582">dim(df)</span>[1] &gt; 0 ){
+      <span id="t_2_607">df_ids</span>    &lt;- <span id="t_2_610">tolower(<span id="t_2_613">apply(<span id="t_2_616">df</span>[,<span id="t_2_621">c("lang", "page", "date")</span>], 1, paste, collapse=" ")</span>)</span>
+      <span id="t_2_673">cache_ids</span> &lt;- <span id="t_2_676">tolower(<span id="t_2_679">apply(<span id="t_2_682">wp_cache</span>$cache[,<span id="t_2_690">c("lang", "page", "date")</span>], 1, paste, collapse=" ")</span>)</span>
+      <span id="t_2_742">iffer</span> &lt;- !( <span id="t_2_747">df_ids</span> %in% cache_ids )
+    }else{
+      <span id="t_2_768">iffer</span> &lt;- T  
+    }
+  }
+  df$count &lt;- <span id="t_2_799">as.numeric(<span id="t_2_802">df</span>$count)</span>
+  wp_cache$cache &lt;- <span id="t_2_821">rbind(<span id="t_2_824">wp_cache</span>$cache, <span id="t_2_832">df</span>[iffer,])</span>
+  rownames(wp_cache$cache) &lt;- NULL
+  <span id="t_2_870">return(<span id="t_2_873">sum(iffer)</span>)</span>
+}
+
+#' a cache for downloads
+
+
+<span id="t_2_907">wp_cache</span> &lt;- <span id="t_2_910">new.env()</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre></div><div class="tab-pane " id="tabs-3"><pre>#' Helper function for \code{wp_trend()}
+#' 
+#' Function that checks if the time span given by from and to (passed down from
+#' wp_trend) are complying with logical constraints: from not prior to first
+#' available data; to not past today; to not prior to from
+#' 
+#' @param from first date of timespan to check
+#' @param to second date of timespan to check
+#'
+#' #@export 
+#' 
+
+<span id="t_3_36">wp_check_date_inputs</span> &lt;- function(from, to){
+  <span id="t_3_49">from</span> &lt;- <span id="t_3_52">as.character(from)</span> 
+  <span id="t_3_65">to</span>   &lt;- <span id="t_3_68">as.character(to)</span>
+  # from larger than to
+  if ( !(<span id="t_3_88">wp_date(from)</span> &lt;= <span id="t_3_98">wp_date(to)</span>) ) {
+    <span id="t_3_116">stop("In wp_check_date_inputs: from-date larger than to-date.")</span>
+  }
+    # to small a value (no data before 2007)
+  if ( <span id="t_3_141">wp_date(from)</span> &lt; <span id="t_3_151">wp_date("2007-12-01")</span>  ) { 
+    <span id="t_3_165">from</span> &lt;- <span id="t_3_168">wp_date("2007-12-01")</span>
+  } 
+  if ( <span id="t_3_192">wp_date(to)</span> &lt; <span id="t_3_202">wp_date("2007-12-01")</span>  ) { 
+    <span id="t_3_216">to</span> &lt;- <span id="t_3_219">wp_date("2007-12-01")</span>
+  } 
+  # to large a value (data beyond today)
+  if ( <span id="t_3_245">wp_date(to)</span> &gt; <span id="t_3_255">Sys.Date()</span>  ) { 
+    <span id="t_3_266">to</span> &lt;- <span id="t_3_269">Sys.Date()</span>
+  } 
+  if ( <span id="t_3_290">wp_date(from)</span> &gt; <span id="t_3_300">Sys.Date()</span>  ) { 
+    <span id="t_3_311">from</span> &lt;- <span id="t_3_314">Sys.Date()</span>
+  } 
+  <span id="t_3_333">return( <span id="t_3_336">list(from=from, to=to)</span> )</span>
+}</pre></div><div class="tab-pane " id="tabs-4"><pre>#' function for getting year and month of a timestamp
+#' 
+#' @param timestamp Some sort of timestamp e.g. of class POSIXlt, POSIXct, Date,
+#'   or character. If the option is of type character it should be in the form
+#'   of yyyy-mm-dd. 
+#' 
+#' @export 
+#' 
+
+<span id="t_4_27">wp_yearmonth</span> &lt;- function(timestamp){
+  if( <span id="t_4_39">is.null(timestamp)</span> ) <span id="t_4_50">return(NULL)</span>
+  <span id="t_4_65">paste0(
+    <span id="t_4_69">wp_year(<span id="t_4_72">wp_date(timestamp)</span>)</span>, 
+    stringr<span id="t_4_91">::</span>str_pad(<span id="t_4_94">wp_month(<span id="t_4_97">wp_date(timestamp)</span>)</span>, 2, "left", 0)
+  )</span>
+}
+
+
+#' Package specific 'as.Date()' function
+#' 
+#' \code{wp_date()} provides a generic function and several methods to transform
+#' something into a date, just like \code{as.Date()} from the base package.
+#' While most methods were copied 1:1 from as.Date() some changes were made that
+#' alter  the usual behavior: (1) Whenever wp_date() is applied to an empty
+#' string \code{""} or any other not-standard-unambiguous format the function
+#' will return \code{NA} and throw out a warning instead of simply kill itself
+#' with an error. (2) Whenever, as.Date usually is in the need of an origin
+#' supplied and does not get one \code{wp_date()} will assume the origin to be
+#' "1970-01-01" and throw an error instead of kill itself with an error. All
+#' these changes are made with the special purpose to make \code{wp_trend()}
+#' also with dirty, unreasonable data (e.g. "" or "2012-13-01" or "2012-02-32")
+#' and are not recommended for any other than wikipediatrend internal use.
+#' 
+#' @param x See \code{?as.Date}
+#' @param format See \code{?as.Date}
+#' @param origin See \code{?as.Date}
+#' @param tz See \code{?as.Date}
+#' @param ... See \code{?as.Date}
+#' 
+#' @export 
+#' 
+
+<span id="t_4_221">wp_date</span> &lt;- function (x, ...)
+{
+  <span id="t_4_235">UseMethod("wp_date")</span>
+}
+
+
+#' @describeIn wp_date Difference to \code{as.Date.character()}: Failing to
+#'   parse the date, \code{wp_date()} will give return a warning and \code{NA}
+#'   instead of killing itself with an error.
+#' 
+#' @export 
+#' 
+<span id="t_4_278">wp_date.character</span> &lt;- function (x, format = "", ...) 
+{
+  if ( <span id="t_4_300">format</span>=="" ) {
+    <span id="t_4_310">res</span> &lt;- <span id="t_4_313">strptime(x, format="%Y-%m-%d")</span>
+  }else{
+    <span id="t_4_340">res</span> &lt;- <span id="t_4_343">strptime(x, format=format)</span>
+  }
+  <span id="t_4_371">wp_date(res)</span>
+}
+
+
+
+#' @describeIn wp_date same as \code{as.Date()}
+#' 
+#' @export 
+#' 
+
+<span id="t_4_412">wp_date.default</span> &lt;- function (x, ...)
+{
+  if( <span id="t_4_428">is.null(x)</span> ) <span id="t_4_439">return(NULL)</span>
+  if (<span id="t_4_456">inherits(x, "Date")</span>) 
+    <span id="t_4_473">return(x)</span>
+  if (<span id="t_4_490">is.logical(x)</span> && <span id="t_4_500">all(<span id="t_4_503">is.na(x)</span>)</span>) 
+    <span id="t_4_520">return(<span id="t_4_523">structure(<span id="t_4_526">as.numeric(x)</span>, class = "Date")</span>)</span>
+  <span id="t_4_556">stop(<span id="t_4_559">gettextf("do not know how to convert '%s' to class %s", 
+                <span id="t_4_568">deparse(<span id="t_4_571">substitute(x)</span>)</span>, <span id="t_4_587">dQuote("Date")</span>)</span>, domain = NA)</span>
+}
+
+
+#' @describeIn wp_date  Difference to \code{as.Date.character()}: Whenever an 
+#'   origin is needed but not supplied isntead of breaking, \code{wp_date()} 
+#'   will raise a warning and proceed by assuming "1970-01-01" to be the origin 
+#'   instead of killing itself with an error.
+#' 
+#' @export 
+#' 
+
+<span id="t_4_650">wp_date.numeric</span> &lt;- function (x, origin, ...) 
+{
+  if (<span id="t_4_669">missing(origin)</span>) 
+    <span id="t_4_681">warning("'origin' was not supplied assuming '1970-01-01'")</span>
+  <span id="t_4_696">wp_date("1970-01-01", ...)</span> + x
+}
+
+
+#' @describeIn wp_date  same as \code{as.Date()} 
+#' 
+#' @export 
+#' 
+<span id="t_4_742">wp_date.dates</span> &lt;- function (x, ...) 
+{
+  if (<span id="t_4_758">inherits(x, "dates")</span>) {
+    <span id="t_4_776">z</span> &lt;- <span id="t_4_779">attr(x, "origin")</span>
+    <span id="t_4_797">x</span> &lt;- <span id="t_4_800">trunc(<span id="t_4_803">as.numeric(x)</span>)</span>
+    if (<span id="t_4_822">length(z)</span> == 3L && <span id="t_4_836">is.numeric(z)</span>) 
+      <span id="t_4_849">x</span> &lt;- <span id="t_4_852">x</span> + <span id="t_4_855">as.numeric(<span id="t_4_858">wp_date(<span id="t_4_861">paste(<span id="t_4_864">z</span>[3L], <span id="t_4_876">z</span>[1L], <span id="t_4_888">z</span>[2L], 
+                                        sep = "/")</span>)</span>)</span>
+    <span id="t_4_925">return(<span id="t_4_928">structure(x, class = "Date")</span>)</span>
+  }
+  else <span id="t_4_957">stop(<span id="t_4_960">gettextf("'%s' is not a \"dates\" object", <span id="t_4_968">deparse(<span id="t_4_971">substitute(x)</span>)</span>)</span>)</span>
+}
+
+
+#' @describeIn wp_date  same as \code{as.Date()} 
+#' 
+#' @export 
+#' 
+<span id="t_4_1022">wp_date.factor</span> &lt;- function (x, ...) 
+{
+  <span id="t_4_1036">wp_date(<span id="t_4_1039">as.character(x)</span>, ...)</span> 
+}
+
+
+#' @describeIn wp_date  same as \code{as.Date()} 
+#' 
+#' @export 
+#' 
+<span id="t_4_1085">wp_date.POSIXct</span>    &lt;- function (x, tz = "UTC", ...) 
+{
+  if (<span id="t_4_1107">tz</span> == "UTC") {
+    <span id="t_4_1117">z</span> &lt;- <span id="t_4_1120">floor(<span id="t_4_1123">unclass(x)</span>/86400)</span>
+    attr(z, "tzone") &lt;- NULL
+    <span id="t_4_1165">structure(z, class = "Date")</span>
+  }
+  else <span id="t_4_1190">wp_date(<span id="t_4_1193">as.POSIXlt(x, tz = tz)</span>)</span>
+}
+
+
+#' @describeIn wp_date  using \code{as.Date()} 
+#' 
+#' @export 
+#' 
+<span id="t_4_1243">wp_date.POSIXlt</span> &lt;- function (x, ...) 
+{
+  <span id="t_4_1257">as.Date(x)</span>
+}
+
+
+
+
+
+
+
+
+#' Function to extract the day
+#' 
+#' Function to extract the day from a timestamp of e.g. class POSIXlt, POSIXct,
+#' Date, or character. If the option is of type character it should be in the
+#' form of yyyy-mm-dd.
+#' 
+#' @param timestamp Some sort of timestamp e.g. of class POSIXlt, POSIXct, Date,
+#'   or character. If the option is of type character it should be in the form
+#'   of yyyy-mm-dd.
+#'   
+#'   
+#' 
+#' @export
+#'  
+
+<span id="t_4_1338">wp_day</span>          &lt;- function(timestamp){
+  <span id="t_4_1348">UseMethod("wp_day")</span>
+}
+
+#' @describeIn wp_day extract day from timestamp
+#' 
+#' @export
+#' 
+ 
+<span id="t_4_1385">wp_day.POSIXlt</span>  &lt;- function(timestamp) {
+  <span id="t_4_1395">timestamp</span>$mday
+}
+
+#' @describeIn wp_day extract day from timestamp
+#' 
+#' @export
+#' 
+
+<span id="t_4_1428">wp_day.default</span>  &lt;- function(timestamp) {
+  if( <span id="t_4_1440">is.null(timestamp)</span> ) <span id="t_4_1451">return(NULL)</span>
+  <span id="t_4_1466">as.POSIXlt(<span id="t_4_1469">wp_date(timestamp)</span>)</span>$mday
+}
+
+
+#' Function to extract the month
+#' 
+#' Function to extract the month from a timestamp of e.g. class POSIXlt,
+#' POSIXct, Date, or character. If the option is of type character it should be
+#' in the form of yyyy-mm-dd.
+#' 
+#' @param timestamp Some sort of timestamp e.g. of class POSIXlt, POSIXct, Date,
+#'   or character. If the option is of type character it should be in the form
+#'   of yyyy-mm-dd.
+#'    
+#' 
+#' @export 
+#' 
+
+<span id="t_4_1542">wp_month</span>          &lt;- function(timestamp) <span id="t_4_1550">UseMethod("wp_month")</span>
+
+
+#' @describeIn wp_month extract
+#'  @export 
+#'  
+
+<span id="t_4_1580">wp_month.POSIXlt</span>  &lt;- function(timestamp) {
+  <span id="t_4_1590">timestamp</span>$mon+1
+}
+
+
+#' @describeIn wp_month extract
+#'  @export 
+#'  
+
+<span id="t_4_1626">wp_month.default</span>  &lt;- function(timestamp) {
+  if( <span id="t_4_1638">is.null(timestamp)</span> ) <span id="t_4_1649">return(NULL)</span>
+  <span id="t_4_1664">as.POSIXlt(<span id="t_4_1667">wp_date(timestamp)</span>)</span>$mon+1
+}
+
+
+#' Function to extract the day of the week
+#' 
+#' Function to extract the day from a timestamp of e.g. class POSIXlt, POSIXct, 
+#' Date, or character. If the option is of type character it should be in the 
+#' form of yyyy-mm-dd.
+#' 
+#' @param timestamp Some sort of timestamp e.g. of class POSIXlt, POSIXct, Date,
+#'   or character. If the option is of type character it should be in the form 
+#'   of yyyy-mm-dd.
+#'   
+#' @param startmonday whether the week should start on Monday (TRUE, the
+#'   default) or it should start on Sunday (FALSE)
+#'  
+#' 
+#' @export 
+#'   
+
+
+<span id="t_4_1755">wp_wday</span>         &lt;- function(timestamp, startmonday=T) <span id="t_4_1769">UseMethod("wp_wday")</span>
+
+
+#' @describeIn wp_wday
+#'  @export 
+#'  
+
+<span id="t_4_1799">wp_wday.POSIXlt</span>  &lt;- function(timestamp, startmonday=T){
+  if( <span id="t_4_1817">is.null(timestamp)</span> ) <span id="t_4_1828">return(NULL)</span>
+  if(<span id="t_4_1845">startmonday</span>){
+    <span id="t_4_1851">tmp</span> &lt;- <span id="t_4_1854">timestamp</span>$wday
+    tmp[tmp==0] &lt;- 7
+    <span id="t_4_1883">return( tmp )</span>
+  }
+  if(!<span id="t_4_1907">startmonday</span>){
+    <span id="t_4_1914">return( <span id="t_4_1917">timestamp</span>$wday+1 )</span>
+  }
+}
+
+
+
+#' @describeIn wp_wday
+#' @export 
+#' 
+
+<span id="t_4_1966">wp_wday.default</span>  &lt;- function(timestamp, startmonday=T){
+  <span id="t_4_1982">timestamp</span> &lt;- <span id="t_4_1985">as.POSIXlt(<span id="t_4_1988">wp_date(timestamp)</span>)</span>
+  if(<span id="t_4_2007">startmonday</span>){
+    <span id="t_4_2013">tmp</span> &lt;- <span id="t_4_2016">timestamp</span>$wday
+    tmp[tmp==0] &lt;- 7
+    <span id="t_4_2045">return( tmp )</span>
+  }
+  if(!<span id="t_4_2069">startmonday</span>){
+    <span id="t_4_2076">return( <span id="t_4_2079">timestamp</span>$wday+1 )</span>
+  }
+}
+
+
+
+#' Function to extract the year 
+#' 
+#' Function to extract the year from a timestamp of e.g. class POSIXlt, POSIXct, Date, or character. If the option is of type character it should be in the form of yyyy-mm-dd.
+#' 
+#' @param timestamp Some sort of timestamp e.g. of class POSIXlt, POSIXct, Date,
+#'   or character. If the option is of type character it should be in the form
+#'   of yyyy-mm-dd.
+#'  
+#' 
+#' @export 
+#' 
+
+<span id="t_4_2152">wp_year</span>          &lt;- function(timestamp) <span id="t_4_2160">UseMethod("wp_year")</span>
+
+
+
+#' @describeIn wp_year extract
+#' @export 
+#' 
+
+<span id="t_4_2192">wp_year.POSIXlt</span>  &lt;- function(timestamp) {
+  <span id="t_4_2202">timestamp</span>$year+1900
+}
+
+
+
+#' @describeIn wp_year extract
+#' @export 
+#' 
+
+<span id="t_4_2240">wp_year.default</span>  &lt;- function(timestamp) {
+  if( <span id="t_4_2252">is.null(timestamp)</span> ) <span id="t_4_2263">return(NULL)</span>
+  <span id="t_4_2278">as.POSIXlt(<span id="t_4_2281">wp_date(timestamp)</span>)</span>$year+1900
+}</pre></div><div class="tab-pane " id="tabs-5"><pre>#' a wikipediastrend specific data frame
+#' @param x the thing to be printed
+#' @param ... print.default parameters
+#' @export
+<span id="t_5_13">print.wp_df</span> &lt;- function (x, ...) 
+{
+  <span id="t_5_27">n</span> &lt;- <span id="t_5_30">length(<span id="t_5_33">row.names(x)</span>)</span>
+  if (<span id="t_5_52">length(x)</span> == 0L) {
+    <span id="t_5_69">cat(<span id="t_5_72">sprintf(<span id="t_5_75">ngettext(n, "data frame with 0 columns and %d row", 
+                         "data frame with 0 columns and %d rows", domain = "R-base")</span>, 
+                n)</span>, "\n", sep = "")</span>
+  }
+  else if (<span id="t_5_139">n</span> == 0L) {
+    <span id="t_5_149">print.default(<span id="t_5_152">names(x)</span>, quote = FALSE)</span>
+    <span id="t_5_175">cat(<span id="t_5_178">gettext("&lt;0 rows&gt; (or 0-length row.names)\n")</span>)</span>
+  }
+  else {
+    # print options 
+    if ( <span id="t_5_206">is.null(<span id="t_5_209">wp_cache</span>$printoptions$rows)</span> ) {
+      <span id="t_5_225">rows</span> &lt;- 29  
+    }else{
+      <span id="t_5_241">rows</span> &lt;- <span id="t_5_244">wp_cache</span>$printoptions$rows
+    }
+    if ( <span id="t_5_266">is.null(<span id="t_5_269">wp_cache</span>$printoptions$rows)</span> ) {
+      <span id="t_5_285">width</span> &lt;- <span id="t_5_288">floor((<span id="t_5_292">options()</span>$width - 51)/2)</span> 
+    }else{
+      <span id="t_5_327">width</span> &lt;- <span id="t_5_330">wp_cache</span>$printoptions$width
+    }
+    # printing
+    <span id="t_5_353">m</span> &lt;- <span id="t_5_356">as.matrix(x)</span>
+    <span id="t_5_369">dummy</span> &lt;- function(x){
+      <span id="t_5_379">ifelse(
+        <span id="t_5_383">nchar(x)</span> &gt;  width , 
+        <span id="t_5_400">paste(<span id="t_5_403">substring(x, 1, width )</span>, "..." )</span>,
+        x
+      )</span>
+    }
+    <span id="t_5_454">m</span> &lt;- <span id="t_5_457">apply(m, <span id="t_5_465">c(1,2)</span>, dummy )</span>
+    dimnames(m)[[1L]] &lt;- <span id="t_5_510">seq_len(<span id="t_5_513">dim(m)</span>[1])</span>
+    if( <span id="t_5_539">dim(m)</span>[1] &gt; <span id="t_5_556">rows</span>+1 ){
+      <span id="t_5_567">text</span> &lt;-  <span id="t_5_570">paste0("\n... ", <span id="t_5_578">dim(m)</span>[1]-rows, " rows of data not shown")</span>
+      <span id="t_5_611">SAMPLE</span> &lt;- <span id="t_5_614">sample( <span id="t_5_617">seq_along( <span id="t_5_620">m</span>[,1] )</span>, rows)</span>
+      <span id="t_5_648">m</span> &lt;- <span id="t_5_651">m</span>[SAMPLE,]
+      <span id="t_5_666">m</span> &lt;- <span id="t_5_669">m</span>[<span id="t_5_672">order(<span id="t_5_675">m</span>[,3], <span id="t_5_689">m</span>[,4], <span id="t_5_703">m</span>[,1])</span>, ]
+      <span id="t_5_728">print( m , ..., quote = FALSE)</span>
+      <span id="t_5_752">cat(text)</span>  
+    }else{
+      <span id="t_5_771">print(m, ..., quote = FALSE)</span>
+    }
+  }
+  <span id="t_5_813">invisible(df)</span>
+}
+
+#' function for setting print options for print.wp_df()
+#' @export
+#' @param x a list of options, e.g. list(rows=35, width=50) or list(rows=Inf, width=Inf)
+#'        
+<span id="t_5_848">wp_set_print_options</span> &lt;- function(x){
+  wp_cache$printoptions &lt;- <span id="t_5_864">x</span>
+}</pre></div><div class="tab-pane " id="tabs-6"><pre>#' function downloading prepared URLs 
+#'
+#' @param urls a vector of urls to be downloaded
+#' @param wait the time to wait in seconds before downloading the next chunk (default=1)
+#' #@export
+
+<span id="t_6_18">wp_download_data</span> &lt;- function(urls, wait=1){
+  # make http requests
+  <span id="t_6_36">jsons</span> &lt;- <span id="t_6_39">list()</span>
+  # make sure to use a handle
+  # does not work on linux!? # if ( !exists("h") ){
+  # does not work on linux!? #   h &lt;- httr::handle("http://stats.grok.se")
+  # does not work on linux!? # }
+  # looping
+  for(<span id="t_6_66">i</span> in <span id="t_6_68">seq_along(urls)</span>){
+    <span id="t_6_81">jsons</span> &lt;- <span id="t_6_84">c(
+      jsons, 
+      <span id="t_6_94">try(
+        rvest<span id="t_6_100">::</span>html_text(
+          rvest<span id="t_6_106">::</span>html( 
+            <span id="t_6_110">urls</span>[i], 
+            httr<span id="t_6_125">::</span>user_agent(<span id="t_6_128">wp_http_header()</span>$`user-agent`)
+            # does not work on linux!? # , handle = h
+          ) 
+        )
+      )</span>
+    )</span>
+    <span id="t_6_167">message(<span id="t_6_170">urls</span>[i])</span>
+    <span id="t_6_186">Sys.sleep(wait)</span>
+  }
+  # return
+  <span id="t_6_209">return(jsons)</span>
+}</pre></div><div class="tab-pane " id="tabs-7"><pre>#' Helper function for wp_trend that transforms a time span into a series of 
+#' months
+#' 
+#' @param from start of timespan
+#' @param to end of timespan
+#' @param by in which time unit expansion should take place: \code{"day"}, 
+#'   \code{"month"}, \code{"year"}
+#'   
+#'   #@export
+
+<span id="t_7_30">wp_expand_ts</span> &lt;- function(from, to, by){
+  <span id="t_7_46">dates</span> &lt;- <span id="t_7_49">seq(<span id="t_7_52">wp_date(from)</span>, <span id="t_7_64">wp_date(to)</span>, by)</span>
+  <span id="t_7_86">return(dates)</span>
+}</pre></div><div class="tab-pane " id="tabs-8"><pre>#' function for getting data (download + extraction)
+#' 
+#' 
+#' @param urls urls to be downloeded
+
+
+<span id="t_8_17">wp_get_data</span> &lt;- function(urls){
+  <span id="t_8_27">tmp</span> &lt;- <span id="t_8_30">list()</span>
+  # does not work for linux!?# h   &lt;- httr::handle("http://stats.grok.se")
+  for ( <span id="t_8_45">i</span> in <span id="t_8_47">seq_along(urls)</span> ){
+    <span id="t_8_60">url</span>       &lt;- <span id="t_8_63">urls</span>[i]
+    <span id="t_8_76">json</span>      &lt;- <span id="t_8_79">wp_download_data(url, wait = 0)</span>
+    tmp[[i]]  &lt;- <span id="t_8_110">wp_jsons_to_df(json, <span id="t_8_118">basename(url)</span> )</span>
+    <span id="t_8_135">wp_add_to_cache(<span id="t_8_138">tmp</span>[[i]])</span>
+  }
+  # combine data
+  <span id="t_8_166">res</span> &lt;- <span id="t_8_169">do.call(rbind, tmp)</span>
+  rownames(res) &lt;- NULL
+  # write cache to disk
+  <span id="t_8_206">wp_save_cache()</span>
+  # return
+  <span id="t_8_218">return(res)</span>
+}
+
+</pre></div><div class="tab-pane " id="tabs-9"><pre>#' function for pasting together the HTTP user-agent field 
+#' 
+#' @export
+
+
+<span id="t_9_14">wp_http_header</span> &lt;- function(){
+  <span id="t_9_22">list( 
+    'user-agent' = 
+      <span id="t_9_29">paste0( 
+        <span id="t_9_33">R.version</span>$version.string, " ",
+        "wikipediatrend/", <span id="t_9_52">packageVersion("wikipediatrend")</span>, " ",
+        "curl/", RCurl<span id="t_9_77">::</span>curlVersion()$version, " ",
+        "Rcurl/", <span id="t_9_100">packageVersion("RCurl")</span>, " ",
+        "httr/", <span id="t_9_123">packageVersion("httr")</span>
+      )</span> 
+  )</span>
+}</pre></div><div class="tab-pane " id="tabs-10"><pre>#' Helper function for wp_trend
+#' 
+#' The function does accepts a list of JSON snippets and transforms the
+#' information into a data frame
+#' 
+#' @param wp_json The results from server request in JSON format
+#' @param page the name of the downloaded page
+#' @export
+
+
+<span id="t_10_29">wp_jsons_to_df</span> &lt;- function(wp_json, page){
+  # function doing the extraction work
+  <span id="t_10_44">worker</span> &lt;- function(wp_json, page){
+    <span id="t_10_57">tmp</span> &lt;- 
+      <span id="t_10_61">tryCatch(
+        {
+          jsonlite<span id="t_10_69">::</span>fromJSON(wp_json)
+        }, 
+          error=function(e){
+            <span id="t_10_97">warning("[wp_jsons_to_df()]\nCould not extract data from server response. Data for one month will be missing.")</span>
+            <span id="t_10_109">data.frame()</span>
+          }
+      )</span>
+    # no data? OR some data?
+    if( <span id="t_10_137">length(<span id="t_10_140">tmp</span>$daily_views)</span>==0 ){
+      <span id="t_10_157">return( <span id="t_10_160">data.frame()</span> )</span>
+    }else{
+      <span id="t_10_180">tmp_data</span> &lt;- <span id="t_10_183">data.frame( date    = <span id="t_10_188">wp_date( <span id="t_10_191">names(<span id="t_10_194">tmp</span>$daily_views)</span> )</span>, 
+                              count   = <span id="t_10_213">unlist(<span id="t_10_216">tmp</span>$daily_views)</span>,
+                              lang    = <span id="t_10_231">tmp</span>$project,
+                              page    = page,
+                              rank    = <span id="t_10_250">tmp</span>$rank,
+                              month   = <span id="t_10_261">tmp</span>$month,
+                              title   = <span id="t_10_272">tmp</span>$title,
+                              stringsAsFactors=F)</span>
+      <span id="t_10_293">return(tmp_data)</span>
+    }
+  }
+  # case of no data
+  if( <span id="t_10_327">length(wp_json)</span>==0 ){
+    <span id="t_10_344">res</span> &lt;- <span id="t_10_347">data.frame()</span>
+    <span id="t_10_357">return(<span id="t_10_360">unique(res)</span>)</span>
+  }
+  # case of only one json
+  if( <span id="t_10_389">length(wp_json)</span>==1 & <span id="t_10_403">is.character(<span id="t_10_406">wp_json</span>[[1]])</span>){
+    <span id="t_10_425">res</span> &lt;- <span id="t_10_428">worker(<span id="t_10_431">wp_json</span>[[1]], page = page)</span>
+    <span id="t_10_456">suppressWarnings(<span id="t_10_459">res</span> &lt;- <span id="t_10_462">res</span>[!<span id="t_10_466">is.na(<span id="t_10_469">res</span>$date)</span>,])</span>
+    <span id="t_10_493">return(<span id="t_10_496">unique(res)</span>)</span>
+  }
+  # case of multiple jsons
+  if(<span id="t_10_525">length(wp_json)</span>&gt; 1 & <span id="t_10_539">is.character(<span id="t_10_542">wp_json</span>[[1]])</span>){
+    <span id="t_10_561">tmp</span> &lt;- <span id="t_10_564">lapply(wp_json, worker, page = page)</span>
+    <span id="t_10_589">res</span> &lt;- <span id="t_10_592">do.call(rbind, tmp)</span>
+    rownames(res) &lt;- NULL
+    <span id="t_10_626">suppressWarnings(<span id="t_10_629">res</span> &lt;- <span id="t_10_632">res</span>[!<span id="t_10_636">is.na(<span id="t_10_639">res</span>$date)</span>,])</span>
+    <span id="t_10_663">return(<span id="t_10_666">unique(res)</span>)</span>
+  }
+}</pre></div><div class="tab-pane " id="tabs-11"><pre>#' function to get date of end of prev month
+#' @export
+
+<span id="t_11_9">prev_month_end</span> &lt;- function() <span id="t_11_15">Sys.Date()</span>-<span id="t_11_22">wp_day(<span id="t_11_25">Sys.Date()</span>)</span>
+
+
+#' function to get date of start of prev month
+#' @export
+
+<span id="t_11_54">prev_month_start</span> &lt;- function() <span id="t_11_60">prev_month_end()</span> - <span id="t_11_67">wp_day(<span id="t_11_70">prev_month_end()</span>)</span> +1</pre></div><div class="tab-pane " id="tabs-12"><pre>#' function looking for other languages of a page
+#' 
+#' @param page title of the wikipedia article to look for links to other
+#'   languages
+#' @param lang language (shorthand, e.g. "en" for English or "de" for German and
+#'   so on) for the afor given title
+#' @export
+
+
+<span id="t_12_26">wp_linked_pages</span> &lt;- function(page, lang){
+  # input checks
+  <span id="t_12_41">stopifnot(<span id="t_12_44">length(page)</span>==1, <span id="t_12_60">length(lang)</span>==1)</span>
+  # make first letter of page title always capital
+  <span id="t_12_83">page</span> &lt;- stringr<span id="t_12_88">::</span>str_replace( 
+    page, 
+    "^.", 
+    <span id="t_12_104">substring(<span id="t_12_107">toupper(page)</span>,1,1)</span> 
+  )
+  # url 
+  <span id="t_12_142">url</span> &lt;- <span id="t_12_145">paste0("http://", lang, ".wikipedia.org/wiki/", page)</span>
+  # getting language links
+  <span id="t_12_176">html_doc</span>   &lt;- rvest<span id="t_12_181">::</span>html( url, httr<span id="t_12_191">::</span>user_agent(<span id="t_12_194">wp_http_header()</span>$`user-agent`) )
+  <span id="t_12_215">lang_nodes</span> &lt;- rvest<span id="t_12_220">::</span>html_nodes( html_doc, "[hreflang]")  
+  <span id="t_12_238">lang_attr</span>  &lt;- rvest<span id="t_12_243">::</span>html_attrs( lang_nodes )  
+  <span id="t_12_256">lang_df</span>    &lt;- 
+    <span id="t_12_260">data.frame(
+      page = <span id="t_12_266">sapply(lang_attr, `[`, <span id="t_12_279">c("href")</span>)</span> ,
+      lang = <span id="t_12_298">sapply(lang_attr, `[`, <span id="t_12_311">c("hreflang")</span>)</span>,
+      stringsAsFactors = F
+    )</span>
+  # data cleansing
+  lang_df$page &lt;- stringr<span id="t_12_352">::</span>str_replace(
+            stringr<span id="t_12_358">::</span>str_extract(<span id="t_12_361">lang_df</span>$page, "wiki/.+$"), 
+          "wiki/", "")
+  lang_df[<span id="t_12_397">lang_df</span>$lang=="x-default",] &lt;- <span id="t_12_413">c(page, lang)</span>
+  # add decoded title 
+  <span id="t_12_434">tmp</span> &lt;- <span id="t_12_437">unlist(<span id="t_12_440">lapply(<span id="t_12_443">lang_df</span>$page, URLdecode)</span>)</span>
+  Encoding(tmp) &lt;- "UTF-8"
+  lang_df$title &lt;- <span id="t_12_487">tmp</span>
+  # return
+  class(lang_df) &lt;- <span id="t_12_506">c("wp_df","data.frame")</span>
+  <span id="t_12_524">return(lang_df)</span>
+}
+
+
+</pre></div><div class="tab-pane " id="tabs-13"><pre>
+#' function to convert character vectors to UTF-8 encoding
+#'
+#' @param x the vector to be converted
+
+
+<span id="t_13_16">toUTF8</span> &lt;- 
+  function(x){
+    <span id="t_13_27">worker</span> &lt;- function(x){
+      <span id="t_13_37">iconv(x, 
+            from = <span id="t_13_48">ifelse( <span id="t_13_51">Encoding(x)</span>=="unknown", "",<span id="t_13_72">Encoding(x)</span> )</span>, 
+            to = "UTF-8")</span>
+    }
+    <span id="t_13_109">unlist(<span id="t_13_112">lapply(x, worker)</span>)</span>
+  }
+
+
+
+#' function to write csv files with UTF-8 characters (even under Windwos)
+#' @param df data frame to be written to file
+#' @param file file name / path where to put the data
+
+
+<span id="t_13_161">write_utf8_csv</span> &lt;- 
+function(df, file){
+  <span id="t_13_175">firstline</span> &lt;- <span id="t_13_178">paste(  '"', <span id="t_13_186">names(df)</span>, '"', sep = "", collapse = " , ")</span>
+  <span id="t_13_222">char_columns</span> &lt;- <span id="t_13_225">seq_along(<span id="t_13_228">df</span>[1,])</span>[<span id="t_13_244">sapply(df, class)</span>=="character"]
+  for( <span id="t_13_272">i</span> in  char_columns){
+    df[,i] &lt;- <span id="t_13_292">toUTF8(<span id="t_13_295">df</span>[,i])</span>
+  }
+  <span id="t_13_322">data</span> &lt;- <span id="t_13_325">apply(df, 1, function(x){<span id="t_13_344">paste('"', x,'"', sep = "",collapse = " , ")</span>})</span>
+  <span id="t_13_391">writeLines( text=<span id="t_13_396">c(firstline, data)</span>, con=file , useBytes = T)</span>
+}
+
+
+#' function to read csv file with UTF-8 characters (even under Windwos) that 
+#' were created by write_U
+#' @param file file name / path where to get the data
+
+
+<span id="t_13_457">read_utf8_csv</span> &lt;- function(file){
+  if ( !<span id="t_13_470">file.exists(file)</span> ) <span id="t_13_482">return( <span id="t_13_485">data.frame()</span> )</span>
+  # reading data from file
+  <span id="t_13_503">content</span> &lt;- <span id="t_13_506">readLines(file, encoding = "UTF-8")</span>
+  if ( <span id="t_13_528">length(content)</span> &lt; 2 ) <span id="t_13_543">return( <span id="t_13_546">data.frame()</span> )</span>
+  # extracting data
+  <span id="t_13_564">content</span> &lt;- stringr<span id="t_13_569">::</span>str_split(content, " , ")
+  <span id="t_13_587">content</span> &lt;- <span id="t_13_590">lapply(content, stringr::<span id="t_13_600">str_replace_all</span>, '"', "")</span>
+  <span id="t_13_620">content_names</span> &lt;- <span id="t_13_623">content</span>[[1]][<span id="t_13_634">content</span>[[1]]!=""]
+  <span id="t_13_656">content</span> &lt;- <span id="t_13_659">content</span>[<span id="t_13_662">seq_along(content)</span>[-1]]  
+  # putting it into data.frame
+  <span id="t_13_691">df</span> &lt;- <span id="t_13_694">data.frame(dummy=<span id="t_13_699">seq_along(content)</span>, stringsAsFactors = F)</span>
+  for(<span id="t_13_725">name</span> in content_names){
+    <span id="t_13_733">tmp</span> &lt;- <span id="t_13_736">sapply(content, `[[`, <span id="t_13_749">dim(df)</span>[2])</span>
+    Encoding(tmp) &lt;- "UTF-8"
+    df[,name] &lt;- <span id="t_13_801">tmp</span> 
+  }
+  <span id="t_13_815">df</span> &lt;- <span id="t_13_818">df</span>[,-1]
+  # return
+  <span id="t_13_838">return(df)</span>
+}
+
+#' Helper function for wp_trend that loads previous saved wp_trend results
+#' 
+#' @param file  name of the file from which previous \code{wp_trend()}
+#'   results should be loaded 
+#' 
+#' @export
+
+<span id="t_13_881">wp_load</span> &lt;- function(file=wp_cache_file()){
+  if ( <span id="t_13_900">file.exists(file)</span> ) {
+#    dat &lt;- read.csv( file = file,
+#                     stringsAsFactors = F, 
+#                     fileEncoding = "UTF-8")
+    <span id="t_13_919">dat</span>      &lt;- <span id="t_13_922">read_utf8_csv(file)</span>
+    if( <span id="t_13_937">any(<span id="t_13_940">dim(dat)</span>==0)</span> ){
+      <span id="t_13_961">dat</span> &lt;- <span id="t_13_964">data.frame()</span>
+    }
+    if( <span id="t_13_985">any(<span id="t_13_988">dim(dat)</span>[1]&gt;0&<span id="t_13_1009">dim(dat)</span>[2]&gt;0)</span> ){
+      dat$date   &lt;- <span id="t_13_1044">wp_date(<span id="t_13_1047">dat</span>$date)</span>
+      dat$count  &lt;- <span id="t_13_1066">as.numeric(<span id="t_13_1069">dat</span>$count)</span>
+    }else{
+      <span id="t_13_1089">dat</span> &lt;- <span id="t_13_1092">data.frame()</span>
+    }
+    class(dat) &lt;- <span id="t_13_1120">c("wp_df","data.frame")</span>
+    <span id="t_13_1138">return(dat)</span>
+  }
+  # else ...
+  <span id="t_13_1161">dat</span> &lt;- <span id="t_13_1164">data.frame()</span>  
+  class(dat) &lt;- <span id="t_13_1184">c("wp_df","data.frame")</span>
+  <span id="t_13_1202">return(dat)</span>
+}
+
+
+
+#' Helper function for wp_trend
+#' 
+#' Function writes wp_trend() data to a CSV file that serves as cache/storage
+#' 
+#' @param res data retreived by \code{wp_trend()}
+#' @param file where to save/cache results (defaults to \code{wp_cache_file()})
+#'   
+#'   
+#' 
+
+<span id="t_13_1258">wp_save</span> &lt;- function(res, file=wp_cache_file()){
+    <span id="t_13_1278">write_utf8_csv( df = res, file = file)</span>
+    <span id="t_13_1299">message(<span id="t_13_1302">paste0(".\n")</span>)</span>
+    <span id="t_13_1318">return( file )</span>
+}
+
+
+
+
+
+
+
+
+
+
+</pre></div><div class="tab-pane " id="tabs-14"><pre>#' function preparing URLs for downlaod
+#' 
+#' @param page page title supplied by wp_trend()
+#' @param from from supplied by wp_trend()
+#' @param to to supplied by wp_trend()
+#' @param lang lang supplied by wp_trend()
+#' 
+
+<span id="t_14_24">wp_prepare_urls</span> &lt;- function(page, from, to, lang){
+  # expand from-date and to-date to sequence of days
+  <span id="t_14_45">timeframe</span> &lt;- <span id="t_14_48">wp_expand_ts(from, to, "day")</span>
+  
+  # comparing data in cache with data requested
+  <span id="t_14_76">cachedata</span> &lt;- <span id="t_14_79">wp_get_cache()</span>
+  <span id="t_14_89">cache_dpoints</span>   &lt;-  <span id="t_14_92">unique(
+                            <span id="t_14_96">paste(<span id="t_14_99">cachedata</span>$date, 
+                                  <span id="t_14_108">cachedata</span>$lang, 
+                                  <span id="t_14_117">cachedata</span>$page)</span>
+                          )</span>
+  <span id="t_14_135">request_comb</span> &lt;- 
+    <span id="t_14_139">cbind(
+      <span id="t_14_143">expand.grid(timeframe, lang, stringsAsFactors=F)</span>,
+      <span id="t_14_168">expand.grid(timeframe, page, stringsAsFactors=F)</span>[,2],
+      stringsAsFactors=F
+    )</span>
+  names(request_comb) &lt;- <span id="t_14_225">c("date", "lang", "page")</span>
+  <span id="t_14_248">request_dpoints</span> &lt;- <span id="t_14_251">apply(request_comb, 1, paste, collapse=" ")</span>
+  
+  <span id="t_14_283">request_tbd</span>     &lt;- !(<span id="t_14_288">request_dpoints</span> %in% cache_dpoints)
+  
+  # prepare urls for download
+  <span id="t_14_307">urls</span> &lt;- 
+    <span id="t_14_311">apply(
+      <span id="t_14_315">cbind( 
+        <span id="t_14_319">request_comb</span>$lang, 
+        <span id="t_14_328">wp_yearmonth(<span id="t_14_331">request_comb</span>$date)</span>, 
+        <span id="t_14_344">request_comb</span>$page
+      )</span>,
+      1, paste, collapse="/"
+    )</span>
+  <span id="t_14_381">urls</span> &lt;- <span id="t_14_384">urls</span>[request_tbd]
+  
+  # check if there is something to download at all
+  if( <span id="t_14_404">length(urls)</span> &gt; 0 ){
+    <span id="t_14_421">urls</span> &lt;- <span id="t_14_424">unique(<span id="t_14_427">paste0("http://stats.grok.se/json/", urls)</span>)</span> 
+  }else{
+    <span id="t_14_456">urls</span> &lt;- NULL
+  }
+  # return
+  <span id="t_14_476">return(urls)</span>
+}
+
+</pre></div><div class="tab-pane " id="tabs-15"><pre>#' Function for getting access statistics for wikipedia pages
+#' 
+#'   
+#' @param page The name of the Wikipedia page as to be found in the URL to the 
+#'   wikipedia article. If e.g. the URL is: 
+#'   \code{https://en.wikipedia.org/wiki/Peter_Fox_(musician)}, than the page 
+#'   name equals to \code{Peter_Fox_(musician)}.
+#'   
+#' @param lang The language shorthand identifying which Wikipedia access 
+#'   statistics are to be used: e.g. \code{"en"} for the English version found 
+#'   at http://en.wikipedia.org, \code{"de"} for the German version found at 
+#'   http://de.wikipedia.org or perhaps \code{"als"} for the Alemannic dialect 
+#'   found under http://als.wikipedia.org/.
+#'   
+#' @param from The starting date of the timespan for which access statistics 
+#'   should be retrieved - note that there is no data prior to 2007-12-01. 
+#'   Supply some sort of timestamp e.g. of class POSIXlt, POSIXct, Date, or 
+#'   character. If the option is of type character it should be in the form of 
+#'   yyyy-mm-dd.
+#'   
+#' @param to The last date for which access statistics should be retrieved. 
+#'   Supply some sort of timestamp e.g. of class POSIXlt, POSIXct, Date, or 
+#'   character. If the option is of type character it should be in the form of 
+#'   yyyy-mm-dd.
+#'   
+#' @param file Where to cache/store the retrieved data? By default a file within 
+#'   the user folder is used for as long as the R session takes place. The data 
+#'   is stored in CSV format. If an already existing file is used for storage, 
+#'   the old data will not be deleted but instead new data will be added to this 
+#'   file. 
+#'   
+#'   path to your current cache file:\cr
+#'   \code{wp_cache_file()}\cr
+#'   \code{dirname(wp_cache_file())}
+#'   
+#'
+#'   browse to the folder containing you current cache file:\cr
+#'   \code{browseURL(wp_cache_file())}
+#'
+#' @param friendly deprecated
+#' @param requestFrom deprecated
+#' @param userAgent deprecated
+#'
+#' @examples 
+#' library(wikipediatrend)
+#' wp_trend(page        = c("Cheese", "K\u00e4se"),
+#'          from        = "2014-11-01", 
+#'          to          = "2014-11-30", 
+#'          lang        = c("en", "de"),
+#'          file        = wp_cache_file()
+#'          )
+#'          
+#' @export
+
+<span id="t_15_162">wp_trend</span> &lt;- function( page , 
+                      from        = prev_month_start(), 
+                      to          = prev_month_end(),
+                      lang        = "en", 
+                      file        = wp_cache_file(), 
+                      friendly,
+                      requestFrom,
+                      userAgent
+){
+  # dev # 
+  # page="main"; from=Sys.Date()-30; to=Sys.Date(); lang="en"; file=wp_cache_file()
+  
+  # deprecation
+  if( !<span id="t_15_235">missing("requestFrom")</span> ) 
+    <span id="t_15_248">message("Option 'requestFrom' is deprecated and will cause errors 
+            in futuere versions of the wp_trend() function. Please read 
+            the package vignette and/or README to learn about the new
+            set of options.
+            
+            Check wp_http_header() to know which information are send to 
+            stats.grok.se (R and package versions)
+            ")</span>
+  if( !<span id="t_15_266">missing("friendly")</span> ) 
+    <span id="t_15_279">message("Option 'friendly' is deprecated and will cause errors 
+            in futuere versions of the wp_trend() function. Please read 
+            the package vignette and/or README to learn about the new
+            set of options.
+            
+            The package now is friendly by default.
+            ")</span>
+  if( !<span id="t_15_297">missing("userAgent")</span> ) 
+    <span id="t_15_310">message("Option 'userAgent' is deprecated and will cause errors 
+            in futuere versions of the wp_trend() function. Please read 
+            the package vignette and/or README to learn about the new
+            set of options.
+            
+            Check wp_http_header() to know which information are send to 
+            stats.grok.se (R and package versions)
+            ")</span>
+  
+  # input check
+  <span id="t_15_328">stopifnot( <span id="t_15_331">length(page)</span>==<span id="t_15_341">length(lang)</span> | <span id="t_15_352">length(lang)</span>==1 )</span>
+  
+  # check dates
+  <span id="t_15_378">from</span> &lt;- <span id="t_15_381">wp_check_date_inputs(from, to)</span>$from
+  <span id="t_15_402">to</span>   &lt;- <span id="t_15_405">wp_check_date_inputs(from, to)</span>$to
+  
+  # check page
+  <span id="t_15_431">page</span> &lt;- stringr<span id="t_15_436">::</span>str_replace( page, "^.", <span id="t_15_449">substring(<span id="t_15_452">toupper(page)</span>,1,1)</span> )
+  <span id="t_15_483">page</span> &lt;- stringr<span id="t_15_488">::</span>str_replace( page, " ", "_" )
+  for( <span id="t_15_513">i</span> in <span id="t_15_515">seq_along(page)</span> ){
+    if ( !stringr<span id="t_15_533">::</span>str_detect( <span id="t_15_536">page</span>[i], "%" ) ){
+      page[i] &lt;- <span id="t_15_569">URLencode(<span id="t_15_572">page</span>[i])</span>
+    }
+  }
+
+  # setting cache-file (if necessary)
+  if ( <span id="t_15_611">file</span> != <span id="t_15_614">wp_cache_file()</span> ){
+    <span id="t_15_625">wp_set_cache_file(file)</span>
+  }
+    
+  # prepare URLs
+  <span id="t_15_649">urls</span> &lt;- <span id="t_15_652">wp_prepare_urls(page=page, 
+                          from=from, 
+                          to=to, 
+                          lang=lang)</span>
+
+  # download data and extract data
+  <span id="t_15_696">trash</span> &lt;- <span id="t_15_699">wp_get_data(urls)</span>
+  
+  # save cache to file and load cache for returning results 
+  <span id="t_15_717">res</span> &lt;- <span id="t_15_720">wp_get_cache()</span>
+  
+  # return
+  <span id="t_15_735">res</span> &lt;- 
+    <span id="t_15_739">res</span>[  <span id="t_15_742">res</span>$date &lt;= to & 
+          <span id="t_15_753">res</span>$date &gt;= from &
+          <span id="t_15_765">paste( <span id="t_15_768">res</span>$lang, <span id="t_15_776">toupper(<span id="t_15_779">res</span>$page)</span>)</span>  %in% <span id="t_15_793">paste( lang, <span id="t_15_801">toupper(page)</span> )</span> 
+          , 
+        ]
+  rownames(res) &lt;- NULL
+  class(res) &lt;- <span id="t_15_854">c("wp_df", "data.frame")</span>
+  <span id="t_15_872">return(res)</span>
+}
+
+
+
+</pre></div><div class="tab-pane " id="tabs-16"><pre><span id="t_16_1">.onLoad</span> &lt;- function(libname, pkgname){
+  <span id="t_16_14">wp_cache_file()</span>
+  <span id="t_16_23">wp_cache_load()</span>
+}</pre></div>
+    </div>
+    </div>
+  </div>
+  <div class="footer">
+    <p> Generated on2015-05-20 16:40:51 by <a href="http://www.mango-solutions.com/wp/products-services/r-services/r-packages/testcoverage/">testCoverage</a>.</p>
+  </div>
+  </div>
+</body> 
+</html>

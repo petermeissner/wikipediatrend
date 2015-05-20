@@ -97,19 +97,6 @@ wp_date.numeric <- function (x, origin, ...)
 }
 
 
-#' @describeIn wp_date  same as \code{as.Date()}
-#' 
-#' @export
-wp_date.date <- function (x, ...) 
-{
-  if (inherits(x, "date")) {
-    x <- (x - 3653)
-    return(structure(x, class = "Date"))
-  }
-  else stop(gettextf("'%s' is not a \"date\" object", deparse(substitute(x))))
-}
-
-
 #' @describeIn wp_date  same as \code{as.Date()} 
 #' 
 #' @export 

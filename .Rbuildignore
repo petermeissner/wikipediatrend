@@ -9,3 +9,7 @@ Readme_cache
 Readme_files
 Readme.html
 autotest.r
+autotest.Rexec
+test_coverage
+coverage_report.html
+appveyor.yml

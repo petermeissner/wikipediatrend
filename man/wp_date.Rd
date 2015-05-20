@@ -5,7 +5,6 @@
 \alias{wp_date.POSIXct}
 \alias{wp_date.POSIXlt}
 \alias{wp_date.character}
-\alias{wp_date.date}
 \alias{wp_date.dates}
 \alias{wp_date.default}
 \alias{wp_date.factor}
@@ -19,8 +18,6 @@ wp_date(x, ...)
 \method{wp_date}{default}(x, ...)
 
 \method{wp_date}{numeric}(x, origin, ...)
-
-\method{wp_date}{date}(x, ...)
 
 \method{wp_date}{dates}(x, ...)
 
@@ -67,8 +64,6 @@ and are not recommended for any other than wikipediatrend internal use.
   origin is needed but not supplied isntead of breaking, \code{wp_date()}
   will raise a warning and proceed by assuming "1970-01-01" to be the origin
   instead of killing itself with an error.
-
-\item \code{date}: same as \code{as.Date()}
 
 \item \code{dates}: same as \code{as.Date()}
 

@@ -6,6 +6,7 @@ output:
   rmarkdown::html_vignette:
     fig_caption: yes
     fig_width: 7 
+    fig_height: 5
     number_sections: yes
     toc: yes
     toc_depth: 2
@@ -261,37 +262,36 @@ ggplot(page_views, aes(x=date, y=count, group=lang, color=lang)) +
 
 
 
-# Going beyond Wikipediatrend -- Anomalies and mean shifts
-
-## Identifying time-series anomalies with `BreakoutDetection` by Twitter, Inc.
-
-> [...] BreakoutDetection, an open-source R package that makes breakout detection simple and fast. <br>
-> Source: https://blog.twitter.com/2014/breakout-detection-in-the-wild
-
-**Package source:** https://github.com/twitter/BreakoutDetection <br>
-**Package introduction:** https://blog.twitter.com/2014/breakout-detection-in-the-wild
-
-```{r, message=F}
-if ( !require(BreakoutDetection) ){    
-  devtools::install_github("twitter/BreakoutDetection")
-  library(BreakoutDetection)
-}
-library(dplyr)
-```
+# Going beyond Wikipediatrend -- Anomalies and mean shifts 
 
 
-## Identifying anomalies with `AnomalyDetection`
 
-```{r, message=F}
+## Identifying anomalies with `AnomalyDetection` by Twitter, Inc.
+
+Currently the `AnomalyDetection` package is not availible on CRAN so we have to use `install_github()` from the `devtools` package to get it. 
+
+```{r, include=F}
 if ( !require(AnomalyDetection) ){    
   devtools::install_github("twitter/AnomalyDetection")
   library(AnomalyDetection)
 }
 library(dplyr)
 library(ggplot2)
+```
 
+```{r, eval=FALSE}
+devtools::install_github("twitter/AnomalyDetection")
+library(AnomalyDetection)
+library(dplyr)
+library(ggplot2)
+```
 
-page_views <- wp_trend("Wikipedia:Pageview_statistics", from = "2012-01-01")
+The package is a little picky about the data it accepts for processing so we 
+have to build a new data frame. It should contain only the date and count variable.
+Furthermore, `date` should be named `timestamp` and transformed to type `POSIXct`.
+
+```{r}
+page_views <- wp_trend("Syria", from = "2012-01-01")
 
 page_views_br <- 
   page_views  %>% 
@@ -300,21 +300,209 @@ page_views_br <-
   unclass()  %>% 
   as.data.frame() %>% 
   mutate(timestamp = as.POSIXct(timestamp))
+```
 
-res <- AnomalyDetectionTs(page_views_br, plot=TRUE, longterm=T)$anoms
+Having transformed the data we can detect anomalies via `AnomalyDetectionTs()`. 
+The function offers various options e.g. the significance level for rejecting 
+normal values (`alpha`); the maximum fraction of the data that is allowed to be 
+detected as anomalies (`max_amoms`); whether or not upward deviations, downward 
+devaitions or irregularities in both directions might form the basis of anomaly 
+detection (`direction`) and last but not least whether or not the time frame for 
+detection is larger than one month (`lonterm`).
+
+Lets choose a greedy set of parameters and detect possible anomalies:
+
+```{r}
+res <- 
+  AnomalyDetectionTs(
+    x         = page_views_br, 
+    alpha     = 0.05, 
+    max_anoms = 0.40,
+    direction = "both",
+    longterm  = T
+  )$anoms
 res$timestamp <- as.Date(res$timestamp)
 
-ggplot( data=page_views, aes(x=date, y=count) ) + 
-  #geom_smooth(color="#4D87B740", fill="#4D87B740") +
-  geom_smooth(
-    data=filter(page_views, !(page_views$date %in% res$timestamp) ), 
-    aes(x=date, y=count), color="#EE000040", fill="#EE000040") +
-  geom_point(data=res, aes(x=timestamp, y=anoms),color="red2",size=3) +
-  theme_bw() + stat_smooth(level=1-1e-15)
+head(res)
+```
+
+... and play back the detected anomalies to our `page_views` data set:
+
+```{r} 
+page_views <- 
+  page_views  %>% 
+  mutate(normal = !(page_views$date %in% res$timestamp))  %>% 
+  mutate(anom   =   page_views$date %in% res$timestamp )
+class(page_views) <- c("wp_df", "data.frame")
+```
+
+Now we can plot counts and anomalies ... 
+
+```{r, message=FALSE}
+(
+p <-
+  ggplot( data=page_views, aes(x=date, y=count) ) + 
+    geom_line(color="steelblue") +
+    geom_point(data=filter(page_views, anom==T), color="red2", size=2) +
+    theme_bw()
+)
+```
+
+... as well as compare running means: 
+
+```{r, message=FALSE}
+p + 
+  geom_line(stat = "smooth", size=2, color="red2", alpha=0.7) + 
+  geom_line(data=filter(page_views, anom==F), 
+            stat = "smooth", size=2, color="dodgerblue4", alpha=0.5) 
+```
+
+It seems like upward and downward anomalies partial each other out most of the 
+time since both smooth lines (with and without anomalies) do not differ much. 
+Nonetheless, keeping anomalies in will upward bias the counts slightly, so we 
+proceed with a cleaned up data set: 
+
+```{r}
+page_views_clean <- 
+  page_views  %>% 
+  filter(anom==F)  %>% 
+  select(date, count, lang, page, rank, month, title)
+
+page_views_br_clean <- 
+  page_views_br  %>% 
+  filter(page_views$anom==F)
+```
 
 
+
+## Identifying mean shifts with `BreakoutDetection` by Twitter, Inc.
+
+`BreakoutDetection` is a package that allows search data for mean level shifts
+by dividing it into timespans of change and those of stability in the presence 
+of seasonal noise. 
+Similar to `AnomalyDetection` the `BreakoutDetection` package is not available 
+on CRAN but has to be obtained from Github. 
+
+```{r, include=FALSE}
+if ( !require(BreakoutDetection) ){    
+  devtools::install_github("twitter/BreakoutDetection")
+  library(BreakoutDetection)
+}
+library(dplyr)
+library(ggplot2)
+library(magrittr)
+```
+
+```{r, eval=FALSE }
+devtools::install_github("twitter/BreakoutDetection")
+library(BreakoutDetection)
+library(dplyr)
+library(ggplot2)
+library(magrittr)
+```
+
+... again the workhorse function (`breakout()`) is picky and requires *"a data.frame which has 'timestamp' and 'count' components"* like our `page_views_br_clean`. 
+
+The function has two general options: one tweaks the minimum length of a timespan 
+(`min.size`); the other one does determine how many mean level changes might 
+occur during the the whole time frame (`method`); and several method specific 
+options, e.g. `decree`, `beta`, and `percent` which control the sensitivity 
+adding further breakpoints. In the following case the the last option tells 
+the function that overall model fit should be increased by at least 5 percent 
+if adding a breakpoint. 
+
+```{r}
+br <- 
+  breakout(
+    page_views_br_clean, 
+    min.size = 30, 
+    plot=T, 
+    method = 'multi', 
+    percent=0.05
+  )
+br
+```
+
+In the following snippet we combine the break information with our page views data and can have a look at the dates at which the breaks occured. 
+
+```{r}
+breaks <- page_views_clean[br$loc,]
+breaks
 
 ```
+
+Next, we add a span variable capturing which page_view observations belong to 
+which span, allowing us to aggregate data. 
+
+```{r}
+page_views_clean$span <- 0
+for (d in breaks$date ) {
+  page_views_clean$span[ page_views_clean$date > d ] %<>% add(1)
+}
+
+page_views_clean$mcount <- 0
+for (s in unique(page_views_clean$span) ) {
+  iffer <- page_views_clean$span == s
+  page_views_clean$mcount[ iffer ] <- mean(page_views_clean$count[iffer])
+}
+
+spans <- 
+  page_views_clean  %>% 
+    as_data_frame() %>% 
+    group_by(span) %>% 
+    summarize(
+      start      = min(date), 
+      end        = max(date), 
+      length     = end-start,
+      mean_count = round(mean(count)),
+      min_count  = min(count),
+      max_count  = max(count),
+      var_count  = var(count)
+    )
+spans
+```
+
+Also, we can now plot the shifting mean. 
+
+```{r}
+ggplot(page_views_clean, aes(x=date, y=count) ) + 
+  geom_line(alpha=0.5) + 
+  geom_line(aes(y=mcount), alpha=0.5, color="red2", size=1.2) + 
+  theme_bw()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

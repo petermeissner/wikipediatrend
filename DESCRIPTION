@@ -18,6 +18,7 @@ License: GPL (>= 2)
 Depends: R (>= 3.0.0)
 Imports: jsonlite (>= 0.9.13), stringr (>= 0.6.2), rvest (>= 0.2.0),
         httr (>= 0.6.1), RCurl (>= 1.8)
-Suggests: testthat, knitr, ggplot2, devtools, dplyr
+Suggests: testthat, knitr, ggplot2, devtools, dplyr, 
+        AnomalyDetection, BreakoutDetection
 BugReports: https://github.com/petermeissner/wikipediatrend/issues
 VignetteBuilder: knitr

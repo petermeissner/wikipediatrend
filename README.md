@@ -1,20 +1,28 @@
 # wikipediatrend
 
-**Author:** <br> Peter Meißner
+# Author
 
-**Last update:**  <br> 2015-05-19
+Peter Meißner
 
-**Status:**  <br> 
-[![Build Status
-](https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master)
+
+
+# Last Update
+
+2015-05-20
+
+
+
+# Status
+
+[<img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master">
 ](https://travis-ci.org/petermeissner/wikipediatrend)
  <br> 
-[![Coverage Status
-](https://coveralls.io/repos/petermeissner/wikipediatrend/badge.svg)
+[<img src="https://coveralls.io/repos/petermeissner/wikipediatrend/badge.svg" >
 ](https://coveralls.io/r/petermeissner/wikipediatrend)
  <br> 
-[![Downloads
-](http://cranlogs.r-pkg.org/badges/grand-total/wikipediatrend)
+[<img src="http://cranlogs.r-pkg.org/badges/grand-total/wikipediatrend">
+](http://cranlogs.r-pkg.org/)
+[<img src="http://cranlogs.r-pkg.org/badges/wikipediatrend">
 ](http://cranlogs.r-pkg.org/)
 
 

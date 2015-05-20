@@ -6,21 +6,29 @@ output:
     self_contained: yes
 ---
 
-**Author:** <br> Peter Meißner
+# Author
 
-**Last update:**  <br> `r Sys.Date()`
+Peter Meißner
 
-**Status:**  <br> 
-[![Build Status
-](https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master)
+
+
+# Last Update
+
+`r Sys.Date()`
+
+
+
+# Status
+
+[<img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master">
 ](https://travis-ci.org/petermeissner/wikipediatrend)
  <br> 
-[![Coverage Status
-](https://coveralls.io/repos/petermeissner/wikipediatrend/badge.svg)
+[<img src="https://coveralls.io/repos/petermeissner/wikipediatrend/badge.svg" >
 ](https://coveralls.io/r/petermeissner/wikipediatrend)
  <br> 
-[![Downloads
-](http://cranlogs.r-pkg.org/badges/grand-total/wikipediatrend)
+[<img src="http://cranlogs.r-pkg.org/badges/grand-total/wikipediatrend">
+](http://cranlogs.r-pkg.org/)
+[<img src="http://cranlogs.r-pkg.org/badges/wikipediatrend">
 ](http://cranlogs.r-pkg.org/)
 
 
@@ -126,7 +134,7 @@ http://onlinelibrary.wiley.com/doi/10.1111/j.1541-0072.2011.00406.x/full
 
 # Thanks 
 
-Fernando Reis, Eryk Walczak, Simon Munzert
+Fernando Reis, Eryk Walczak, Simon Munzert, Kristin Lindemann
 
 
 

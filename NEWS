@@ -1,11 +1,12 @@
 NEWS wikipediatrend 
-===============================================================================
+==========================================================================
 
-version 1.1.0 // 2015-05-xx ...
--------------------------------------------------------------------------------
-- feature: wp_trend() now tries to guess if page was supplied as title with
-possible special characters or as (url-encoded) URL part and take care of 
-further processing
+version 1.1.0 // 2015-05-21 ...
+--------------------------------------------------------------------------
+
+- feature: caching has been overhauled 
+
+- feature: wp_trend() now tries to guess if page was supplied as title with possible special characters or as (url-encoded) URL part and take care of  further processing
 
 - bug-fix: special character support of the packages was lousy and preventing 
 the usage of articles of non-standard languages ( - especially on Windows)
@@ -23,8 +24,8 @@ wp_trend() were causing errors
 
 - bug-fix: wp_cache_reset() would stop with an error if called twice in a row - fixed
 
-version 1.0.0 // 2015-04-xx ...
--------------------------------------------------------------------------------
+version 1.0.0 // 2015-04-01 ...
+--------------------------------------------------------------------------
 
 - api-change: option userAgent deleted: the default is to send information on 
 versions of R, wikipediatrend, curl as well as RCurl
@@ -59,7 +60,7 @@ rank, month
 - bug-fix: wp_trend() now checks date inputs better for logical inconsistencies 
 
 
-version 0.2.0 // 2014-11-xx ... 
--------------------------------------------------------------------------------
+version 0.2.0 // 2014-11-01 ... 
+--------------------------------------------------------------------------
 
 - first puplication on CRAN

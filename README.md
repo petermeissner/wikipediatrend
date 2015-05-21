@@ -8,7 +8,7 @@ Peter Meißner
 
 # Last Update
 
-2015-05-20
+2015-05-21
 
 
 
@@ -32,7 +32,7 @@ Peter Meißner
 
 # Purpose
 
-The wikipeditrend package is designed around the idea to make Wikipedia page view statistics data availible in R in a most convenient way. 
+The wikipediatrend package is designed around the idea of make Wikipedia page view statistics data availible in R in a most convenient way. 
 
 *Consequently the package provides* 
 
@@ -72,7 +72,7 @@ library(wikipediatrend)
 
 
 
-# Usage:
+# Usage
 
 
 The workhorse of the package is the `wp_trend()` function:
@@ -132,7 +132,7 @@ ggplot(wp, aes(date, count, group=page, color = page)) +
 # Some examples for using page view statistics
 
 
-- Mellon, Jonathan (2014) *Internet Search Data and Issue Salience: The Properties of Google Trends as a Measure of Issue Salience* Journal of Elections, Public Opinion and Parties 24(1):4572.
+- Mellon, Jonathan (2014) *Internet Search Data and Issue Salience: The Properties of Google Trends as a Measure of Issue Salience* Journal of Elections, Public Opinion and Parties 24(1):45-72.
 http://www.tandfonline.com/doi/abs/10.1080/17457289.2013.846346 
 
 - Ripberger, Joseph T. (2011): *Capturing curiosity: using Internet search trends to measure public attentiveness*. Policy Studies Journal 39(2):239-259.
@@ -150,7 +150,7 @@ http://onlinelibrary.wiley.com/doi/10.1111/j.1541-0072.2011.00406.x/full
 
 # Thanks 
 
-Fernando Reis, Eryk Walczak, Simon Munzert
+Fernando Reis, Eryk Walczak, Simon Munzert, Kristin Lindemann
 
 
 

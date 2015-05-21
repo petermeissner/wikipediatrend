@@ -16,6 +16,11 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
+```{r, include=FALSE}
+library(ggplot2)
+update_geom_defaults("line",   list(colour = "steelblue"))
+```
+
 
 
 > What do Wikipedia's readers care about? Is Britney Spears more popular than Brittany? Is Asia Carrera more popular than Asia? How many people looked at the article on Santa Claus in December? How many looked at the article on Ron Paul?
@@ -24,8 +29,8 @@ vignette: >
 
 
 
-The *wikipediatrend* package provides convenience -- easy and reliable --
-access to the daily page view counts (*Wikipedia article traffic statistics*)
+The *wikipediatrend* package provides convenience
+access to daily page view counts (*Wikipedia article traffic statistics*)
 stored at http://stats.grok.se/ . 
 
 If you want to know how often an article has been viewed over time and 
@@ -35,13 +40,13 @@ this package is for you.
 Are you up to policy studies or epidemiology? Have a look at page counts for *Flue*, *Ebola*, *Climate Change* or
 *Millennium Development Goals* and maybe build a model or two. Again, this package is for you. 
 
-If you simply want to browse Wikipedia page view statistics without all that coding
+If you simply want to browse Wikipedia page view statistics without all that coding,
 visit http://stats.grok.se/ and have a look around. 
 
-If non-big data is not an option get the raw data in their entity at 
+If non-big data is not an option, get the raw data in their entity at 
 http://dumps.wikimedia.org/other/pagecounts-raw/ . 
 
-If you think days are crude measures time but seconds might do if need be and info about which article was viewed is useless anyways - go to http://datahub.io/dataset/english-wikipedia-pageviews-by-second . 
+If you think days are crude measures of time but seconds might do if need be and info about which article views led to the numbers is useless anyways - go to http://datahub.io/dataset/english-wikipedia-pageviews-by-second. 
 
 To get further information on the data source (Who? When? How? How good?) there is a Wikipedia article for that: http://en.wikipedia.org/wiki/Wikipedia:Pageview_statistics and another one: http://en.wikipedia.org/wiki/Wikipedia:About_page_view_statistics .
 
@@ -137,7 +142,7 @@ ggplot(page_views, aes(x=date, y=count, group=page, color=page)) +
 
 ## `from` and `to`
 
-These two options determine the time frame for which data shall be retrieved. The defaults are set to gather the last 30 days but might be set to cover larger time frames as well. Note, that there is no data prior to December 2007 so that any date prior will be set to this minimum. 
+These two options determine the time frame for which data shall be retrieved. The defaults are set to gather the last 30 days but might be set to cover larger time frames as well. Note that there is no data prior to December 2007 so that any date prior will be set to this minimum. 
 
 ```{r, message=F}
 page_views <- wp_trend( 
@@ -157,7 +162,7 @@ ggplot(page_views, aes(x=date, y=count, color=wp_year(date))) +
 
 ## `lang`
 
-This option determines for which Wikipedia the page views shall be retrieved, English, German, Chinese, Spanish, ... . The default is set to `"en"` for the English Wikipedia. This option should get one language shorthand that than is used for all pages or for each page a corresponding language shorthand should be specified. 
+This option determines for which Wikipedia the page views shall be retrieved, English, German, Chinese, Spanish, ... . The default is set to `"en"` for the English Wikipedia. This option should get one language shorthand that then is used for all pages or for each page a corresponding language shorthand should be specified. 
 
 ```{r, message=F}
 page_views <- wp_trend( 
@@ -187,7 +192,7 @@ To get the path and name of the default cache file use the `wp_cache_file()` fun
 wp_cache_file()
 ```
 
-While `wp_trend()` will never return more data than specified by options `page`, `lang`, `from`, and `to`  `wp_get_cache()` can be used retrieve all the data cached sofar:
+While `wp_trend()` will never return more data than specified by options `page`, `lang`, `from`, and `to`  `wp_get_cache()` can be used to retrieve all the data cached so far:
 
 ```{r, message=F}
 cache <- wp_get_cache()
@@ -235,7 +240,7 @@ titles <- titles[titles$lang %in% c("en", "de", "es", "ar", "ru"),]
 titles 
 ```
 
-... than we can use the information to get data for several languages ... 
+... then we can use the information to get data for several languages ... 
 
 ```{r, message=F}
 page_views <- wp_trend(page = titles$page[1:5], 
@@ -266,7 +271,7 @@ ggplot(page_views, aes(x=date, y=count, group=lang, color=lang)) +
 
 
 
-## Identifying anomalies with `AnomalyDetection` by Twitter, Inc.
+## Identifying anomalies with `AnomalyDetection` 
 
 Currently the `AnomalyDetection` package is not availible on CRAN so we have to use `install_github()` from the `devtools` package to get it. 
 
@@ -375,9 +380,9 @@ page_views_br_clean <-
 
 
 
-## Identifying mean shifts with `BreakoutDetection` by Twitter, Inc.
+## Identifying mean shifts with `BreakoutDetection` 
 
-`BreakoutDetection` is a package that allows search data for mean level shifts
+`BreakoutDetection` is a package that allows to search data for mean level shifts
 by dividing it into timespans of change and those of stability in the presence 
 of seasonal noise. 
 Similar to `AnomalyDetection` the `BreakoutDetection` package is not available 
@@ -405,9 +410,9 @@ library(magrittr)
 
 The function has two general options: one tweaks the minimum length of a timespan 
 (`min.size`); the other one does determine how many mean level changes might 
-occur during the the whole time frame (`method`); and several method specific 
+occur during the whole time frame (`method`); and several method specific 
 options, e.g. `decree`, `beta`, and `percent` which control the sensitivity 
-adding further breakpoints. In the following case the the last option tells 
+adding further breakpoints. In the following case the last option tells 
 the function that overall model fit should be increased by at least 5 percent 
 if adding a breakpoint. 
 
@@ -416,9 +421,9 @@ br <-
   breakout(
     page_views_br_clean, 
     min.size = 30, 
-    plot=T, 
-    method = 'multi', 
-    percent=0.05
+    method   = 'multi', 
+    percent  = 0.05,
+    plot     = TRUE
   )
 br
 ```
@@ -464,9 +469,9 @@ spans
 
 Also, we can now plot the shifting mean. 
 
-```{r}
+```{r, message=FALSE}
 ggplot(page_views_clean, aes(x=date, y=count) ) + 
-  geom_line(alpha=0.5) + 
+  geom_line(alpha=0.5, color="steelblue") + 
   geom_line(aes(y=mcount), alpha=0.5, color="red2", size=1.2) + 
   theme_bw()
 ```

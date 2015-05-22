@@ -7,7 +7,6 @@
 #' @param from first date of timespan to check
 #' @param to second date of timespan to check
 #'
-#' #@export 
 #' 
 
 wp_check_date_inputs <- function(from, to){

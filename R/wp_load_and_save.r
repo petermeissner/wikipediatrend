@@ -99,7 +99,7 @@ wp_load <- function(file=wp_cache_file()){
 #' 
 #' @param res data retreived by \code{wp_trend()}
 #' @param file where to save/cache results (defaults to \code{wp_cache_file()})
-#'   
+#' @export  
 #'   
 #' 
 

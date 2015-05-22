@@ -277,7 +277,11 @@ Currently the `AnomalyDetection` package is not availible on CRAN so we have to 
 
 ```{r, include=F}
 if ( !require(AnomalyDetection) ){    
-  devtools::install_github("twitter/AnomalyDetection")
+install.packages(
+  "AnomalyDetection", 
+  repos="http://ghrr.github.io/drat", 
+  type="source"
+)
   library(AnomalyDetection)
 }
 library(dplyr)
@@ -285,7 +289,11 @@ library(ggplot2)
 ```
 
 ```{r, eval=FALSE}
-devtools::install_github("twitter/AnomalyDetection")
+install.packages(
+  "AnomalyDetection", 
+  repos="http://ghrr.github.io/drat", 
+  type="source"
+)
 library(AnomalyDetection)
 library(dplyr)
 library(ggplot2)
@@ -389,17 +397,25 @@ Similar to `AnomalyDetection` the `BreakoutDetection` package is not available
 on CRAN but has to be obtained from Github. 
 
 ```{r, include=FALSE}
-#if ( !require(BreakoutDetection) ){    
-#  devtools::install_github("twitter/BreakoutDetection")
+if ( !require(BreakoutDetection) ){    
+  install.packages(
+    "BreakoutDetection", 
+    repos="http://ghrr.github.io/drat", 
+    type="source"
+  )
   library(BreakoutDetection)
-#}
+}
 library(dplyr)
 library(ggplot2)
 library(magrittr)
 ```
 
 ```{r, eval=FALSE }
-devtools::install_github("twitter/BreakoutDetection")
+install.packages(
+  "BreakoutDetection", 
+  repos="http://ghrr.github.io/drat", 
+  type="source"
+)
 library(BreakoutDetection)
 library(dplyr)
 library(ggplot2)

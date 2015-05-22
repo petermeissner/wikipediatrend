@@ -2,7 +2,7 @@
 #'
 #' @param urls a vector of urls to be downloaded
 #' @param wait the time to wait in seconds before downloading the next chunk (default=1)
-#' #@export
+#' 
 
 wp_download_data <- function(urls, wait=1){
   # make http requests

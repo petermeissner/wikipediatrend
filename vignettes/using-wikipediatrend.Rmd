@@ -389,10 +389,10 @@ Similar to `AnomalyDetection` the `BreakoutDetection` package is not available
 on CRAN but has to be obtained from Github. 
 
 ```{r, include=FALSE}
-if ( !require(BreakoutDetection) ){    
-  devtools::install_github("twitter/BreakoutDetection")
+#if ( !require(BreakoutDetection) ){    
+#  devtools::install_github("twitter/BreakoutDetection")
   library(BreakoutDetection)
-}
+#}
 library(dplyr)
 library(ggplot2)
 library(magrittr)

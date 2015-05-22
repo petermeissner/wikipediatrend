@@ -1,5 +1,11 @@
 # Testing
 
+- local Win7 / Win8 
+- local Ubuntu 14.04 LTS
+- winbuild
+- Travis (Ubuntu) : https://travis-ci.org/petermeissner/wikipediatrend
+- Apveyor (Windows) : https://ci.appveyor.com/project/petermeissner/wikipediatrend
+
 
 # Submission Comments and responses / actions taken
 

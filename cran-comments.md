@@ -1,8 +1,7 @@
-# Testing
+# Checking
 
-- local Win7 / Win8 
-- local Ubuntu 14.04 LTS
-- winbuild
+- local Win7 
+- winbuild : http://win-builder.r-project.org/THTI37gay9b1/00check.log : http://win-builder.r-project.org/a3F8892M0us3/00check.log
 - Travis (Ubuntu) : https://travis-ci.org/petermeissner/wikipediatrend
 - Apveyor (Windows) : https://ci.appveyor.com/project/petermeissner/wikipediatrend
 

@@ -16,5 +16,5 @@
 - Suggests or Enhances not in mainstream repositories: AnomalyDetection, BreakoutDetection
 
 -> added the following to DESCRIPTION:
-Additional_repositories: 'http://ghrr.github.io/drat'
+Additional_repositories: http://ghrr.github.io/drat
 

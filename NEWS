@@ -1,6 +1,13 @@
 NEWS wikipediatrend 
 ==========================================================================
 
+version 1.1.1 // 2015-05-23 ...
+--------------------------------------------------------------------------
+
+- adding ghrr as additional repo to comply with CRAN policies
+- changing default forlder of cache file from home (~) to temp (basename(tempdir()))
+
+
 version 1.1.0 // 2015-05-21 ...
 --------------------------------------------------------------------------
 
@@ -12,17 +19,14 @@ version 1.1.0 // 2015-05-21 ...
 the usage of articles of non-standard languages ( - especially on Windows)
   * introduction of the wp_df class to allow for a print.wp_df that 
     a) shortens long strings on print
-    b) does not use format() (format() causes UTF-8 characters to be replaced 
-       by "<U+xxxx>" strings (propably only))
-  * using a package specific write_utf8_csv() and read_utf8_csv() to be able to
-    store and cache data for articles with special character names 
-    (even under Windows, write.csv() does not allow enforcing a specific 
-    encoding)
+    b) does not use format() (format() causes UTF-8 characters to be replaced by "<U+xxxx>" strings (propably only))
+  * using a package specific write_utf8_csv() and read_utf8_csv() to be able to store and cache data for articles with special character names     (even under Windows, write.csv() does not allow enforcing a specific encoding)
 
 - bug-fix / backward compatibility: with version 1.0.0 old parameters for 
 wp_trend() were causing errors
 
 - bug-fix: wp_cache_reset() would stop with an error if called twice in a row - fixed
+
 
 version 1.0.0 // 2015-04-01 ...
 --------------------------------------------------------------------------

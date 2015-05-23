@@ -5,7 +5,7 @@
 #' 
 #' @param wp_json The results from server request in JSON format
 #' @param page the name of the downloaded page
-#' @export
+#' 
 
 
 wp_jsons_to_df <- function(wp_json, page){

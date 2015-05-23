@@ -1,9 +1,18 @@
+#' function for building default cache file name
+#' 
+wp_cache_default <- function(){
+  paste0(
+    dirname(tempdir()),
+    "/wikipediatrend_cache.csv"
+  )
+}
+
 #' function for determining where downloaded information can be stored
 #' @export
 #'
 wp_cache_file <- function(){
   if( is.null(wp_cache$cachefile) ){
-    file <- paste0("~", "/", "wikipediatrend_cache.csv")
+    file <- wp_cache_default()
     wp_cache$cachefile <- file
   }else{
     file <- wp_cache$cachefile
@@ -34,7 +43,6 @@ wp_cache_reset <- function(){
 }
 
 #' function for loading data in cache
-#' @export
 #'
 wp_cache_load <- function(){
   tmp <- wp_load(wp_cache_file())
@@ -50,7 +58,6 @@ wp_get_cache <- function(){
 }
 
 #' functio to save cache to file
-#' @export
 #'   
 wp_save_cache <- function(){
   wp_save(wp_cache$cache, wp_cache_file())

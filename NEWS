@@ -1,30 +1,35 @@
 NEWS wikipediatrend 
-===============================================================================
+==========================================================================
 
-version 1.1.0 // 2015-05-xx ...
--------------------------------------------------------------------------------
-- feature: wp_trend() now tries to guess if page was supplied as title with
-possible special characters or as (url-encoded) URL part and take care of 
-further processing
+version 1.1.1 // 2015-05-23 ...
+--------------------------------------------------------------------------
+
+- adding ghrr as additional repo to comply with CRAN policies
+- changing default forlder of cache file from home (~) to temp (basename(tempdir()))
+
+
+version 1.1.0 // 2015-05-21 ...
+--------------------------------------------------------------------------
+
+- feature: caching has been overhauled 
+
+- feature: wp_trend() now tries to guess if page was supplied as title with possible special characters or as (url-encoded) URL part and take care of  further processing
 
 - bug-fix: special character support of the packages was lousy and preventing 
 the usage of articles of non-standard languages ( - especially on Windows)
   * introduction of the wp_df class to allow for a print.wp_df that 
     a) shortens long strings on print
-    b) does not use format() (format() causes UTF-8 characters to be replaced 
-       by "<U+xxxx>" strings (propably only))
-  * using a package specific write_utf8_csv() and read_utf8_csv() to be able to
-    store and cache data for articles with special character names 
-    (even under Windows, write.csv() does not allow enforcing a specific 
-    encoding)
+    b) does not use format() (format() causes UTF-8 characters to be replaced by "<U+xxxx>" strings (propably only))
+  * using a package specific write_utf8_csv() and read_utf8_csv() to be able to store and cache data for articles with special character names     (even under Windows, write.csv() does not allow enforcing a specific encoding)
 
 - bug-fix / backward compatibility: with version 1.0.0 old parameters for 
 wp_trend() were causing errors
 
 - bug-fix: wp_cache_reset() would stop with an error if called twice in a row - fixed
 
-version 1.0.0 // 2015-04-xx ...
--------------------------------------------------------------------------------
+
+version 1.0.0 // 2015-04-01 ...
+--------------------------------------------------------------------------
 
 - api-change: option userAgent deleted: the default is to send information on 
 versions of R, wikipediatrend, curl as well as RCurl
@@ -59,7 +64,7 @@ rank, month
 - bug-fix: wp_trend() now checks date inputs better for logical inconsistencies 
 
 
-version 0.2.0 // 2014-11-xx ... 
--------------------------------------------------------------------------------
+version 0.2.0 // 2014-11-01 ... 
+--------------------------------------------------------------------------
 
 - first puplication on CRAN

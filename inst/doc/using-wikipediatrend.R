@@ -1,3 +1,7 @@
+## ---- include=FALSE------------------------------------------------------
+library(ggplot2)
+update_geom_defaults("line",   list(colour = "steelblue"))
+
 ## ---- message=F, eval=FALSE----------------------------------------------
 #  install.packages("wikipediatrend")
 
@@ -113,14 +117,22 @@ ggplot(page_views, aes(x=date, y=count, group=lang, color=lang)) +
 
 ## ---- include=F----------------------------------------------------------
 if ( !require(AnomalyDetection) ){    
-  devtools::install_github("twitter/AnomalyDetection")
+install.packages(
+  "AnomalyDetection", 
+  repos="http://ghrr.github.io/drat", 
+  type="source"
+)
   library(AnomalyDetection)
 }
 library(dplyr)
 library(ggplot2)
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  devtools::install_github("twitter/AnomalyDetection")
+#  install.packages(
+#    "AnomalyDetection",
+#    repos="http://ghrr.github.io/drat",
+#    type="source"
+#  )
 #  library(AnomalyDetection)
 #  library(dplyr)
 #  library(ggplot2)
@@ -183,7 +195,11 @@ page_views_br_clean <-
 
 ## ---- include=FALSE------------------------------------------------------
 if ( !require(BreakoutDetection) ){    
-  devtools::install_github("twitter/BreakoutDetection")
+  install.packages(
+    "BreakoutDetection", 
+    repos="http://ghrr.github.io/drat", 
+    type="source"
+  )
   library(BreakoutDetection)
 }
 library(dplyr)
@@ -191,7 +207,11 @@ library(ggplot2)
 library(magrittr)
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  devtools::install_github("twitter/BreakoutDetection")
+#  install.packages(
+#    "BreakoutDetection",
+#    repos="http://ghrr.github.io/drat",
+#    type="source"
+#  )
 #  library(BreakoutDetection)
 #  library(dplyr)
 #  library(ggplot2)
@@ -202,9 +222,9 @@ br <-
   breakout(
     page_views_br_clean, 
     min.size = 30, 
-    plot=T, 
-    method = 'multi', 
-    percent=0.05
+    method   = 'multi', 
+    percent  = 0.05,
+    plot     = TRUE
   )
 br
 
@@ -240,9 +260,9 @@ spans <-
     )
 spans
 
-## ------------------------------------------------------------------------
+## ---- message=FALSE------------------------------------------------------
 ggplot(page_views_clean, aes(x=date, y=count) ) + 
-  geom_line(alpha=0.5) + 
+  geom_line(alpha=0.5, color="steelblue") + 
   geom_line(aes(y=mcount), alpha=0.5, color="red2", size=1.2) + 
   theme_bw()
 

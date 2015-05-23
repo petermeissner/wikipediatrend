@@ -9,9 +9,7 @@ wp_check_date_inputs(from, to)
 \arguments{
 \item{from}{first date of timespan to check}
 
-\item{to}{second date of timespan to check
-
-#}
+\item{to}{second date of timespan to check}
 }
 \description{
 Function that checks if the time span given by from and to (passed down from

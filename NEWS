@@ -5,7 +5,8 @@ version 1.1.1 // 2015-05-23 ...
 --------------------------------------------------------------------------
 
 - adding ghrr as additional repo to comply with CRAN policies
-- changing default forlder of cache file from home (~) to temp (basename(tempdir()))
+
+- changing default folder of cache file from home (~) to temp (basename(tempdir()))
 
 
 version 1.1.0 // 2015-05-21 ...

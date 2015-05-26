@@ -1,7 +1,7 @@
 Package: wikipediatrend
 Title: Public Subject Attention via Wikipedia Page Access Statistics
-Version: 1.1.1.9000498
-Date: 2015-05-22
+Version: 1.1.2.9000513
+Date: 2015-05-25
 Author: Peter Meissner [aut, cre], R Core team [ctb] ('wp_date()'
         derived from base package's 'as.Date()')
 Maintainer: Peter Meissner <retep.meissner@gmail.com>
@@ -10,16 +10,16 @@ Description: Public attention is an interesting field of study. The
         virtually any subject but via page access statistics gathered
         by website authors the subject of attention as well can be
         studied. For the omnipresent Wikipedia those access statistics
-        are made available via 'http://stats.grok.se' a server providing 
-        the information as file dumps as well as as web API. This package
-        provides an easy to use, consistent and traffic minimizing
-        approach to make those data accessible within R.
+        are made available via 'http://stats.grok.se' a server
+        providing the information as file dumps as well as as web API.
+        This package provides an easy to use, consistent and traffic
+        minimizing approach to make those data accessible within R.
 License: GPL (>= 2)
 Depends: R (>= 3.0.0)
 Imports: jsonlite (>= 0.9.13), stringr (>= 0.6.2), rvest (>= 0.2.0),
         httr (>= 0.6.1), RCurl (>= 1.8)
-Suggests: testthat, knitr, ggplot2, devtools, dplyr, magrittr, 
-        AnomalyDetection, BreakoutDetection, 
+Suggests: testthat, knitr, ggplot2, devtools, dplyr, magrittr,
+        AnomalyDetection, BreakoutDetection,
 BugReports: https://github.com/petermeissner/wikipediatrend/issues
 VignetteBuilder: knitr
 Additional_repositories: http://ghrr.github.io/drat

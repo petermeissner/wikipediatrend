@@ -147,7 +147,7 @@ These two options determine the time frame for which data shall be retrieved. Th
 ```{r, message=F}
 page_views <- wp_trend( 
                 page = "Millennium_Development_Goals" ,
-                from = "2000-01-01",
+                from = "2014-01-01",
                 to   = prev_month_end())
 ```
 
@@ -304,7 +304,7 @@ have to build a new data frame. It should contain only the date and count variab
 Furthermore, `date` should be named `timestamp` and transformed to type `POSIXct`.
 
 ```{r}
-page_views <- wp_trend("Syria", from = "2012-01-01")
+page_views <- wp_trend("Syria", from = "2013-06-01")
 
 page_views_br <- 
   page_views  %>% 

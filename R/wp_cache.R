@@ -7,18 +7,39 @@ wp_cache_default <- function(){
   )
 }
 
+#' function for initializing persistant cache in tempdir/ or elsewhere
+#' @export
+#'  
+wp_make_cache_permanent <- function(path){
+  if ( path == TRUE ) {
+    path_set = wp_cache_default()
+  }
+  if ( path == FALSE ){
+    Sys.setenv("WP_CACHE_PATH" = "" )
+    path_set = ""
+  }
+  if ( class(path)=="character" & length(path) > 0 & !is.na(path) ){
+    path_set = path 
+  }
+  # apply path
+  Sys.setenv("WP_CACHE_PATH" = path )
+  wp_set_cache_file( path_set )
+}
+
 #' function for determining where downloaded information can be stored
 #' @export
 #'
 wp_cache_file <- function(){
   if( is.null(wp_cache$cachefile) ){
-    file <- wp_cache_default()
+    file <- Sys.getenv("WP_CACHE_PATH")
     wp_cache$cachefile <- file
   }else{
     file <- wp_cache$cachefile
   }
   if ( !file.exists(file) ){
-    file.create(file)
+    if( file != "" ){
+      file.create(file)
+    } 
     wp_cache$cachefile <- file
   }
   return(file)
@@ -60,7 +81,9 @@ wp_get_cache <- function(){
 #' functio to save cache to file
 #'   
 wp_save_cache <- function(){
-  wp_save(wp_cache$cache, wp_cache_file())
+  if ( wp_cache_file() != "" ){
+    wp_save( wp_cache$cache, wp_cache_file() )
+  }
 }
 
 #' function adding downloaded data to the cache

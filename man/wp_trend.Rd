@@ -5,7 +5,7 @@
 \title{Function for getting access statistics for wikipedia pages}
 \usage{
 wp_trend(page, from = prev_month_start(), to = prev_month_end(),
-  lang = "en", file = wp_cache_file(), friendly, requestFrom, userAgent)
+  lang = "en", file = "", friendly, requestFrom, userAgent)
 }
 \arguments{
 \item{page}{The name of the Wikipedia page as to be found in the URL to the
@@ -30,19 +30,12 @@ wp_trend(page, from = prev_month_start(), to = prev_month_end(),
   http://de.wikipedia.org or perhaps \code{"als"} for the Alemannic dialect
   found under http://als.wikipedia.org/.}
 
-\item{file}{Where to cache/store the retrieved data? By default a file within
-  the user folder is used for as long as the R session takes place. The data
+\item{file}{Where to store data retrieved by function call? The data
   is stored in CSV format. If an already existing file is used for storage,
   the old data will not be deleted but instead new data will be added to this
-  file.
-
-  path to your current cache file:\cr
-  \code{wp_cache_file()}\cr
-  \code{dirname(wp_cache_file())}
-
-
-  browse to the folder containing you current cache file:\cr
-  \code{browseURL(wp_cache_file())}}
+  file! The cache in memory before the function call will be saved and restored
+  afterwards. If you prefer automatic mirroring of in memory cache and cache
+  on disk}
 
 \item{friendly}{deprecated}
 

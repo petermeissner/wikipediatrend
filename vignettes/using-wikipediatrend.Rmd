@@ -16,9 +16,22 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-```{r, include=FALSE}
-library(ggplot2)
-update_geom_defaults("line",   list(colour = "steelblue"))
+```{r general options, include=FALSE}
+  # default line color in ggplot graphics
+    library(ggplot2)
+    update_geom_defaults("line",   list(colour = "steelblue"))
+  
+  # use cache coming with package to make vignette build by magnitudes faster 
+  # there still we be some downloads of data so that building the vignette should imply 
+  # that reproducing the vignette by user is possible
+    library(wikipediatrend)
+    wp_cache_load(
+      system.file(
+        "extdata", 
+        "wikipediatrend_cache.csv", 
+        package = "wikipediatrend"
+      )
+    )
 ```
 
 
@@ -81,6 +94,7 @@ view counts as neat data frames like this:
 
 ```{r, message=F}
 page_views <- wp_trend("main_page")
+    
 page_views
 ```
 
@@ -89,11 +103,12 @@ page_views
 
 ```{r, message=F}
 library(ggplot2)
+
 ggplot(page_views, aes(x=date, y=count)) + 
   geom_line(size=1.5, colour="steelblue") + 
   geom_smooth(method="loess", colour="#00000000", fill="#001090", alpha=0.1) +
   scale_y_continuous( breaks=c(10e6, 15e6, 20e6), 
-                      label=c("10 M","15 M","20 M")) +
+  label=c("10 M","15 M","20 M")) +
   theme_bw()
 ```
 
@@ -103,11 +118,11 @@ ggplot(page_views, aes(x=date, y=count)) +
 `wp_trend()` has several options and most of them are set to defaults: 
 
 page , 
-                      from        = prev_month_start(), 
-                      to          = prev_month_end(),
-                      lang        = "en", 
-                      file        = wp_cache_file(), 
-                      
+from        = prev_month_start(), 
+to          = prev_month_end(),
+lang        = "en", 
+file        = wp_cache_file(), 
+
 
 - `page`
 - `from = Sys.Date() - 30`
@@ -129,12 +144,15 @@ the article is found here:  *"http://en.wikipedia.org/wiki/Millennium_Developmen
 To ease data gathering `wp_trend()` `page` accepts whole vectors of page  titles and will retrieve date for each one after another. 
 
 ```{r, message=F}
-page_views <- wp_trend( page = c( "Millennium_Development_Goals",
-                                  "Climate_Change") )
+page_views <- 
+  wp_trend( 
+    page = c( "Millennium_Development_Goals", "Climate_Change") 
+  )
 ```
 
 ```{r, message=F}
 library(ggplot2)
+
 ggplot(page_views, aes(x=date, y=count, group=page, color=page)) + 
   geom_line(size=1.5) + theme_bw()
 ```
@@ -145,14 +163,17 @@ ggplot(page_views, aes(x=date, y=count, group=page, color=page)) +
 These two options determine the time frame for which data shall be retrieved. The defaults are set to gather the last 30 days but might be set to cover larger time frames as well. Note that there is no data prior to December 2007 so that any date prior will be set to this minimum. 
 
 ```{r, message=F}
-page_views <- wp_trend( 
-                page = "Millennium_Development_Goals" ,
-                from = "2000-01-01",
-                to   = prev_month_end())
+page_views <- 
+  wp_trend( 
+    page = "Millennium_Development_Goals" ,
+    from = "2000-01-01",
+    to   = prev_month_end()
+  )
 ```
 
 ```{r, message=F, warning=FALSE}
 library(ggplot2)
+
 ggplot(page_views, aes(x=date, y=count, color=wp_year(date))) + 
   geom_line() + 
   stat_smooth(method = "lm", formula = y ~ poly(x, 22), color="#CD0000a0", size=1.2) +
@@ -165,16 +186,17 @@ ggplot(page_views, aes(x=date, y=count, color=wp_year(date))) +
 This option determines for which Wikipedia the page views shall be retrieved, English, German, Chinese, Spanish, ... . The default is set to `"en"` for the English Wikipedia. This option should get one language shorthand that then is used for all pages or for each page a corresponding language shorthand should be specified. 
 
 ```{r, message=F}
-page_views <- wp_trend( 
-                page = c("Objetivos_de_Desarrollo_del_Milenio",
-                         "Millennium_Development_Goals") ,
-                lang = c("es", "en"),
-                from = Sys.Date()-100
-              )
+page_views <- 
+  wp_trend( 
+    page = c("Objetivos_de_Desarrollo_del_Milenio", "Millennium_Development_Goals") ,
+    lang = c("es", "en"),
+    from = Sys.Date()-100
+  )
 ```
 
 ```{r, message=F}
 library(ggplot2)
+
 ggplot(page_views, aes(x=date, y=count, group=lang, color=lang, fill=lang)) + 
   geom_smooth(size=1.5) + 
   geom_point() +
@@ -184,48 +206,47 @@ ggplot(page_views, aes(x=date, y=count, group=lang, color=lang, fill=lang)) +
 
 ## `file`
 
-This last option defines where the package should cache the data to prevent unecessary downloads of already existing data. The default is to use and reuse a file in the temporary folder but can be replaced by any valid filename, e.g. `file = MyCache.csv`.
+This last option allows for storing the data retrieved by a call to `wp_trend()`
+in a file, e.g. `file = "MyCache.csv"`. While `MyCache.csv` will be created if it 
+does not exist already it will never be overwritten by `wp_trend()` thus allowing 
+to accumulate data from susequent calls to `wp_trend()`. To get the data stored 
+back into R use `wp_load(file = "MyCache.csv")`.
 
-To get the path and name of the default cache file use the `wp_cache_file()` function:
+```{r, message=FALSE}
+wp_trend("Cheese", file="cheeeeese.csv")
+wp_trend("Käse", lang="de", file="cheeeeese.csv")
 
-```{r, message=F}
-wp_cache_file()
+cheeeeeese <- wp_load( file="cheeeeese.csv" )
+cheeeeeese
 ```
 
-While `wp_trend()` will never return more data than specified by options `page`, `lang`, `from`, and `to`  `wp_get_cache()` can be used to retrieve all the data cached so far:
-
-```{r, message=F}
-cache <- wp_get_cache()
-head(cache)
-dim(cache)
+```{r, include=FALSE}
+file.remove("cheeeeese.csv")
 ```
 
-Last but not least the cache (file), that might exist across multiple sessions, can also be reset:
 
-```{r, message=F, eval=FALSE}
-wp_cache_reset()
+
+# Caching and workflow
+
+When using `wp_trend()` you will notice that subsequent calls to the function 
+with might take considerably less time than previous calls - given the later 
+calls include data that has been downloaded already. This is due to the caching
+system running in the background and keeping track of things downloaded already. 
+You can see if `wp_trend()` had to download something if it reports one or more 
+links to the stats.grok.se server, e.g. ... 
+
+```{r}
+wp_trend("Cheese")
+wp_trend("Cheese")
+```
+... but ... 
+
+```{r}
+wp_trend("Cheese", from = Sys.Date()-60)
 ```
 
-... or set to another file - this option stays for the rest of the R-session or if set to something else again:
 
-```{r, message=F}
-# save apth of curent cache file
-tmp <- wp_cache_file()
 
-# set cache file 
-wp_set_cache_file("My_Other_Cache_File.csv")
-
-wp_cache_file()
-
-wp_get_cache()
-
-# set cache file back
-wp_set_cache_file(tmp)
-
-wp_cache_file()
-
-wp_get_cache()
-```
 
 
 
@@ -243,9 +264,12 @@ titles
 ... then we can use the information to get data for several languages ... 
 
 ```{r, message=F}
-page_views <- wp_trend(page = titles$page[1:5], 
-                       lang = titles$lang[1:5],
-                       from = "2014-08-01")
+page_views <- 
+  wp_trend(
+    page = titles$page[1:5], 
+    lang = titles$lang[1:5],
+    from = "2014-08-01"
+  )
 ```
 
 
@@ -277,13 +301,14 @@ Currently the `AnomalyDetection` package is not availible on CRAN so we have to 
 
 ```{r, include=F}
 if ( !require(AnomalyDetection) ){    
-install.packages(
-  "AnomalyDetection", 
-  repos="http://ghrr.github.io/drat", 
-  type="source"
-)
-  library(AnomalyDetection)
+  install.packages(
+    "AnomalyDetection", 
+    repos="http://ghrr.github.io/drat", 
+    type="source"
+  )
 }
+
+library(AnomalyDetection)
 library(dplyr)
 library(ggplot2)
 ```
@@ -294,6 +319,7 @@ install.packages(
   repos="http://ghrr.github.io/drat", 
   type="source"
 )
+
 library(AnomalyDetection)
 library(dplyr)
 library(ggplot2)
@@ -304,7 +330,7 @@ have to build a new data frame. It should contain only the date and count variab
 Furthermore, `date` should be named `timestamp` and transformed to type `POSIXct`.
 
 ```{r}
-page_views <- wp_trend("Syria", from = "2012-01-01")
+page_views <- wp_trend("Syria", from = "2010-01-01")
 
 page_views_br <- 
   page_views  %>% 
@@ -327,13 +353,14 @@ Lets choose a greedy set of parameters and detect possible anomalies:
 
 ```{r}
 res <- 
-  AnomalyDetectionTs(
-    x         = page_views_br, 
-    alpha     = 0.05, 
-    max_anoms = 0.40,
-    direction = "both",
-    longterm  = T
-  )$anoms
+AnomalyDetectionTs(
+  x         = page_views_br, 
+  alpha     = 0.05, 
+  max_anoms = 0.40,
+  direction = "both",
+  longterm  = T
+)$anoms
+
 res$timestamp <- as.Date(res$timestamp)
 
 head(res)
@@ -346,6 +373,7 @@ page_views <-
   page_views  %>% 
   mutate(normal = !(page_views$date %in% res$timestamp))  %>% 
   mutate(anom   =   page_views$date %in% res$timestamp )
+
 class(page_views) <- c("wp_df", "data.frame")
 ```
 
@@ -353,11 +381,11 @@ Now we can plot counts and anomalies ...
 
 ```{r, message=FALSE}
 (
-p <-
-  ggplot( data=page_views, aes(x=date, y=count) ) + 
-    geom_line(color="steelblue") +
-    geom_point(data=filter(page_views, anom==T), color="red2", size=2) +
-    theme_bw()
+  p <-
+    ggplot( data=page_views, aes(x=date, y=count) ) + 
+      geom_line(color="steelblue") +
+      geom_point(data=filter(page_views, anom==T), color="red2", size=2) +
+      theme_bw()
 )
 ```
 
@@ -367,7 +395,7 @@ p <-
 p + 
   geom_line(stat = "smooth", size=2, color="red2", alpha=0.7) + 
   geom_line(data=filter(page_views, anom==F), 
-            stat = "smooth", size=2, color="dodgerblue4", alpha=0.5) 
+  stat = "smooth", size=2, color="dodgerblue4", alpha=0.5) 
 ```
 
 It seems like upward and downward anomalies partial each other out most of the 
@@ -398,12 +426,12 @@ on CRAN but has to be obtained from Github.
 
 ```{r, include=FALSE}
 if ( !require(BreakoutDetection) ){    
-  install.packages(
-    "BreakoutDetection", 
-    repos="http://ghrr.github.io/drat", 
-    type="source"
-  )
-  library(BreakoutDetection)
+install.packages(
+"BreakoutDetection", 
+repos="http://ghrr.github.io/drat", 
+type="source"
+)
+library(BreakoutDetection)
 }
 library(dplyr)
 library(ggplot2)
@@ -464,22 +492,22 @@ for (d in breaks$date ) {
 page_views_clean$mcount <- 0
 for (s in unique(page_views_clean$span) ) {
   iffer <- page_views_clean$span == s
-  page_views_clean$mcount[ iffer ] <- mean(page_views_clean$count[iffer])
+page_views_clean$mcount[ iffer ] <- mean(page_views_clean$count[iffer])
 }
 
 spans <- 
   page_views_clean  %>% 
-    as_data_frame() %>% 
-    group_by(span) %>% 
-    summarize(
-      start      = min(date), 
-      end        = max(date), 
-      length     = end-start,
-      mean_count = round(mean(count)),
-      min_count  = min(count),
-      max_count  = max(count),
-      var_count  = var(count)
-    )
+  as_data_frame() %>% 
+  group_by(span) %>% 
+  summarize(
+    start      = min(date), 
+    end        = max(date), 
+    length     = end-start,
+    mean_count = round(mean(count)),
+    min_count  = min(count),
+    max_count  = max(count),
+    var_count  = var(count)
+  )
 spans
 ```
 

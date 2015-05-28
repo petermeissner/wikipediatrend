@@ -23,23 +23,17 @@
 #'   character. If the option is of type character it should be in the form of 
 #'   yyyy-mm-dd.
 #'   
-#' @param file Where to cache/store the retrieved data? By default a file within 
-#'   the user folder is used for as long as the R session takes place. The data 
+#' @param file Where to store data retrieved by function call? The data 
 #'   is stored in CSV format. If an already existing file is used for storage, 
 #'   the old data will not be deleted but instead new data will be added to this 
-#'   file. 
-#'   
-#'   path to your current cache file:\cr
-#'   \code{wp_cache_file()}\cr
-#'   \code{dirname(wp_cache_file())}
-#'   
-#'
-#'   browse to the folder containing you current cache file:\cr
-#'   \code{browseURL(wp_cache_file())}
+#'   file! The cache in memory before the function call will be saved and restored 
+#'   afterwards. If you prefer automatic mirroring of in memory cache and cache 
+#'   on disk 
 #'
 #' @param friendly deprecated
 #' @param requestFrom deprecated
 #' @param userAgent deprecated
+#' 
 #'
 #' @examples 
 #' library(wikipediatrend)
@@ -49,20 +43,22 @@
 #'          lang        = c("en", "de"),
 #'          file        = wp_cache_file()
 #'          )
-#'          
+#'
+#' 
 #' @export
 
 wp_trend <- function( page , 
                       from        = prev_month_start(), 
                       to          = prev_month_end(),
                       lang        = "en", 
-                      file        = wp_cache_file(), 
+                      file        = "", 
                       friendly,
                       requestFrom,
                       userAgent
 ){
   # dev # 
-  # page="main"; from=Sys.Date()-30; to=Sys.Date(); lang="en"; file=wp_cache_file()
+  # page="main"; from=prev_month_start(); to=prev_month_end(); lang="en"; file=""
+  # page="main"; from=prev_month_start(); to=prev_month_end(); lang="en"; file="test.csv"
   
   # deprecation
   if( !missing("requestFrom") ) 
@@ -91,7 +87,9 @@ wp_trend <- function( page ,
             Check wp_http_header() to know which information are send to 
             stats.grok.se (R and package versions)
             ")
-  
+
+  old_cache_file <- wp_cache_file()
+                          
   # input check
   stopifnot( length(page)==length(lang) | length(lang)==1 )
   
@@ -109,10 +107,10 @@ wp_trend <- function( page ,
   }
 
   # setting cache-file (if necessary)
-  if ( file != wp_cache_file() ){
+  if ( file != wp_cache_file() & file != "" ) {
     wp_set_cache_file(file)
   }
-    
+   
   # prepare URLs
   urls <- wp_prepare_urls(page=page, 
                           from=from, 
@@ -125,6 +123,9 @@ wp_trend <- function( page ,
   # save cache to file and load cache for returning results 
   res <- wp_get_cache()
   
+  # re-setting cache-file
+  wp_set_cache_file(old_cache_file)
+
   # return
   res <- 
     res[  res$date <= to & 
@@ -134,7 +135,7 @@ wp_trend <- function( page ,
         ]
   rownames(res) <- NULL
   class(res) <- c("wp_df", "data.frame")
-  return(res)
+  invisible(res)
 }
 
 

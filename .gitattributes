@@ -22,4 +22,4 @@
 *.RTF	 diff=astextplain
 *.Rd  diff=astextplain
 *.md  diff=astextplain
-*.Rmd  diff=astextplain
+

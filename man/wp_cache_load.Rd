@@ -2,11 +2,14 @@
 % Please edit documentation in R/wp_cache.R
 \name{wp_cache_load}
 \alias{wp_cache_load}
-\title{function for loading data in cache}
+\title{function for loading cache on disk into memory}
 \usage{
-wp_cache_load()
+wp_cache_load(file = wp_cache_file())
+}
+\arguments{
+\item{file}{where to find previously saved cache}
 }
 \description{
-function for loading data in cache
+function for loading cache on disk into memory
 }
 

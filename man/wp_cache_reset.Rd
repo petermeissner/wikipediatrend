@@ -2,11 +2,11 @@
 % Please edit documentation in R/wp_cache.R
 \name{wp_cache_reset}
 \alias{wp_cache_reset}
-\title{function for resetting cache}
+\title{function for resetting cache/cachefile as if package was just loaded}
 \usage{
 wp_cache_reset()
 }
 \description{
-function for resetting cache
+function for resetting cache/cachefile as if package was just loaded
 }
 

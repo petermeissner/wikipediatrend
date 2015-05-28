@@ -23,6 +23,7 @@ toUTF8 <-
 
 write_utf8_csv <- 
 function(df, file){
+  if ( is.null(df) ) df <- data.frame()
   firstline <- paste(  '"', names(df), '"', sep = "", collapse = " , ")
   char_columns <- seq_along(df[1,])[sapply(df, class)=="character"]
   for( i in  char_columns){
@@ -105,7 +106,7 @@ wp_load <- function(file=wp_cache_file()){
 
 wp_save <- function(res, file=wp_cache_file()){
     write_utf8_csv( df = res, file = file)
-    message(paste0(".\n"))
+    #dev# message(paste0(".\n"))
     return( file )
 }
 

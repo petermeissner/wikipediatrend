@@ -1,29 +1,23 @@
+
+#' a cache for downloads
+wp_cache <- new.env()
+
 #' function for building default cache file name
 #' 
 wp_cache_default <- function(){
-  paste0(
-    dirname(tempdir()),
-    "/wikipediatrend_cache.csv"
-  )
-}
-
-#' function for initializing persistant cache in tempdir/ or elsewhere
-#' @export
-#'  
-wp_make_cache_permanent <- function(path){
-  if ( path == TRUE ) {
-    path_set = wp_cache_default()
+  path <- Sys.getenv("WP_CACHE_FILE")
+  if ( path == "" ) {
+    path <- tempfile("wikipediatrend_cache", fileext = ".csv") 
+  }else{
+    message(
+      paste0(
+        "\nNon empty system variable WP_CACHE_FILE found and\n",
+        Sys.getenv("WP_CACHE_FILE"),
+        "\nused as path to permanent cache.\n"
+      )
+    )
   }
-  if ( path == FALSE ){
-    Sys.setenv("WP_CACHE_PATH" = "" )
-    path_set = ""
-  }
-  if ( class(path)=="character" & length(path) > 0 & !is.na(path) ){
-    path_set = path 
-  }
-  # apply path
-  Sys.setenv("WP_CACHE_PATH" = path )
-  wp_set_cache_file( path_set )
+  return(path)
 }
 
 #' function for determining where downloaded information can be stored
@@ -31,19 +25,17 @@ wp_make_cache_permanent <- function(path){
 #'
 wp_cache_file <- function(){
   if( is.null(wp_cache$cachefile) ){
-    file <- Sys.getenv("WP_CACHE_PATH")
+    file <- wp_cache_default()
     wp_cache$cachefile <- file
   }else{
     file <- wp_cache$cachefile
   }
-  if ( !file.exists(file) ){
-    if( file != "" ){
-      file.create(file)
-    } 
-    wp_cache$cachefile <- file
+  if ( !file.exists(file) & file!="" ){
+    file.create(file)
   }
   return(file)
 }
+
 
 #' function to set a different cachefile as session default
 #' @export
@@ -54,35 +46,42 @@ wp_set_cache_file <- function(file){
   wp_cache_load()
 } 
 
-#' function for resetting cache
+#' function for resetting cache/cachefile as if package was just loaded
 #' @export
 #'
 wp_cache_reset <- function(){
-  file.remove(wp_cache_file())
-  file.create(wp_cache_file())
-  wp_cache_load()
+  wp_cache$cache <- NULL 
+  file = wp_cache_default()
+  wp_set_cache_file( file  )
+  wp_cache_load( file )
 }
 
-#' function for loading data in cache
-#'
-wp_cache_load <- function(){
-  tmp <- wp_load(wp_cache_file())
+#' function for loading cache on disk into memory
+#' @param file where to find previously saved cache
+#' @export
+wp_cache_load <- function(file=wp_cache_file()){
+  tmp <- wp_load(file)
   assign("cache", tmp, envir = wp_cache )
-  }
+}
 
 #' function to get cache content
 #' @export
 wp_get_cache <- function(){
-  tmp <- wp_cache$cache
+  if ( !is.null(wp_cache$cache) ){
+    tmp <- wp_cache$cache
+  }else{
+    tmp <- data.frame()
+  }
   class(tmp) <- c("wp_df", "data.frame")
   return(tmp)
 }
 
 #' functio to save cache to file
-#'   
-wp_save_cache <- function(){
+#' @param file where to store in memory cache (e.g. "myData.csv")
+#' @export
+wp_save_cache <- function(file=wp_cache_file()){
   if ( wp_cache_file() != "" ){
-    wp_save( wp_cache$cache, wp_cache_file() )
+    wp_save( wp_cache$cache, file )
   }
 }
 
@@ -107,10 +106,7 @@ wp_add_to_cache <- function(df){
   return(sum(iffer))
 }
 
-#' a cache for downloads
 
-
-wp_cache <- new.env()
 
 
 

@@ -4,7 +4,10 @@
 \alias{wp_save_cache}
 \title{functio to save cache to file}
 \usage{
-wp_save_cache()
+wp_save_cache(file = wp_cache_file())
+}
+\arguments{
+\item{file}{where to store in memory cache (e.g. "myData.csv")}
 }
 \description{
 functio to save cache to file

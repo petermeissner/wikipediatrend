@@ -4,7 +4,7 @@
 \name{wp_cache}
 \alias{wp_cache}
 \title{a cache for downloads}
-\format{\preformatted{<environment: 0x000000000837a580> 
+\format{\preformatted{<environment: 0x000000000851f498> 
 }}
 \usage{
 wp_cache

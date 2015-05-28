@@ -7,6 +7,8 @@
 # Checking
 
 - Local  Win7 / win8
+- Local Ubuntu 14.10
+
 - winbuilder 
 - Travis (Ubuntu) : https://travis-ci.org/petermeissner/wikipediatrend
 

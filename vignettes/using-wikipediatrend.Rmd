@@ -322,7 +322,6 @@ ggplot(page_views, aes(x=date, y=count, group=lang, color=lang)) +
 ```
 
 
-
 # Going beyond Wikipediatrend -- Anomalies and mean shifts 
 
 
@@ -331,27 +330,8 @@ ggplot(page_views, aes(x=date, y=count, group=lang, color=lang)) +
 
 Currently the `AnomalyDetection` package is not availible on CRAN so we have to use `install_github()` from the `devtools` package to get it. 
 
-```{r, include=F}
-if ( !require(AnomalyDetection) ){    
-  install.packages(
-    "AnomalyDetection", 
-    repos="http://ghrr.github.io/drat", 
-    type="source"
-  )
-}
-
-library(AnomalyDetection)
-library(dplyr)
-library(ggplot2)
-```
-
-```{r, eval=FALSE}
-install.packages(
-  "AnomalyDetection", 
-  repos="http://ghrr.github.io/drat", 
-  type="source"
-)
-
+```{r}
+# install.packages( "AnomalyDetection", repos="http://ghrr.github.io/drat",  type="source")
 library(AnomalyDetection)
 library(dplyr)
 library(ggplot2)
@@ -456,26 +436,9 @@ of seasonal noise.
 Similar to `AnomalyDetection` the `BreakoutDetection` package is not available 
 on CRAN but has to be obtained from Github. 
 
-```{r, include=FALSE}
-if ( !require(BreakoutDetection) ){    
-install.packages(
-"BreakoutDetection", 
-repos="http://ghrr.github.io/drat", 
-type="source"
-)
-library(BreakoutDetection)
-}
-library(dplyr)
-library(ggplot2)
-library(magrittr)
-```
 
-```{r, eval=FALSE }
-install.packages(
-  "BreakoutDetection", 
-  repos="http://ghrr.github.io/drat", 
-  type="source"
-)
+```{r}
+# install.packages(  "BreakoutDetection",   repos="http://ghrr.github.io/drat", type="source")
 library(BreakoutDetection)
 library(dplyr)
 library(ggplot2)
@@ -551,6 +514,7 @@ ggplot(page_views_clean, aes(x=date, y=count) ) +
   geom_line(aes(y=mcount), alpha=0.5, color="red2", size=1.2) + 
   theme_bw()
 ```
+
 
 
 

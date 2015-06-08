@@ -20,6 +20,9 @@ Peter Meißner
 
 # Status
 
+[<img src="http://www.r-pkg.org/badges/version/wikipediatrend">
+](http://cran.rstudio.com/web/packages/wikipediatrend/)
+<br>
 [<img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master">
 ](https://travis-ci.org/petermeissner/wikipediatrend)
  <br> 
@@ -28,6 +31,7 @@ Peter Meißner
  <br> 
 [<img src="http://cranlogs.r-pkg.org/badges/grand-total/wikipediatrend">
 ](http://cranlogs.r-pkg.org/)
+<br>
 [<img src="http://cranlogs.r-pkg.org/badges/wikipediatrend">
 ](http://cranlogs.r-pkg.org/)
 

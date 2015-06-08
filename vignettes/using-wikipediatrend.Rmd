@@ -67,20 +67,22 @@ To get further information on the data source (Who? When? How? How good?) there 
 
 # Installation
 
-**stable CRAN version**
+
+**stable CRAN version** (http://cran.rstudio.com/web/packages/wikipediatrend/)
 
 ```{r, message=F, eval=FALSE}
 install.packages("wikipediatrend")
 ```
 
-**developemnt version**
+
+**developemnt version** (https://github.com/petermeissner/wikipediatrend)
 
 ```{r, message=F, eval=FALSE}
 devtools::install_github("petermeissner/wikipediatrend")
 ```
 
-**... and load it via:**
 
+**... and load it via:**
 
 ```{r, message=F}
 library(wikipediatrend)
@@ -107,8 +109,8 @@ library(ggplot2)
 ggplot(page_views, aes(x=date, y=count)) + 
   geom_line(size=1.5, colour="steelblue") + 
   geom_smooth(method="loess", colour="#00000000", fill="#001090", alpha=0.1) +
-  scale_y_continuous( breaks=c(10e6, 15e6, 20e6), 
-  label=c("10 M","15 M","20 M")) +
+  scale_y_continuous( breaks=seq(5e6, 50e6, 5e6) , 
+  label= paste(seq(5,50,5),"M") ) +
   theme_bw()
 ```
 
@@ -117,18 +119,11 @@ ggplot(page_views, aes(x=date, y=count)) +
 
 `wp_trend()` has several options and most of them are set to defaults: 
 
-page , 
-from        = prev_month_start(), 
-to          = prev_month_end(),
-lang        = "en", 
-file        = wp_cache_file(), 
-
-
 - `page`
 - `from = Sys.Date() - 30`
 - `to   = Sys.Date()`
 - `lang = "en"`
-- `file = wp_cache_file()`
+- `file = ""`
 - ~~`friendly`~~ *deprecated*
 - ~~`requestFrom`~~ *deprecated*
 - ~~`userAgent`~~ *deprecated*
@@ -226,10 +221,12 @@ file.remove("cheeeeese.csv")
 
 
 
-# Caching and workflow
+# Caching
+
+## Session caching
 
 When using `wp_trend()` you will notice that subsequent calls to the function 
-with might take considerably less time than previous calls - given the later 
+might take considerably less time than previous calls - given that later 
 calls include data that has been downloaded already. This is due to the caching
 system running in the background and keeping track of things downloaded already. 
 You can see if `wp_trend()` had to download something if it reports one or more 
@@ -245,8 +242,38 @@ wp_trend("Cheese")
 wp_trend("Cheese", from = Sys.Date()-60)
 ```
 
+The current cache in memory can be accessed via:
+
+```{r}
+wp_get_cache()
+```
+
+... and emptied by a call to `wp_cache_reset()`.
 
 
+## Caching across sessions 1
+
+While everything that is downloaded during a session is cached in memory it might come handy to save the cache parallel on disk to reuse it in the next R session.  To activate disk-caching for a session simply use:
+
+
+```{r, eval=FALSE}
+wp_set_cache_file( file = "myCache.csv" )
+```
+
+The function will reload whatever is stored in the file and in subsequent calls to 
+`wp_trend()` will automatically add data as it is downloaded. The file used for disk-caching can be changed by another call to `wp_set_cache_file( file = "myOtherCache.csv")` or turned off completely by leaving the `file` argument empty. 
+
+
+## Caching across sessions 2
+
+If disk-caching should be enabled by default one can define a path as system/environment variable `WP_CACHE_FILE`. When loading the package it will look for this variable via `Sys.getenv("WP_CACHE_FILE")` and use the path for caching 
+as if ...
+
+```{r, eval=FALSE}
+wp_set_cache_file( Sys.getenv("WP_CACHE_FILE") )
+```
+
+.. would have been typed in by the user. 
 
 
 
@@ -290,7 +317,6 @@ ggplot(page_views, aes(x=date, y=count, group=lang, color=lang)) +
 ```
 
 
-
 # Going beyond Wikipediatrend -- Anomalies and mean shifts 
 
 
@@ -299,27 +325,8 @@ ggplot(page_views, aes(x=date, y=count, group=lang, color=lang)) +
 
 Currently the `AnomalyDetection` package is not availible on CRAN so we have to use `install_github()` from the `devtools` package to get it. 
 
-```{r, include=F}
-if ( !require(AnomalyDetection) ){    
-  install.packages(
-    "AnomalyDetection", 
-    repos="http://ghrr.github.io/drat", 
-    type="source"
-  )
-}
-
-library(AnomalyDetection)
-library(dplyr)
-library(ggplot2)
-```
-
-```{r, eval=FALSE}
-install.packages(
-  "AnomalyDetection", 
-  repos="http://ghrr.github.io/drat", 
-  type="source"
-)
-
+```{r}
+# install.packages( "AnomalyDetection", repos="http://ghrr.github.io/drat",  type="source")
 library(AnomalyDetection)
 library(dplyr)
 library(ggplot2)
@@ -424,26 +431,9 @@ of seasonal noise.
 Similar to `AnomalyDetection` the `BreakoutDetection` package is not available 
 on CRAN but has to be obtained from Github. 
 
-```{r, include=FALSE}
-if ( !require(BreakoutDetection) ){    
-install.packages(
-"BreakoutDetection", 
-repos="http://ghrr.github.io/drat", 
-type="source"
-)
-library(BreakoutDetection)
-}
-library(dplyr)
-library(ggplot2)
-library(magrittr)
-```
 
-```{r, eval=FALSE }
-install.packages(
-  "BreakoutDetection", 
-  repos="http://ghrr.github.io/drat", 
-  type="source"
-)
+```{r}
+# install.packages(  "BreakoutDetection",   repos="http://ghrr.github.io/drat", type="source")
 library(BreakoutDetection)
 library(dplyr)
 library(ggplot2)
@@ -519,6 +509,7 @@ ggplot(page_views_clean, aes(x=date, y=count) ) +
   geom_line(aes(y=mcount), alpha=0.5, color="red2", size=1.2) + 
   theme_bw()
 ```
+
 
 
 

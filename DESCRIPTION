@@ -1,7 +1,7 @@
 Package: wikipediatrend
 Title: Public Subject Attention via Wikipedia Page Access Statistics
-Version: 1.1.2.9000644
-Date: 2015-05-28
+Version: 1.1.3
+Date: 2015-06-06
 Author: Peter Meissner [aut, cre], R Core team [ctb] ('wp_date()'
         derived from base package's 'as.Date()')
 Maintainer: Peter Meissner <retep.meissner@gmail.com>

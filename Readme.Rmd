@@ -25,6 +25,7 @@ Peter Meißner
 <br>
 [<img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master">
 ](https://travis-ci.org/petermeissner/wikipediatrend)
+[![Build status](https://ci.appveyor.com/api/projects/status/wk31m9jqg5sgkic5?svg=true)](https://ci.appveyor.com/project/petermeissner/wikipediatrend)
  <br> 
 [<img src="https://coveralls.io/repos/petermeissner/wikipediatrend/badge.svg" >
 ](https://coveralls.io/r/petermeissner/wikipediatrend)

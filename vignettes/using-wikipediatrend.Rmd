@@ -67,20 +67,22 @@ To get further information on the data source (Who? When? How? How good?) there 
 
 # Installation
 
-**stable CRAN version**
+
+**stable CRAN version** (http://cran.rstudio.com/web/packages/wikipediatrend/)
 
 ```{r, message=F, eval=FALSE}
 install.packages("wikipediatrend")
 ```
 
-**developemnt version**
+
+**developemnt version** (https://github.com/petermeissner/wikipediatrend)
 
 ```{r, message=F, eval=FALSE}
 devtools::install_github("petermeissner/wikipediatrend")
 ```
 
-**... and load it via:**
 
+**... and load it via:**
 
 ```{r, message=F}
 library(wikipediatrend)
@@ -107,8 +109,8 @@ library(ggplot2)
 ggplot(page_views, aes(x=date, y=count)) + 
   geom_line(size=1.5, colour="steelblue") + 
   geom_smooth(method="loess", colour="#00000000", fill="#001090", alpha=0.1) +
-  scale_y_continuous( breaks=c(10e6, 15e6, 20e6), 
-  label=c("10 M","15 M","20 M")) +
+  scale_y_continuous( breaks=seq(5e6, 50e6, 5e6) , 
+  label= paste(seq(5,50,5),"M") ) +
   theme_bw()
 ```
 
@@ -117,18 +119,11 @@ ggplot(page_views, aes(x=date, y=count)) +
 
 `wp_trend()` has several options and most of them are set to defaults: 
 
-page , 
-from        = prev_month_start(), 
-to          = prev_month_end(),
-lang        = "en", 
-file        = wp_cache_file(), 
-
-
 - `page`
 - `from = Sys.Date() - 30`
 - `to   = Sys.Date()`
 - `lang = "en"`
-- `file = wp_cache_file()`
+- `file = ""`
 - ~~`friendly`~~ *deprecated*
 - ~~`requestFrom`~~ *deprecated*
 - ~~`userAgent`~~ *deprecated*
@@ -278,7 +273,7 @@ as if ...
 wp_set_cache_file( Sys.getenv("WP_CACHE_FILE") )
 ```
 
-.. would have beend typed in by the user. 
+.. would have been typed in by the user. 
 
 
 

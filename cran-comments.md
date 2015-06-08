@@ -4,8 +4,12 @@
 - Local  Win7-32 / Win8-64
 - Local Ubuntu 14.10
 
-- winbuilder 
-- Travis (Ubuntu) : https://travis-ci.org/petermeissner/wikipediatrend
+- winbuilder :
+  http://win-builder.r-project.org/5mr52ul843VK/00check.log
+  http://win-builder.r-project.org/4sFNjSdEjY86/00check.log
+  
+- Travis (Ubuntu) : 
+  https://travis-ci.org/petermeissner/wikipediatrend
 
 
 
@@ -19,4 +23,4 @@ This installs packages in the user's file space (e.g. his personal library) with
 The package has been removed from CRAN.
 
 
--> I removed those lines from the vignette that - if build - installed two packages from ghrr repository if they were not on the system already
+-> I removed those lines from the vignette that - if vignette was build - installed two packages (from ghrr repository) if they were not available.

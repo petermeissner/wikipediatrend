@@ -20,21 +20,12 @@ Peter Meißner
 
 # Status
 
-[<img src="http://www.r-pkg.org/badges/version/wikipediatrend">
-](http://cran.rstudio.com/web/packages/wikipediatrend/)
-<br>
-[<img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master">
-](https://travis-ci.org/petermeissner/wikipediatrend)
-[![Build status](https://ci.appveyor.com/api/projects/status/wk31m9jqg5sgkic5?svg=true)](https://ci.appveyor.com/project/petermeissner/wikipediatrend)
- <br> 
-[<img src="https://coveralls.io/repos/petermeissner/wikipediatrend/badge.svg" >
-](https://coveralls.io/r/petermeissner/wikipediatrend)
- <br> 
-[<img src="http://cranlogs.r-pkg.org/badges/grand-total/wikipediatrend">
-](http://cranlogs.r-pkg.org/)
-<br>
-[<img src="http://cranlogs.r-pkg.org/badges/wikipediatrend">
-](http://cranlogs.r-pkg.org/)
+|--|-----|--|
+| Ubuntu build | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |  [<img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master">](https://travis-ci.org/petermeissner/wikipediatrend) | 
+| Windows build | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |  <img alt="https://ci.appveyor.com/api/projects/status/github/petermeissner/wikipediatrend?branch=master" src="https://camo.githubusercontent.com/72b31c9a4b4d466bd7c056870774a6c168017540/68747470733a2f2f63692e6170707665796f722e636f6d2f6170692f70726f6a656374732f7374617475732f6769746875622f617564726579722f636f6f6b69656375747465723f6272616e63683d6d6173746572" data-canonical-src="https://ci.appveyor.com/api/projects/status/github/audreyr/cookiecutter?branch=master" style="max-width:100%;"> | 
+| Code covered by tests | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | [<img src="https://coveralls.io/repos/petermeissner/wikipediatrend/badge.svg" >](https://coveralls.io/r/petermeissner/wikipediatrend) | 
+| Version on CRAN | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  | [<img src="http://www.r-pkg.org/badges/version/wikipediatrend">](http://cran.rstudio.com/web/packages/wikipediatrend/) |
+| Downloads from [CRAN.RStudio](http://cran.rstudio.com/) | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | [<img src="http://cranlogs.r-pkg.org/badges/grand-total/wikipediatrend">](http://cranlogs.r-pkg.org/) [<img src="http://cranlogs.r-pkg.org/badges/wikipediatrend">](http://cranlogs.r-pkg.org/)
 
 
 

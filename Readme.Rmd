@@ -20,6 +20,7 @@ Peter Meißner
 
 # Status
 
+|  |     |  |
 |--|-----|--|
 | Ubuntu build | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |  [<img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master">](https://travis-ci.org/petermeissner/wikipediatrend) | 
 | Windows build | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |  <img alt="https://ci.appveyor.com/api/projects/status/github/petermeissner/wikipediatrend?branch=master" src="https://camo.githubusercontent.com/72b31c9a4b4d466bd7c056870774a6c168017540/68747470733a2f2f63692e6170707665796f722e636f6d2f6170692f70726f6a656374732f7374617475732f6769746875622f617564726579722f636f6f6b69656375747465723f6272616e63683d6d6173746572" data-canonical-src="https://ci.appveyor.com/api/projects/status/github/audreyr/cookiecutter?branch=master" style="max-width:100%;"> | 

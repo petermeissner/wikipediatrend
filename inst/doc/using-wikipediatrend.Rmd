@@ -67,20 +67,22 @@ To get further information on the data source (Who? When? How? How good?) there 
 
 # Installation
 
-**stable CRAN version**
+
+**stable CRAN version** (http://cran.rstudio.com/web/packages/wikipediatrend/)
 
 ```{r, message=F, eval=FALSE}
 install.packages("wikipediatrend")
 ```
 
-**developemnt version**
+
+**developemnt version** (https://github.com/petermeissner/wikipediatrend)
 
 ```{r, message=F, eval=FALSE}
 devtools::install_github("petermeissner/wikipediatrend")
 ```
 
-**... and load it via:**
 
+**... and load it via:**
 
 ```{r, message=F}
 library(wikipediatrend)
@@ -107,8 +109,8 @@ library(ggplot2)
 ggplot(page_views, aes(x=date, y=count)) + 
   geom_line(size=1.5, colour="steelblue") + 
   geom_smooth(method="loess", colour="#00000000", fill="#001090", alpha=0.1) +
-  scale_y_continuous( breaks=c(10e6, 15e6, 20e6), 
-  label=c("10 M","15 M","20 M")) +
+  scale_y_continuous( breaks=seq(5e6, 50e6, 5e6) , 
+  label= paste(seq(5,50,5),"M") ) +
   theme_bw()
 ```
 
@@ -117,18 +119,11 @@ ggplot(page_views, aes(x=date, y=count)) +
 
 `wp_trend()` has several options and most of them are set to defaults: 
 
-page , 
-from        = prev_month_start(), 
-to          = prev_month_end(),
-lang        = "en", 
-file        = wp_cache_file(), 
-
-
 - `page`
 - `from = Sys.Date() - 30`
 - `to   = Sys.Date()`
 - `lang = "en"`
-- `file = wp_cache_file()`
+- `file = ""`
 - ~~`friendly`~~ *deprecated*
 - ~~`requestFrom`~~ *deprecated*
 - ~~`userAgent`~~ *deprecated*
@@ -214,7 +209,7 @@ back into R use `wp_load(file = "MyCache.csv")`.
 
 ```{r, message=FALSE}
 wp_trend("Cheese", file="cheeeeese.csv")
-wp_trend("Käse", lang="de", file="cheeeeese.csv")
+wp_trend("K\u00e4se", lang="de", file="cheeeeese.csv")
 
 cheeeeeese <- wp_load( file="cheeeeese.csv" )
 cheeeeeese
@@ -278,7 +273,7 @@ as if ...
 wp_set_cache_file( Sys.getenv("WP_CACHE_FILE") )
 ```
 
-.. would have beend typed in by the user. 
+.. would have been typed in by the user. 
 
 
 
@@ -322,6 +317,11 @@ ggplot(page_views, aes(x=date, y=count, group=lang, color=lang)) +
 ```
 
 
+
+
+
+
+
 # Going beyond Wikipediatrend -- Anomalies and mean shifts 
 
 
@@ -331,6 +331,11 @@ ggplot(page_views, aes(x=date, y=count, group=lang, color=lang)) +
 Currently the `AnomalyDetection` package is not availible on CRAN so we have to use `install_github()` from the `devtools` package to get it. 
 
 ```{r}
+RUN_IT <- require(AnomalyDetection) & require(BreakoutDetection) & F
+```
+
+
+```{r, eval=RUN_IT}
 # install.packages( "AnomalyDetection", repos="http://ghrr.github.io/drat",  type="source")
 library(AnomalyDetection)
 library(dplyr)
@@ -341,7 +346,7 @@ The package is a little picky about the data it accepts for processing so we
 have to build a new data frame. It should contain only the date and count variable.
 Furthermore, `date` should be named `timestamp` and transformed to type `POSIXct`.
 
-```{r}
+```{r, eval=RUN_IT}
 page_views <- wp_trend("Syria", from = "2010-01-01")
 
 page_views_br <- 
@@ -363,7 +368,7 @@ detection is larger than one month (`lonterm`).
 
 Lets choose a greedy set of parameters and detect possible anomalies:
 
-```{r}
+```{r, eval=RUN_IT}
 res <- 
 AnomalyDetectionTs(
   x         = page_views_br, 
@@ -380,7 +385,7 @@ head(res)
 
 ... and play back the detected anomalies to our `page_views` data set:
 
-```{r} 
+```{r, eval=RUN_IT} 
 page_views <- 
   page_views  %>% 
   mutate(normal = !(page_views$date %in% res$timestamp))  %>% 
@@ -391,7 +396,7 @@ class(page_views) <- c("wp_df", "data.frame")
 
 Now we can plot counts and anomalies ... 
 
-```{r, message=FALSE}
+```{r, message=FALSE, eval=RUN_IT}
 (
   p <-
     ggplot( data=page_views, aes(x=date, y=count) ) + 
@@ -403,7 +408,7 @@ Now we can plot counts and anomalies ...
 
 ... as well as compare running means: 
 
-```{r, message=FALSE}
+```{r, message=FALSE, eval=RUN_IT}
 p + 
   geom_line(stat = "smooth", size=2, color="red2", alpha=0.7) + 
   geom_line(data=filter(page_views, anom==F), 
@@ -415,7 +420,7 @@ time since both smooth lines (with and without anomalies) do not differ much.
 Nonetheless, keeping anomalies in will upward bias the counts slightly, so we 
 proceed with a cleaned up data set: 
 
-```{r}
+```{r, eval=RUN_IT}
 page_views_clean <- 
   page_views  %>% 
   filter(anom==F)  %>% 
@@ -437,7 +442,7 @@ Similar to `AnomalyDetection` the `BreakoutDetection` package is not available
 on CRAN but has to be obtained from Github. 
 
 
-```{r}
+```{r, eval=RUN_IT}
 # install.packages(  "BreakoutDetection",   repos="http://ghrr.github.io/drat", type="source")
 library(BreakoutDetection)
 library(dplyr)
@@ -455,7 +460,7 @@ adding further breakpoints. In the following case the last option tells
 the function that overall model fit should be increased by at least 5 percent 
 if adding a breakpoint. 
 
-```{r}
+```{r, eval=RUN_IT}
 br <- 
   breakout(
     page_views_br_clean, 
@@ -469,7 +474,7 @@ br
 
 In the following snippet we combine the break information with our page views data and can have a look at the dates at which the breaks occured. 
 
-```{r}
+```{r, eval=RUN_IT}
 breaks <- page_views_clean[br$loc,]
 breaks
 
@@ -478,7 +483,7 @@ breaks
 Next, we add a span variable capturing which page_view observations belong to 
 which span, allowing us to aggregate data. 
 
-```{r}
+```{r, eval=RUN_IT}
 page_views_clean$span <- 0
 for (d in breaks$date ) {
   page_views_clean$span[ page_views_clean$date > d ] %<>% add(1)
@@ -508,61 +513,10 @@ spans
 
 Also, we can now plot the shifting mean. 
 
-```{r, message=FALSE}
+```{r, message=FALSE, eval=RUN_IT}
 ggplot(page_views_clean, aes(x=date, y=count) ) + 
   geom_line(alpha=0.5, color="steelblue") + 
   geom_line(aes(y=mcount), alpha=0.5, color="red2", size=1.2) + 
   theme_bw()
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

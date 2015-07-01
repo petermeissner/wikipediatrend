@@ -59,7 +59,7 @@ wp_trend <- function( page ,
   # dev # 
   # page="main"; from=prev_month_start(); to=prev_month_end(); lang="en"; file=""
   # page="main"; from=prev_month_start(); to=prev_month_end(); lang="en"; file="test.csv"
-  
+  # page="pegida"; from=prev_month_start(); to=Sys.Date(); lang="de"; file=""
   # deprecation
   if( !missing("requestFrom") ) 
     message("Option 'requestFrom' is deprecated and will cause errors 

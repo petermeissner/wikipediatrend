@@ -100,7 +100,7 @@ wp_add_to_cache <- function(df){
       iffer <- T  
     }
   }
-  df$count <- as.numeric(df$count)
+  if( !is.null(df$count) ) df$count <- as.numeric(df$count)
   wp_cache$cache <- rbind(wp_cache$cache, df[iffer,])
   rownames(wp_cache$cache) <- NULL
   return(sum(iffer))

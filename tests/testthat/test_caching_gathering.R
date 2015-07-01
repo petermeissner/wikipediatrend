@@ -65,6 +65,13 @@ test_that(
   }
 )
 
+test_that(
+  "adding NULL to cache does not cause any error", 
+  {
+    expect_true(  {wp_add_to_cache(data.frame()) ; TRUE })
+  }
+)
+
 
 test_that(
   "file argument in wp_trend()", {

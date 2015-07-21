@@ -8,10 +8,10 @@ wp_http_header <- function(){
     'user-agent' = 
       paste0( 
         R.version$version.string, " ",
-        "wikipediatrend/", packageVersion("wikipediatrend"), " ",
+        "wikipediatrend/", utils::packageVersion("wikipediatrend"), " ",
         "curl/", RCurl::curlVersion()$version, " ",
-        "Rcurl/", packageVersion("RCurl"), " ",
-        "httr/", packageVersion("httr")
+        "Rcurl/", utils::packageVersion("RCurl"), " ",
+        "httr/", utils::packageVersion("httr")
       ) 
   )
 }

@@ -52,7 +52,7 @@ print.wp_df <- function (x, ...)
       print(m, ..., quote = FALSE)
     }
   }
-  invisible(df)
+  invisible(x)
 }
 
 #' function for setting print options for print.wp_df()

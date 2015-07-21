@@ -103,7 +103,7 @@ wp_trend <- function( page ,
   page <- stringr::str_replace( page, " ", "_" )
   for( i in seq_along(page) ){
     if ( !stringr::str_detect( page[i], "%" ) ){
-      page[i] <- URLencode(page[i])
+      page[i] <- utils::URLencode(page[i])
     }
   }
 

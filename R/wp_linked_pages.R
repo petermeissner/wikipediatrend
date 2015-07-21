@@ -34,7 +34,7 @@ wp_linked_pages <- function(page, lang){
           "wiki/", "")
   lang_df[lang_df$lang=="x-default",] <- c(page, lang)
   # add decoded title 
-  tmp <- unlist(lapply(lang_df$page, URLdecode))
+  tmp <- unlist(lapply(lang_df$page, utils::URLdecode))
   Encoding(tmp) <- "UTF-8"
   lang_df$title <- tmp
   # return

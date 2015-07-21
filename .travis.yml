@@ -11,6 +11,7 @@ before_install:
 
 install:
   - ./pkg-build.sh install_deps
+  - ./pkg-build.sh install_github twitter/AnomalyDetection twitter/BreakoutDetection jimhester/covr
 
 script:
   - ./pkg-build.sh run_tests
@@ -28,13 +29,6 @@ env:
     - RVERSION=oldrel
     - RVERSION=release
     - RVERSION=devel
-
-
-r_github_packages:
-  - jimhester/covr
-  - twitter/AnomalyDetection
-  - twitter/BreakoutDetection
-
 
 after_success:
   - Rscript -e 'library(covr);coveralls()'

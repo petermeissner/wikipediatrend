@@ -41,7 +41,11 @@ print.wp_df <- function (x, ...)
       text <-  paste0("\n... ", dim(m)[1]-rows, " rows of data not shown")
       SAMPLE <- sample( seq_along( m[,1] ), rows)
       m <- m[SAMPLE,]
-      m <- m[order(m[,3], m[,4], m[,1]), ]
+      if( dim(m)[2]>=4 ){
+        m <- m[order(m[,3], m[,4], m[,1]), ]
+      }else{
+        m <- m[order(m[,2]), ]
+      }
       print( m , ..., quote = FALSE)
       cat(text)  
     }else{

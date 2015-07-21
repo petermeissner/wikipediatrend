@@ -1,12 +1,19 @@
 NEWS wikipediatrend 
 ==========================================================================
 
+version 1.1.6 // 2015-07-21 ... 
+
+* BUGFIX
+
+- wp_trend() would fail with un-informative error if page or lang input would contain NA - now it fails with more informative error: 'Error: all(!is.na(page)) is not TRUE'
+
+- vignette would fail due to NA as page/lang input of wp_trend() - code has been changed to prevent such 
 
 
 version 1.1.5 // 2015-07-01 ... 
 --------------------------------------------------------------------------
 
-- BUGFIX
+* BUGFIX
     - adding control for empty data returned by server and adding test 
 
 
@@ -14,17 +21,18 @@ version 1.1.5 // 2015-07-01 ...
 version 1.1.4 // 2015-06-10 ...
 --------------------------------------------------------------------------
 
-- BUGFIX
-    - modifying vignette to comply with CRAN policies: replaced non ascii character in R code by its \u-escape sequence ( \u00e4 )
+* BUGFIX
 
-    - modifying vignette to comply with CRAN policies: making code evaluation for code that uses non-mainstream repository hosted packages optional on machines that do not have those installed
+- modifying vignette to comply with CRAN policies: replaced non ascii character in R code by its \u-escape sequence ( \u00e4 )
+
+- modifying vignette to comply with CRAN policies: making code evaluation for code that uses non-mainstream repository hosted packages optional on machines that do not have those installed
 
 
 
 version 1.1.3 // 2015-06-04 ... 
 --------------------------------------------------------------------------
 
-- BUGFIX
+* BUGFIX
     - modifying vignette to comply with CRAN policies (dropping lines installing packages if not present)
 
 

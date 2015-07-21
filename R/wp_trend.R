@@ -92,6 +92,7 @@ wp_trend <- function( page ,
                           
   # input check
   stopifnot( length(page)==length(lang) | length(lang)==1 )
+  stopifnot( all( !is.na(page) ), all( !is.na(lang) ) )
   
   # check dates
   from <- wp_check_date_inputs(from, to)$from

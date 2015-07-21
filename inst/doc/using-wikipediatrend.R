@@ -111,14 +111,14 @@ wp_get_cache()
 
 ## ---- message=F----------------------------------------------------------
 titles <- wp_linked_pages("Islamic_State_of_Iraq_and_the_Levant", "en")
-titles <- titles[titles$lang %in% c("en", "de", "es", "ar", "ru"),]
+titles <- titles[titles$lang %in% c("de", "es", "ar", "ru","zh-min-nan"),]
 titles 
 
 ## ---- message=F----------------------------------------------------------
 page_views <- 
   wp_trend(
-    page = titles$page[1:5], 
-    lang = titles$lang[1:5],
+    page = titles$page, 
+    lang = titles$lang,
     from = "2014-08-01"
   )
 

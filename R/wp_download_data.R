@@ -7,10 +7,6 @@
 wp_download_data <- function(urls, wait=1){
   # make http requests
   jsons <- list()
-  # make sure to use a handle
-  # does not work on linux!? # if ( !exists("h") ){
-  # does not work on linux!? #   h <- httr::handle("http://stats.grok.se")
-  # does not work on linux!? # }
   # looping
   for(i in seq_along(urls)){
     jsons <- c(

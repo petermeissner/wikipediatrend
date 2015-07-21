@@ -69,14 +69,15 @@ Downloads from <a href='http://cran.rstudio.com/'>CRAN.RStudio</a>
 
 # Purpose
 
-The wikipediatrend package is designed around the idea of make Wikipedia page view statistics data availible in R in a most convenient way. 
+The wikipediatrend package is designed to make Wikipedia page access statistics data availible in R in a most convenient way. 
 
 *Consequently the package provides* 
 
 - daily page views as data frames 
 - page views for user set time spans
 - page views for multiple articles in one function call
-- page views for articles in different language domains 
+- page views for articles in different language domains
+- a function to check article titles in other country domains
 - background caching of results to minimize function execution time as well as server burdens
 
 

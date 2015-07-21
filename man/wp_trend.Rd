@@ -26,9 +26,9 @@ wp_trend(page, from = prev_month_start(), to = prev_month_end(),
 
 \item{lang}{The language shorthand identifying which Wikipedia access
   statistics are to be used: e.g. \code{"en"} for the English version found
-  at http://en.wikipedia.org, \code{"de"} for the German version found at
-  http://de.wikipedia.org or perhaps \code{"als"} for the Alemannic dialect
-  found under http://als.wikipedia.org/.}
+  at https://en.wikipedia.org, \code{"de"} for the German version found at
+  https://de.wikipedia.org or perhaps \code{"als"} for the Alemannic dialect
+  found under https://als.wikipedia.org/.}
 
 \item{file}{Where to store data retrieved by function call? The data
   is stored in CSV format. If an already existing file is used for storage,

@@ -8,9 +8,9 @@
 #'   
 #' @param lang The language shorthand identifying which Wikipedia access 
 #'   statistics are to be used: e.g. \code{"en"} for the English version found 
-#'   at http://en.wikipedia.org, \code{"de"} for the German version found at 
-#'   http://de.wikipedia.org or perhaps \code{"als"} for the Alemannic dialect 
-#'   found under http://als.wikipedia.org/.
+#'   at https://en.wikipedia.org, \code{"de"} for the German version found at 
+#'   https://de.wikipedia.org or perhaps \code{"als"} for the Alemannic dialect 
+#'   found under https://als.wikipedia.org/.
 #'   
 #' @param from The starting date of the timespan for which access statistics 
 #'   should be retrieved - note that there is no data prior to 2007-12-01. 

@@ -197,7 +197,3 @@ Fernando Reis, Eryk Walczak, Simon Munzert, Kristin Lindemann
 
 
 
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/petermeissner/wikipediatrend/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-

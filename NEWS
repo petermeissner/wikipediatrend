@@ -1,7 +1,10 @@
 NEWS wikipediatrend 
 ==========================================================================
 
+
+
 version 1.1.6 // 2015-07-21 ... 
+--------------------------------------------------------------------------
 
 * BUGFIX
 
@@ -10,11 +13,17 @@ version 1.1.6 // 2015-07-21 ...
 - vignette would fail due to NA as page/lang input of wp_trend() - code has been changed to prevent such 
 
 
+* CRAN COMPLIANCE
+
+- imports from none 'base' R now are made explicit
+
+
+
 version 1.1.5 // 2015-07-01 ... 
 --------------------------------------------------------------------------
 
 * BUGFIX
-    - adding control for empty data returned by server and adding test 
+    - adding checks for empty data returned by server (might cause breaking of wp_trend()) and adding tests for such cases 
 
 
 

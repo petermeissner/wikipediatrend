@@ -17,6 +17,10 @@ Peter Meißner
 `r Sys.Date()`
 
 
+```{r,include=FALSE}
+library(wikipediatrend)
+```
+
 
 # Status
 
@@ -54,13 +58,50 @@ Version on CRAN
 </tr>
 <tr>
 <td>
-Downloads from <a href='http://cran.rstudio.com/'>CRAN.RStudio</a>
+Version on Github
+</td> 
+<td>
+
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="20">
+  <linearGradient id="b" x2="0" y2="100%">
+    <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
+    <stop offset="1" stop-opacity=".1"/>
+  </linearGradient>
+  <mask id="a">
+    <rect width="500" height="20" rx="3" fill="#fff"/>
+  </mask>
+<g mask="url(#a)"><path fill="#555" d="M0 0h50v20H0z"/>
+    <path fill="#007ec6" d="M50 0h85v20H50z"/>
+    <path fill="url(#b)" d="M0 0h135v20H0z"/>
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
+    <text x="25" y="15" fill="#010101" fill-opacity=".3">
+      Github
+    </text>
+    <text x="25" y="14">
+      Github
+    </text>
+    <text x="90" y="15" fill="#010101" fill-opacity=".3">
+      `r sessionInfo()$otherPkgs$wikipediatrend$Version`
+    </text>
+    <text x="90" y="14">
+      `r sessionInfo()$otherPkgs$wikipediatrend$Version`
+    </text>
+  </g>
+</svg>
+</td>
+</tr>
+
+<tr>
+<td>
+Downloads from <a href='http://cran.rstudio.com/'>CRAN.RStudio</a>&nbsp;&nbsp;&nbsp;
 </td>
 <td>
 <img src="http://cranlogs.r-pkg.org/badges/grand-total/wikipediatrend">
 <img src="http://cranlogs.r-pkg.org/badges/wikipediatrend">
 </td>
 </tr>
+
 </table>
 
 
@@ -148,6 +189,9 @@ ggplot(wp, aes(date, count, group=page, color = page)) +
 # Some examples for using page view statistics
 
 
+- Wilkerson, Bill (2015): *Post-Republican debate on Wikipedia follow-up: before and after public interest in the candidates* http://www.wrwilkerson.com/ . 
+http://www.wrwilkerson.com/blog/2015/8/15/post-republican-debate-on-wikipedia-follow-up-before-and-after-public-interest-in-the-candidates
+
 - Mellon, Jonathan (2014) *Internet Search Data and Issue Salience: The Properties of Google Trends as a Measure of Issue Salience* Journal of Elections, Public Opinion and Parties 24(1):45-72.
 http://www.tandfonline.com/doi/abs/10.1080/17457289.2013.846346 
 
@@ -160,7 +204,7 @@ http://onlinelibrary.wiley.com/doi/10.1111/j.1541-0072.2011.00406.x/full
 - Taha Yasseri and Jonathan Bright (2015): *Predicting elections from online information flows: towards theoretically informed models*. http://arxiv.org/abs/1505.01818
 
  
-
+*(I missed your application? Let me know and I put it here)*
 
 
 

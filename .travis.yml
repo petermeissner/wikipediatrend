@@ -11,7 +11,6 @@ before_install:
 
 install:
   - ./pkg-build.sh install_deps
-  - ./pkg-build.sh install_github twitter/AnomalyDetection twitter/BreakoutDetection jimhester/covr
 
 script:
   - ./pkg-build.sh run_tests

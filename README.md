@@ -8,7 +8,7 @@ Peter Meißner
 
 # Last Update
 
-2015-08-31
+2015-08-17
 
 
 
@@ -53,7 +53,7 @@ Version on CRAN
 Version on Github
 </td> 
 <td>
-      1.1.7.900000
+      1.1.6.900000
 </td>
 </tr>
 
@@ -256,29 +256,7 @@ Fernando Reis, Eryk Walczak, Simon Munzert, Kristin Lindemann
 
 
 
-# Meta ([cranlogs](https://github.com/metacran/cranlogs)) wikipediatrend
 
-
-```r
-library(cranlogs)
-```
-
-```
-## Warning: package 'cranlogs' was built under R version 3.2.2
-```
-
-```r
-plot(
-  cran_downloads(
-    package = "wikipediatrend", 
-    from = "2014-01-01", 
-    to = Sys.Date()
-  )[,1:2], 
-  type="l"
-)
-```
-
-![](Readme_files/figure-html/unnamed-chunk-8-1.png) 
 
 
 

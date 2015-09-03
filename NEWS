@@ -2,22 +2,20 @@ NEWS wikipediatrend
 ==========================================================================
 
 
-version 1.1.7 // 2015-08-31 ... 
-
-* BUGFIX
-  - section going beyond wikipediatrend from the vignette was deleted because some errors occured with R-devel and R-release (3.2.2) - not clear whether or not due to R or due to https://github.com/twitter/BreakoutDetection and https://github.com/twitter/AnomalyDetection most likely the latter one. To keep things going smoothly all dependencies ('Sugests' in Description) to those packages were cut loose.
-
 
 version 1.1.6 // 2015-07-21 ... 
 --------------------------------------------------------------------------
 
 * BUGFIX
-  - wp_trend() would fail with un-informative error if page or lang input would contain NA - now it fails with more informative error: 'Error: all(!is.na(page)) is not TRUE'
-  - vignette would fail due to NA as page/lang input of wp_trend() - code has been changed to prevent such 
+
+- wp_trend() would fail with un-informative error if page or lang input would contain NA - now it fails with more informative error: 'Error: all(!is.na(page)) is not TRUE'
+
+- vignette would fail due to NA as page/lang input of wp_trend() - code has been changed to prevent such 
 
 
 * CRAN COMPLIANCE
-  - imports from none 'base' R now are made explicit
+
+- imports from none 'base' R now are made explicit
 
 
 
@@ -33,8 +31,10 @@ version 1.1.4 // 2015-06-10 ...
 --------------------------------------------------------------------------
 
 * BUGFIX
-  - modifying vignette to comply with CRAN policies: replaced non ascii character in R code by its \u-escape sequence ( \u00e4 )
-  - modifying vignette to comply with CRAN policies: making code evaluation for code that uses non-mainstream repository hosted packages optional on machines that do not have those installed
+
+- modifying vignette to comply with CRAN policies: replaced non ascii character in R code by its \u-escape sequence ( \u00e4 )
+
+- modifying vignette to comply with CRAN policies: making code evaluation for code that uses non-mainstream repository hosted packages optional on machines that do not have those installed
 
 
 

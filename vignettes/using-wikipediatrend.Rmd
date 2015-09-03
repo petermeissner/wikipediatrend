@@ -321,7 +321,7 @@ ggplot(page_views, aes(x=date, y=count, group=lang, color=lang)) +
 
 
 
-<!--
+
 # Going beyond Wikipediatrend -- Anomalies and mean shifts 
 
 
@@ -519,4 +519,4 @@ ggplot(page_views_clean, aes(x=date, y=count) ) +
   geom_line(aes(y=mcount), alpha=0.5, color="red2", size=1.2) + 
   theme_bw()
 ```
--->
+

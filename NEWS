@@ -1,6 +1,12 @@
 NEWS wikipediatrend 
 ==========================================================================
 
+version 1.1.7 // 2015-09-22 ... 
+--------------------------------------------------------------------------
+
+* BUGFIX
+
+- the package's functions would fail combined with rvest versions >= 0.3.0 - that has been fixed
 
 
 version 1.1.6 // 2015-07-21 ... 

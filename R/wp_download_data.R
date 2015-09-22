@@ -12,15 +12,13 @@ wp_download_data <- function(urls, wait=1){
     jsons <- c(
       jsons, 
       try(
-        rvest::html_text(
-          rvest::html( 
+        html( 
             urls[i], 
             httr::user_agent(wp_http_header()$`user-agent`)
             # does not work on linux!? # , handle = h
           ) 
         )
       )
-    )
     message(urls[i])
     Sys.sleep(wait)
   }

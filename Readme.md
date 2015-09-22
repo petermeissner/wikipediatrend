@@ -8,7 +8,7 @@ Peter Meißner
 
 # Last Update
 
-2015-08-17
+2015-09-22
 
 
 
@@ -256,7 +256,22 @@ Fernando Reis, Eryk Walczak, Simon Munzert, Kristin Lindemann
 
 
 
+# Meta ([cranlogs](https://github.com/metacran/cranlogs)) wikipediatrend
 
+
+```r
+library(cranlogs)
+plot(
+  cran_downloads(
+    package = "wikipediatrend", 
+    from = "2014-01-01", 
+    to = Sys.Date()
+  )[,1:2], 
+  type="l"
+)
+```
+
+![](Readme_files/figure-html/unnamed-chunk-8-1.png) 
 
 
 

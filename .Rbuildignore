@@ -8,6 +8,7 @@ cran-comments.md
 Readme_cache
 Readme_files
 Readme.html
+Readme.md
 autotest.r
 autotest.Rexec
 test_coverage

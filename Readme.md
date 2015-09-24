@@ -8,20 +8,23 @@ Peter Meißner
 
 # Last Update
 
-2015-09-23
+2015-09-24
 
 
 
 
 
-# Status
+# Status (current version on Github)
 
 <table>
 <tr>
 <td> 
-Ubuntu build </td>
+Ubuntu build 
+</td>
 <td> 
+<a href="https://travis-ci.org/petermeissner/wikipediatrend">
 <img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master">
+</a>
 </td>
 </tr>
 <tr>
@@ -29,15 +32,9 @@ Ubuntu build </td>
 Windows build
 </td>
 <td> 
+<a href="https://ci.appveyor.com/project/petermeissner/wikipediatrend">
 <img src="http://ci.appveyor.com/api/projects/status/github/petermeissner/wikipediatrend">
-</td>
-</tr>
-<tr>
-<td> 
-Code covered by tests
-</td>
-<td> 
-<img src="https://coveralls.io/repos/petermeissner/wikipediatrend/badge.svg">
+</a>
 </td>
 </tr>
 <tr>
@@ -45,7 +42,9 @@ Code covered by tests
 Version on CRAN  
 </td> 
 <td>
+<a href="https://cran.r-project.org/web/packages/wikipediatrend/index.html">
 <img src="http://www.r-pkg.org/badges/version/wikipediatrend">
+</a>
 </td>
 </tr>
 <tr>
@@ -53,10 +52,9 @@ Version on CRAN
 Version on Github
 </td> 
 <td>
-      1.1.6.900000
+1.1.7.900000
 </td>
 </tr>
-
 <tr>
 <td>
 Downloads from <a href='http://cran.rstudio.com/'>CRAN.RStudio</a>&nbsp;&nbsp;&nbsp;

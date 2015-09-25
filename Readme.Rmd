@@ -195,16 +195,58 @@ Fernando Reis, Eryk Walczak, Simon Munzert, Kristin Lindemann
 
 # Meta ([cranlogs](https://github.com/metacran/cranlogs)) wikipediatrend
 
-```{r}
+```{r, fig.width=10, echo=FALSE, fig.retina=TRUE, message=FALSE}
 library(cranlogs)
-plot(
+library(jsonlite)
+library(stringr)
+
+wptrendversions <- 
+  grep(
+    "version \\d{1,3}.\\d{1,3}.\\d{1,3}.*//", 
+    readLines("NEWS"),
+    value = TRUE
+  )
+wptrendversions <- 
+  data.frame(
+    version = str_extract(wptrendversions, "\\d{1,3}.\\d{1,3}.\\d{1,3}"),
+    date = str_extract(wptrendversions, "\\d{4}-\\d{2}-\\d{2}")
+  )
+
+rversions <- fromJSON("http://rversions.r-pkg.org/r-versions")
+
+downloads <- 
   cran_downloads(
     package = "wikipediatrend", 
-    from = "2014-01-01", 
+    from = "2014-09-01", 
     to = Sys.Date()
-  )[,1:2], 
-  type="l"
-)
+  )[,1:2]
+
+downloads_cum <- 
+  data.frame(
+    date = downloads$date,
+    sum = round(cumsum(downloads$count)/1000,1)
+  )
+downloads_cum <- 
+  downloads_cum[
+    !duplicated(downloads_cum$sum) &
+    downloads_cum$sum %% 0.5 == 0 , ]
+downloads_cum$date[1] <- "2014-11-07"
+
+plot(downloads, type="l", ylim = c(-40,80))
+text(as.Date(rversions$date),-17,labels = rversions$version, col = "red", srt=0, cex=0.7)
+#segments(x0=as.Date(rversions$date),x1=as.Date(rversions$date),y0=0,y1=10,col="red", lwd=2)
+text(as.Date(wptrendversions$date),-25,labels = wptrendversions$version, col = "steelblue", srt=0, cex=0.7)
+#segments(x0=as.Date(wptrendversions$date),x1=as.Date(wptrendversions$date),y0=0,y1=10,col="steelblue",lwd = 2)
+text(downloads_cum$date, -34, downloads_cum$sum, cex=0.7, col = "darkgreen")
+text(as.Date("2014-08-15"),-25,"wp versions", col="steelblue", cex=0.7,pos=4)
+text(as.Date("2014-08-15"),-17,"R versions", col="red", cex=0.7,pos=4)
+text(as.Date("2014-08-15"),-34,"K downloads", col="darkgreen", cex=0.7,pos=4)
+abline(h=c(0),col="black")
+abline(h=c(-40,-10),col="grey")
+lines(
+  loess.smooth(downloads$date, downloads$count, span = 1/5, degree = 2,
+    family = c("gaussian"), evaluation = 50),
+  col="darkgreen", lwd=2)
 ```
 
 

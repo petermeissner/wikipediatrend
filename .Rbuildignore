@@ -7,8 +7,8 @@ README.Rmd
 cran-comments.md
 Readme_cache
 Readme_files
-Readme.html
-Readme.md
+README.html
+README.md
 autotest.r
 autotest.Rexec
 test_coverage

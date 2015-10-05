@@ -73,7 +73,7 @@ Downloads from <a href='http://cran.rstudio.com/'>CRAN.RStudio</a>&nbsp;&nbsp;&n
 
 # Meta ([cranlogs](https://github.com/metacran/cranlogs)) wikipediatrend
 
-![](README_files/figure-html/unnamed-chunk-3-1.png) 
+![](Readme_files/figure-html/unnamed-chunk-3-1.png) 
 
 
 
@@ -123,6 +123,7 @@ library(wikipediatrend)
 
 # Usage
 
+## getting data
 
 The workhorse of the package is the `wp_trend()` function:
 
@@ -149,6 +150,7 @@ wp <- wp_trend(page = c("Fever","Fieber"),
 ```
 
 
+## glancing data
 
 The function's return is a data frame with six variables *date*, *count*, *project*, *title*, *rank*, *month* paralleling the data provided by the stats.grok.se server:
 
@@ -167,9 +169,32 @@ head(wp)
 ## 6 2013-08-31 2441  en   Fever 5014 201308 Fever
 ```
 
-![](README_files/figure-html/unnamed-chunk-9-1.png) 
+## plotting data
+
+![](Readme_files/figure-html/unnamed-chunk-9-1.png) 
 
 
+## other languages
+
+Furthermore, wikipediatrend provides a helper function `wp_linked_pages()` which allows to query wikipedia if a particualr article exists in other languages as well: 
+
+
+```r
+wp_linked_pages("Hitsche", lang="de")
+```
+
+```
+##   page             lang   title           
+## 1 Schame           bar    Schame          
+## 2 Footstool        en     Footstool       
+## 3 Reposapi%C3% ... es     Reposapiés      
+## 4 %D8%B2%DB%8C ... fa     <U+0632><U+06CC><U+0631><U+067E><U+0627><U+06CC><U+06CC>
+## 5 Pouf             fr     Pouf            
+## 6 Skabelo          io     Skabelo         
+## 7 Voetenb%C3%A ... nds-NL Voetenbänksi ...
+## 8 Fotskammel       nn     Fotskammel      
+## 9 Podn%C3%B3%C ... pl     Podnózek
+```
 
 
 # Vignette
@@ -181,6 +206,10 @@ head(wp)
 
 
 # Some examples for using page view statistics
+
+- politan.ch (2015-10-04): *Welche Ständeratskandidaturen interessieren?.* politan.ch. http://www.politan.ch/welche-standeratskandidaturen-interessieren/
+
+- politan.ch (2015-05-25): *Wenn Klicks Stimmen wären.* politan.ch. http://www.politan.ch/wenn-klicks-stimmen-waren/
 
 - Munzert, Simon (2015): *Using Wikipedia Page View Statistics to Measure Issue Salience.* WEBDATANET CONFERENCE 2015. http://conference.webdatanet.eu/uploads/submission/full_paper/35/munzert-wikipedia-webdatanet.pdf
 

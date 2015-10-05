@@ -72,7 +72,7 @@ Version on CRAN
 Version on Github
 </td> 
 <td>
-`r sessionInfo()$otherPkgs$wikipediatrend$Version`
+`r github_version_badge`
 </td>
 </tr>
 <tr>

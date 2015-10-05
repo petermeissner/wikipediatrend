@@ -142,7 +142,7 @@ abline(h=c(-40,-10),col="grey")
 lines(
   loess.smooth(downloads$date, downloads$count, span = 1/5, degree = 2,
     family = c("gaussian"), evaluation = 50),
-  col="darkgreen", lwd=2)
+  col="darkgreen", lwd=2) 
 ```
 
 
@@ -209,7 +209,7 @@ The function's return is a data frame with six variables *date*, *count*, *proje
 head(wp)
 ```
 
-```{r, cache=TRUE, error=TRUE, message=FALSE}
+```{r, fig.width=10, echo=FALSE, fig.retina=TRUE, message=FALSE}
 library(ggplot2)
 
 ggplot(wp, aes(date, count, group=page, color = page)) + 

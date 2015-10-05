@@ -24,6 +24,18 @@ library(wikipediatrend)
 
 # Status (current version on Github)
 
+```{r, include=FALSE}
+github_version_badge <- 
+paste0(
+  '<a href="https://github.com/petermeissner/wikipediatrend"> <img src="data:image/svg+xml; charset=utf-8;base64,', 
+  base64enc::base64encode(charToRaw(
+  paste0(
+'<svg xmlns="http://www.w3.org/2000/svg" width="170" height="20">\n <linearGradient id="b" x2="0" y2="100%">\n <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>\n <stop offset="1" stop-opacity=".1"/>\n </linearGradient>\n <mask id="a">\n <rect width="170" height="20" rx="3" fill="#fff"/>\n </mask>\n <g mask="url(#a)"><path fill="#555" d="M0 0h70v20H0z"/>\n <path fill="#4c1" d="M70 0h99v20H70z"/>\n <path fill="url(#b)" d="M0 0h170v20H0z"/>\n </g>\n <g fill="#fff" text-anchor="middle"\n font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">\n <text x="36" y="15" fill="#010101" fill-opacity=".3">\n Github\n </text>\n <text x="36" y="14">\n Github\n </text>\n <text x="115.5" y="15" fill="#010101" fill-opacity=".3">\n', sessionInfo()$otherPkgs$wikipediatrend$Version, '</text>\n <text x="115.5" y="14">\n', sessionInfo()$otherPkgs$wikipediatrend$Version, '</text>\n </g>\n </svg>\n'
+  ))),
+'">'
+)
+```
+
 <table>
 <tr>
 <td> 
@@ -74,122 +86,6 @@ Downloads from <a href='http://cran.rstudio.com/'>CRAN.RStudio</a>&nbsp;&nbsp;&n
 </tr>
 
 </table>
-
-
-
-
-
-# Purpose
-
-The wikipediatrend package is designed to make Wikipedia page access statistics data availible in R in a most convenient way. 
-
-*Consequently the package provides* 
-
-- daily page views as data frames 
-- page views for user set time spans
-- page views for multiple articles in one function call
-- page views for articles in different language domains
-- a function to check article titles in other country domains
-- background caching of results to minimize function execution time as well as server burdens
-
-
-
-
-
-
-# Installation 
-
-A stable version of the package can be found on CRAN and installed via ...
-```{r, eval=FALSE}
-install.packages("wikipediatrend")
-```
-
-... while the current developement version can be retrieved by using `install_github()` from the devtools package ... 
-
-```{r, eval=FALSE}
-devtools::install_github("petermeissner/wikipediatrend")
-```
-
-After loading the package several functions are available.
-
-```{r, error=TRUE, message=FALSE}
-library(wikipediatrend)
-```
-
-
-
-
-# Usage
-
-
-The workhorse of the package is the `wp_trend()` function:
-
-```{r, cache=TRUE, error=TRUE}
-wp <- wp_trend(page = c("Fever","Fieber"), 
-               from = "2013-08-01", 
-               to   = prev_month_end(), 
-               lang = c("en","de"))
-```
-
-The function's return is a data frame with six variables *date*, *count*, *project*, *title*, *rank*, *month* paralleling the data provided by the stats.grok.se server:
-
-```{r, cache=TRUE, error=TRUE}
-head(wp)
-```
-
-```{r, cache=TRUE, error=TRUE, message=FALSE}
-library(ggplot2)
-
-ggplot(wp, aes(date, count, group=page, color = page)) + 
-  geom_point() +
-  geom_smooth(method="lm", formula = y ~ poly(x, 20), size=1.5) +
-  theme_bw()
-```
-
-
-
-
-# Vignette
-
-*For a more detailed usage have a look at the vignette accompanying the package. `vignette("using-wikipediatrend", package="wikipediatrend")`*
-
-... or GoTo [CRAN](http://cran.r-project.org/web/packages/wikipediatrend/index.html) or build it from scratch from [Github](https://raw.githubusercontent.com/petermeissner/wikipediatrend/master/vignettes/using-wikipediatrend.Rmd).
-
-
-
-# Some examples for using page view statistics
-
-
-- Wilkerson, Bill (2015): *Post-Republican debate on Wikipedia follow-up: before and after public interest in the candidates* http://www.wrwilkerson.com/ . 
-http://www.wrwilkerson.com/blog/2015/8/15/post-republican-debate-on-wikipedia-follow-up-before-and-after-public-interest-in-the-candidates
-
-- Mellon, Jonathan (2014) *Internet Search Data and Issue Salience: The Properties of Google Trends as a Measure of Issue Salience* Journal of Elections, Public Opinion and Parties 24(1):45-72.
-http://www.tandfonline.com/doi/abs/10.1080/17457289.2013.846346 
-
-- Ripberger, Joseph T. (2011): *Capturing curiosity: using Internet search trends to measure public attentiveness*. Policy Studies Journal 39(2):239-259.
-http://onlinelibrary.wiley.com/doi/10.1111/j.1541-0072.2011.00406.x/full
-
-- Yla Tausczik, Kate Faasse, James W. Pennebaker, Keith J. Petrie (2012): *Public Anxiety and Information Seeking Following the H1N1 Outbreak: Blogs, Newspaper Articles, and Wikipedia Visits*. Health Communication, Vol. 27, Iss. 2.
- http://www.tandfonline.com/doi/pdf/10.1080/10410236.2011.571759
-
-- Taha Yasseri and Jonathan Bright (2015): *Predicting elections from online information flows: towards theoretically informed models*. http://arxiv.org/abs/1505.01818
-
- 
-*(I missed your application? Let me know and I put it here)*
-
-
-
-# Thanks 
-
-Fernando Reis, Eryk Walczak, Simon Munzert, Kristin Lindemann
-
-
-
-
-
-# Credits
-
-- Parts of the package's code have been shamelessly copied and modified from R base package written by R core team. This concerns the `wp_date()` generic and its methods and is detailed in the help files. 
 
 
 
@@ -248,6 +144,130 @@ lines(
     family = c("gaussian"), evaluation = 50),
   col="darkgreen", lwd=2)
 ```
+
+
+
+
+# Purpose
+
+The wikipediatrend package is designed to make Wikipedia page access statistics data availible in R in a most convenient way. 
+
+*Consequently the package provides* 
+
+- daily page views as data frames 
+- page views for user set time spans
+- page views for multiple articles in one function call
+- page views for articles in different language domains
+- a function to check article titles in other country domains
+- background caching of results to minimize function execution time as well as server burdens
+
+
+
+
+
+
+# Installation 
+
+A stable version of the package can be found on CRAN and installed via ...
+```{r, eval=FALSE}
+install.packages("wikipediatrend")
+```
+
+... while the current developement version can be retrieved by using `install_github()` from the devtools package ... 
+
+```{r, eval=FALSE}
+devtools::install_github("petermeissner/wikipediatrend")
+```
+
+After loading the package several functions are available.
+
+```{r, error=TRUE, message=FALSE}
+library(wikipediatrend)
+```
+
+
+
+
+# Usage
+
+
+The workhorse of the package is the `wp_trend()` function:
+
+```{r, cache=TRUE, error=TRUE, message=c(1:3, 30:33)}
+wp <- wp_trend(page = c("Fever","Fieber"), 
+               from = "2013-08-01", 
+               to   = prev_month_end(), 
+               lang = c("en","de"))
+# (... messages shortened)
+```
+
+
+
+The function's return is a data frame with six variables *date*, *count*, *project*, *title*, *rank*, *month* paralleling the data provided by the stats.grok.se server:
+
+```{r, cache=TRUE, error=TRUE}
+head(wp)
+```
+
+```{r, cache=TRUE, error=TRUE, message=FALSE}
+library(ggplot2)
+
+ggplot(wp, aes(date, count, group=page, color = page)) + 
+  geom_point() +
+  geom_smooth(method="lm", formula = y ~ poly(x, 20), size=1.5) +
+  theme_bw()
+```
+
+
+
+
+# Vignette
+
+*For a more detailed usage have a look at the vignette accompanying the package. `vignette("using-wikipediatrend", package="wikipediatrend")`*
+
+... or GoTo [CRAN](http://cran.r-project.org/web/packages/wikipediatrend/index.html) or build it from scratch from [Github](https://raw.githubusercontent.com/petermeissner/wikipediatrend/master/vignettes/using-wikipediatrend.Rmd).
+
+
+
+# Some examples for using page view statistics
+
+- Munzert, Simon (2015): *Using Wikipedia Page View Statistics to Measure Issue Salience.* WEBDATANET CONFERENCE 2015. http://conference.webdatanet.eu/uploads/submission/full_paper/35/munzert-wikipedia-webdatanet.pdf
+
+- Wilkerson, Bill (2015): *Post-Republican debate on Wikipedia follow-up: before and after public interest in the candidates.* http://www.wrwilkerson.com/ .
+http://www.wrwilkerson.com/blog/2015/8/15/post-republican-debate-on-wikipedia-follow-up-before-and-after-public-interest-in-the-candidates
+
+- Taha Yasseri and Jonathan Bright (2015): *Predicting elections from online information flows: towards theoretically informed models*. http://arxiv.org/abs/1505.01818
+
+- Mellon, Jonathan (2014) *Internet Search Data and Issue Salience: The Properties of Google Trends as a Measure of Issue Salience* Journal of Elections, Public Opinion and Parties 24(1):45-72.
+http://www.tandfonline.com/doi/abs/10.1080/17457289.2013.846346 
+
+- Yla Tausczik, Kate Faasse, James W. Pennebaker, Keith J. Petrie (2012): *Public Anxiety and Information Seeking Following the H1N1 Outbreak: Blogs, Newspaper Articles, and Wikipedia Visits*. Health Communication, Vol. 27, Iss. 2.
+ http://www.tandfonline.com/doi/pdf/10.1080/10410236.2011.571759
+
+- Ripberger, Joseph T. (2011): *Capturing curiosity: using Internet search trends to measure public attentiveness*. Policy Studies Journal 39(2):239-259.
+http://onlinelibrary.wiley.com/doi/10.1111/j.1541-0072.2011.00406.x/full
+
+
+
+
+
+ 
+*(I missed your application? Make a pull request, open an issue, drop me a line and I put it here)*
+
+
+
+# Thanks 
+
+Fernando Reis, Eryk Walczak, Simon Munzert, Kristin Lindemann
+
+
+
+
+
+# Credits
+
+- Parts of the package's code have been shamelessly copied and modified from R base package written by R core team. This concerns the `wp_date()` generic and its methods and is detailed in the help files. 
+
 
 
 

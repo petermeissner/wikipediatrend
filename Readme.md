@@ -8,13 +8,15 @@ Peter Meißner
 
 # Last Update
 
-2015-09-25
+2015-10-05
 
 
 
 
 
 # Status (current version on Github)
+
+
 
 <table>
 <tr>
@@ -67,6 +69,11 @@ Downloads from <a href='http://cran.rstudio.com/'>CRAN.RStudio</a>&nbsp;&nbsp;&n
 
 </table>
 
+
+
+# Meta ([cranlogs](https://github.com/metacran/cranlogs)) wikipediatrend
+
+![](README_files/figure-html/unnamed-chunk-3-1.png) 
 
 
 
@@ -131,52 +138,17 @@ wp <- wp_trend(page = c("Fever","Fieber"),
 ## http://stats.grok.se/json/en/201308/Fever
 ## http://stats.grok.se/json/en/201309/Fever
 ## http://stats.grok.se/json/en/201310/Fever
-## http://stats.grok.se/json/en/201311/Fever
-## http://stats.grok.se/json/en/201312/Fever
-## http://stats.grok.se/json/en/201401/Fever
-## http://stats.grok.se/json/en/201402/Fever
-## http://stats.grok.se/json/en/201403/Fever
-## http://stats.grok.se/json/en/201404/Fever
-## http://stats.grok.se/json/en/201405/Fever
-## http://stats.grok.se/json/en/201406/Fever
-## http://stats.grok.se/json/en/201407/Fever
-## http://stats.grok.se/json/en/201408/Fever
-## http://stats.grok.se/json/en/201409/Fever
-## http://stats.grok.se/json/en/201410/Fever
-## http://stats.grok.se/json/en/201411/Fever
-## http://stats.grok.se/json/en/201412/Fever
-## http://stats.grok.se/json/en/201501/Fever
-## http://stats.grok.se/json/en/201502/Fever
-## http://stats.grok.se/json/en/201503/Fever
-## http://stats.grok.se/json/en/201504/Fever
-## http://stats.grok.se/json/en/201505/Fever
-## http://stats.grok.se/json/en/201506/Fever
-## http://stats.grok.se/json/en/201507/Fever
-## http://stats.grok.se/json/de/201308/Fieber
-## http://stats.grok.se/json/de/201309/Fieber
-## http://stats.grok.se/json/de/201310/Fieber
 ## http://stats.grok.se/json/de/201311/Fieber
 ## http://stats.grok.se/json/de/201312/Fieber
 ## http://stats.grok.se/json/de/201401/Fieber
 ## http://stats.grok.se/json/de/201402/Fieber
-## http://stats.grok.se/json/de/201403/Fieber
-## http://stats.grok.se/json/de/201404/Fieber
-## http://stats.grok.se/json/de/201405/Fieber
-## http://stats.grok.se/json/de/201406/Fieber
-## http://stats.grok.se/json/de/201407/Fieber
-## http://stats.grok.se/json/de/201408/Fieber
-## http://stats.grok.se/json/de/201409/Fieber
-## http://stats.grok.se/json/de/201410/Fieber
-## http://stats.grok.se/json/de/201411/Fieber
-## http://stats.grok.se/json/de/201412/Fieber
-## http://stats.grok.se/json/de/201501/Fieber
-## http://stats.grok.se/json/de/201502/Fieber
-## http://stats.grok.se/json/de/201503/Fieber
-## http://stats.grok.se/json/de/201504/Fieber
-## http://stats.grok.se/json/de/201505/Fieber
-## http://stats.grok.se/json/de/201506/Fieber
-## http://stats.grok.se/json/de/201507/Fieber
 ```
+
+```r
+# (... messages shortened)
+```
+
+
 
 The function's return is a data frame with six variables *date*, *count*, *project*, *title*, *rank*, *month* paralleling the data provided by the stats.grok.se server:
 
@@ -205,7 +177,7 @@ ggplot(wp, aes(date, count, group=page, color = page)) +
   theme_bw()
 ```
 
-![](Readme_files/figure-html/unnamed-chunk-7-1.png) 
+![](README_files/figure-html/unnamed-chunk-9-1.png) 
 
 
 
@@ -220,23 +192,28 @@ ggplot(wp, aes(date, count, group=page, color = page)) +
 
 # Some examples for using page view statistics
 
+- Munzert, Simon (2015): *Using Wikipedia Page View Statistics to Measure Issue Salience.* WEBDATANET CONFERENCE 2015. http://conference.webdatanet.eu/uploads/submission/full_paper/35/munzert-wikipedia-webdatanet.pdf
 
-- Wilkerson, Bill (2015): *Post-Republican debate on Wikipedia follow-up: before and after public interest in the candidates* http://www.wrwilkerson.com/ . 
+- Wilkerson, Bill (2015): *Post-Republican debate on Wikipedia follow-up: before and after public interest in the candidates.* http://www.wrwilkerson.com/ .
 http://www.wrwilkerson.com/blog/2015/8/15/post-republican-debate-on-wikipedia-follow-up-before-and-after-public-interest-in-the-candidates
+
+- Taha Yasseri and Jonathan Bright (2015): *Predicting elections from online information flows: towards theoretically informed models*. http://arxiv.org/abs/1505.01818
 
 - Mellon, Jonathan (2014) *Internet Search Data and Issue Salience: The Properties of Google Trends as a Measure of Issue Salience* Journal of Elections, Public Opinion and Parties 24(1):45-72.
 http://www.tandfonline.com/doi/abs/10.1080/17457289.2013.846346 
 
-- Ripberger, Joseph T. (2011): *Capturing curiosity: using Internet search trends to measure public attentiveness*. Policy Studies Journal 39(2):239-259.
-http://onlinelibrary.wiley.com/doi/10.1111/j.1541-0072.2011.00406.x/full
-
 - Yla Tausczik, Kate Faasse, James W. Pennebaker, Keith J. Petrie (2012): *Public Anxiety and Information Seeking Following the H1N1 Outbreak: Blogs, Newspaper Articles, and Wikipedia Visits*. Health Communication, Vol. 27, Iss. 2.
  http://www.tandfonline.com/doi/pdf/10.1080/10410236.2011.571759
 
-- Taha Yasseri and Jonathan Bright (2015): *Predicting elections from online information flows: towards theoretically informed models*. http://arxiv.org/abs/1505.01818
+- Ripberger, Joseph T. (2011): *Capturing curiosity: using Internet search trends to measure public attentiveness*. Policy Studies Journal 39(2):239-259.
+http://onlinelibrary.wiley.com/doi/10.1111/j.1541-0072.2011.00406.x/full
+
+
+
+
 
  
-*(I missed your application? Let me know and I put it here)*
+*(I missed your application? Make a pull request, open an issue, drop me a line and I put it here)*
 
 
 
@@ -252,11 +229,6 @@ Fernando Reis, Eryk Walczak, Simon Munzert, Kristin Lindemann
 
 - Parts of the package's code have been shamelessly copied and modified from R base package written by R core team. This concerns the `wp_date()` generic and its methods and is detailed in the help files. 
 
-
-
-# Meta ([cranlogs](https://github.com/metacran/cranlogs)) wikipediatrend
-
-![](Readme_files/figure-html/unnamed-chunk-8-1.png) 
 
 
 

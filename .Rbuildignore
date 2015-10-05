@@ -2,12 +2,11 @@
 ^\.Rproj\.user$
 devel/.*$
 data-raw/.*$
-README.Rmd
 ^\.travis\.yml$
 cran-comments.md
 Readme_cache
 Readme_files
-README.html
+README.Rmd
 README.md
 autotest.r
 autotest.Rexec

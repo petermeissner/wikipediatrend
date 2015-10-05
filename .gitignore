@@ -41,3 +41,4 @@ man/pversion_inc.Rd
 R/aa_pversion_inc.r
 # misc
 *.csv
+README_cache

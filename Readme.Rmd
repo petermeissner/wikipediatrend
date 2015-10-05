@@ -138,7 +138,7 @@ text(as.Date("2014-08-15"),-25,"wp versions", col="steelblue", cex=0.7,pos=4)
 text(as.Date("2014-08-15"),-17,"R versions", col="red", cex=0.7,pos=4)
 text(as.Date("2014-08-15"),-34,"K downloads", col="darkgreen", cex=0.7,pos=4)
 abline(h=c(0),col="black")
-abline(h=c(-40,-10),col="grey")
+#abline(h=c(-40,-10),col="grey")
 lines(
   loess.smooth(downloads$date, downloads$count, span = 1/5, degree = 2,
     family = c("gaussian"), evaluation = 50),
@@ -214,8 +214,8 @@ library(ggplot2)
 
 ggplot(wp, aes(date, count, group=page, color = page)) + 
   geom_point() +
-  geom_smooth(method="lm", formula = y ~ poly(x, 20), size=1.5) +
-  theme_bw()
+  geom_smooth(method="lm", formula = y ~ poly(x, 20), size=1.5) #+
+  #theme_bw()
 ```
 
 

@@ -8,7 +8,7 @@ Peter Meißner
 
 # Last Update
 
-2015-10-09
+2015-10-11
 
 
 
@@ -54,7 +54,7 @@ Version on CRAN
 Version on Github
 </td> 
 <td>
-<a href="https://github.com/petermeissner/wikipediatrend"> <img src="data:image/svg+xml; charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzAiIGhlaWdodD0iMjAiPgogPGxpbmVhckdyYWRpZW50IGlkPSJiIiB4Mj0iMCIgeTI9IjEwMCUiPgogPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjYmJiIiBzdG9wLW9wYWNpdHk9Ii4xIi8+CiA8c3RvcCBvZmZzZXQ9IjEiIHN0b3Atb3BhY2l0eT0iLjEiLz4KIDwvbGluZWFyR3JhZGllbnQ+CiA8bWFzayBpZD0iYSI+CiA8cmVjdCB3aWR0aD0iMTcwIiBoZWlnaHQ9IjIwIiByeD0iMyIgZmlsbD0iI2ZmZiIvPgogPC9tYXNrPgogPGcgbWFzaz0idXJsKCNhKSI+PHBhdGggZmlsbD0iIzU1NSIgZD0iTTAgMGg3MHYyMEgweiIvPgogPHBhdGggZmlsbD0iIzRjMSIgZD0iTTcwIDBoOTl2MjBINzB6Ii8+CiA8cGF0aCBmaWxsPSJ1cmwoI2IpIiBkPSJNMCAwaDE3MHYyMEgweiIvPgogPC9nPgogPGcgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIKIGZvbnQtZmFtaWx5PSJEZWphVnUgU2FucyxWZXJkYW5hLEdlbmV2YSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIj4KIDx0ZXh0IHg9IjM2IiB5PSIxNSIgZmlsbD0iIzAxMDEwMSIgZmlsbC1vcGFjaXR5PSIuMyI+CiBHaXRodWIKIDwvdGV4dD4KIDx0ZXh0IHg9IjM2IiB5PSIxNCI+CiBHaXRodWIKIDwvdGV4dD4KIDx0ZXh0IHg9IjExNS41IiB5PSIxNSIgZmlsbD0iIzAxMDEwMSIgZmlsbC1vcGFjaXR5PSIuMyI+CjEuMS43LjkwMDAwMDwvdGV4dD4KIDx0ZXh0IHg9IjExNS41IiB5PSIxNCI+CjEuMS43LjkwMDAwMDwvdGV4dD4KIDwvZz4KIDwvc3ZnPgo=">
+<a href="https://github.com/petermeissner/wikipediatrend"> <img src="data:image/svg+xml; charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNzAiIGhlaWdodD0iMjAiPgogPGxpbmVhckdyYWRpZW50IGlkPSJiIiB4Mj0iMCIgeTI9IjEwMCUiPgogPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjYmJiIiBzdG9wLW9wYWNpdHk9Ii4xIi8+CiA8c3RvcCBvZmZzZXQ9IjEiIHN0b3Atb3BhY2l0eT0iLjEiLz4KIDwvbGluZWFyR3JhZGllbnQ+CiA8bWFzayBpZD0iYSI+CiA8cmVjdCB3aWR0aD0iMTcwIiBoZWlnaHQ9IjIwIiByeD0iMyIgZmlsbD0iI2ZmZiIvPgogPC9tYXNrPgogPGcgbWFzaz0idXJsKCNhKSI+PHBhdGggZmlsbD0iIzU1NSIgZD0iTTAgMGg3MHYyMEgweiIvPgogPHBhdGggZmlsbD0iIzRjMSIgZD0iTTcwIDBoOTl2MjBINzB6Ii8+CiA8cGF0aCBmaWxsPSJ1cmwoI2IpIiBkPSJNMCAwaDE3MHYyMEgweiIvPgogPC9nPgogPGcgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIKIGZvbnQtZmFtaWx5PSJEZWphVnUgU2FucyxWZXJkYW5hLEdlbmV2YSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIj4KIDx0ZXh0IHg9IjM2IiB5PSIxNSIgZmlsbD0iIzAxMDEwMSIgZmlsbC1vcGFjaXR5PSIuMyI+CiBHaXRodWIKIDwvdGV4dD4KIDx0ZXh0IHg9IjM2IiB5PSIxNCI+CiBHaXRodWIKIDwvdGV4dD4KIDx0ZXh0IHg9IjExNS41IiB5PSIxNSIgZmlsbD0iIzAxMDEwMSIgZmlsbC1vcGFjaXR5PSIuMyI+CjEuMS44LjkwMDAwMDwvdGV4dD4KIDx0ZXh0IHg9IjExNS41IiB5PSIxNCI+CjEuMS44LjkwMDAwMDwvdGV4dD4KIDwvZz4KIDwvc3ZnPgo=">
 </td>
 </tr>
 <tr>
@@ -188,12 +188,12 @@ wp_linked_pages("Hitsche", lang="de")
 ## 1 Schame           bar    Schame          
 ## 2 Footstool        en     Footstool       
 ## 3 Reposapi%C3% ... es     Reposapiés      
-## 4 %D8%B2%DB%8C ... fa     <U+0632><U+06CC><U+0631><U+067E><U+0627><U+06CC><U+06CC>
+## 4 %D8%B2%DB%8C ... fa     زیرپایی         
 ## 5 Pouf             fr     Pouf            
 ## 6 Skabelo          io     Skabelo         
 ## 7 Voetenb%C3%A ... nds-NL Voetenbänksi ...
 ## 8 Fotskammel       nn     Fotskammel      
-## 9 Podn%C3%B3%C ... pl     Podnózek
+## 9 Podn%C3%B3%C ... pl     Podnóżek
 ```
 
 
@@ -205,7 +205,7 @@ wp_linked_pages("Hitsche", lang="de")
 
 
 
-# Some examples for using page view statistics
+# Some examples for using page view statistics in general 
 
 - politan.ch (2015-10-04): *Welche Ständeratskandidaturen interessieren?.* politan.ch. http://www.politan.ch/welche-standeratskandidaturen-interessieren/
 

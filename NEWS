@@ -1,6 +1,14 @@
 NEWS wikipediatrend 
 ==========================================================================
 
+version 1.1.8 // 2015-10-11 ... 
+--------------------------------------------------------------------------
+
+* FEATURE
+
+- if provided with bad server response data - could not be parsed - wp_trend() would without giving further information: now it reports whatever data was send back from the server along with the warning
+
+
 version 1.1.7 // 2015-09-22 ... 
 --------------------------------------------------------------------------
 

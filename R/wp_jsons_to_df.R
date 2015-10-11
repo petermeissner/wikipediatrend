@@ -18,6 +18,7 @@ wp_jsons_to_df <- function(wp_json, page){
         }, 
           error=function(e){
             warning("[wp_jsons_to_df()]\nCould not extract data from server response. Data for one month will be missing.")
+            message("\ndata from server was: ", wp_json, "\n")
             data.frame()
           }
       )

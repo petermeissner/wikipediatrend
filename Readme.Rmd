@@ -26,14 +26,19 @@ library(wikipediatrend)
 
 ```{r, include=FALSE}
 github_version_badge <- 
-paste0(
-  '<a href="https://github.com/petermeissner/wikipediatrend"> <img src="data:image/svg+xml; charset=utf-8;base64,', 
-  base64enc::base64encode(charToRaw(
-  paste0(
-'<svg xmlns="http://www.w3.org/2000/svg" width="170" height="20">\n <linearGradient id="b" x2="0" y2="100%">\n <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>\n <stop offset="1" stop-opacity=".1"/>\n </linearGradient>\n <mask id="a">\n <rect width="170" height="20" rx="3" fill="#fff"/>\n </mask>\n <g mask="url(#a)"><path fill="#555" d="M0 0h70v20H0z"/>\n <path fill="#4c1" d="M70 0h99v20H70z"/>\n <path fill="url(#b)" d="M0 0h170v20H0z"/>\n </g>\n <g fill="#fff" text-anchor="middle"\n font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">\n <text x="36" y="15" fill="#010101" fill-opacity=".3">\n Github\n </text>\n <text x="36" y="14">\n Github\n </text>\n <text x="115.5" y="15" fill="#010101" fill-opacity=".3">\n', sessionInfo()$otherPkgs$wikipediatrend$Version, '</text>\n <text x="115.5" y="14">\n', sessionInfo()$otherPkgs$wikipediatrend$Version, '</text>\n </g>\n </svg>\n'
-  ))),
-'">'
-)
+  paste0("<b>",
+    sessionInfo()$otherPkgs$wikipediatrend$Version,
+    "</b>"
+  )
+  
+#paste0(
+#  '<a href="https://github.com/petermeissner/wikipediatrend"> <img src="data:image/svg+xml; charset=utf-8;base64,', 
+#  base64enc::base64encode(charToRaw(
+#  paste0(
+#'<svg xmlns="http://www.w3.org/2000/svg" width="170" height="20">\n <linearGradient id="b" x2="0" y2="100%">\n <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>\n <stop offset="1" stop-opacity=".1"/>\n </linearGradient>\n <mask id="a">\n <rect width="170" height="20" rx="3" fill="#fff"/>\n </mask>\n <g mask="url(#a)"><path fill="#555" d="M0 0h70v20H0z"/>\n <path fill="#4c1" d="M70 0h99v20H70z"/>\n <path fill="url(#b)" d="M0 0h170v20H0z"/>\n </g>\n <g fill="#fff" text-anchor="middle"\n font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">\n <text x="36" y="15" fill="#010101" fill-opacity=".3">\n Github\n </text>\n <text x="36" y="14">\n Github\n </text>\n <text x="115.5" y="15" fill="#010101" fill-opacity=".3">\n', sessionInfo()$otherPkgs$wikipediatrend$Version, '</text>\n <text x="115.5" y="14">\n', sessionInfo()$otherPkgs$wikipediatrend$Version, '</text>\n </g>\n </svg>\n'
+#  ))),
+#'">'
+#)
 ```
 
 <table>

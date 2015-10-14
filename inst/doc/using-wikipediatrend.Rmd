@@ -17,6 +17,7 @@ vignette: >
 ---
 
 ```{r general options, include=FALSE}
+  options("width"=90)
   # default line color in ggplot graphics
     library(ggplot2)
     update_geom_defaults("line",   list(colour = "steelblue"))
@@ -25,13 +26,13 @@ vignette: >
   # there still we be some downloads of data so that building the vignette should imply 
   # that reproducing the vignette by user is possible
     library(wikipediatrend)
-    wp_cache_load(
-      system.file(
-        "extdata", 
-        "wikipediatrend_cache.csv", 
-        package = "wikipediatrend"
+    #if ( interactive() ){
+    #  wp_set_cache_file( "inst/extdata/wikipediatrend_cache.csv" )
+    #}else{
+      wp_cache_load(
+        system.file("extdata/wikipediatrend_cache.csv", package="wikipediatrend")
       )
-    )
+    #}
 ```
 
 
@@ -313,7 +314,7 @@ ggplot(page_views, aes(x=date, y=count, group=lang, color=lang)) +
   ylab("standardized count\n(by lang: m=0, var=1)") +
   theme_bw() + 
   scale_colour_brewer(palette="Set1") + 
-  guides(colour = guide_legend(override.aes = list(alpha = 1)))
+  guides(colour = guide_legend(override.aes = list(alpha = 1))) 
 ```
 
 

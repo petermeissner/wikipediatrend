@@ -8,7 +8,7 @@ Peter Meißner
 
 # Last Update
 
-2015-10-12
+2015-10-13
 
 
 
@@ -188,12 +188,12 @@ wp_linked_pages("Hitsche", lang="de")
 ## 1 Schame           bar    Schame          
 ## 2 Footstool        en     Footstool       
 ## 3 Reposapi%C3% ... es     Reposapiés      
-## 4 %D8%B2%DB%8C ... fa     زیرپایی         
+## 4 %D8%B2%DB%8C ... fa     <U+0632><U+06CC><U+0631><U+067E><U+0627><U+06CC><U+06CC>
 ## 5 Pouf             fr     Pouf            
 ## 6 Skabelo          io     Skabelo         
 ## 7 Voetenb%C3%A ... nds-NL Voetenbänksi ...
 ## 8 Fotskammel       nn     Fotskammel      
-## 9 Podn%C3%B3%C ... pl     Podnóżek
+## 9 Podn%C3%B3%C ... pl     Podnózek
 ```
 
 

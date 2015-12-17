@@ -1,6 +1,7 @@
 #' a wikipediastrend specific data frame
 #' @param x the thing to be printed
 #' @param ... print.default parameters
+#' @import hellno
 #' @export
 print.wp_df <- function (x, ...) 
 {

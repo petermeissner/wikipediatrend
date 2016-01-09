@@ -1,0 +1,229 @@
+---
+title: "Exemplifying Public Attention Analytics with the Wikipediatrend Package"
+author: "Peter Meißner"
+date: '2014-12-03'
+output:
+  html_document:
+    keep_md: yes
+  pdf_document:
+    keep_tex: yes
+---
+
+```{r set-options, echo=FALSE, cache=FALSE}
+options(width = 160)
+```
+
+
+# A case study of public attention on elections
+
+
+Within the last months two things happened: 
+First, I dived into Hadley Wickham's online book on [how to write R packages](http://r-pkgs.had.co.nz/). 
+Second, I **re**discovered [stats.grok.se](http://stats.grok.se/) which provides an API to retrieve page access statistics on [Wikipedia](http://www.wikipedia.org/) articles. In combination these two developments led me to writing [wikipediatrend](https://github.com/petermeissner/wikipediatrend) an R package that allows for very easy gathering of page access statistics of any [Wikipedia](http://www.wikipedia.org/) article written since late 2007. 
+
+While the [README](https://github.com/petermeissner/wikipediatrend/blob/master/README.md) accompanying wikipediatrend's [GitHub repository](https://github.com/petermeissner/wikipediatrend) already introduces the package and shows how it is used from a mere technical perspective -- which functions and options come with the package and what do they do -- something more tuned to showing the package's potential is still amiss. 
+
+The following *case study* should fill that gap by working on a small research 
+question in the field of election. 
+Let us shed light on the span and amount of public attention on elections and election                     results. 
+
+
+
+
+Along the way the following questions will be touched: 
+
+- Do events like elections raise public attention?
+- How to separate event driven attention from general (background/noise) attention?
+- How to identify the span of attention?
+- How to measure the amount of attention?
+
+
+
+## Data
+
+As the internet is full of analysis of US elections -- for good reasons like: large country, money bloated elections, strong political science, long history of data driven election studies and study driven campaigns, strong use of social media, ... -- let us have some other country to serve as an example. Something not too small, not too exotic, but with gravity, something in Europe, maybe with access to the Alps, a country dominant in the great sports of [luge](http://en.wikipedia.org/wiki/Luge), something like ... [Germany](http://de.wikipedia.org/wiki/Bundestagswahl) maybe.  
+
+[Germany](http://de.wikipedia.org/wiki/Bundestagswahl) had two elections at national level since 2007 -- one in September of 2009 and one in September 2013 both resulting in governments led by [Angela Merkel](http://en.wikipedia.org/wiki/Angela_Merkel). Checking Wikipedia for elections in Germany we find that there exists an [overview article for all elections to the German Bundestag](http://de.wikipedia.org/wiki/Bundestagswahl) as well as separate articles for each election ([1949](http://de.wikipedia.org/wiki/Bundestagswahl_1949), [1953](http://de.wikipedia.org/wiki/Bundestagswahl_1953), ..., [2009](http://de.wikipedia.org/wiki/Bundestagswahl_2009), [2013](http://de.wikipedia.org/wiki/Bundestagswahl_2013) ). For the sake of simplicity we only use the general overview article. 
+
+
+## Analysis
+
+In a first step we load the necessary packages to be used throughout the analysis -- the wikipediatrend package. 
+
+```{r loading_packages, , message=FALSE, warning=FALSE}
+require(wikipediatrend)
+```
+
+Next, we use `wp_trend()` to download the data and save it into `bt_election`. 
+Within `wp_trend()` we use `page = "Bundestagswahl"` to get counts for the  overview article. 
+Furthermore, we specify `2007` as `from` date, `de` for the language flavor of Wikipedia, `friendly = T` to ensure automatic saving and reuse of downloaded data as well as `userAgent = T` to tell the server that the data is requested by an R user with wikipediatrend package: <code>`r paste("wikipediatrend running on: ", R.version$platform, ", ", R.version$version.string)`</code>.
+
+```{r getting_data, message=FALSE, warning=FALSE, cache=TRUE}
+bt_election <- wp_trend(  page      = "Bundestagswahl", 
+                          from      = "2007-01-01", 
+                          lang      = "de", 
+                          friendly  = T,
+                          userAgent = T)
+bt_election <- bt_election[ order(bt_election$date), ]
+bt_election[55:60, ]
+dim(bt_election)
+summary(bt_election$date)
+```
+
+
+While at this point we could go forth and simply plot the daily access statistics (`plot(bt_election)`) let us first separate our counts into those being unsurprising normal (lower 95% of the values) and those being unusual large (upper 5% of the values). 
+
+```{r big_data}
+count_big       <- bt_election$count > quantile(bt_election$count, 0.95)
+count_big_col   <- ifelse(count_big, "red", "black")
+```
+
+The following plot visualizes page access counts for the Wikipedia article *Bundestagswahl* from the German Wikipedia on a daily basis with red bars for upper 5% of the  values and black bars the other 95%. The triangles pointing at the bars from above mark the two election dates -- 27th of September in 2009 and 22nd of September in 2013 -- that occurred during the time span under observation. 
+
+```{r plotting_data, fig.width=15}
+plot(bt_election, type="h", col=count_big_col, ylim=c(-1000,40000))
+abline(h=seq(0,40000,5000), col=rgb(0,0,0,0.1))
+arrows( x0  = as.numeric(c(wp_date("2013-09-22"),wp_date("2009-09-27"))),
+        x1  = as.numeric(c(wp_date("2013-09-22"),wp_date("2009-09-27"))),
+        y0  = 40000, y1  = 39500, lwd = 3, col="red")
+legend(x="topleft", col=c("red", "black"), legend=c("upper 5% quantile", "lower 95% quantile"), lwd=1)
+```
+
+
+From the graphics we see, that indeed public attention *significantly* peaks around election dates. 
+
+In a next step we try to find out how long these above-normal attention spans last. Therefore we cycle through all counts. If a  lower 95% value is followed by one of the upper 5% we start a new span (and vice versa), we give it a number and we number consecutive items that are among the upper 5% as well. 
+
+
+```{r span_calculation1}
+span              <- rep(NA, length(count_big))
+span_item         <- rep( 0, length(count_big))
+span_counter      <- 0
+span_item_counter <- 0
+
+for ( i in seq_along(bt_election$date) ) {
+  if ( i == 1 ) {
+      is_new_span      <- T
+    }else{
+      is_new_span      <- count_big[i] != count_big[i-1]
+    }
+  if ( is_new_span  ){
+    span_counter       <- span_counter + 1 
+    span_item_counter  <- 0
+  }
+    span_item_counter  <- span_item_counter +1 
+    span_item[i]       <- span_item_counter
+    span[i]            <- span_counter
+}
+span[span==0] <- NA
+```
+
+In a next step we cycle through all spans and look for their length.
+
+```{r span_calculation2}
+span_length       <- 0
+
+for ( v in unique(span) ) {
+    span_length[span==v] <- max(span_item[span==v])
+}
+
+```
+
+Of cause we can now also calculate the amount of attention by summing up the page access counts per span: 
+
+```{r span_calculation3}
+span_attention       <- ifelse(is.na(span), NA, bt_election$count)
+
+for ( v in unique(span) ) {
+  if ( !is.na(v) )  {
+    span_attention[span==v] <- sum(span_attention[span==v])
+  }
+}
+span_attention_factor <- span_attention / (mean(bt_election$count)*span_length)
+```
+
+
+In the end we have got span information for every single count:
+
+```{r span_presentation}
+spans <- data.frame( date=bt_election$date, 
+                     count=bt_election$count, 
+                     count_big, 
+                     span, 
+                     span_item, 
+                     span_length, 
+                     span_attention, 
+                     span_attention_mean=span_attention/span_length)
+spans[520:532, ] 
+```
+
+
+With span based data we can now have plots that are more pronounced and less noisy. 
+
+```{r span_plot1, fig.width=15}
+plot(spans$date, spans$span_attention_mean,
+     type="l", ylab="average counts per day", xlab="date", ylim=c(0,15000))
+abline(h=c(0,1),col="grey")
+```
+
+Demanding that only spans with length of two and more should be plotted and disregarding zero counts altogether frees us from even more noise.
+
+```{r span_plot2, fig.width=15}
+iffer <- span_length > 1 & spans$count > 0
+plot(spans$date[iffer], spans$span_attention_mean[iffer],
+     type="l", ylab="average counts per day", xlab="date", ylim=c(0,15000))
+abline(h=c(0,1),col="grey")
+```
+
+
+If we prefer a data set using spans as unit we can simply aggregate the information gathered so far. 
+
+```{r span_aggregation}
+range2 <- function(x) max(x) - min(x) +1
+span_data <- 
+  data.frame(  
+  span        = aggregate(spans$count,     by=list(span=span), FUN=mean)$span,
+  start       = aggregate(spans$date,      by=list(span=span), FUN=min)$x,
+  end         = aggregate(spans$date,      by=list(span=span), FUN=max)$x,
+  length      = aggregate(spans$date,      by=list(span=span), FUN=range2)$x,
+  count_big   = aggregate(spans$count_big, by=list(span=span), FUN=min)$x,
+  count_total = aggregate(spans$count,     by=list(span=span), FUN=sum)$x,
+  count_mean  = aggregate(spans$count,     by=list(span=span), FUN=mean)$x
+  )
+span_data$count_factor <- span_data$count_mean / mean(bt_election$count)
+```
+
+Now we can e.g. easily answer the question how long the heighten attention around elections lasts and how much higher the public attention is within this period:
+
+```{r span_length}
+span_data[  span_data$length > 10 &
+            span_data$count_big==T, ]
+```
+
+
+According to our measurement, high public attention around election date sums up to spans of approximately one month length and a level of attention that is seven up to eight times higher than without any election nearby. 
+
+
+
+## Conclusion
+
+In the above presented analyses we have sketched out how analysis of public attention with help of the wikipediatrend package can be conducted. The main strategy pursued was to aggregate daily counts into attention spans to be able to derive statements about attention span lengths as well as about the amount of attention raised during those periods compared to what happens in normal times. As a side effect aggregation the level of noise is diminished and attention spans get more pronounced within visualizations. 
+
+It has to be noted however that full fledged analysis have to take into account that the data derived from [stats.grok.se](http://stats.grok.se/) via the [wikipediatrend](http://cran.r-project.org/web/packages/wikipediatrend/index.html) package might very well entail measurement errors ([e.g. see here](http://stats.grok.se/about)). For those much more effort has to be put in handling possible erroneous values. 
+
+
+
+## Credits
+
+As far as I know we have to thank Domas Mituzas and User:Henrik for the API provided at [stats.grok.se](http://stats.grok.se/) -- [see here](http://stats.grok.se/about). 
+
+
+
+
+
+
+
+
+
+
+

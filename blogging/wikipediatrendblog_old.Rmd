@@ -1,0 +1,181 @@
+---
+title: "Introducing to Public Attention Analytics with Wikipediatrend"
+author: "Peter Meißner"
+date: '2014-11-25'
+output:
+  html_document:
+    keep_md: yes
+  pdf_document:
+    keep_tex: yes
+---
+
+```{r set-options, echo=FALSE, cache=FALSE}
+options(width = 160)
+```
+
+
+# A case study of public attention on elections
+
+
+Within the last months two things happened: 
+First, I dived into Hadley Wickham's online book on [how to write R packages](http://r-pkgs.had.co.nz/). 
+Second, I **re**discovered [stats.grok.se](http://stats.grok.se/) which provides an API to retrieve page access statistics on [Wikipedia](http://www.wikipedia.org/) articles. In combination these two developments led me to writing [wikipediatrend](https://github.com/petermeissner/wikipediatrend) an R package that allows for very easy gathering of page access statistics of any [Wikipedia](http://www.wikipedia.org/) article written since late 2007. 
+
+While the [README](https://github.com/petermeissner/wikipediatrend/blob/master/README.md) accompanying wikipediatrend's [GitHub repository](https://github.com/petermeissner/wikipediatrend) already introduces the package and shows how it is used from a mere technical perspective -- functions and options come with the package and what do they do -- something more tuned to showing the package's potential is still amiss. 
+
+The following *case study* should fill that gap by working on a small research question in the field of elections by shedding light on the public attention of elections and election results. 
+
+
+## Questions
+
+Along the way the following questions will be touched: 
+
+- Do events like elections raise public attention?
+- How to separate event driven attention from general (background/noise) attention?
+- How to identify the span of attention?
+- How to measure the amount of attention?
+
+
+## Data
+
+As the internet is full of analysis of US elections -- for good reasons like large country, money bloated elections, strong political science, long history of data driven election studies and study driven campaigns, strong use of social media, ... -- let us have some other country to serve as an example. Something not too small, not too exotic, but with gravity, something in Europe, maybe with access to the Alps, a country dominant in the great sports of [luge](http://en.wikipedia.org/wiki/Luge), something like ... [Germany](http://de.wikipedia.org/wiki/Bundestagswahl) maybe.  
+
+[Germany](http://de.wikipedia.org/wiki/Bundestagswahl) had two elections at national level since 2007 -- one in September of 2009 and one in September 2013 both resulting in governments led by [Angela Merkel](http://en.wikipedia.org/wiki/Angela_Merkel). Checking Wikipedia for elections in Germany we find that there exists an [overview article for all elections to the German Bundestag](http://de.wikipedia.org/wiki/Bundestagswahl) as well as separate articles for each election ([1949](http://de.wikipedia.org/wiki/Bundestagswahl_1949), [1953](http://de.wikipedia.org/wiki/Bundestagswahl_1953), ..., [2009](http://de.wikipedia.org/wiki/Bundestagswahl_2009), [2013](http://de.wikipedia.org/wiki/Bundestagswahl_2013) ). For the sake of simplicity we only use the general overview article. 
+
+
+## Analysis
+
+In a first step we load the necessary packages to be used throughout the analysis -- the wikipediatrend package. 
+
+```{r loading_packages, , message=FALSE, warning=FALSE}
+require(wikipediatrend)
+require(MASS)
+```
+
+Next, we download the data (with `page = "Bundestagswahl"`) and save it into `bt_election`. Furthermore, we specify `2007` as `from` date, `de` for the language flavor of Wikipedia, `friendly = T` to ensure automatic saving and reuse of downloaded data as well as `userAgent = T` to tell the server that the data is requested by an R user with wikipediatrend package: <code>`r paste("wikipediatrend running on: ", R.version$platform, ", ", R.version$version.string)`</code>.
+
+```{r getting_data, message=FALSE, warning=FALSE, cache=TRUE}
+bt_election <- wp_trend(  page      = "Bundestagswahl", 
+                          from      = "2007-01-01", 
+                          lang      = "de", 
+                          friendly  = T,
+                          userAgent = T)
+bt_election <- bt_election[ order(bt_election$date), ]
+bt_election[55:60, ]
+dim(bt_election)
+summary(bt_election$date)
+```
+
+
+While at this point we could go forth and simply plot the daily access statistics let us have a little detour and put a little bit more science into the data. When researching puplic attention in relation to events we have to establish a baseline to compare our results to. What is event-driven attention and what is general, solid and every-day interest that has nothing to to with the event? When would we say that there is something going on and when are things simple noise or due to other factors that have nothing to to with the event of interest -- in our case elections? 
+
+Our strategy will be the following: To establish a baseline we build a model of our data that incorporates (all) *relevant* factors that might systematically influence daily access counts but our event. We will use a negative-binomial-regression due to the nature of our dependent variable (positive integers with overdispersion) and from the model estimate we can use the residuals to separate (according to the model) unlikely from normal observations. Looking at the data one can observe that during the course of the week the amount of page views varies systematically so our simple baseline model will incorporate an estimate for each day of the week while other systematic factors are not in sight - at the moment. 
+
+En détail: (1) We generate another variable (`wday`) that captures the day of the week. (2) We estimate a model for daily page access counts with `glm.nb(...)`. (3) We extract the models' residuals and define that everything above the 95% quantile is suspicious and should be treated as abnormal data that might need further explanation -- that we hope to give in form of higher public attention due to the election event. Last but not least we (5) create another variable that maps colors to abnormal (<font style="color:red">red</font>) and normal (<font style="color:black">black</font>) observations. 
+
+
+```{r significant_data}
+wday            <- factor(wp_wday(bt_election$date))
+count_model     <- glm.nb(count ~ wday, data=bt_election)
+count_model_res <- count_model$residuals
+count_big       <- count_model_res > quantile(count_model_res, 0.95)
+count_big_col   <- ifelse(count_sig, "red", "#008888")
+```
+
+
+Now that we have sorted our observations into unsuspicious-normal and suspiciously-high values we can use this information to enrich the plot that we have postboned until now. 
+
+The following plot visualizes page access counts for the Wikipedia article *Bundestagswahl* from the German Wikipedia on a daily basis with red bars representing unusual high values and black bars representing quite normal. The grey triangles pointing at the bars from above mark the two election dates -- 27th of September in 2009 and 22nd of September in 2013 -- that occured during the time span under observation. 
+
+```{r plotting_data, fig.width=15}
+plot(bt_election, type="h", col=count_sig_col, ylim=c(-1000,40000))
+abline(h=seq(0,40000,5000), col=rgb(0,0,0,0.1))
+arrows( x0  = as.numeric(c(wp_date("2013-09-22"),wp_date("2009-09-27"))),
+        x1  = as.numeric(c(wp_date("2013-09-22"),wp_date("2009-09-27"))),
+        y0  = 40000, y1  = 39500, 
+        lwd = 3, col=rgb(0.5,0.5,0.5))
+legend(x        = "topleft", 
+       col      = c("red", "#008888"), 
+       legend   = c("upper 5% quantile",
+                    "lower 95% quantile"), 
+       lwd      = 1)
+```
+
+
+From the grafics we see, that indeed puplic attention 'significantly' peaks around election dates. 
+
+In a next step we try to find out how long these above-normal attention spans last. Therefore we cycle through all counts in orderly manner determined by date. If a count is unusually high we start a span, give it a number and number its cosecutive items
+
+
+```{r span_calculation1}
+span              <- rep(NA, length(count_sig))
+span_item         <- rep( 0, length(count_sig))
+span_counter      <- 0
+span_item_counter <- 0
+
+for ( i in seq_along(bt_election$date) ) {
+  is_new_span <- count_sig[i] & !count_sig[i-1]
+  is_new_span <- ifelse(length(is_new_span)==0               , F, is_new_span)
+  is_new_span <- ifelse(length(is_new_span)==0 & count_sig[i], T, is_new_span)
+  is_span     <- count_sig[i]
+  if ( is_new_span  ){
+    span_counter  <- span_counter + 1 
+    span_lcounter <- 0
+  }
+  if ( is_span ) {
+    span_item_counter  <- span_item_counter +1 
+    span_item[i]       <- span_item_counter
+    span[i]            <- span_counter
+  }else{
+    span[i]           <- 0
+    span_item_counter <- 0
+  }
+}
+span[span==0] <- NA
+```
+
+In a next step we cycle through all spans and look for their length.
+
+```{r span_calculation2}
+span_length       <- 0
+
+for ( v in unique(span) ) {
+    span_length[span==v] <- max(span_item[span==v])
+}
+
+```
+
+Of cause we can now also calculate the amount of attention by summing up the page access counts per span: 
+
+```{r span_calculation3}
+span_attention       <- ifelse(is.na(span), NA, bt_election$count)
+
+for ( v in unique(span) ) {
+  if ( !is.na(v) )  {
+    span_attention[span==v] <- sum(span_attention[span==v])
+  }
+}
+
+```
+
+
+```{r span_presentation}
+spans <- data.frame(date=bt_election$date, count=bt_election$count, count_sig, span, span_item, span_length, span_attention)
+spans[520:532, ] 
+```
+
+## Discussion
+
+
+
+
+
+
+
+
+
+
+
+
+
+

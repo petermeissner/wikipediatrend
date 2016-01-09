@@ -13,3 +13,4 @@ autotest.Rexec
 test_coverage
 coverage_report.html
 appveyor.yml
+blogging/

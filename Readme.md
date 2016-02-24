@@ -8,7 +8,7 @@ Peter Meißner
 
 # Last Update
 
-2016-01-09
+2016-02-24
 
 
 
@@ -73,7 +73,7 @@ Downloads from <a href='http://cran.rstudio.com/'>CRAN.RStudio</a>&nbsp;&nbsp;&n
 
 # Meta ([cranlogs](https://github.com/metacran/cranlogs)) wikipediatrend
 
-![](Readme_files/figure-html/unnamed-chunk-3-1.png) 
+![](Readme_files/figure-html/unnamed-chunk-3-1.png)
 
 
 
@@ -171,7 +171,7 @@ head(wp)
 
 ## plotting data
 
-![](Readme_files/figure-html/unnamed-chunk-9-1.png) 
+![](Readme_files/figure-html/unnamed-chunk-9-1.png)
 
 
 ## other languages
@@ -185,16 +185,17 @@ wp_linked_pages("Hitsche", lang="de")
 
 ```
 ##    page             lang   title           
-## 1  Schame           bar    Schame          
-## 2  Reposapeus       ca     Reposapeus      
-## 3  Footstool        en     Footstool       
-## 4  Reposapi%C3% ... es     Reposapiés      
-## 5  %D8%B2%DB%8C ... fa     زیرپایی         
-## 6  Pouf             fr     Pouf            
-## 7  Skabelo          io     Skabelo         
-## 8  Voetenb%C3%A ... nds-NL Voetenbänksi ...
-## 9  Fotskammel       nn     Fotskammel      
-## 10 Podn%C3%B3%C ... pl     Podnóżek
+## 1  Category:Foo ... en     Category:Foo ...
+## 2  Schame           bar    Schame          
+## 3  Reposapeus       ca     Reposapeus      
+## 4  Footstool        en     Footstool       
+## 5  Reposapi%C3% ... es     Reposapiés      
+## 6  %D8%B2%DB%8C ... fa     زیرپایی         
+## 7  Pouf             fr     Pouf            
+## 8  Skabelo          io     Skabelo         
+## 9  Voetenb%C3%A ... nds-NL Voetenbänksi ...
+## 10 Fotskammel       nn     Fotskammel      
+## 11 Podn%C3%B3%C ... pl     Podnóżek
 ```
 
 

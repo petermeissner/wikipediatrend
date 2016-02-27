@@ -1,6 +1,14 @@
 NEWS wikipediatrend 
 ==========================================================================
 
+version 1.1.9 // 2016-02-29 ... 
+--------------------------------------------------------------------------
+
+* BUGFIX
+
+- wp_linked_pages() would sometimes return links that do not link to wikipedia pages but to other projects - that has been fixed. 
+
+
 version 1.1.8 // 2015-10-11 ... 
 --------------------------------------------------------------------------
 

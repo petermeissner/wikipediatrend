@@ -51,43 +51,13 @@ wp_trend <- function( page ,
                       from        = prev_month_start(), 
                       to          = prev_month_end(),
                       lang        = "en", 
-                      file        = "", 
-                      friendly,
-                      requestFrom,
-                      userAgent
+                      file        = ""
 ){
   # dev # 
   # page="main"; from=prev_month_start(); to=prev_month_end(); lang="en"; file=""
   # page="main"; from=prev_month_start(); to=prev_month_end(); lang="en"; file="test.csv"
   # page="pegida"; from=prev_month_start(); to=Sys.Date(); lang="de"; file=""
   # deprecation
-  if( !missing("requestFrom") ) 
-    message("Option 'requestFrom' is deprecated and will cause errors 
-            in futuere versions of the wp_trend() function. Please read 
-            the package vignette and/or README to learn about the new
-            set of options.
-            
-            Check wp_http_header() to know which information are send to 
-            stats.grok.se (R and package versions)
-            ")
-  if( !missing("friendly") ) 
-    message("Option 'friendly' is deprecated and will cause errors 
-            in futuere versions of the wp_trend() function. Please read 
-            the package vignette and/or README to learn about the new
-            set of options.
-            
-            The package now is friendly by default.
-            ")
-  if( !missing("userAgent") ) 
-    message("Option 'userAgent' is deprecated and will cause errors 
-            in futuere versions of the wp_trend() function. Please read 
-            the package vignette and/or README to learn about the new
-            set of options.
-            
-            Check wp_http_header() to know which information are send to 
-            stats.grok.se (R and package versions)
-            ")
-
   old_cache_file <- wp_cache_file()
                           
   # input check

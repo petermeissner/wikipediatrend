@@ -30,9 +30,6 @@
 #'   afterwards. If you prefer automatic mirroring of in memory cache and cache 
 #'   on disk 
 #'
-#' @param server which 'server' to use for data gathering. 
-#' This is pretty much a sole developent option allowing to access local pre-downloaded 
-#' files for testing. Might be either "statsgrokse", "dev" or "local".
 #' 
 #'
 #' @examples 

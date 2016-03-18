@@ -1,7 +1,7 @@
 Package: wikipediatrend
-Title: Public Subject Attention via Wikipedia Page Access Statistics
+Title: Public Subject Attention via Wikipedia Page View Statistics
 Version: 1.1.10.900000
-Date: 2015-10-11
+Date: 2016-03-18
 Author: Peter Meissner [aut, cre], R Core Team [ctb]
 Maintainer: Peter Meissner <retep.meissner@gmail.com>
 Description: Public attention is an interesting field of study. The

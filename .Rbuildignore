@@ -7,10 +7,10 @@ cran-comments.md
 Readme_cache
 Readme_files
 README.Rmd
-README.md
+Readme.html
 autotest.r
 autotest.Rexec
 test_coverage
 coverage_report.html
 appveyor.yml
-blogging/
+blogging

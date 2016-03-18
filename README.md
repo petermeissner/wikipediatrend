@@ -73,7 +73,7 @@ Downloads from <a href='http://cran.rstudio.com/'>CRAN.RStudio</a>&nbsp;&nbsp;&n
 
 # Meta ([cranlogs](https://github.com/metacran/cranlogs)) wikipediatrend
 
-![](Readme_files/figure-html/unnamed-chunk-3-1.png)
+![](README_files/figure-html/unnamed-chunk-3-1.png)
 
 
 
@@ -136,11 +136,31 @@ wp <- wp_trend(page = c("Fever","Fieber"),
 ```
 
 ```
-## http://stats.grok.se/json/en/201510/Fever
+## http://stats.grok.se/json/en/201308/Fever
 ```
 
 ```
-## http://stats.grok.se/json/de/201510/Fieber
+## http://stats.grok.se/json/en/201309/Fever
+```
+
+```
+## http://stats.grok.se/json/en/201310/Fever
+```
+
+```
+## http://stats.grok.se/json/de/201308/Fieber
+```
+
+```
+## http://stats.grok.se/json/de/201309/Fieber
+```
+
+```
+## http://stats.grok.se/json/de/201310/Fieber
+```
+
+```
+## http://stats.grok.se/json/de/201311/Fieber
 ```
 
 ```r
@@ -158,18 +178,18 @@ head(wp)
 ```
 
 ```
-##   date       count lang page  rank month  title
-## 1 2013-08-26 2993  en   Fever 5014 201308 Fever
-## 2 2013-08-27 3153  en   Fever 5014 201308 Fever
-## 3 2013-08-28 2984  en   Fever 5014 201308 Fever
-## 4 2013-08-19 3229  en   Fever 5014 201308 Fever
-## 5 2013-08-18 2700  en   Fever 5014 201308 Fever
-## 6 2013-08-31 2441  en   Fever 5014 201308 Fever
+##   date       count lang page   rank month  title 
+## 1 2013-08-01  486  de   Fieber 1391 201308 Fieber
+## 2 2013-08-01 2768  en   Fever  5014 201308 Fever 
+## 3 2013-08-02  476  de   Fieber 1391 201308 Fieber
+## 4 2013-08-02 2529  en   Fever  5014 201308 Fever 
+## 5 2013-08-03  429  de   Fieber 1391 201308 Fieber
+## 6 2013-08-03 2113  en   Fever  5014 201308 Fever
 ```
 
 ## plotting data
 
-![](Readme_files/figure-html/unnamed-chunk-9-1.png)
+![](README_files/figure-html/unnamed-chunk-9-1.png)
 
 
 ## other languages

@@ -36,10 +36,6 @@ the old data will not be deleted but instead new data will be added to this
 file! The cache in memory before the function call will be saved and restored 
 afterwards. If you prefer automatic mirroring of in memory cache and cache 
 on disk}
-
-\item{server}{which 'server' to use for data gathering. 
-This is pretty much a sole developent option allowing to access local pre-downloaded 
-files for testing. Might be either "statsgrokse", "dev" or "local".}
 }
 \description{
 Function for getting access statistics for wikipedia pages

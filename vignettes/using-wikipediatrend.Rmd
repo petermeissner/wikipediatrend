@@ -70,7 +70,7 @@ To get further information on the data source (Who? When? How? How good?) there 
 # Installation
 
 
-**stable CRAN version** (https://cran.rstudio.com/web/packages/wikipediatrend/)
+**stable CRAN version** (https://cran.r-project.org/package=wikipediatrend)
 
 ```{r, message=F, eval=FALSE}
 install.packages("wikipediatrend")

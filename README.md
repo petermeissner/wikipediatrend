@@ -44,7 +44,7 @@ Windows build
 Version on CRAN  
 </td> 
 <td>
-<a href="https://cran.r-project.org/web/packages/wikipediatrend/index.html">
+<a href="https://cran.r-project.org/web/packages/package=wikipediatrend">
 <img src="http://www.r-pkg.org/badges/version/wikipediatrend">
 </a>
 </td>
@@ -54,12 +54,12 @@ Version on CRAN
 Version on Github
 </td> 
 <td>
-<b>1.1.10.900000</b>
+<b>1.1.10</b>
 </td>
 </tr>
 <tr>
 <td>
-Downloads from <a href='http://cran.rstudio.com/'>CRAN.RStudio</a>&nbsp;&nbsp;&nbsp;
+Downloads from <a href='https://cran.rstudio.com/'>CRAN.RStudio</a>&nbsp;&nbsp;&nbsp;
 </td>
 <td>
 <img src="http://cranlogs.r-pkg.org/badges/grand-total/wikipediatrend">
@@ -220,7 +220,7 @@ wp_linked_pages("Hitsche", lang="de")
 
 *For a more detailed usage have a look at the vignette accompanying the package. `vignette("using-wikipediatrend", package="wikipediatrend")`*
 
-... or GoTo [CRAN](http://cran.r-project.org/web/packages/wikipediatrend/index.html) or build it from scratch from [Github](https://raw.githubusercontent.com/petermeissner/wikipediatrend/master/vignettes/using-wikipediatrend.Rmd).
+... or GoTo [CRAN](https://cran.r-project.org/package=wikipediatrend) or build it from scratch from [Github](https://raw.githubusercontent.com/petermeissner/wikipediatrend/master/vignettes/using-wikipediatrend.Rmd).
 
 
 

@@ -15,7 +15,6 @@ wp_download_data <- function(urls, wait=1){
         html( 
             urls[i], 
             httr::user_agent(wp_http_header()$`user-agent`)
-            # does not work on linux!? # , handle = h
           ) 
         )
       )

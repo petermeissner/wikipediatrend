@@ -252,8 +252,8 @@ wp_month.default  <- function(timestamp) {
 wp_wday         <- function(timestamp, startmonday=T) UseMethod("wp_wday")
 
 
-#' @describeIn wp_wday
-#'  @export 
+#' @describeIn wp_wday method for POSIXlt
+#' @export 
 #'  
 
 wp_wday.POSIXlt  <- function(timestamp, startmonday=T){
@@ -270,7 +270,7 @@ wp_wday.POSIXlt  <- function(timestamp, startmonday=T){
 
 
 
-#' @describeIn wp_wday
+#' @describeIn wp_wday method for everything coercable by as.POSIXlt 
 #' @export 
 #' 
 

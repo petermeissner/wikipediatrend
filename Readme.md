@@ -8,7 +8,7 @@ Peter Meißner
 
 # Last Update
 
-2016-02-27
+2016-03-18
 
 
 
@@ -54,7 +54,7 @@ Version on CRAN
 Version on Github
 </td> 
 <td>
-<b>1.1.9.900000</b>
+<b>1.1.10.900000</b>
 </td>
 </tr>
 <tr>
@@ -131,18 +131,16 @@ The workhorse of the package is the `wp_trend()` function:
 ```r
 wp <- wp_trend(page = c("Fever","Fieber"), 
                from = "2013-08-01", 
-               to   = prev_month_end(), 
+               to   = "2015-12-31", 
                lang = c("en","de"))
 ```
 
 ```
-## http://stats.grok.se/json/en/201308/Fever
-## http://stats.grok.se/json/en/201309/Fever
-## http://stats.grok.se/json/en/201310/Fever
-## http://stats.grok.se/json/de/201311/Fieber
-## http://stats.grok.se/json/de/201312/Fieber
-## http://stats.grok.se/json/de/201401/Fieber
-## http://stats.grok.se/json/de/201402/Fieber
+## http://stats.grok.se/json/en/201510/Fever
+```
+
+```
+## http://stats.grok.se/json/de/201510/Fieber
 ```
 
 ```r

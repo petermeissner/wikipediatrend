@@ -1,6 +1,3 @@
-library(wikipediatrend)
-
-
 context("wp_check_date_inputs()")
 # ----------------------------------------------------------
 
@@ -38,7 +35,18 @@ context("wp_date()")
 
 date_na   <- c("", "01-01", "2000-01", "2015-02-29")
 date_num  <- -10:10
-date_char <- apply(expand.grid(year=2004:2006, months=1:3, days=1:5),1, paste0, collapse="-")
+library(stringr)
+date_char <- 
+  apply(
+    expand.grid(
+      year   = 2004:2006, 
+      months = str_pad(1:3, 2, "left", "0"), 
+      days   = str_pad(1:5, 2, "left", "0")
+    ),
+    1, 
+    paste0, 
+    collapse="-"
+  )
 
 dates1 <- paste0("2015-03-", 1:32)
 dates2 <- paste0("2015-02-", 1:32)

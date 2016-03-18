@@ -50,4 +50,3 @@ wp_prepare_urls <- function(page, from, to, lang){
   return(urls)
 }
 
-

@@ -12,6 +12,13 @@
 wp_check_date_inputs <- function(from, to){
   from <- as.character(from) 
   to   <- as.character(to)
+  # could it be parsed?
+  if( is.na(wp_date(from)) ){ 
+    stop("from parameter could not be parsed, sure the date exists?") 
+  }
+  if( is.na(wp_date(to  )) ){ 
+    stop("to parameter could not be parsed, sure the date exists?")
+  }
   # from larger than to
   if ( !(wp_date(from) <= wp_date(to)) ) {
     stop("In wp_check_date_inputs: from-date larger than to-date.")

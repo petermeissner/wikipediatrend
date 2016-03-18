@@ -30,18 +30,18 @@
 #'   afterwards. If you prefer automatic mirroring of in memory cache and cache 
 #'   on disk 
 #'
-#' @param friendly deprecated
-#' @param requestFrom deprecated
-#' @param userAgent deprecated
+#' @param server which 'server' to use for data gathering. 
+#' This is pretty much a sole developent option allowing to access local pre-downloaded 
+#' files for testing. Might be either "statsgrokse", "dev" or "local".
 #' 
 #'
 #' @examples 
 #' library(wikipediatrend)
-#' wp_trend(page        = c("Cheese", "K\u00e4se"),
-#'          from        = "2014-11-01", 
-#'          to          = "2014-11-30", 
-#'          lang        = c("en", "de"),
-#'          file        = wp_cache_file()
+#' wp_trend(  page        = c("Cheese", "K\u00e4se"),
+#'            from        = "2014-11-01", 
+#'            to          = "2014-11-30", 
+#'            lang        = c("en", "de"),
+#'            file        = wp_cache_file()
 #'          )
 #'
 #' 
@@ -51,13 +51,15 @@ wp_trend <- function( page ,
                       from        = prev_month_start(), 
                       to          = prev_month_end(),
                       lang        = "en", 
-                      file        = ""
+                      file        = "" 
 ){
   # dev # 
   # page="main"; from=prev_month_start(); to=prev_month_end(); lang="en"; file=""
   # page="main"; from=prev_month_start(); to=prev_month_end(); lang="en"; file="test.csv"
   # page="pegida"; from=prev_month_start(); to=Sys.Date(); lang="de"; file=""
   # deprecation
+  
+  # save current global save file
   old_cache_file <- wp_cache_file()
                           
   # input check
@@ -83,10 +85,13 @@ wp_trend <- function( page ,
   }
    
   # prepare URLs
-  urls <- wp_prepare_urls(page=page, 
-                          from=from, 
-                          to=to, 
-                          lang=lang)
+  urls <- 
+    wp_prepare_urls(
+      page=page, 
+      from=from, 
+      to=to, 
+      lang=lang
+    )
 
   # download data and extract data
   trash <- wp_get_data(urls)
@@ -106,6 +111,10 @@ wp_trend <- function( page ,
         ]
   rownames(res) <- NULL
   class(res) <- c("wp_df", "data.frame")
+  if( any(dim(res))>0 ){
+    res <- 
+      res[order(res$date, res$lang, res$title),]
+  }
   invisible(res)
 }
 

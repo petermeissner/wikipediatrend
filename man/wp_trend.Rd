@@ -5,7 +5,7 @@
 \title{Function for getting access statistics for wikipedia pages}
 \usage{
 wp_trend(page, from = prev_month_start(), to = prev_month_end(),
-  lang = "en", file = "", friendly, requestFrom, userAgent)
+  lang = "en", file = "")
 }
 \arguments{
 \item{page}{The name of the Wikipedia page as to be found in the URL to the 
@@ -37,22 +37,20 @@ file! The cache in memory before the function call will be saved and restored
 afterwards. If you prefer automatic mirroring of in memory cache and cache 
 on disk}
 
-\item{friendly}{deprecated}
-
-\item{requestFrom}{deprecated}
-
-\item{userAgent}{deprecated}
+\item{server}{which 'server' to use for data gathering. 
+This is pretty much a sole developent option allowing to access local pre-downloaded 
+files for testing. Might be either "statsgrokse", "dev" or "local".}
 }
 \description{
 Function for getting access statistics for wikipedia pages
 }
 \examples{
 library(wikipediatrend)
-wp_trend(page        = c("Cheese", "K\\u00e4se"),
-         from        = "2014-11-01", 
-         to          = "2014-11-30", 
-         lang        = c("en", "de"),
-         file        = wp_cache_file()
+wp_trend(  page        = c("Cheese", "K\\u00e4se"),
+           from        = "2014-11-01", 
+           to          = "2014-11-30", 
+           lang        = c("en", "de"),
+           file        = wp_cache_file()
          )
 
 

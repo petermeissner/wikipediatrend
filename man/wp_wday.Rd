@@ -3,11 +3,14 @@
 \name{wp_wday}
 \alias{wp_wday}
 \alias{wp_wday.POSIXlt}
+\alias{wp_wday.default}
 \title{Function to extract the day of the week}
 \usage{
 wp_wday(timestamp, startmonday = T)
 
 \method{wp_wday}{POSIXlt}(timestamp, startmonday = T)
+
+\method{wp_wday}{default}(timestamp, startmonday = T)
 }
 \arguments{
 \item{timestamp}{Some sort of timestamp e.g. of class POSIXlt, POSIXct, Date,
@@ -24,6 +27,8 @@ form of yyyy-mm-dd.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{POSIXlt}: @export
+\item \code{POSIXlt}: method for POSIXlt
+
+\item \code{default}: method for everything coercable by as.POSIXlt
 }}
 

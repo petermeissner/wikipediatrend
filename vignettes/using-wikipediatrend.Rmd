@@ -172,7 +172,7 @@ page_views <-
   wp_trend( 
     page = "Millennium_Development_Goals" ,
     from = "2000-01-01",
-    to   = "2015-11-30"
+    to   = "2010-01-30"
   )
 ```
 

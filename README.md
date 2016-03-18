@@ -44,7 +44,7 @@ Windows build
 Version on CRAN  
 </td> 
 <td>
-<a href="https://cran.r-project.org/web/packages/package=wikipediatrend">
+<a href="https://cran.r-project.org/package=wikipediatrend">
 <img src="http://www.r-pkg.org/badges/version/wikipediatrend">
 </a>
 </td>

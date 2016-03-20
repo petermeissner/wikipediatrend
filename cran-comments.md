@@ -44,7 +44,7 @@ Found the following (possibly) invalid URLs:
 - winbuilder:
     * http://win-builder.r-project.org/7C5LSHCsNmpM/00check.log
     * (OK) for : "devel" 
-    * the one last complaint there was fixed wihtout letting win builder run again
+    * the one last complaint there was fixed without letting winbuilder run again
   
 - Travis Ubuntu (old, release, devel) :
     * https://travis-ci.org/petermeissner/wikipediatrend
@@ -54,7 +54,7 @@ Found the following (possibly) invalid URLs:
   
 - Appveyor Win
     * https://ci.appveyor.com/project/petermeissner/wikipediatrend
-    * (NA) currently braks due to service not worling not properly
+    * (NA) currently braks due to service not working not properly
 
 
 

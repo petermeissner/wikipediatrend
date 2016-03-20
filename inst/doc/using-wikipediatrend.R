@@ -66,7 +66,7 @@ page_views <-
   wp_trend( 
     page = "Millennium_Development_Goals" ,
     from = "2000-01-01",
-    to   = "2010-01-30"
+    to   = "2009-01-30"
   )
 
 ## ---- message=F, warning=FALSE--------------------------------------------------------
@@ -126,7 +126,7 @@ page_views <-
   wp_trend(
     page = titles$page, 
     lang = titles$lang,
-    from = "2014-08-01",
+    from = "2015-06-01",
     to   = "2015-11-30"
   )
 
@@ -149,13 +149,13 @@ ggplot(page_views, aes(x=date, y=count, group=lang, color=lang)) +
 RUN_IT <- require(AnomalyDetection) & require(BreakoutDetection) & F
 
 ## ---- eval=RUN_IT---------------------------------------------------------------------
-#  # install.packages( "AnomalyDetection", repos="http://ghrr.github.io/drat",  type="source")
+#  # install.packages( "AnomalyDetection", repos="https://ghrr.github.io/drat",  type="source")
 #  library(AnomalyDetection)
 #  library(dplyr)
 #  library(ggplot2)
 
 ## ---- eval=RUN_IT---------------------------------------------------------------------
-#  page_views <- wp_trend("Syria", from = "2010-01-01", to="2015-11-30")
+#  page_views <- wp_trend("Syria", from = "2014-01-01", to="2015-11-30")
 #  
 #  page_views_br <-
 #    page_views  %>%
@@ -213,7 +213,7 @@ RUN_IT <- require(AnomalyDetection) & require(BreakoutDetection) & F
 #    filter(page_views$anom==F)
 
 ## ---- eval=RUN_IT---------------------------------------------------------------------
-#  # install.packages(  "BreakoutDetection",   repos="http://ghrr.github.io/drat", type="source")
+#  # install.packages(  "BreakoutDetection",   repos="https://ghrr.github.io/drat", type="source")
 #  library(BreakoutDetection)
 #  library(dplyr)
 #  library(ggplot2)

@@ -59,11 +59,11 @@ If you simply want to browse Wikipedia page view statistics without all that cod
 visit http://stats.grok.se/ and have a look around. 
 
 If non-big data is not an option, get the raw data in their entity at 
-http://dumps.wikimedia.org/other/pagecounts-raw/ . 
+https://dumps.wikimedia.org/other/pagecounts-raw/ . 
 
-If you think days are crude measures of time but seconds might do if need be and info about which article views led to the numbers is useless anyways - go to http://datahub.io/dataset/english-wikipedia-pageviews-by-second. 
+If you think days are crude measures of time but seconds might do if need be and info about which article views led to the numbers is useless anyways - go to https://datahub.io/dataset/english-wikipedia-pageviews-by-second. 
 
-To get further information on the data source (Who? When? How? How good?) there is a Wikipedia article for that: http://en.wikipedia.org/wiki/Wikipedia:Pageview_statistics and another one: http://en.wikipedia.org/wiki/Wikipedia:About_page_view_statistics .
+To get further information on the data source (Who? When? How? How good?) there is a Wikipedia article for that: https://en.wikipedia.org/wiki/Wikipedia:Pageview_statistics and another one: https://en.wikipedia.org/wiki/Wikipedia:About_page_view_statistics .
 
 
 
@@ -142,7 +142,7 @@ The `page` option allows to specify one or more article titles for which data sh
 
 These titles should be in the same format as shown in the address bar of your browser to ensure that the pages are found. 
 If we want to get page views for the United Nations Millennium Development Goals and 
-the article is found here:  *"http://en.wikipedia.org/wiki/Millennium_Development_Goals"* the page title to pass to `wp_trend()` should be *Millennium_Development_Goals* not *Millennium Development Goals* or *Millennium_development_goals* or amy other *'mostly-like-the-original'* variation. 
+the article is found here:  https://en.wikipedia.org/wiki/Millennium_Development_Goals the page title to pass to `wp_trend()` should be *Millennium_Development_Goals* not *Millennium Development Goals* or *Millennium_development_goals* or any other *'mostly-like-the-original'* variation. 
 
 To ease data gathering `wp_trend()` `page` accepts whole vectors of page  titles and will retrieve date for each one after another. 
 
@@ -172,7 +172,7 @@ page_views <-
   wp_trend( 
     page = "Millennium_Development_Goals" ,
     from = "2000-01-01",
-    to   = "2010-01-30"
+    to   = "2009-01-30"
   )
 ```
 
@@ -301,7 +301,7 @@ page_views <-
   wp_trend(
     page = titles$page, 
     lang = titles$lang,
-    from = "2014-08-01",
+    from = "2015-06-01",
     to   = "2015-11-30"
   )
 ```
@@ -343,7 +343,7 @@ RUN_IT <- require(AnomalyDetection) & require(BreakoutDetection) & F
 
 
 ```{r, eval=RUN_IT}
-# install.packages( "AnomalyDetection", repos="http://ghrr.github.io/drat",  type="source")
+# install.packages( "AnomalyDetection", repos="https://ghrr.github.io/drat",  type="source")
 library(AnomalyDetection)
 library(dplyr)
 library(ggplot2)
@@ -354,7 +354,7 @@ have to build a new data frame. It should contain only the date and count variab
 Furthermore, `date` should be named `timestamp` and transformed to type `POSIXct`.
 
 ```{r, eval=RUN_IT}
-page_views <- wp_trend("Syria", from = "2010-01-01", to="2015-11-30")
+page_views <- wp_trend("Syria", from = "2014-01-01", to="2015-11-30")
 
 page_views_br <- 
   page_views  %>% 
@@ -450,7 +450,7 @@ on CRAN but has to be obtained from Github.
 
 
 ```{r, eval=RUN_IT}
-# install.packages(  "BreakoutDetection",   repos="http://ghrr.github.io/drat", type="source")
+# install.packages(  "BreakoutDetection",   repos="https://ghrr.github.io/drat", type="source")
 library(BreakoutDetection)
 library(dplyr)
 library(ggplot2)

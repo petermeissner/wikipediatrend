@@ -25,6 +25,8 @@ Found the following (possibly) invalid URLs:
 
 -> the first URL: 
   - fixed
+  - it reads now: https://cran.r-project.org/package=wikipediatrend
+  - all other http links were upgraded to https - if possible - as well
 
 -> the second URL: 
   - should be left as is
@@ -36,23 +38,24 @@ Found the following (possibly) invalid URLs:
 # ------------------------------------
 
 - Local :
+    * OK  for : "R version 3.2.4 (2016-03-10) / Platform: x86_64-pc-linux-gnu (64-bit) /  Running under: Ubuntu 14.04.4 LTS"
   
-  R version 3.2.4 (2016-03-10)
-  Platform: x86_64-pc-linux-gnu (64-bit)
-  Running under: Ubuntu 14.04.4 LTS
 
-- winbuilder (release, devel) :
-  http://win-builder.r-project.org/KM0W4ZGlaQqu/00check.log
+- winbuilder:
+    * http://win-builder.r-project.org/7C5LSHCsNmpM/00check.log
+    * (OK) for : "devel" 
+    * the one last complaint there was fixed wihtout letting win builder run again
   
 - Travis Ubuntu (old, release, devel) :
-  https://travis-ci.org/petermeissner/wikipediatrend
+    * https://travis-ci.org/petermeissner/wikipediatrend
+    * OK  for : "old"
+    * OK  for : "release"
+    * OK  for : "devel"
   
 - Appveyor Win
-  https://ci.appveyor.com/project/petermeissner/wikipediatrend
+    * https://ci.appveyor.com/project/petermeissner/wikipediatrend
+    * (NA) currently braks due to service not worling not properly
 
-- check status: 
-    - checks succeded without Errors and Warnings for most builds
-    - one Note on Windows builds informed that qpdf was missing to check PDF size
-    - on local Ubuntu build I get "LaTeX errors when creating PDF version." warning but not on other builds ... I am not sure what is the problem here
+
 
 

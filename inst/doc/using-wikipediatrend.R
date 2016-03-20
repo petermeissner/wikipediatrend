@@ -1,5 +1,6 @@
-## ----general options, include=FALSE-----------------------------------------------------
-  options("width"=90)
+## ----general options, include=FALSE---------------------------------------------------
+  options("width"=88)
+  options("width.cutoff"=88)
   # default line color in ggplot graphics
     library(ggplot2)
     update_geom_defaults("line",   list(colour = "steelblue"))
@@ -16,21 +17,27 @@
       )
     #}
 
-## ---- message=F, eval=FALSE-------------------------------------------------------------
+## ---- message=F, eval=FALSE-----------------------------------------------------------
 #  install.packages("wikipediatrend")
 
-## ---- message=F, eval=FALSE-------------------------------------------------------------
+## ---- message=F, eval=FALSE-----------------------------------------------------------
 #  devtools::install_github("petermeissner/wikipediatrend")
 
-## ---- message=F-------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------
 library(wikipediatrend)
 
-## ---- message=F-------------------------------------------------------------------------
-page_views <- wp_trend("main_page")
+## ---- message=F-----------------------------------------------------------------------
+page_views <- wp_trend("main_page", from = "2015-10-01", to = "2015-11-30")
     
 page_views
 
-## ---- message=F-------------------------------------------------------------------------
+## ---- message=F-----------------------------------------------------------------------
+plot(
+  page_views[, c("date","count")], 
+  type="b"
+)
+
+## ---- message=F-----------------------------------------------------------------------
 library(ggplot2)
 
 ggplot(page_views, aes(x=date, y=count)) + 
@@ -40,27 +47,29 @@ ggplot(page_views, aes(x=date, y=count)) +
   label= paste(seq(5,50,5),"M") ) +
   theme_bw()
 
-## ---- message=F-------------------------------------------------------------------------
+## ---- message=F-----------------------------------------------------------------------
 page_views <- 
   wp_trend( 
-    page = c( "Millennium_Development_Goals", "Climate_Change") 
+    page = c( "Millennium_Development_Goals", "Climate_Change"), 
+    from = "2015-01-01",
+    to   = "2015-01-30"
   )
 
-## ---- message=F-------------------------------------------------------------------------
+## ---- message=F-----------------------------------------------------------------------
 library(ggplot2)
 
 ggplot(page_views, aes(x=date, y=count, group=page, color=page)) + 
   geom_line(size=1.5) + theme_bw()
 
-## ---- message=F-------------------------------------------------------------------------
+## ---- message=F-----------------------------------------------------------------------
 page_views <- 
   wp_trend( 
     page = "Millennium_Development_Goals" ,
     from = "2000-01-01",
-    to   = prev_month_end()
+    to   = "2010-01-30"
   )
 
-## ---- message=F, warning=FALSE----------------------------------------------------------
+## ---- message=F, warning=FALSE--------------------------------------------------------
 library(ggplot2)
 
 ggplot(page_views, aes(x=date, y=count, color=wp_year(date))) + 
@@ -68,15 +77,16 @@ ggplot(page_views, aes(x=date, y=count, color=wp_year(date))) +
   stat_smooth(method = "lm", formula = y ~ poly(x, 22), color="#CD0000a0", size=1.2) +
   theme_bw() 
 
-## ---- message=F-------------------------------------------------------------------------
+## ---- message=F-----------------------------------------------------------------------
 page_views <- 
   wp_trend( 
     page = c("Objetivos_de_Desarrollo_del_Milenio", "Millennium_Development_Goals") ,
     lang = c("es", "en"),
-    from = Sys.Date()-100
+    from = "2015-01-01",
+    to   = "2015-04-30"
   )
 
-## ---- message=F-------------------------------------------------------------------------
+## ---- message=F-----------------------------------------------------------------------
 library(ggplot2)
 
 ggplot(page_views, aes(x=date, y=count, group=lang, color=lang, fill=lang)) + 
@@ -84,46 +94,43 @@ ggplot(page_views, aes(x=date, y=count, group=lang, color=lang, fill=lang)) +
   geom_point() +
   theme_bw() 
 
-## ---- message=FALSE---------------------------------------------------------------------
-wp_trend("Cheese", file="cheeeeese.csv")
-wp_trend("K\u00e4se", lang="de", file="cheeeeese.csv")
+## ---- message=FALSE-------------------------------------------------------------------
+wp_trend("Cheese", file="cheeeeese.csv", from = "2015-01-01", to="2015-01-30")
+wp_trend("K\u00e4se", lang="de", file="cheeeeese.csv", from = "2015-01-01", to="2015-01-30")
 
 cheeeeeese <- wp_load( file="cheeeeese.csv" )
 cheeeeeese
 
-## ---- include=FALSE---------------------------------------------------------------------
+## ---- include=FALSE-------------------------------------------------------------------
 file.remove("cheeeeese.csv")
 
-## ---------------------------------------------------------------------------------------
-wp_trend("Cheese")
-wp_trend("Cheese")
+## -------------------------------------------------------------------------------------
+wp_trend("Cheese", from = "2015-01-01", to = "2015-01-30")
 
-## ---------------------------------------------------------------------------------------
-wp_trend("Cheese", from = Sys.Date()-60)
-
-## ---------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------
 wp_get_cache()
 
-## ---- eval=FALSE------------------------------------------------------------------------
+## ---- eval=FALSE----------------------------------------------------------------------
 #  wp_set_cache_file( file = "myCache.csv" )
 
-## ---- eval=FALSE------------------------------------------------------------------------
+## ---- eval=FALSE----------------------------------------------------------------------
 #  wp_set_cache_file( Sys.getenv("WP_CACHE_FILE") )
 
-## ---- message=F-------------------------------------------------------------------------
+## ---- message=F-----------------------------------------------------------------------
 titles <- wp_linked_pages("Islamic_State_of_Iraq_and_the_Levant", "en")
-titles <- titles[titles$lang %in% c("de", "es", "ar", "ru","zh-min-nan"),]
+titles <- titles[titles$lang %in% c("de", "es", "ar", "ru"),]
 titles 
 
-## ---- message=F-------------------------------------------------------------------------
+## ---- message=F-----------------------------------------------------------------------
 page_views <- 
   wp_trend(
     page = titles$page, 
     lang = titles$lang,
-    from = "2014-08-01"
+    from = "2014-08-01",
+    to   = "2015-11-30"
   )
 
-## ---- message=F-------------------------------------------------------------------------
+## ---- message=F-----------------------------------------------------------------------
 library(ggplot2)
 
 for(i in unique(page_views$lang) ){
@@ -138,17 +145,17 @@ ggplot(page_views, aes(x=date, y=count, group=lang, color=lang)) +
   scale_colour_brewer(palette="Set1") + 
   guides(colour = guide_legend(override.aes = list(alpha = 1))) 
 
-## ---------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------
 RUN_IT <- require(AnomalyDetection) & require(BreakoutDetection) & F
 
-## ---- eval=RUN_IT-----------------------------------------------------------------------
+## ---- eval=RUN_IT---------------------------------------------------------------------
 #  # install.packages( "AnomalyDetection", repos="http://ghrr.github.io/drat",  type="source")
 #  library(AnomalyDetection)
 #  library(dplyr)
 #  library(ggplot2)
 
-## ---- eval=RUN_IT-----------------------------------------------------------------------
-#  page_views <- wp_trend("Syria", from = "2010-01-01")
+## ---- eval=RUN_IT---------------------------------------------------------------------
+#  page_views <- wp_trend("Syria", from = "2010-01-01", to="2015-11-30")
 #  
 #  page_views_br <-
 #    page_views  %>%
@@ -158,7 +165,7 @@ RUN_IT <- require(AnomalyDetection) & require(BreakoutDetection) & F
 #    as.data.frame() %>%
 #    mutate(timestamp = as.POSIXct(timestamp))
 
-## ---- eval=RUN_IT-----------------------------------------------------------------------
+## ---- eval=RUN_IT---------------------------------------------------------------------
 #  res <-
 #  AnomalyDetectionTs(
 #    x         = page_views_br,
@@ -172,7 +179,7 @@ RUN_IT <- require(AnomalyDetection) & require(BreakoutDetection) & F
 #  
 #  head(res)
 
-## ---- eval=RUN_IT-----------------------------------------------------------------------
+## ---- eval=RUN_IT---------------------------------------------------------------------
 #  page_views <-
 #    page_views  %>%
 #    mutate(normal = !(page_views$date %in% res$timestamp))  %>%
@@ -180,7 +187,7 @@ RUN_IT <- require(AnomalyDetection) & require(BreakoutDetection) & F
 #  
 #  class(page_views) <- c("wp_df", "data.frame")
 
-## ---- message=FALSE, eval=RUN_IT--------------------------------------------------------
+## ---- message=FALSE, eval=RUN_IT------------------------------------------------------
 #  (
 #    p <-
 #      ggplot( data=page_views, aes(x=date, y=count) ) +
@@ -189,13 +196,13 @@ RUN_IT <- require(AnomalyDetection) & require(BreakoutDetection) & F
 #        theme_bw()
 #  )
 
-## ---- message=FALSE, eval=RUN_IT--------------------------------------------------------
+## ---- message=FALSE, eval=RUN_IT------------------------------------------------------
 #  p +
 #    geom_line(stat = "smooth", size=2, color="red2", alpha=0.7) +
 #    geom_line(data=filter(page_views, anom==F),
 #    stat = "smooth", size=2, color="dodgerblue4", alpha=0.5)
 
-## ---- eval=RUN_IT-----------------------------------------------------------------------
+## ---- eval=RUN_IT---------------------------------------------------------------------
 #  page_views_clean <-
 #    page_views  %>%
 #    filter(anom==F)  %>%
@@ -205,14 +212,14 @@ RUN_IT <- require(AnomalyDetection) & require(BreakoutDetection) & F
 #    page_views_br  %>%
 #    filter(page_views$anom==F)
 
-## ---- eval=RUN_IT-----------------------------------------------------------------------
+## ---- eval=RUN_IT---------------------------------------------------------------------
 #  # install.packages(  "BreakoutDetection",   repos="http://ghrr.github.io/drat", type="source")
 #  library(BreakoutDetection)
 #  library(dplyr)
 #  library(ggplot2)
 #  library(magrittr)
 
-## ---- eval=RUN_IT-----------------------------------------------------------------------
+## ---- eval=RUN_IT---------------------------------------------------------------------
 #  br <-
 #    breakout(
 #      page_views_br_clean,
@@ -223,12 +230,12 @@ RUN_IT <- require(AnomalyDetection) & require(BreakoutDetection) & F
 #    )
 #  br
 
-## ---- eval=RUN_IT-----------------------------------------------------------------------
+## ---- eval=RUN_IT---------------------------------------------------------------------
 #  breaks <- page_views_clean[br$loc,]
 #  breaks
 #  
 
-## ---- eval=RUN_IT-----------------------------------------------------------------------
+## ---- eval=RUN_IT---------------------------------------------------------------------
 #  page_views_clean$span <- 0
 #  for (d in breaks$date ) {
 #    page_views_clean$span[ page_views_clean$date > d ] %<>% add(1)
@@ -255,7 +262,7 @@ RUN_IT <- require(AnomalyDetection) & require(BreakoutDetection) & F
 #    )
 #  spans
 
-## ---- message=FALSE, eval=RUN_IT--------------------------------------------------------
+## ---- message=FALSE, eval=RUN_IT------------------------------------------------------
 #  ggplot(page_views_clean, aes(x=date, y=count) ) +
 #    geom_line(alpha=0.5, color="steelblue") +
 #    geom_line(aes(y=mcount), alpha=0.5, color="red2", size=1.2) +

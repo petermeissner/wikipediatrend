@@ -8,7 +8,7 @@ Peter Meißner
 
 # Last Update
 
-2016-03-23
+2016-03-31
 
 
 
@@ -54,7 +54,7 @@ Version on CRAN
 Version on Github
 </td> 
 <td>
-<b>1.1.9.900000</b>
+<b>1.1.10.90000</b>
 </td>
 </tr>
 <tr>
@@ -178,13 +178,13 @@ head(wp)
 ```
 
 ```
-##   date       count lang page  rank month  title
-## 1 2013-08-26 2993  en   Fever 5014 201308 Fever
-## 2 2013-08-27 3153  en   Fever 5014 201308 Fever
-## 3 2013-08-28 2984  en   Fever 5014 201308 Fever
-## 4 2013-08-19 3229  en   Fever 5014 201308 Fever
-## 5 2013-08-18 2700  en   Fever 5014 201308 Fever
-## 6 2013-08-31 2441  en   Fever 5014 201308 Fever
+##   date       count lang page   rank month  title 
+## 1 2013-08-01  486  de   Fieber 1391 201308 Fieber
+## 2 2013-08-01 2768  en   Fever  5014 201308 Fever 
+## 3 2013-08-02  476  de   Fieber 1391 201308 Fieber
+## 4 2013-08-02 2529  en   Fever  5014 201308 Fever 
+## 5 2013-08-03  429  de   Fieber 1391 201308 Fieber
+## 6 2013-08-03 2113  en   Fever  5014 201308 Fever
 ```
 
 ## plotting data

@@ -1,6 +1,6 @@
 Package: wikipediatrend
 Title: Public Subject Attention via Wikipedia Page View Statistics
-Version: 1.1.10.90000
+Version: 1.1.11.90000
 Date: 2016-03-20
 Author: Peter Meissner [aut, cre], R Core Team [ctb]
 Maintainer: Peter Meissner <retep.meissner@gmail.com>
@@ -23,7 +23,8 @@ Imports:
     httr (>= 0.6.1),
     utils,
     xml2 (>= 0.1.2),
-    hellno (>= 0.0.1)
+    hellno (>= 0.0.1), 
+    RColorBrewer
 Suggests:
     testthat,
     knitr,

@@ -105,10 +105,7 @@ page_views
 ... that can easily be turned into a plot ... 
 
 ```{r, message=F}
-plot(
-  page_views[, c("date","count")], 
-  type="b"
-)
+plot(page_views)
 ```
 
 ... or like that ...
@@ -314,15 +311,20 @@ for(i in unique(page_views$lang) ){
   iffer <- page_views$lang==i
   page_views[iffer, ]$count <- scale(page_views[iffer, ]$count)
 }
+```
 
+```{r
 ggplot(page_views, aes(x=date, y=count, group=lang, color=lang)) + 
   geom_line(size=1.2, alpha=0.5) + 
   ylab("standardized count\n(by lang: m=0, var=1)") +
   theme_bw() + 
   scale_colour_brewer(palette="Set1") + 
-  guides(colour = guide_legend(override.aes = list(alpha = 1))) 
+  guides(colour = guide_legend(override.aes = list(alpha = 1))) }
 ```
 
+```{r}
+plot(page_views)
+```
 
 
 

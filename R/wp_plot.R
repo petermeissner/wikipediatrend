@@ -6,7 +6,7 @@ plot.wp_df <- function(wp_df, ...){
   plot(
     wp_df$date, wp_df$count,
     ylab="pageviews per day", xlab="date",
-    ylim=c(0, max(wp_df$count)),
+    ylim=c(floor(min(wp_df$count)), ceiling(max(wp_df$count))),
     pch=19, ..., type = "n"
   )
   wp_df$cat <- paste0(wp_df$title, wp_df$lang)

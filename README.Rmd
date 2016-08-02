@@ -1,4 +1,10 @@
-# wikipediatrend
+---
+title: "wikipediatrend"
+output:
+  html_document:
+    keep_md: yes
+    self_contained: yes
+---
 
 # Author
 
@@ -8,15 +14,32 @@ Peter Meißner
 
 # Last Update
 
-2016-08-02
+`r Sys.Date()`
 
 
-
+```{r,include=FALSE}
+library(wikipediatrend)
+```
 
 
 # Status (current version on Github)
 
-
+```{r, include=FALSE}
+github_version_badge <- 
+  paste0("<b>",
+    sessionInfo()$otherPkgs$wikipediatrend$Version,
+    "</b>"
+  )
+  
+#paste0(
+#  '<a href="https://github.com/petermeissner/wikipediatrend"> <img src="data:image/svg+xml; charset=utf-8;base64,', 
+#  base64enc::base64encode(charToRaw(
+#  paste0(
+#'<svg xmlns="http://www.w3.org/2000/svg" width="170" height="20">\n <linearGradient id="b" x2="0" y2="100%">\n <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>\n <stop offset="1" stop-opacity=".1"/>\n </linearGradient>\n <mask id="a">\n <rect width="170" height="20" rx="3" fill="#fff"/>\n </mask>\n <g mask="url(#a)"><path fill="#555" d="M0 0h70v20H0z"/>\n <path fill="#4c1" d="M70 0h99v20H70z"/>\n <path fill="url(#b)" d="M0 0h170v20H0z"/>\n </g>\n <g fill="#fff" text-anchor="middle"\n font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">\n <text x="36" y="15" fill="#010101" fill-opacity=".3">\n Github\n </text>\n <text x="36" y="14">\n Github\n </text>\n <text x="115.5" y="15" fill="#010101" fill-opacity=".3">\n', sessionInfo()$otherPkgs$wikipediatrend$Version, '</text>\n <text x="115.5" y="14">\n', sessionInfo()$otherPkgs$wikipediatrend$Version, '</text>\n </g>\n </svg>\n'
+#  ))),
+#'">'
+#)
+```
 
 <table>
 <tr>
@@ -54,7 +77,7 @@ Version on CRAN
 Version on Github
 </td> 
 <td>
-<b>1.1.11.90000</b>
+`r github_version_badge`
 </td>
 </tr>
 <tr>
@@ -73,7 +96,59 @@ Downloads from <a href='https://cran.rstudio.com/'>CRAN.RStudio</a>&nbsp;&nbsp;&
 
 # Meta ([cranlogs](https://github.com/metacran/cranlogs)) wikipediatrend
 
-![](README_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+```{r, fig.width=10, echo=FALSE, fig.retina=TRUE, message=FALSE}
+library(cranlogs)
+library(jsonlite)
+library(stringr)
+
+wptrendversions <- 
+  grep(
+    "version \\d{1,3}.\\d{1,3}.\\d{1,3}.*//", 
+    readLines("NEWS"),
+    value = TRUE
+  )
+wptrendversions <- 
+  data.frame(
+    version = str_extract(wptrendversions, "\\d{1,3}.\\d{1,3}.\\d{1,3}"),
+    date = str_extract(wptrendversions, "\\d{4}-\\d{2}-\\d{2}")
+  )
+
+rversions <- fromJSON("http://rversions.r-pkg.org/r-versions")
+
+downloads <- 
+  cran_downloads(
+    package = "wikipediatrend", 
+    from = "2014-09-01", 
+    to = Sys.Date()
+  )[,1:2]
+
+downloads_cum <- 
+  data.frame(
+    date = downloads$date,
+    sum = round(cumsum(downloads$count)/1000,1)
+  )
+downloads_cum <- 
+  downloads_cum[
+    !duplicated(downloads_cum$sum) &
+    downloads_cum$sum %% 1 == 0 , ]
+downloads_cum$date[1] <- "2014-11-07"
+
+plot(downloads, type="l", ylim = c(-40,80))
+text(as.Date(rversions$date),-17,labels = rversions$version, col = "red", srt=0, cex=0.7)
+#segments(x0=as.Date(rversions$date),x1=as.Date(rversions$date),y0=0,y1=10,col="red", lwd=2)
+text(as.Date(wptrendversions$date),c(-23,-27),labels = wptrendversions$version, col = "steelblue", srt=0, cex=0.7)
+#segments(x0=as.Date(wptrendversions$date),x1=as.Date(wptrendversions$date),y0=0,y1=10,col="steelblue",lwd = 2)
+text(downloads_cum$date, -34, downloads_cum$sum, cex=0.7, col = "darkgreen")
+text(as.Date("2014-08-15"),-25,"wp versions", col="steelblue", cex=0.7,pos=4)
+text(as.Date("2014-08-15"),-17,"R versions", col="red", cex=0.7,pos=4)
+text(as.Date("2014-08-15"),-34,"K downloads", col="darkgreen", cex=0.7,pos=4)
+abline(h=c(0),col="black")
+#abline(h=c(-40,-10),col="grey")
+lines(
+  loess.smooth(downloads$date, downloads$count, span = 1/5, degree = 2,
+    family = c("gaussian"), evaluation = 50),
+  col="darkgreen", lwd=2) 
+```
 
 
 
@@ -99,22 +174,19 @@ The wikipediatrend package is designed to make Wikipedia page access statistics 
 # Installation 
 
 A stable version of the package can be found on CRAN and installed via ...
-
-```r
+```{r, eval=FALSE}
 install.packages("wikipediatrend")
 ```
 
 ... while the current developement version can be retrieved by using `install_github()` from the devtools package ... 
 
-
-```r
+```{r, eval=FALSE}
 devtools::install_github("petermeissner/wikipediatrend")
 ```
 
 After loading the package several functions are available.
 
-
-```r
+```{r, error=TRUE, message=FALSE}
 library(wikipediatrend)
 ```
 
@@ -127,43 +199,11 @@ library(wikipediatrend)
 
 The workhorse of the package is the `wp_trend()` function:
 
-
-```r
+```{r, cache=TRUE, error=TRUE, message=c(1:3, 30:33)}
 wp <- wp_trend(page = c("Fever","Fieber"), 
                from = "2013-08-01", 
                to   = "2015-12-31", 
                lang = c("en","de"))
-```
-
-```
-## http://stats.grok.se/json/en/201308/Fever
-```
-
-```
-## http://stats.grok.se/json/en/201309/Fever
-```
-
-```
-## http://stats.grok.se/json/en/201310/Fever
-```
-
-```
-## http://stats.grok.se/json/de/201308/Fieber
-```
-
-```
-## http://stats.grok.se/json/de/201309/Fieber
-```
-
-```
-## http://stats.grok.se/json/de/201310/Fieber
-```
-
-```
-## http://stats.grok.se/json/de/201311/Fieber
-```
-
-```r
 # (... messages shortened)
 ```
 
@@ -172,47 +212,28 @@ wp <- wp_trend(page = c("Fever","Fieber"),
 
 The function's return is a data frame with six variables *date*, *count*, *project*, *title*, *rank*, *month* paralleling the data provided by the stats.grok.se server:
 
-
-```r
+```{r, cache=TRUE, error=TRUE}
 head(wp)
-```
-
-```
-##   date       count lang page   rank month  title 
-## 1 2013-08-01  486  de   Fieber 1391 201308 Fieber
-## 2 2013-08-01 2768  en   Fever  5014 201308 Fever 
-## 3 2013-08-02  476  de   Fieber 1391 201308 Fieber
-## 4 2013-08-02 2529  en   Fever  5014 201308 Fever 
-## 5 2013-08-03  429  de   Fieber 1391 201308 Fieber
-## 6 2013-08-03 2113  en   Fever  5014 201308 Fever
 ```
 
 ## plotting data
 
-![](README_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+```{r, fig.width=10, echo=FALSE, fig.retina=TRUE, message=FALSE}
+library(ggplot2)
+
+ggplot(wp, aes(date, count, group=page, color = page)) + 
+  geom_point() +
+  geom_smooth(method="lm", formula = y ~ poly(x, 20), size=1.5) +
+  theme_bw()
+```
 
 
 ## other languages
 
 Furthermore, wikipediatrend provides a helper function `wp_linked_pages()` which allows to query wikipedia if a particualr article exists in other languages as well: 
 
-
-```r
+```{r}
 wp_linked_pages("Hitsche", lang="de")
-```
-
-```
-##    page             lang   title           
-## 1  Schame           bar    Schame          
-## 2  Reposapeus       ca     Reposapeus      
-## 3  Footstool        en     Footstool       
-## 4  Reposapi%C3% ... es     Reposapiés      
-## 5  %D8%B2%DB%8C ... fa     <U+0632><U+06CC><U+0631><U+067E><U+0627><U+06CC><U+06CC>
-## 6  Pouf             fr     Pouf            
-## 7  Skabelo          io     Skabelo         
-## 8  Voetenb%C3%A ... nds-NL Voetenbänksi ...
-## 9  Fotskammel       nn     Fotskammel      
-## 10 Podn%C3%B3%C ... pl     Podnózek
 ```
 
 

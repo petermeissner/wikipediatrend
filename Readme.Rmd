@@ -21,8 +21,6 @@ library(wikipediatrend)
 ```
 
 
-# Status (current version on Github)
-
 ```{r, include=FALSE}
 github_version_badge <- 
   paste0("<b>",
@@ -40,56 +38,14 @@ github_version_badge <-
 #)
 ```
 
-<table>
-<tr>
-<td> 
-Ubuntu build 
-</td>
-<td> 
+
 <a href="https://travis-ci.org/petermeissner/wikipediatrend">
 <img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master">
-</a>
-</td>
-</tr>
-<tr>
-<td> 
-Windows build
-</td>
-<td> 
-<a href="https://ci.appveyor.com/project/petermeissner/wikipediatrend">
-<img src="http://ci.appveyor.com/api/projects/status/github/petermeissner/wikipediatrend">
-</a>
-</td>
-</tr>
-<tr>
-<td>
-Version on CRAN  
-</td> 
-<td>
 <a href="https://cran.r-project.org/package=wikipediatrend">
 <img src="http://www.r-pkg.org/badges/version/wikipediatrend">
-</a>
-</td>
-</tr>
-<tr>
-<td>
-Version on Github
-</td> 
-<td>
-`r github_version_badge`
-</td>
-</tr>
-<tr>
-<td>
-Downloads from <a href='https://cran.rstudio.com/'>CRAN.RStudio</a>&nbsp;&nbsp;&nbsp;
-</td>
-<td>
 <img src="http://cranlogs.r-pkg.org/badges/grand-total/wikipediatrend">
 <img src="http://cranlogs.r-pkg.org/badges/wikipediatrend">
-</td>
-</tr>
 
-</table>
 
 
 
@@ -177,10 +133,10 @@ A stable version of the package can be found on CRAN and installed via ...
 install.packages("wikipediatrend")
 ```
 
-... while the current developement version can be retrieved by using `install_github()` from the devtools package ... 
+... while the current (stable) developement version can be from [drat]()-repo
 
 ```{r, eval=FALSE}
-devtools::install_github("petermeissner/wikipediatrend")
+install.packages("wikipediatrend", repos = "https://petermeissner.github.io/drat")
 ```
 
 After loading the package several functions are available.

@@ -1,6 +1,15 @@
 NEWS wikipediatrend 
 ==========================================================================
 
+version 1.1.12 // 2016-12-30 ... 
+--------------------------------------------------------------------------
+
+* BUGFIX 
+
+- wp_linked_pages() would fail in case of no links at wikipedia page - now it does not / https://github.com/petermeissner/wikipediatrend/issues/27 
+
+
+
 version 1.1.10 // 2016-03-18 ... 
 --------------------------------------------------------------------------
 

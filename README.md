@@ -6,11 +6,11 @@ Public Subject Attention via Wikipedia Page View Statistics
 
 <a href="https://travis-ci.org/petermeissner/wikipediatrend"> <img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master"> <a/> <a href="https://cran.r-project.org/package=wikipediatrend"> <img src="http://www.r-pkg.org/badges/version/wikipediatrend"> </a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/wikipediatrend"> <img src="http://cranlogs.r-pkg.org/badges/wikipediatrend">
 
-*lines of R code:* 572, *lines of test code:* 240
+*lines of R code:* 586, *lines of test code:* 249
 
 **Version**
 
-1.1.11.90000 ( 2016-05-12 15:29:22 )
+1.1.12.90000 ( 2016-12-30 21:27:45 )
 
 **Description**
 
@@ -40,10 +40,10 @@ Stable version from CRAN:
 install.packages("wikipediatrend")
 ```
 
-Latest (stable) development version from personal R-repository:
+Latest development version from Github:
 
 ``` r
-install.packages("wikipediatrend", repos = "https://petermeissner.github.io/drat")
+devtools::install_github("petermeissner/wikipediatrend")
 ```
 
 Meta ([cranlogs](https://github.com/metacran/cranlogs)) wikipediatrend

@@ -110,10 +110,10 @@ install.packages("wikipediatrend")
 ```
 
 
-Latest (stable) development version from personal R-repository:
+Latest development version from Github:
 
 ```{r, eval=FALSE}
-install.packages("wikipediatrend", repos = "https://petermeissner.github.io/drat")
+devtools::install_github("petermeissner/wikipediatrend")
 ```
 
 

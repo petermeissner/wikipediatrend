@@ -1,50 +1,126 @@
 ---
-title: "wikipediatrend"
-output:
-  html_document:
-    keep_md: yes
+output: github_document
 ---
 
-# Author
-
-Peter Meißner
 
 
+```{r, include=FALSE}
+options("width"=110)
+tmp <- packageDescription( basename(getwd()) )
+```
 
-# Last Update
+```{r, results='asis', echo=FALSE}
+cat("#", tmp$Title)
+```
 
-`r Sys.Date()`
+
+**Status**
+
+
+
+
+<a href="https://travis-ci.org/petermeissner/wikipediatrend">
+<img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master">
+<a/>
+<a href="https://cran.r-project.org/package=wikipediatrend">
+<img src="http://www.r-pkg.org/badges/version/wikipediatrend">
+</a>
+<img src="http://cranlogs.r-pkg.org/badges/grand-total/wikipediatrend">
+<img src="http://cranlogs.r-pkg.org/badges/wikipediatrend">
+
+
+
+
+
+```{r, include=FALSE}
+filelist.R   <- list.files("R", recursive = TRUE, pattern="\\.R$", ignore.case = TRUE, full.names = TRUE)
+filelist.tests   <- list.files("tests", recursive = TRUE, pattern="\\.R$", ignore.case = TRUE, full.names = TRUE)
+filelist.cpp <- list.files("src", recursive = TRUE, pattern="\\.cpp$", ignore.case = TRUE, full.names = TRUE)
+lines.R      <- unlist(lapply(filelist.R, readLines))
+lines.tests  <- unlist(lapply(filelist.tests, readLines))
+lines.cpp    <- unlist(lapply(filelist.cpp, readLines))
+length.R     <- length(grep("(^\\s*$)|(^\\s*#)|(^\\s*//)", lines.R,  value = TRUE, invert = TRUE))
+length.tests <- length(grep("(^\\s*$)|(^\\s*#)|(^\\s*//)", lines.tests,  value = TRUE, invert = TRUE))
+length.cpp   <- length(grep("(^\\s*$)|(^\\s*#)|(^\\s*//)", lines.cpp,  value = TRUE, invert = TRUE))
+```
+
+
+*lines of R code:* `r length.R`, *lines of test code:* `r length.tests`
+
+
+
+**Version**
+
+```{r, include=FALSE}
+source_files <- 
+  grep(
+    "/R/|/src/|/tests/",
+    list.files(recursive = TRUE, full.names = TRUE), 
+    value = TRUE
+  )
+last_change <- 
+  as.character(
+    format(max(file.info(source_files)$mtime), tz="UTC")
+  )
+```
+
+
+```{r, results='asis', echo=FALSE}
+cat(tmp$Version, "(",last_change,")")
+```
+
+**Description**
+
+```{r, results='asis', echo=FALSE}
+cat(tmp$Description)
+```
+
+
+**License**
+
+```{r, results='asis', echo=FALSE}
+cat(tmp$License, "<br>")
+cat(tmp$Author)
+```
+
+
+
+
+**Citation**
+
+
+```{r, results='asis',  eval=FALSE}
+citation("wikipediatrend")
+```
+
+**BibTex for citing**
+
+```{r, eval=FALSE}
+toBibtex(citation("wikipediatrend"))
+```
+
+
+
+**Installation**
+
+Stable version from CRAN:
+
+```{r, eval=FALSE}
+install.packages("wikipediatrend")
+```
+
+
+Latest (stable) development version from personal R-repository:
+
+```{r, eval=FALSE}
+install.packages("wikipediatrend", repos = "https://petermeissner.github.io/drat")
+```
+
 
 
 ```{r,include=FALSE}
 library(wikipediatrend)
 ```
-
-
-```{r, include=FALSE}
-github_version_badge <- 
-  paste0("<b>",
-    sessionInfo()$otherPkgs$wikipediatrend$Version,
-    "</b>"
-  )
-  
-#paste0(
-#  '<a href="https://github.com/petermeissner/wikipediatrend"> <img src="data:image/svg+xml; charset=utf-8;base64,', 
-#  base64enc::base64encode(charToRaw(
-#  paste0(
-#'<svg xmlns="http://www.w3.org/2000/svg" width="170" height="20">\n <linearGradient id="b" x2="0" y2="100%">\n <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>\n <stop offset="1" stop-opacity=".1"/>\n </linearGradient>\n <mask id="a">\n <rect width="170" height="20" rx="3" fill="#fff"/>\n </mask>\n <g mask="url(#a)"><path fill="#555" d="M0 0h70v20H0z"/>\n <path fill="#4c1" d="M70 0h99v20H70z"/>\n <path fill="url(#b)" d="M0 0h170v20H0z"/>\n </g>\n <g fill="#fff" text-anchor="middle"\n font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">\n <text x="36" y="15" fill="#010101" fill-opacity=".3">\n Github\n </text>\n <text x="36" y="14">\n Github\n </text>\n <text x="115.5" y="15" fill="#010101" fill-opacity=".3">\n', sessionInfo()$otherPkgs$wikipediatrend$Version, '</text>\n <text x="115.5" y="14">\n', sessionInfo()$otherPkgs$wikipediatrend$Version, '</text>\n </g>\n </svg>\n'
-#  ))),
-#'">'
-#)
-```
-
-
-<a href="https://travis-ci.org/petermeissner/wikipediatrend">
-<img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master">
-<a href="https://cran.r-project.org/package=wikipediatrend">
-<img src="http://www.r-pkg.org/badges/version/wikipediatrend">
-<img src="http://cranlogs.r-pkg.org/badges/grand-total/wikipediatrend">
-<img src="http://cranlogs.r-pkg.org/badges/wikipediatrend">
 
 
 
@@ -126,28 +202,6 @@ The wikipediatrend package is designed to make Wikipedia page access statistics 
 
 
 
-# Installation 
-
-A stable version of the package can be found on CRAN and installed via ...
-```{r, eval=FALSE}
-install.packages("wikipediatrend")
-```
-
-... while the current (stable) developement version can be from [drat]()-repo
-
-```{r, eval=FALSE}
-install.packages("wikipediatrend", repos = "https://petermeissner.github.io/drat")
-```
-
-After loading the package several functions are available.
-
-```{r, error=TRUE, message=FALSE}
-library(wikipediatrend)
-```
-
-
-
-
 # Usage
 
 ## getting data
@@ -158,7 +212,8 @@ The workhorse of the package is the `wp_trend()` function:
 wp <- wp_trend(page = c("Fever","Fieber"), 
                from = "2013-08-01", 
                to   = "2015-12-31", 
-               lang = c("en","de"))
+               lang = c("en","de"),
+               file = "wp_trend.cache")
 # (... messages shortened)
 ```
 

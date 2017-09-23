@@ -17,6 +17,7 @@ cat("#", tmp$Title)
 **Status**
 
 
+<span style="color:red;">This package does not work at the moment due due a missing data source</span>
 
 
 <a href="https://travis-ci.org/petermeissner/wikipediatrend">
@@ -71,8 +72,9 @@ cat(tmp$Version, "(",last_change,")")
 
 **Description**
 
+
 ```{r, results='asis', echo=FALSE}
-cat(tmp$Description)
+#cat(tmp$Description)
 ```
 
 
@@ -118,183 +120,8 @@ devtools::install_github("petermeissner/wikipediatrend")
 
 
 
-```{r,include=FALSE}
-library(wikipediatrend)
-```
 
-
-
-
-# Meta ([cranlogs](https://github.com/metacran/cranlogs)) wikipediatrend
-
-```{r, fig.width=10, echo=FALSE, fig.retina=TRUE, message=FALSE}
-library(cranlogs)
-library(jsonlite)
-library(stringr)
-
-wptrendversions <- 
-  grep(
-    "version \\d{1,3}.\\d{1,3}.\\d{1,3}.*//", 
-    readLines("NEWS"),
-    value = TRUE
-  )
-wptrendversions <- 
-  data.frame(
-    version = str_extract(wptrendversions, "\\d{1,3}.\\d{1,3}.\\d{1,3}"),
-    date = str_extract(wptrendversions, "\\d{4}-\\d{2}-\\d{2}")
-  )
-
-rversions <- fromJSON("http://rversions.r-pkg.org/r-versions")
-
-downloads <- 
-  cran_downloads(
-    package = "wikipediatrend", 
-    from = "2014-09-01", 
-    to = Sys.Date()
-  )[,1:2]
-
-downloads_cum <- 
-  data.frame(
-    date = downloads$date,
-    sum = round(cumsum(downloads$count)/1000,1)
-  )
-downloads_cum <- 
-  downloads_cum[
-    !duplicated(downloads_cum$sum) &
-    downloads_cum$sum %% 1 == 0 , ]
-downloads_cum$date[1] <- "2014-11-07"
-
-plot(downloads, type="l", ylim = c(-40,80))
-text(as.Date(rversions$date),-17,labels = rversions$version, col = "red", srt=0, cex=0.7)
-#segments(x0=as.Date(rversions$date),x1=as.Date(rversions$date),y0=0,y1=10,col="red", lwd=2)
-text(as.Date(wptrendversions$date),c(-23,-27),labels = wptrendversions$version, col = "steelblue", srt=0, cex=0.7)
-#segments(x0=as.Date(wptrendversions$date),x1=as.Date(wptrendversions$date),y0=0,y1=10,col="steelblue",lwd = 2)
-text(downloads_cum$date, -34, downloads_cum$sum, cex=0.7, col = "darkgreen")
-text(as.Date("2014-08-15"),-25,"wp versions", col="steelblue", cex=0.7,pos=4)
-text(as.Date("2014-08-15"),-17,"R versions", col="red", cex=0.7,pos=4)
-text(as.Date("2014-08-15"),-34,"K downloads", col="darkgreen", cex=0.7,pos=4)
-abline(h=c(0),col="black")
-#abline(h=c(-40,-10),col="grey")
-lines(
-  loess.smooth(downloads$date, downloads$count, span = 1/5, degree = 2,
-    family = c("gaussian"), evaluation = 50),
-  col="darkgreen", lwd=2) 
-```
-
-
-
-
-# Purpose
-
-The wikipediatrend package is designed to make Wikipedia page access statistics data availible in R in a most convenient way. 
-
-*Consequently the package provides* 
-
-- daily page views as data frames 
-- page views for user set time spans
-- page views for multiple articles in one function call
-- page views for articles in different language domains
-- a function to check article titles in other country domains
-- background caching of results to minimize function execution time as well as server burdens
-
-
-
-
-
-
-# Usage
-
-## getting data
-
-The workhorse of the package is the `wp_trend()` function:
-
-```{r, cache=TRUE, error=TRUE, message=c(1:3, 30:33)}
-wp <- wp_trend(page = c("Fever","Fieber"), 
-               from = "2013-08-01", 
-               to   = "2015-12-31", 
-               lang = c("en","de"),
-               file = "wp_trend.cache")
-# (... messages shortened)
-```
-
-
-## glancing data
-
-The function's return is a data frame with six variables *date*, *count*, *project*, *title*, *rank*, *month* paralleling the data provided by the stats.grok.se server:
-
-```{r, cache=TRUE, error=TRUE}
-head(wp)
-```
-
-## plotting data
-
-```{r, fig.width=10, echo=FALSE, fig.retina=TRUE, message=FALSE}
-library(ggplot2)
-
-ggplot(wp, aes(date, count, group=page, color = page)) + 
-  geom_point() +
-  geom_smooth(method="lm", formula = y ~ poly(x, 20), size=1.5) +
-  theme_bw()
-```
-
-
-## other languages
-
-Furthermore, wikipediatrend provides a helper function `wp_linked_pages()` which allows to query wikipedia if a particualr article exists in other languages as well: 
-
-```{r}
-wp_linked_pages("Hitsche", lang="de")
-```
-
-
-# Vignette
-
-*For a more detailed usage have a look at the vignette accompanying the package. `vignette("using-wikipediatrend", package="wikipediatrend")`*
-
-... or GoTo [CRAN](https://cran.r-project.org/package=wikipediatrend) or build it from scratch from [Github](https://raw.githubusercontent.com/petermeissner/wikipediatrend/master/vignettes/using-wikipediatrend.Rmd).
-
-
-
-# Some examples for using page view statistics in general 
-
-- politan.ch (2015-10-04): *Welche Ständeratskandidaturen interessieren?.* politan.ch. http://www.politan.ch/welche-standeratskandidaturen-interessieren/
-
-- politan.ch (2015-05-25): *Wenn Klicks Stimmen wären.* politan.ch. http://www.politan.ch/wenn-klicks-stimmen-waren/
-
-- Munzert, Simon (2015): *Using Wikipedia Page View Statistics to Measure Issue Salience.* WEBDATANET CONFERENCE 2015. http://conference.webdatanet.eu/uploads/submission/full_paper/35/munzert-wikipedia-webdatanet.pdf
-
-- Wilkerson, Bill (2015): *Post-Republican debate on Wikipedia follow-up: before and after public interest in the candidates.* http://www.wrwilkerson.com/ .
-http://www.wrwilkerson.com/blog/2015/8/15/post-republican-debate-on-wikipedia-follow-up-before-and-after-public-interest-in-the-candidates
-
-- Taha Yasseri and Jonathan Bright (2015): *Predicting elections from online information flows: towards theoretically informed models*. http://arxiv.org/abs/1505.01818
-
-- Mellon, Jonathan (2014) *Internet Search Data and Issue Salience: The Properties of Google Trends as a Measure of Issue Salience* Journal of Elections, Public Opinion and Parties 24(1):45-72.
-http://www.tandfonline.com/doi/abs/10.1080/17457289.2013.846346 
-
-- Yla Tausczik, Kate Faasse, James W. Pennebaker, Keith J. Petrie (2012): *Public Anxiety and Information Seeking Following the H1N1 Outbreak: Blogs, Newspaper Articles, and Wikipedia Visits*. Health Communication, Vol. 27, Iss. 2.
- http://www.tandfonline.com/doi/pdf/10.1080/10410236.2011.571759
-
-- Ripberger, Joseph T. (2011): *Capturing curiosity: using Internet search trends to measure public attentiveness*. Policy Studies Journal 39(2):239-259.
-http://onlinelibrary.wiley.com/doi/10.1111/j.1541-0072.2011.00406.x/full
-
-
-
-
-
- 
-*(I missed your application? Make a pull request, open an issue, drop me a line and I put it here)*
-
-
-
-# Thanks 
-
-Fernando Reis, Eryk Walczak, Simon Munzert, Kristin Lindemann
-
-
-
-
-
-# Credits
+**Credits**
 
 - Parts of the package's code have been shamelessly copied and modified from R base package written by R core team. This concerns the `wp_date()` generic and its methods and is detailed in the help files. 
 

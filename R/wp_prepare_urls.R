@@ -1,4 +1,4 @@
-#' function preparing URLs for downlaod
+#' function preparing URLs for download
 #' 
 #' @param page page title supplied by wp_trend()
 #' @param from from supplied by wp_trend()

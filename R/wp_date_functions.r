@@ -82,7 +82,7 @@ wp_date.default <- function (x, ...)
 
 
 #' @describeIn wp_date  Difference to \code{as.Date.character()}: Whenever an 
-#'   origin is needed but not supplied isntead of breaking, \code{wp_date()} 
+#'   origin is needed but not supplied instead of breaking, \code{wp_date()} 
 #'   will raise a warning and proceed by assuming "1970-01-01" to be the origin 
 #'   instead of killing itself with an error.
 #' 

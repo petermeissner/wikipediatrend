@@ -11,7 +11,7 @@ wp_linked_pages(page, lang)
 languages}
 
 \item{lang}{language (shorthand, e.g. "en" for English or "de" for German and
-so on) for the afor given title}
+so on) for the given title}
 }
 \description{
 function looking for other languages of a page

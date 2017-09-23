@@ -1,7 +1,7 @@
 #' function for getting data (download + extraction)
 #' 
 #' 
-#' @param urls urls to be downloeded
+#' @param urls urls to be downloaded
 
 
 wp_get_data <- function(urls){

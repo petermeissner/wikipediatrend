@@ -2,7 +2,7 @@
 % Please edit documentation in R/wp_prepare_urls.R
 \name{wp_prepare_urls}
 \alias{wp_prepare_urls}
-\title{function preparing URLs for downlaod}
+\title{function preparing URLs for download}
 \usage{
 wp_prepare_urls(page, from, to, lang)
 }
@@ -16,5 +16,5 @@ wp_prepare_urls(page, from, to, lang)
 \item{lang}{lang supplied by wp_trend()}
 }
 \description{
-function preparing URLs for downlaod
+function preparing URLs for download
 }

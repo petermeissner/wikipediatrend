@@ -86,7 +86,7 @@ wp_save_cache <- function(file=wp_cache_file()){
 }
 
 #' function adding downloaded data to the cache
-#' @param df data frame to be aded to cache
+#' @param df data frame to be added to cache
 
 wp_add_to_cache <- function(df){
   if( is.null(wp_cache$cache) ){

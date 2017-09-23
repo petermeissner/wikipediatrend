@@ -7,7 +7,7 @@
 wp_get_data(urls)
 }
 \arguments{
-\item{urls}{urls to be downloeded}
+\item{urls}{urls to be downloaded}
 }
 \description{
 function for getting data (download + extraction)

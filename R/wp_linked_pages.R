@@ -3,7 +3,7 @@
 #' @param page title of the wikipedia article to look for links to other
 #'   languages
 #' @param lang language (shorthand, e.g. "en" for English or "de" for German and
-#'   so on) for the afor given title
+#'   so on) for the given title
 #' @export
 
 

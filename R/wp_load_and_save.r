@@ -16,7 +16,7 @@ toUTF8 <-
 
 
 
-#' function to write csv files with UTF-8 characters (even under Windwos)
+#' function to write csv files with UTF-8 characters (even under Windows)
 #' @param df data frame to be written to file
 #' @param file file name / path where to put the data
 
@@ -98,7 +98,7 @@ wp_load <- function(file=wp_cache_file()){
 #' 
 #' Function writes wp_trend() data to a CSV file that serves as cache/storage
 #' 
-#' @param res data retreived by \code{wp_trend()}
+#' @param res data retrieved by \code{wp_trend()}
 #' @param file where to save/cache results (defaults to \code{wp_cache_file()})
 #' @export  
 #'   

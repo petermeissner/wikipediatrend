@@ -14,4 +14,3 @@ wp_save(res, file = wp_cache_file())
 \description{
 Function writes wp_trend() data to a CSV file that serves as cache/storage
 }
-

@@ -14,4 +14,3 @@
 \description{
 a wikipediastrend specific data frame
 }
-

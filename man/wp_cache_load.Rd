@@ -12,4 +12,3 @@ wp_cache_load(file = wp_cache_file())
 \description{
 function for loading cache on disk into memory
 }
-

@@ -14,4 +14,3 @@ wp_download_data(urls, wait = 1)
 \description{
 function downloading prepared URLs
 }
-

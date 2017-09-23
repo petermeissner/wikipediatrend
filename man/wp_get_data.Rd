@@ -12,4 +12,3 @@ wp_get_data(urls)
 \description{
 function for getting data (download + extraction)
 }
-

@@ -9,4 +9,3 @@ wp_get_cache()
 \description{
 function to get cache content
 }
-

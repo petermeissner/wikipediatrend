@@ -18,4 +18,3 @@ wp_prepare_urls(page, from, to, lang)
 \description{
 function preparing URLs for downlaod
 }
-

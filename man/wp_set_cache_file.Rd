@@ -12,4 +12,3 @@ wp_set_cache_file(file)
 \description{
 function to set a different cachefile as session default
 }
-

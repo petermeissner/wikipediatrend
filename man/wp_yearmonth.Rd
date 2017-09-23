@@ -14,4 +14,3 @@ of yyyy-mm-dd.}
 \description{
 function for getting year and month of a timestamp
 }
-

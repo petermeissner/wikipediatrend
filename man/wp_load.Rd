@@ -13,4 +13,3 @@ results should be loaded}
 \description{
 Helper function for wp_trend that loads previous saved wp_trend results
 }
-

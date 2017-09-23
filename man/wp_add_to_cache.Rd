@@ -12,4 +12,3 @@ wp_add_to_cache(df)
 \description{
 function adding downloaded data to the cache
 }
-

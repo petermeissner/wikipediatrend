@@ -32,9 +32,6 @@ Suggests:
     devtools,
     dplyr,
     magrittr,
-    AnomalyDetection,
-    BreakoutDetection,
     cranlogs
 BugReports: https://github.com/petermeissner/wikipediatrend/issues
-Additional_repositories: http://ghrr.github.io/drat
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

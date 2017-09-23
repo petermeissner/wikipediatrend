@@ -16,4 +16,3 @@ so on) for the afor given title}
 \description{
 function looking for other languages of a page
 }
-

@@ -14,4 +14,3 @@ read_utf8_csv(file)
 function to read csv file with UTF-8 characters (even under Windwos) that 
 were created by write_U
 }
-

@@ -15,4 +15,3 @@ wp_jsons_to_df(wp_json, page)
 The function does accepts a list of JSON snippets and transforms the
 information into a data frame
 }
-

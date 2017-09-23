@@ -9,4 +9,3 @@ wp_cache_reset()
 \description{
 function for resetting cache/cachefile as if package was just loaded
 }
-

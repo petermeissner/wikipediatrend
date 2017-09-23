@@ -9,4 +9,3 @@ wp_cache_default()
 \description{
 function for building default cache file name
 }
-

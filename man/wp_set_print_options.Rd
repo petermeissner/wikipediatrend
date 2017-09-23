@@ -12,4 +12,3 @@ wp_set_print_options(x)
 \description{
 function for setting print options for print.wp_df()
 }
-

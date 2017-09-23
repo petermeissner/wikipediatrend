@@ -12,4 +12,3 @@ wp_save_cache(file = wp_cache_file())
 \description{
 functio to save cache to file
 }
-

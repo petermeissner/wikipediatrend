@@ -16,4 +16,3 @@ Function that checks if the time span given by from and to (passed down from
 wp_trend) are complying with logical constraints: from not prior to first
 available data; to not past today; to not prior to from
 }
-

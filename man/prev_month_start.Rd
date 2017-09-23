@@ -9,4 +9,3 @@ prev_month_start()
 \description{
 function to get date of start of prev month
 }
-

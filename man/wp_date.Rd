@@ -2,13 +2,13 @@
 % Please edit documentation in R/wp_date_functions.r
 \name{wp_date}
 \alias{wp_date}
+\alias{wp_date.character}
+\alias{wp_date.default}
+\alias{wp_date.numeric}
+\alias{wp_date.dates}
+\alias{wp_date.factor}
 \alias{wp_date.POSIXct}
 \alias{wp_date.POSIXlt}
-\alias{wp_date.character}
-\alias{wp_date.dates}
-\alias{wp_date.default}
-\alias{wp_date.factor}
-\alias{wp_date.numeric}
 \title{Package specific 'as.Date()' function}
 \usage{
 wp_date(x, ...)

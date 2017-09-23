@@ -14,4 +14,3 @@ html(url, ...)
 \description{
 function downloading content
 }
-

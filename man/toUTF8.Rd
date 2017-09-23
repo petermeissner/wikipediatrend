@@ -12,4 +12,3 @@ toUTF8(x)
 \description{
 function to convert character vectors to UTF-8 encoding
 }
-

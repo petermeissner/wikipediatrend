@@ -1,7 +1,17 @@
 #' simple plot function for objects of class wp_df
-#' @param wp_df object of class wp_df to be plotted
+#' 
+#' @method plot wp_df
+#' 
+#' @param x object of class wp_df to be plotted
+#' @param ... other parameter
+#' 
 #' @export
-plot.wp_df <- function(wp_df, ...){
+#' 
+#' @importFrom graphics lines plot points
+#' @importFrom stats lowess
+#' 
+plot.wp_df <- function(x, ...){
+  wp_df <- x
   wp_df <- wp_df[order(wp_df$page, wp_df$lang, wp_df$date), ]
   plot(
     wp_df$date, wp_df$count,

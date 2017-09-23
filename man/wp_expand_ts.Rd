@@ -19,4 +19,3 @@ wp_expand_ts(from, to, by)
 Helper function for wp_trend that transforms a time span into a series of 
 months
 }
-

@@ -31,7 +31,9 @@
 #'   on disk 
 #'
 #' 
-#'
+#' @examples 
+#' 
+#' wp_tre
 #'
 #' 
 #' @export
@@ -43,6 +45,14 @@ wp_trend <- function( page ,
                       file        = "" 
 ){
 
+  message(
+    "
+The wikipediatrend package currently has no server providing any page view information. 
+Use package pageviews for recent (2016+) information. 
+Older information hopefully available again soon.
+    ")
+  return(NULL)
+  
   # save current global save file
   old_cache_file <- wp_cache_file()
                           

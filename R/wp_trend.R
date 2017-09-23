@@ -33,7 +33,7 @@
 #' 
 #' @examples 
 #' 
-#' wp_tre
+#' wp_trend()
 #'
 #' 
 #' @export

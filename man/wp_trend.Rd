@@ -42,7 +42,7 @@ Function for getting access statistics for wikipedia pages
 }
 \examples{
 
-wp_tre
+wp_trend()
 
 
 }

@@ -1,3 +1,11 @@
+# Re-submission
+
+You complaint about: 
+
+- missing example - now included
+- URL without angle brackets in DESCRIPTION - deleted
+
+
 
 # Checking
 # ------------------------------------

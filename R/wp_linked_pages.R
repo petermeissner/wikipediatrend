@@ -23,7 +23,7 @@ wp_linked_pages <- function(page, lang){
   url <- paste0("https://", lang, ".wikipedia.org/wiki/", page)
   
   # getting language links
-  html_doc   <- html2( url )
+  html_doc   <- xml2::read_html( url )
   lang_nodes <- 
     rvest::html_nodes( 
       html_doc, 

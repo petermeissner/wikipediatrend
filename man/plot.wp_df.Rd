@@ -4,7 +4,7 @@
 \alias{plot.wp_df}
 \title{simple plot function for objects of class wp_df}
 \usage{
-\method{plot}{wp_df}(x, ...)
+\method{plot}{wp_df}(x)
 }
 \arguments{
 \item{x}{object of class wp_df to be plotted}

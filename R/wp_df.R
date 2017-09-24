@@ -17,16 +17,9 @@ print.wp_df <- function (x, ...)
   }
   else {
     # print options 
-    if ( is.null(wp_cache$printoptions$rows) ) {
-      rows <- 29  
-    }else{
-      rows <- wp_cache$printoptions$rows
-    }
-    if ( is.null(wp_cache$printoptions$rows) ) {
-      width <- floor((options()$width - 51)/2) 
-    }else{
-      width <- wp_cache$printoptions$width
-    }
+    rows <- 10
+    width <- floor((options()$width - 51)/2) 
+
     # printing
     m <- as.matrix(x)
     dummy <- function(x){
@@ -56,10 +49,3 @@ print.wp_df <- function (x, ...)
   invisible(x)
 }
 
-#' function for setting print options for print.wp_df()
-#' @export
-#' @param x a list of options, e.g. list(rows=35, width=50) or list(rows=Inf, width=Inf)
-#'        
-wp_set_print_options <- function(x){
-  wp_cache$printoptions <- x
-}

@@ -1,33 +1,26 @@
 Package: wikipediatrend
 Title: Public Subject Attention via Wikipedia Page View Statistics
-Version: 1.1.14
-Date: 2017-09-23
+Version: 2.0.0.900000
+Date: 2017-09-24
 Author: Peter Meissner [aut, cre], R Core Team [ctb]
 Maintainer: Peter Meissner <retep.meissner@gmail.com>
-Description: Public attention is an interesting field of study. The
-    internet not only allows to access information in no time on
-    virtually any subject but via page access statistics gathered
-    by website authors the subject of attention as well can be
-    studied. 
+Description: A convenience wrapper for the Wikipedia page access statistics API 
+  binding package called 'pageviews'. 
 License: GPL (>= 2)
 Depends:
     R (>= 3.0.0)
 Imports:
-    jsonlite (>= 0.9.13),
+    pageviews (>= 0.3.0),
     stringr (>= 0.6.2),
     rvest (>= 0.2.0),
     httr (>= 0.6.1),
     utils,
     xml2 (>= 0.1.2),
     hellno (>= 0.0.1), 
-    RColorBrewer
+    glue (>= 1.1.1),
+    ggplot2 (>= 2.2.1)
 Suggests:
     testthat,
-    knitr,
-    ggplot2,
-    devtools,
-    dplyr,
-    magrittr,
-    cranlogs
+    knitr
 BugReports: https://github.com/petermeissner/wikipediatrend/issues
 RoxygenNote: 6.0.1

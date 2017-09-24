@@ -5,13 +5,13 @@ Public Subject Attention via Wikipedia Page View Statistics
 
 **Status**
 
-<a href="https://travis-ci.org/petermeissner/wikipediatrend"> <img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master"> <a/> <a href="https://cran.r-project.org/package=wikipediatrend"> <img src="http://www.r-pkg.org/badges/version/wikipediatrend"> </a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/wikipediatrend"> <img src="http://cranlogs.r-pkg.org/badges/wikipediatrend">
+<a href="https://travis-ci.org/petermeissner/wikipediatrend"> <img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master"> <a/> <a href="https://codecov.io/gh/petermeissner/wikipediatrend"> <img src="https://codecov.io/gh/petermeissner/wikipediatrend/branch/master/graph/badge.svg" alt="Codecov" /> </a> <a href="https://cran.r-project.org/package=wikipediatrend"> <img src="http://www.r-pkg.org/badges/version/wikipediatrend"> </a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/wikipediatrend"> <img src="http://cranlogs.r-pkg.org/badges/wikipediatrend">
 
-*lines of R code:* 320, *lines of test code:* 142
+*lines of R code:* 316, *lines of test code:* 158
 
 **Version**
 
-2.0.1.900000 ( 2017-09-24 20:54:36 )
+2.0.1.900000 ( 2017-09-24 21:41:52 )
 
 **Description**
 
@@ -78,16 +78,16 @@ trend_data
 ```
 
     ##      project   language article     access     agent      granularity date       views
-    ## 1017 wikipedia de       Der_Spiegel all-access all-agents daily       2016-03-11 1051 
-    ## 487  wikipedia en       Der_Spiegel all-access all-agents daily       2015-10-30  392 
-    ## 255  wikipedia en       Der_Spiegel all-access all-agents daily       2015-09-02  455 
-    ## 1755 wikipedia en       Der_Spiegel all-access all-agents daily       2016-09-11  467 
-    ## 359  wikipedia en       Der_Spiegel all-access all-agents daily       2015-09-28  414 
-    ## 1163 wikipedia en       Der_Spiegel all-access all-agents daily       2016-04-16  378 
-    ## 21   wikipedia de       Der_Spiegel all-access all-agents daily       2015-07-06 1190 
-    ## 1897 wikipedia de       Der_Spiegel all-access all-agents daily       2016-10-17 1259 
-    ## 1337 wikipedia de       Der_Spiegel all-access all-agents daily       2016-05-30 1168 
-    ## 398  wikipedia de       Die_Zeit    all-access all-agents daily       2015-10-08  869 
+    ## 573  wikipedia de       Der_Spiegel all-access all-agents daily       2015-11-21 3359 
+    ## 1139 wikipedia en       Der_Spiegel all-access all-agents daily       2016-04-10  381 
+    ## 2153 wikipedia de       Der_Spiegel all-access all-agents daily       2016-12-20 1154 
+    ## 627  wikipedia en       Der_Spiegel all-access all-agents daily       2015-12-04  416 
+    ## 2041 wikipedia de       Der_Spiegel all-access all-agents daily       2016-11-22 1011 
+    ## 1415 wikipedia en       Der_Spiegel all-access all-agents daily       2016-06-18  403 
+    ## 1863 wikipedia en       Der_Spiegel all-access all-agents daily       2016-10-08  429 
+    ## 1676 wikipedia en       Die_Zeit    all-access all-agents daily       2016-08-22  179 
+    ## 564  wikipedia en       Die_Zeit    all-access all-agents daily       2015-11-18  284 
+    ## 206  wikipedia de       Die_Zeit    all-access all-agents daily       2015-08-21  565 
     ## 
     ## ... 2194 rows of data not shown
 

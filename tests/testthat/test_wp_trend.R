@@ -14,6 +14,11 @@ test_that("wp_trend()", {
     plot(res)
   )
   
+  expect_silent({
+    print.wp_df(1)
+    print.wp_df(res) 
+  })
+  
 })
 
 

@@ -1,5 +1,7 @@
 #' check page input 
 #'
+#' @param page the pages to check
+#' 
 wp_check_page_input <- function(page){
   # make first letter capital
   page <- stringr::str_replace( page, "^.", substring(toupper(page),1,1) )

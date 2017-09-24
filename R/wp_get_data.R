@@ -1,9 +1,9 @@
 #' function for getting data (download + extraction)
 #' 
 #' 
-#' @param urls urls to be downloaded
-
-
+#' @inheritParams wp_trend
+#' @inheritParams pageviews::article_pageviews
+#' 
 wp_get_data <- 
   function(
     page = "R_(programming_language)", 

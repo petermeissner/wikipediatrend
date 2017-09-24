@@ -14,3 +14,5 @@ test_coverage
 coverage_report.html
 appveyor.yml
 blogging
+^README\.Rmd$
+^README-.*\.png$

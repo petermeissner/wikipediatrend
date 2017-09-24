@@ -2,6 +2,8 @@
 output: github_document
 ---
 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
 
 
 ```{r, include=FALSE}
@@ -16,8 +18,6 @@ cat("#", tmp$Title)
 
 **Status**
 
-
-<span style="color:red;">This package does not work at the moment due due a missing data source</span>
 
 
 <a href="https://travis-ci.org/petermeissner/wikipediatrend">
@@ -119,7 +119,37 @@ devtools::install_github("petermeissner/wikipediatrend")
 ```
 
 
+**Usage**
 
+*starting up ...*
+```{r}
+library(wikipediatrend)
+```
+
+
+*getting some data ...*
+```{r}
+trend_data <- 
+  wp_trend(
+    page = c("Der_Spiegel", "Die_Zeit"), 
+    lang = c("de", "en"), 
+    from = "2007-01-01",
+    to   = "2017-01-01"
+  )
+```
+
+*having a look ...*
+
+```{r}
+trend_data
+```
+
+
+*having another look ...*
+
+```{r}
+plot(trend_data)
+```
 
 **Credits**
 

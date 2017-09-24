@@ -9,7 +9,32 @@ wp_get_data(page = "R_(programming_language)", from = "2007-12-01",
   platform = "all")
 }
 \arguments{
-\item{urls}{urls to be downloaded}
+\item{page}{The name of the Wikipedia page as to be found in the URL to the 
+wikipedia article. If e.g. the URL is: 
+\code{https://en.wikipedia.org/wiki/Peter_Fox_(musician)}, than the page 
+name equals to \code{Peter_Fox_(musician)}.}
+
+\item{from}{The starting date of the timespan for which access statistics 
+should be retrieved - note that there is no data prior to 2007-12-01. 
+Supply some sort of timestamp e.g. of class POSIXlt, POSIXct, Date, or 
+character. If the option is of type character it should be in the form of 
+yyyy-mm-dd.}
+
+\item{to}{The last date for which access statistics should be retrieved. 
+Supply some sort of timestamp e.g. of class POSIXlt, POSIXct, Date, or 
+character. If the option is of type character it should be in the form of 
+yyyy-mm-dd.}
+
+\item{lang}{The language shorthand identifying which Wikipedia access 
+statistics are to be used: e.g. \code{"en"} for the English version found 
+at https://en.wikipedia.org, \code{"de"} for the German version found at 
+https://de.wikipedia.org or perhaps \code{"als"} for the Alemannic dialect 
+found under https://als.wikipedia.org/.}
+
+\item{user_type}{the type of users. One or more of "all", "user", "spider" or "bot". "all" by default.}
+
+\item{platform}{The platform the pageviews came from; One or more of "all", "desktop", "mobile-web" and
+"mobile-app". Set to "all" by default.}
 }
 \description{
 function for getting data (download + extraction)

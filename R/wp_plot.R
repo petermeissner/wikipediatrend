@@ -9,7 +9,7 @@
 #' 
 #' @import ggplot2 
 #' 
-plot.wp_df <- function(x){
+plot.wp_df <- function(x, ...){
   
   # make label for data series
   if( length(unique(x$language)) > 1 ){
@@ -22,11 +22,11 @@ plot.wp_df <- function(x){
   ggplot(
     x, 
     mapping = 
-      aes( 
-        x     = date,
-        y     = views, 
-        group = label, 
-        color = label
+      aes_string( 
+        x     = "date",
+        y     = "views", 
+        group = "label", 
+        color = "label"
       )
     ) + 
     geom_point() +

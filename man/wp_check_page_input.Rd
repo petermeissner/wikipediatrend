@@ -6,6 +6,9 @@
 \usage{
 wp_check_page_input(page)
 }
+\arguments{
+\item{page}{the pages to check}
+}
 \description{
 check page input
 }

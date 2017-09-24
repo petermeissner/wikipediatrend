@@ -19,6 +19,10 @@ Public Subject Attention via Wikipedia Page View Statistics
 
 GPL (&gt;= 2) <br>Peter Meissner \[aut, cre\], R Core Team \[ctb\]
 
+**Credits**
+
+-   Parts of the package's code have been shamelessly copied and modified from R base package written by R core team. This concerns the `wp_date()` generic and its methods and is detailed in the help files.
+
 **Citation**
 
 ``` r
@@ -72,16 +76,16 @@ trend_data
 ```
 
     ##      project   language article     access     agent      granularity date       views
-    ## 1329 wikipedia de       Der_Spiegel all-access all-agents daily       2016-05-28  796 
-    ## 667  wikipedia en       Der_Spiegel all-access all-agents daily       2015-12-14  426 
-    ## 211  wikipedia en       Der_Spiegel all-access all-agents daily       2015-08-22  342 
-    ## 1898 wikipedia de       Die_Zeit    all-access all-agents daily       2016-10-17  741 
-    ## 138  wikipedia de       Die_Zeit    all-access all-agents daily       2015-08-04  597 
-    ## 972  wikipedia en       Die_Zeit    all-access all-agents daily       2016-02-28  182 
-    ## 1020 wikipedia en       Die_Zeit    all-access all-agents daily       2016-03-11  274 
-    ## 86   wikipedia de       Die_Zeit    all-access all-agents daily       2015-07-22  553 
-    ## 12   wikipedia en       Die_Zeit    all-access all-agents daily       2015-07-03  208 
-    ## 400  wikipedia en       Die_Zeit    all-access all-agents daily       2015-10-08  233 
+    ## 511  wikipedia en       Der_Spiegel all-access all-agents daily       2015-11-05  500 
+    ## 1391 wikipedia en       Der_Spiegel all-access all-agents daily       2016-06-12  458 
+    ## 1599 wikipedia en       Der_Spiegel all-access all-agents daily       2016-08-03  373 
+    ## 909  wikipedia de       Der_Spiegel all-access all-agents daily       2016-02-13 1171 
+    ## 1546 wikipedia de       Die_Zeit    all-access all-agents daily       2016-07-21  615 
+    ## 1132 wikipedia en       Die_Zeit    all-access all-agents daily       2016-04-08  160 
+    ## 1420 wikipedia en       Die_Zeit    all-access all-agents daily       2016-06-19  129 
+    ## 2012 wikipedia en       Die_Zeit    all-access all-agents daily       2016-11-14  204 
+    ## 2190 wikipedia de       Die_Zeit    all-access all-agents daily       2016-12-29  717 
+    ## 586  wikipedia de       Die_Zeit    all-access all-agents daily       2015-11-24 1348 
     ## 
     ## ... 2194 rows of data not shown
 
@@ -92,7 +96,3 @@ plot(trend_data)
 ```
 
 ![](README_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-15-1.png)
-
-**Credits**
-
--   Parts of the package's code have been shamelessly copied and modified from R base package written by R core team. This concerns the `wp_date()` generic and its methods and is detailed in the help files.

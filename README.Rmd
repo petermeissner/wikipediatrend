@@ -96,8 +96,12 @@ cat(tmp$Author)
 **Citation**
 
 
-```{r, results='asis',  eval=FALSE}
+```{r, results='asis', eval=FALSE}
 citation("wikipediatrend")
+```
+
+```{r, results='asis', echo=FALSE}
+print(citation("wikipediatrend"), style = "text")
 ```
 
 **BibTex for citing**

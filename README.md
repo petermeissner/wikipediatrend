@@ -17,7 +17,7 @@ Public Subject Attention via Wikipedia Page View Statistics
 
 **License**
 
-GPL (&gt;= 2) <br>Peter Meissner \[aut, cre\], R Core Team \[ctb\]
+GPL (&gt;= 2) <br>Peter Meissner \[aut, cre\], \[ctb\]
 
 **Credits**
 
@@ -28,6 +28,8 @@ GPL (&gt;= 2) <br>Peter Meissner \[aut, cre\], R Core Team \[ctb\]
 ``` r
 citation("wikipediatrend")
 ```
+
+Meissner P (2017). *wikipediatrend: Public Subject Attention via Wikipedia Page View Statistics*. R package version 2.0.1.900000.
 
 **BibTex for citing**
 
@@ -76,16 +78,16 @@ trend_data
 ```
 
     ##      project   language article     access     agent      granularity date       views
-    ## 511  wikipedia en       Der_Spiegel all-access all-agents daily       2015-11-05  500 
-    ## 1391 wikipedia en       Der_Spiegel all-access all-agents daily       2016-06-12  458 
-    ## 1599 wikipedia en       Der_Spiegel all-access all-agents daily       2016-08-03  373 
-    ## 909  wikipedia de       Der_Spiegel all-access all-agents daily       2016-02-13 1171 
-    ## 1546 wikipedia de       Die_Zeit    all-access all-agents daily       2016-07-21  615 
-    ## 1132 wikipedia en       Die_Zeit    all-access all-agents daily       2016-04-08  160 
-    ## 1420 wikipedia en       Die_Zeit    all-access all-agents daily       2016-06-19  129 
-    ## 2012 wikipedia en       Die_Zeit    all-access all-agents daily       2016-11-14  204 
-    ## 2190 wikipedia de       Die_Zeit    all-access all-agents daily       2016-12-29  717 
-    ## 586  wikipedia de       Die_Zeit    all-access all-agents daily       2015-11-24 1348 
+    ## 1017 wikipedia de       Der_Spiegel all-access all-agents daily       2016-03-11 1051 
+    ## 487  wikipedia en       Der_Spiegel all-access all-agents daily       2015-10-30  392 
+    ## 255  wikipedia en       Der_Spiegel all-access all-agents daily       2015-09-02  455 
+    ## 1755 wikipedia en       Der_Spiegel all-access all-agents daily       2016-09-11  467 
+    ## 359  wikipedia en       Der_Spiegel all-access all-agents daily       2015-09-28  414 
+    ## 1163 wikipedia en       Der_Spiegel all-access all-agents daily       2016-04-16  378 
+    ## 21   wikipedia de       Der_Spiegel all-access all-agents daily       2015-07-06 1190 
+    ## 1897 wikipedia de       Der_Spiegel all-access all-agents daily       2016-10-17 1259 
+    ## 1337 wikipedia de       Der_Spiegel all-access all-agents daily       2016-05-30 1168 
+    ## 398  wikipedia de       Die_Zeit    all-access all-agents daily       2015-10-08  869 
     ## 
     ## ... 2194 rows of data not shown
 
@@ -95,4 +97,4 @@ trend_data
 plot(trend_data)
 ```
 
-![](README_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-15-1.png)
+![](README_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-16-1.png)

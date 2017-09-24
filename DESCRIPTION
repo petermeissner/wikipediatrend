@@ -2,7 +2,15 @@ Package: wikipediatrend
 Title: Public Subject Attention via Wikipedia Page View Statistics
 Version: 2.0.1.900000
 Date: 2017-09-24
-Author: Peter Meissner [aut, cre], R Core Team [ctb]
+Author: Peter Meissner [aut, cre],  [ctb]
+Authors@R:
+    c(
+      person(
+        "Peter", "Meissner", role = c("aut", "cre"),
+        email = "retep.meissner@gmail.com"
+      ),
+	     person("", "R Core Team", role = "cph")
+    )
 Maintainer: Peter Meissner <retep.meissner@gmail.com>
 Description: A convenience wrapper for the Wikipedia page access statistics API 
   binding package called 'pageviews'. 

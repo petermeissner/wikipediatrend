@@ -23,3 +23,7 @@
 *.Rd  diff=astextplain
 *.md  diff=astextplain
 
+# linguist settings
+blogging/* linguist-vendored=true
+
+

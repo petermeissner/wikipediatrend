@@ -1,6 +1,25 @@
 NEWS wikipediatrend 
 ==========================================================================
 
+
+
+version 2.1.x // 2019-01-10 ... 
+--------------------------------------------------------------------------
+
+- 'old' data from end 2007 up to late 2015 is available again
+    * adding handlers for new API made available by data gathering project comissioned by Hertie School of Governance (Simon Munzert) and supported by Daimler and Benz Foundation
+    * adding petermeissner.de as first endpoint for newly available data
+
+
+
+
+version 2.0.x // 2017-09-24 ... 
+--------------------------------------------------------------------------
+
+- using pageviews package (and wikipedias own API as data source)
+
+
+
 version 1.1.14 // 2017-09-23 ... 
 --------------------------------------------------------------------------
 

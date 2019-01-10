@@ -147,7 +147,7 @@ trend_data <-
     page = c("Der_Spiegel", "Die_Zeit"), 
     lang = c("de", "en"), 
     from = "2007-01-01",
-    to   = "2017-01-01"
+    to   = Sys.Date()
   )
 ```
 
@@ -160,8 +160,10 @@ trend_data
 
 *having another look ...*
 
-```{r}
-plot(trend_data)
+```{r, fig.width=10}
+plot(
+  trend_data[trend_data$views < 2500, ]
+)
 ```
 
 

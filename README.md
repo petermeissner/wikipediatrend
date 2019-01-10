@@ -93,7 +93,7 @@ trend_data <-
     page = c("Der_Spiegel", "Die_Zeit"), 
     lang = c("de", "en"), 
     from = "2007-01-01",
-    to   = "2017-01-01"
+    to   = Sys.Date()
   )
 ```
 
@@ -109,18 +109,20 @@ trend_data
     ## 4    en       die_zeit    2007-12-11    35
     ## 3    de       der_spiegel 2007-12-11   710
     ## 5    de       der_spiegel 2007-12-12   770
-    ## 6618 en       die_zeit    2016-12-30   183
-    ## 6620 en       die_zeit    2016-12-31   154
-    ## 6619 de       der_spiegel 2016-12-31   871
-    ## 6622 en       die_zeit    2017-01-01   155
-    ## 6621 de       der_spiegel 2017-01-01  1215
+    ## 8094 en       die_zeit    2019-01-07   233
+    ## 8096 en       die_zeit    2019-01-08   215
+    ## 8095 de       der_spiegel 2019-01-08  1427
+    ## 8098 en       die_zeit    2019-01-09   212
+    ## 8097 de       der_spiegel 2019-01-09  1160
     ## 
-    ## ... 6612 rows of data not shown
+    ## ... 8088 rows of data not shown
 
 *having another look …*
 
 ``` r
-plot(trend_data)
+plot(
+  trend_data[trend_data$views < 2500, ]
+)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->

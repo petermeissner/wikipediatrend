@@ -5,7 +5,7 @@
 #'
 #' @keywords internal
 wp_prepare_date_for_pageviews <- function(date, type){
-  if( type == "from" ){
+  if( type == "from" | type == "start"  ){
     if( date < "2016-01-01"){
       date <- "2016-01-01"
     }

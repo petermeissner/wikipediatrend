@@ -1,27 +1,37 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-Public Subject Attention via Wikipedia Page View Statistics
-===========================================================
+
+# Public Subject Attention via Wikipedia Page View Statistics
 
 **Status**
 
-<a href="https://travis-ci.org/petermeissner/wikipediatrend"> <img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master"> <a/> <a href="https://codecov.io/gh/petermeissner/wikipediatrend"> <img src="https://codecov.io/gh/petermeissner/wikipediatrend/branch/master/graph/badge.svg" alt="Codecov" /> </a> <a href="https://cran.r-project.org/package=wikipediatrend"> <img src="http://www.r-pkg.org/badges/version/wikipediatrend"> </a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/wikipediatrend"> <img src="http://cranlogs.r-pkg.org/badges/wikipediatrend">
+<a href="https://travis-ci.org/petermeissner/wikipediatrend">
+<img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master">
+<a/> <a href="https://codecov.io/gh/petermeissner/wikipediatrend">
+<img src="https://codecov.io/gh/petermeissner/wikipediatrend/branch/master/graph/badge.svg" alt="Codecov" />
+</a> <a href="https://cran.r-project.org/package=wikipediatrend">
+<img src="http://www.r-pkg.org/badges/version/wikipediatrend"> </a>
+<img src="http://cranlogs.r-pkg.org/badges/grand-total/wikipediatrend">
+<img src="http://cranlogs.r-pkg.org/badges/wikipediatrend">
 
-*lines of R code:* 316, *lines of test code:* 158
+*lines of R code:* 428, *lines of test code:* 160
 
 **Version**
 
-2.0.1.900000 ( 2017-09-24 21:41:52 )
+2.1.0 ( 2019-01-10 20:49:54 )
 
 **Description**
 
 **License**
 
-GPL (&gt;= 2) <br>Peter Meissner \[aut, cre\], \[ctb\]
+GPL (\>= 2) <br>Peter Meissner \[aut, cre\], \[ctb\]
 
 **Credits**
 
--   Parts of the package's code have been shamelessly copied and modified from R base package written by R core team. This concerns the `wp_date()` generic and its methods and is detailed in the help files.
+  - Parts of the package’s code have been shamelessly copied and
+    modified from R base package written by R core team. This concerns
+    the `wp_date()` generic and its methods and is detailed in the help
+    files.
 
 **Citation**
 
@@ -29,7 +39,8 @@ GPL (&gt;= 2) <br>Peter Meissner \[aut, cre\], \[ctb\]
 citation("wikipediatrend")
 ```
 
-Meissner P (2017). *wikipediatrend: Public Subject Attention via Wikipedia Page View Statistics*. R package version 2.0.1.900000.
+Meissner P (2018). *wikipediatrend: Public Subject Attention via
+Wikipedia Page View Statistics*. R package version 2.1.0.
 
 **BibTex for citing**
 
@@ -53,13 +64,28 @@ devtools::install_github("petermeissner/wikipediatrend")
 
 **Usage**
 
-*starting up ...*
+*starting up …*
 
 ``` r
 library(wikipediatrend)
 ```
 
-*getting some data ...*
+    ## 
+    ##   [wikipedaitrend]
+    ##     
+    ##   Note:
+    ##     
+    ##     - Data before 2016-01-01 
+    ##       * is provided by petermeissner.de and
+    ##       * was prepared in a project comissioned by the Hertie School of Governance (Simon Munzert)
+    ##       * and supported by the Daimler and Benz Foundation.
+    ##     
+    ##     - Data from 2016-01-01 onwards 
+    ##       * is provided by the Wikipedia Foundation
+    ##       * via its pageviews package and API.
+    ## 
+
+*getting some data …*
 
 ``` r
 trend_data <- 
@@ -71,30 +97,30 @@ trend_data <-
   )
 ```
 
-*having a look ...*
+*having a look …*
 
 ``` r
 trend_data
 ```
 
-    ##      project   language article     access     agent      granularity date       views
-    ## 573  wikipedia de       Der_Spiegel all-access all-agents daily       2015-11-21 3359 
-    ## 1139 wikipedia en       Der_Spiegel all-access all-agents daily       2016-04-10  381 
-    ## 2153 wikipedia de       Der_Spiegel all-access all-agents daily       2016-12-20 1154 
-    ## 627  wikipedia en       Der_Spiegel all-access all-agents daily       2015-12-04  416 
-    ## 2041 wikipedia de       Der_Spiegel all-access all-agents daily       2016-11-22 1011 
-    ## 1415 wikipedia en       Der_Spiegel all-access all-agents daily       2016-06-18  403 
-    ## 1863 wikipedia en       Der_Spiegel all-access all-agents daily       2016-10-08  429 
-    ## 1676 wikipedia en       Die_Zeit    all-access all-agents daily       2016-08-22  179 
-    ## 564  wikipedia en       Die_Zeit    all-access all-agents daily       2015-11-18  284 
-    ## 206  wikipedia de       Die_Zeit    all-access all-agents daily       2015-08-21  565 
+    ##      language article     date       views
+    ## 2    en       die_zeit    2007-12-10    74
+    ## 1    de       der_spiegel 2007-12-10   798
+    ## 4    en       die_zeit    2007-12-11    35
+    ## 3    de       der_spiegel 2007-12-11   710
+    ## 5    de       der_spiegel 2007-12-12   770
+    ## 6618 en       die_zeit    2016-12-30   183
+    ## 6620 en       die_zeit    2016-12-31   154
+    ## 6619 de       der_spiegel 2016-12-31   871
+    ## 6622 en       die_zeit    2017-01-01   155
+    ## 6621 de       der_spiegel 2017-01-01  1215
     ## 
-    ## ... 2194 rows of data not shown
+    ## ... 6612 rows of data not shown
 
-*having another look ...*
+*having another look …*
 
 ``` r
 plot(trend_data)
 ```
 
-![](README_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-16-1.png)
+![](README_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->

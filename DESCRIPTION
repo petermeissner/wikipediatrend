@@ -1,7 +1,7 @@
 Package: wikipediatrend
 Title: Public Subject Attention via Wikipedia Page View Statistics
-Version: 2.0.1.900000
-Date: 2017-09-24
+Version: 2.1.0
+Date: 2018-01-10
 Author: Peter Meissner [aut, cre],  [ctb]
 Authors@R:
     c(
@@ -31,4 +31,4 @@ Suggests:
     testthat,
     knitr
 BugReports: https://github.com/petermeissner/wikipediatrend/issues
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1

@@ -14,10 +14,13 @@ test_that("wp_trend()", {
     plot(res)
   )
   
-  expect_silent({
-    print.wp_df(1)
+  expect_warning({
     print.wp_df(res) 
-  })
+  }, NA)
+  
+  expect_error({
+    print.wp_df(res) 
+  }, NA)
   
 })
 

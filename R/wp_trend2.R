@@ -33,8 +33,8 @@
 
 wp_trend <- 
   function( 
-    page , 
-    from        = Sys.Date()-30, 
+    page = "R_(programming_language)", 
+    from        = "2007-12-10", 
     to          = Sys.Date(),
     lang        = "en"
   ){
@@ -52,8 +52,17 @@ wp_trend <-
     
     
     # download data and extract data
-    data_list <- wp_get_data(page = page, from = from, to = to, lang = lang)
-    
+    data_list <- 
+      mapply(
+        FUN       = wp_get_data,
+        page      = page, 
+        from      = from, 
+        to        = to, 
+        lang      = lang,
+        SIMPLIFY  = FALSE,
+        USE.NAMES = FALSE
+      )
+
     
     # combine data
     res <- do.call(rbind, data_list)

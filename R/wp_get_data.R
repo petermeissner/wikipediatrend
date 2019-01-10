@@ -16,14 +16,15 @@ wp_get_data <-
   
     res <- list()
     if( from < "2016-01-01" ){
-      # TBD
+      res[[ length(res) + 1 ]] <- 
+        wpd_get_exact(page = page, lang = lang, from = from, to = to)
     }
     
     if ( to > "2015-12-31" ) {
       for ( m in seq_along(user_type) ) {
         for ( k in seq_along(platform) ) {
           
-          res[[ length(res) + 1 ]] <- 
+          tmp_res <- 
             pageviews::article_pageviews(
               project   = glue::glue("{lang}.wikipedia"),
               article   = page,
@@ -33,10 +34,16 @@ wp_get_data <-
               platform  = platform[k]
             )
           
+          tmp_res <- tmp_res[, c("language", "article", "date", "views")] 
+          
+          res[[ length(res) + 1 ]] <- tmp_res
         }
       }
     }
 
+  res <- do.call(rbind, res)
+  res$article <- tolower(res$article)
+    
   return(res)
 }
 

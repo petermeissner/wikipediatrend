@@ -32,8 +32,9 @@ print.wp_df <- function (x, ...)
     m <- apply(m, c(1,2), dummy )
     dimnames(m)[[1L]] <- seq_len(dim(m)[1])
     if( dim(m)[1] > rows+1 ){
-      text <-  paste0("\n... ", dim(m)[1]-rows, " rows of data not shown")
-      SAMPLE <- sample( seq_along( m[,1] ), rows)
+      text   <-  paste0("\n... ", dim(m)[1]-rows, " rows of data not shown")
+      sq     <- seq_along(m[,1])
+      SAMPLE <- c( utils::head(sq, 5), utils::tail(sq, 5) )
       m <- m[SAMPLE,]
       if( dim(m)[2]>=4 ){
         m <- m[order(m[,3], m[,4], m[,1]), ]

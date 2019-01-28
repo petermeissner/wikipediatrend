@@ -1,13 +1,20 @@
-# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+# Sample .travis.yml for R projects
 
-language: R
+language: r
+warnings_are_errors: true
 sudo: false
 cache: packages
 
-r_packages:
-  - covr
-
 after_success:
-  - Rscript -e 'library(covr); codecov()'
-  
-  
+  - Rscript -e 'covr::codecov()'
+
+notifications:
+  email:
+    on_success: retep.meissner@gmail.com
+    on_failure: retep.meissner@gmail.com
+
+env:
+  matrix:
+    - RVERSION=oldrel
+    - RVERSION=release
+    - RVERSION=devel

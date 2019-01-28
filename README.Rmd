@@ -20,12 +20,9 @@ cat("#", tmp$Title)
 
 
 
-<a href="https://travis-ci.org/petermeissner/wikipediatrend">
-<img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master">
-<a/>
-<a href="https://codecov.io/gh/petermeissner/wikipediatrend">
-  <img src="https://codecov.io/gh/petermeissner/wikipediatrend/branch/master/graph/badge.svg" alt="Codecov" />
-</a>
+<a href="https://travis-ci.org/petermeissner/wikipediatrend"><img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master"><a/>
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/petermeissner/wikipediatrend?branch=master&svg=true)](https://ci.appveyor.com/project/petermeissner/wikipediatrend)
+<a href="https://codecov.io/gh/petermeissner/wikipediatrend"><img src="https://codecov.io/gh/petermeissner/wikipediatrend/branch/master/graph/badge.svg" alt="Codecov" /></a>
 <a href="https://cran.r-project.org/package=wikipediatrend">
 <img src="http://www.r-pkg.org/badges/version/wikipediatrend">
 </a>

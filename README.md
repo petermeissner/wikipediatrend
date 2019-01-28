@@ -5,11 +5,11 @@
 
 **Status**
 
-<a href="https://travis-ci.org/petermeissner/wikipediatrend">
-<img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master">
-<a/> <a href="https://codecov.io/gh/petermeissner/wikipediatrend">
-<img src="https://codecov.io/gh/petermeissner/wikipediatrend/branch/master/graph/badge.svg" alt="Codecov" />
-</a> <a href="https://cran.r-project.org/package=wikipediatrend">
+<a href="https://travis-ci.org/petermeissner/wikipediatrend"><img src="https://api.travis-ci.org/petermeissner/wikipediatrend.svg?branch=master"><a/>
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/petermeissner/wikipediatrend?branch=master&svg=true)](https://ci.appveyor.com/project/petermeissner/wikipediatrend)
+<a href="https://codecov.io/gh/petermeissner/wikipediatrend"><img src="https://codecov.io/gh/petermeissner/wikipediatrend/branch/master/graph/badge.svg" alt="Codecov" /></a>
+<a href="https://cran.r-project.org/package=wikipediatrend">
 <img src="http://www.r-pkg.org/badges/version/wikipediatrend"> </a>
 <img src="http://cranlogs.r-pkg.org/badges/grand-total/wikipediatrend">
 <img src="http://cranlogs.r-pkg.org/badges/wikipediatrend">
@@ -18,7 +18,7 @@
 
 **Version**
 
-2.1.0 ( 2019-01-10 20:49:54 )
+2.1.0 ( 2019-01-28 19:42:18 )
 
 **Description**
 
@@ -71,13 +71,13 @@ library(wikipediatrend)
 ```
 
     ## 
-    ##   [wikipedaitrend]
+    ##   [wikipediatrend]
     ##     
     ##   Note:
     ##     
     ##     - Data before 2016-01-01 
     ##       * is provided by petermeissner.de and
-    ##       * was prepared in a project comissioned by the Hertie School of Governance (Simon Munzert)
+    ##       * was prepared in a project commissioned by the Hertie School of Governance (Simon Munzert)
     ##       * and supported by the Daimler and Benz Foundation.
     ##     
     ##     - Data from 2016-01-01 onwards 
@@ -109,13 +109,13 @@ trend_data
     ## 4    en       die_zeit    2007-12-11    35
     ## 3    de       der_spiegel 2007-12-11   710
     ## 5    de       der_spiegel 2007-12-12   770
-    ## 8094 en       die_zeit    2019-01-07   233
-    ## 8096 en       die_zeit    2019-01-08   215
-    ## 8095 de       der_spiegel 2019-01-08  1427
-    ## 8098 en       die_zeit    2019-01-09   212
-    ## 8097 de       der_spiegel 2019-01-09  1160
+    ## 8130 en       die_zeit    2019-01-25   158
+    ## 8132 en       die_zeit    2019-01-26   136
+    ## 8131 de       der_spiegel 2019-01-26  1031
+    ## 8134 en       die_zeit    2019-01-27   146
+    ## 8133 de       der_spiegel 2019-01-27  1240
     ## 
-    ## ... 8088 rows of data not shown
+    ## ... 8124 rows of data not shown
 
 *having another look …*
 

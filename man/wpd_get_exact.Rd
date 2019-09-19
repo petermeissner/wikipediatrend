@@ -4,7 +4,7 @@
 \alias{wpd_get_exact}
 \title{Title}
 \usage{
-wpd_get_exact(page, lang, from, to)
+wpd_get_exact(page, lang, from, to, warn = TRUE)
 }
 \arguments{
 \item{page}{The name of the Wikipedia page as to be found in the URL to the 
@@ -28,6 +28,8 @@ yyyy-mm-dd.}
 Supply some sort of timestamp e.g. of class POSIXlt, POSIXct, Date, or 
 character. If the option is of type character it should be in the form of 
 yyyy-mm-dd.}
+
+\item{warn}{Warn about not beeing able to retrieve data or not?}
 }
 \description{
 Title

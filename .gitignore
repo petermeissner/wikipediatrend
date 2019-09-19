@@ -43,3 +43,4 @@ R/aa_pversion_inc.r
 *.csv
 README_cache
 README.html
+.Rhistory

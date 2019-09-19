@@ -14,11 +14,11 @@ status](https://ci.appveyor.com/api/projects/status/github/petermeissner/wikiped
 <img src="http://cranlogs.r-pkg.org/badges/grand-total/wikipediatrend">
 <img src="http://cranlogs.r-pkg.org/badges/wikipediatrend">
 
-*lines of R code:* 428, *lines of test code:* 160
+*lines of R code:* 448, *lines of test code:* 160
 
 **Version**
 
-2.1.0 ( 2019-01-28 19:42:18 )
+2.1.1 ( 2019-09-19 21:51:46 )
 
 **Description**
 
@@ -39,8 +39,8 @@ GPL (\>= 2) <br>Peter Meissner \[aut, cre\], \[ctb\]
 citation("wikipediatrend")
 ```
 
-Meissner P (2018). *wikipediatrend: Public Subject Attention via
-Wikipedia Page View Statistics*. R package version 2.1.0.
+Meissner P (2019). *wikipediatrend: Public Subject Attention via
+Wikipedia Page View Statistics*. R package version 2.1.1.
 
 **BibTex for citing**
 
@@ -109,13 +109,13 @@ trend_data
     ## 4    en       die_zeit    2007-12-11    35
     ## 3    de       der_spiegel 2007-12-11   710
     ## 5    de       der_spiegel 2007-12-12   770
-    ## 8130 en       die_zeit    2019-01-25   158
-    ## 8132 en       die_zeit    2019-01-26   136
-    ## 8131 de       der_spiegel 2019-01-26  1031
-    ## 8134 en       die_zeit    2019-01-27   146
-    ## 8133 de       der_spiegel 2019-01-27  1240
+    ## 8598 en       die_zeit    2019-09-16   181
+    ## 8600 en       die_zeit    2019-09-17   225
+    ## 8599 de       der_spiegel 2019-09-17  1116
+    ## 8602 en       die_zeit    2019-09-18   182
+    ## 8601 de       der_spiegel 2019-09-18  1014
     ## 
-    ## ... 8124 rows of data not shown
+    ## ... 8592 rows of data not shown
 
 *having another look …*
 

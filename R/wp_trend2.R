@@ -23,6 +23,7 @@
 #'   character. If the option is of type character it should be in the form of 
 #'   yyyy-mm-dd.
 #'
+#' @param warn Warn about not beeing able to retrieve data or not?
 #' 
 #' @examples 
 #' 
@@ -36,7 +37,8 @@ wp_trend <-
     page = "R_(programming_language)", 
     from        = "2007-12-10", 
     to          = Sys.Date(),
-    lang        = "en"
+    lang        = "en",
+    warn        = TRUE
   ){
     
     # input check
@@ -59,6 +61,7 @@ wp_trend <-
         from      = from, 
         to        = to, 
         lang      = lang,
+        warn      = warn,
         SIMPLIFY  = FALSE,
         USE.NAMES = FALSE
       )

@@ -5,7 +5,7 @@
 \title{Function for getting access statistics for wikipedia pages}
 \usage{
 wp_trend(page = "R_(programming_language)", from = "2007-12-10",
-  to = Sys.Date(), lang = "en")
+  to = Sys.Date(), lang = "en", warn = TRUE)
 }
 \arguments{
 \item{page}{The name of the Wikipedia page as to be found in the URL to the 
@@ -29,6 +29,8 @@ statistics are to be used: e.g. \code{"en"} for the English version found
 at https://en.wikipedia.org, \code{"de"} for the German version found at 
 https://de.wikipedia.org or perhaps \code{"als"} for the Alemannic dialect 
 found under https://als.wikipedia.org/.}
+
+\item{warn}{Warn about not beeing able to retrieve data or not?}
 }
 \description{
 Function for getting access statistics for wikipedia pages

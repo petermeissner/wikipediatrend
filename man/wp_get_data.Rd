@@ -6,7 +6,7 @@
 \usage{
 wp_get_data(page = "R_(programming_language)", from = "2007-12-01",
   to = as.character(Sys.Date()), lang = "en", user_type = "all",
-  platform = "all")
+  platform = "all", warn = TRUE)
 }
 \arguments{
 \item{page}{The name of the Wikipedia page as to be found in the URL to the 
@@ -35,6 +35,8 @@ found under https://als.wikipedia.org/.}
 
 \item{platform}{The platform the pageviews came from; One or more of "all", "desktop", "mobile-web" and
 "mobile-app". Set to "all" by default.}
+
+\item{warn}{Warn about not beeing able to retrieve data or not?}
 }
 \description{
 function for getting data (download + extraction)

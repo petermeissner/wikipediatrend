@@ -36,7 +36,7 @@ found under https://als.wikipedia.org/.}
 \item{platform}{The platform the pageviews came from; One or more of "all", "desktop", "mobile-web" and
 "mobile-app". Set to "all" by default.}
 
-\item{warn}{Warn about not beeing able to retrieve data or not?}
+\item{warn}{Warn about not being able to retrieve data or not?}
 }
 \description{
 function for getting data (download + extraction)

@@ -23,7 +23,7 @@
 #'   character. If the option is of type character it should be in the form of 
 #'   yyyy-mm-dd.
 #'
-#' @param warn Warn about not beeing able to retrieve data or not?
+#' @param warn Warn about not being able to retrieve data or not?
 #' 
 #' @examples 
 #' 

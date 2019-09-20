@@ -270,7 +270,7 @@ wp_wday.POSIXlt  <- function(timestamp, startmonday=T){
 
 
 
-#' @describeIn wp_wday method for everything coercable by as.POSIXlt 
+#' @describeIn wp_wday method for everything as.POSIXlt 
 #' @export 
 #' 
 

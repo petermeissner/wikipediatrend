@@ -18,13 +18,13 @@ status](https://ci.appveyor.com/api/projects/status/github/petermeissner/wikiped
 
 **Version**
 
-2.1.1 ( 2019-09-19 21:51:46 )
+2.1.3 ( 2019-09-20 21:12:05 )
 
 **Description**
 
 **License**
 
-GPL (\>= 2) <br>Peter Meissner \[aut, cre\], \[ctb\]
+GPL (\>= 2) <br>Peter Meissner \[aut, cre\], R Core Team \[cph\]
 
 **Credits**
 
@@ -40,7 +40,7 @@ citation("wikipediatrend")
 ```
 
 Meissner P (2019). *wikipediatrend: Public Subject Attention via
-Wikipedia Page View Statistics*. R package version 2.1.1.
+Wikipedia Page View Statistics*. R package version 2.1.3.
 
 **BibTex for citing**
 
@@ -77,7 +77,7 @@ library(wikipediatrend)
     ##     
     ##     - Data before 2016-01-01 
     ##       * is provided by petermeissner.de and
-    ##       * was prepared in a project commissioned by the Hertie School of Governance (Simon Munzert)
+    ##       * was prepared in a project commissioned by the Hertie School of Governance (Prof. Dr. Simon Munzert)
     ##       * and supported by the Daimler and Benz Foundation.
     ##     
     ##     - Data from 2016-01-01 onwards 
@@ -125,4 +125,4 @@ plot(
 )
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-17-1.png)<!-- -->

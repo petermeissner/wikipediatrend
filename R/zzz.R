@@ -7,7 +7,7 @@
     
     - Data before 2016-01-01 
       * is provided by petermeissner.de and
-      * was prepared in a project commissioned by the Hertie School of Governance (Simon Munzert)
+      * was prepared in a project commissioned by the Hertie School of Governance (Prof. Dr. Simon Munzert)
       * and supported by the Daimler and Benz Foundation.
     
     - Data from 2016-01-01 onwards 

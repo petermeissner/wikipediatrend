@@ -9,6 +9,8 @@ version 2.1.x // 2019-01-10 ...
 - 'old' data from end 2007 up to late 2015 is available again
     * adding handlers for new API made available by data gathering project comissioned by Hertie School of Governance (Simon Munzert) and supported by Daimler and Benz Foundation
     * adding petermeissner.de as first endpoint for newly available data
+- fixing some typos
+- CRAN compliance: moving README.Rmd figures to different path
 
 
 

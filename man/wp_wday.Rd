@@ -29,6 +29,6 @@ form of yyyy-mm-dd.
 \itemize{
 \item \code{POSIXlt}: method for POSIXlt
 
-\item \code{default}: method for everything coercable by as.POSIXlt
+\item \code{default}: method for everything as.POSIXlt
 }}
 

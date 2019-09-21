@@ -2,7 +2,7 @@
 % Please edit documentation in R/wpd_get_exact.R
 \name{wpd_get_exact}
 \alias{wpd_get_exact}
-\title{Title}
+\title{wpd_get_exact}
 \usage{
 wpd_get_exact(page, lang, from, to, warn = TRUE)
 }
@@ -32,5 +32,5 @@ yyyy-mm-dd.}
 \item{warn}{Warn about not being able to retrieve data or not?}
 }
 \description{
-Title
+wpd_get_exact
 }

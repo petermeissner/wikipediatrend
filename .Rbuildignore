@@ -16,3 +16,4 @@ appveyor.yml
 blogging
 ^README\.Rmd$
 ^README-.*\.png$
+^CRAN-RELEASE$

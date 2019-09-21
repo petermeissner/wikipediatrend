@@ -1,10 +1,3 @@
-# Re-submission
-
-You complaint about: 
-
-- missing example - now included
-- URL without angle brackets in DESCRIPTION - deleted
-
 
 
 # Checking
@@ -13,13 +6,14 @@ You complaint about:
 - Local :
     * OK  for : 
     
-    R version 3.4.1 (2017-06-30)
+    R version 3.5.2 (2018-12-20)
     Platform: x86_64-w64-mingw32/x64 (64-bit)
-    Running under: Windows >= 8 x64 (build 9200)
+    Running under: Windows 10 x64 (build 18362)
   
 
 - winbuilder:
     * (OK) for : "devel" 
+    * (OK) for : "release" 
 
 
 - Travis Ubuntu (old, release, devel) :
@@ -30,7 +24,7 @@ You complaint about:
   
   
 - Appveyor Win
-    * OK for : 3.4.1 (32-bit)
+    * OK 
 
 
 

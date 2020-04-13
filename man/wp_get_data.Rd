@@ -4,9 +4,15 @@
 \alias{wp_get_data}
 \title{function for getting data (download + extraction)}
 \usage{
-wp_get_data(page = "R_(programming_language)", from = "2007-12-01",
-  to = as.character(Sys.Date()), lang = "en", user_type = "all",
-  platform = "all", warn = TRUE)
+wp_get_data(
+  page = "R_(programming_language)",
+  from = "2007-12-01",
+  to = as.character(Sys.Date()),
+  lang = "en",
+  user_type = "all",
+  platform = "all",
+  warn = TRUE
+)
 }
 \arguments{
 \item{page}{The name of the Wikipedia page as to be found in the URL to the 

@@ -4,8 +4,13 @@
 \alias{wp_trend}
 \title{Function for getting access statistics for wikipedia pages}
 \usage{
-wp_trend(page = "R_(programming_language)", from = "2007-12-10",
-  to = Sys.Date(), lang = "en", warn = TRUE)
+wp_trend(
+  page = "R_(programming_language)",
+  from = "2007-12-10",
+  to = Sys.Date(),
+  lang = "en",
+  warn = TRUE
+)
 }
 \arguments{
 \item{page}{The name of the Wikipedia page as to be found in the URL to the 

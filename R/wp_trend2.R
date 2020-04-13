@@ -42,7 +42,11 @@ wp_trend <-
   ){
     
     # input check
-    stopifnot( length(page)==length(lang) | length(lang)==1 )
+    stopifnot( 
+      length(page)==length(lang) | 
+      length(lang) == 1 & length(page) >= 1 |   
+      length(lang) >= 1 & length(page) == 1 
+    )
     stopifnot( all( !is.na(page) ), all( !is.na(lang) ) )
     
     # check dates

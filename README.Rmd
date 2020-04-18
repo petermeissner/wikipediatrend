@@ -172,3 +172,44 @@ plot(
 
 
 
+**Usage 2**
+
+
+
+*getting some data ...*
+```{r}
+trend_data <- 
+  wp_trend(
+    page = 
+      c(
+        "Climate_crisis", 
+        "2019–20_coronavirus_pandemic",
+        "Donald_Trump",
+        "Syria",
+        "Crimea",
+        "Influenza"
+      ), 
+    lang = "en", 
+    from = "2007-01-01",
+    to   = Sys.Date()
+  )
+```
+
+*having a look ...*
+
+```{r}
+trend_data
+```
+
+
+*having another look ...*
+
+```{r, fig.width=10}
+options(scipen = 1000000)
+
+plot(trend_data) + 
+  ggplot2::scale_y_log10()
+```
+
+
+

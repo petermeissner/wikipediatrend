@@ -14,11 +14,11 @@ status](https://ci.appveyor.com/api/projects/status/github/petermeissner/wikiped
 <img src="http://cranlogs.r-pkg.org/badges/grand-total/wikipediatrend">
 <img src="http://cranlogs.r-pkg.org/badges/wikipediatrend">
 
-*lines of R code:* 470, *lines of test code:* 160
+*lines of R code:* 474, *lines of test code:* 160
 
 **Version**
 
-2.1.4 ( 2019-09-21 15:25:37 )
+2.1.5 ( 2020-04-13 13:01:13 )
 
 **Description**
 
@@ -39,8 +39,8 @@ GPL (\>= 2) <br>Peter Meissner \[aut, cre\], R Core Team \[cph\]
 citation("wikipediatrend")
 ```
 
-Meissner P (2019). *wikipediatrend: Public Subject Attention via
-Wikipedia Page View Statistics*. R package version 2.1.4.
+Meissner P (2020). *wikipediatrend: Public Subject Attention via
+Wikipedia Page View Statistics*. R package version 2.1.5.
 
 **BibTex for citing**
 
@@ -109,13 +109,13 @@ trend_data
     ## 4    en       die_zeit    2007-12-11    35
     ## 3    de       der_spiegel 2007-12-11   710
     ## 5    de       der_spiegel 2007-12-12   770
-    ## 8602 en       die_zeit    2019-09-18   182
-    ## 8604 en       die_zeit    2019-09-19   157
-    ## 8603 de       der_spiegel 2019-09-19  1125
-    ## 8606 en       die_zeit    2019-09-20   165
-    ## 8605 de       der_spiegel 2019-09-20   943
+    ## 9020 en       die_zeit    2020-04-14   276
+    ## 9022 en       die_zeit    2020-04-15   259
+    ## 9021 de       der_spiegel 2020-04-15  1292
+    ## 9024 en       die_zeit    2020-04-16   243
+    ## 9023 de       der_spiegel 2020-04-16  1090
     ## 
-    ## ... 8596 rows of data not shown
+    ## ... 9014 rows of data not shown
 
 *having another look …*
 
@@ -126,3 +126,65 @@ plot(
 ```
 
 ![](man/figures/README-unnamed-chunk-17-1.png)<!-- -->
+
+**Usage 2**
+
+*getting some data …*
+
+``` r
+trend_data <- 
+  wp_trend(
+    page = 
+      c(
+        "Climate_crisis", 
+        "2019–20_coronavirus_pandemic",
+        "Donald_Trump",
+        "Syria",
+        "Crimea",
+        "Influenza"
+      ), 
+    lang = "en", 
+    from = "2007-01-01",
+    to   = Sys.Date()
+  )
+```
+
+    ## Warning in wpd_get_exact(page = page, lang = lang, from = from, to = to, : Unable to retrieve data for url:
+    ## http://petermeissner.de:8880/article/exact/en/2019–20_coronavirus_pandemic. Status: error.
+
+*having a look …*
+
+``` r
+trend_data
+```
+
+    ##       language article        date       views  
+    ## 1     en       climate_crisis 2007-12-10       0
+    ## 2     en       crimea         2007-12-10    1051
+    ## 5     en       syria          2007-12-10    3205
+    ## 4     en       influenza      2007-12-10    4153
+    ## 3     en       donald_trump   2007-12-10    5050
+    ## 22447 en       climate_crisis 2020-04-17     151
+    ## 22448 en       crimea         2020-04-17    3201
+    ## 22451 en       syria          2020-04-17    6339
+    ## 22450 en       influenza      2020-04-17   11628
+    ## 22449 en       donald_trump   2020-04-17  772260
+    ## 
+    ## ... 22441 rows of data not shown
+
+*having another look …*
+
+``` r
+options(scipen = 1000000)
+
+plot(trend_data) + 
+  ggplot2::scale_y_log10()
+```
+
+    ## Warning: Transformation introduced infinite values in continuous y-axis
+    
+    ## Warning: Transformation introduced infinite values in continuous y-axis
+
+    ## Warning: Removed 1202 rows containing non-finite values (stat_smooth).
+
+![](man/figures/README-unnamed-chunk-20-1.png)<!-- -->

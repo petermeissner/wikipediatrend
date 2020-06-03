@@ -27,8 +27,9 @@
 #' 
 #' @examples 
 #' 
+#' \dontrun{
 #' res <- wp_trend(page=c("Der_Spiegel", "Die_Zeit"), lang=c("de", "en"))
-#' 
+#' }
 #' 
 #' @export
 

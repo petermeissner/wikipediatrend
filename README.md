@@ -18,7 +18,7 @@ status](https://ci.appveyor.com/api/projects/status/github/petermeissner/wikiped
 
 **Version**
 
-2.1.5 ( 2020-04-13 13:01:13 )
+2.1.6 ( 2020-06-03 12:43:18 )
 
 **Description**
 
@@ -40,7 +40,7 @@ citation("wikipediatrend")
 ```
 
 Meissner P (2020). *wikipediatrend: Public Subject Attention via
-Wikipedia Page View Statistics*. R package version 2.1.5.
+Wikipedia Page View Statistics*. R package version 2.1.6.
 
 **BibTex for citing**
 
@@ -109,13 +109,13 @@ trend_data
     ## 4    en       die_zeit    2007-12-11    35
     ## 3    de       der_spiegel 2007-12-11   710
     ## 5    de       der_spiegel 2007-12-12   770
-    ## 9020 en       die_zeit    2020-04-14   276
-    ## 9022 en       die_zeit    2020-04-15   259
-    ## 9021 de       der_spiegel 2020-04-15  1292
-    ## 9024 en       die_zeit    2020-04-16   243
-    ## 9023 de       der_spiegel 2020-04-16  1090
+    ## 9114 en       die_zeit    2020-05-31   209
+    ## 9116 en       die_zeit    2020-06-01   174
+    ## 9115 de       der_spiegel 2020-06-01  1498
+    ## 9118 en       die_zeit    2020-06-02   208
+    ## 9117 de       der_spiegel 2020-06-02  1252
     ## 
-    ## ... 9014 rows of data not shown
+    ## ... 9108 rows of data not shown
 
 *having another look …*
 
@@ -124,6 +124,8 @@ plot(
   trend_data[trend_data$views < 2500, ]
 )
 ```
+
+    ## `geom_smooth()` using formula 'y ~ x'
 
 ![](man/figures/README-unnamed-chunk-17-1.png)<!-- -->
 
@@ -164,13 +166,13 @@ trend_data
     ## 5     en       syria          2007-12-10    3205
     ## 4     en       influenza      2007-12-10    4153
     ## 3     en       donald_trump   2007-12-10    5050
-    ## 22447 en       climate_crisis 2020-04-17     151
-    ## 22448 en       crimea         2020-04-17    3201
-    ## 22451 en       syria          2020-04-17    6339
-    ## 22450 en       influenza      2020-04-17   11628
-    ## 22449 en       donald_trump   2020-04-17  772260
+    ## 22723 en       climate_crisis 2020-06-02     103
+    ## 22726 en       influenza      2020-06-02    3437
+    ## 22724 en       crimea         2020-06-02    3681
+    ## 22727 en       syria          2020-06-02    4969
+    ## 22725 en       donald_trump   2020-06-02  916742
     ## 
-    ## ... 22441 rows of data not shown
+    ## ... 22717 rows of data not shown
 
 *having another look …*
 
@@ -184,6 +186,8 @@ plot(trend_data) +
     ## Warning: Transformation introduced infinite values in continuous y-axis
     
     ## Warning: Transformation introduced infinite values in continuous y-axis
+
+    ## `geom_smooth()` using formula 'y ~ x'
 
     ## Warning: Removed 1202 rows containing non-finite values (stat_smooth).
 
